@@ -1,0 +1,45 @@
+# Bulgarian translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-"
+"Version: PROJECT "
+"VERSION\n"
+"Report-Msgid-Bugs-"
+"To: "
+"EMAIL@ADDRESS\n"
+"POT-Creation-"
+"Date: 2018-12-17 "
+"09:55+0200\n"
+"PO-Revision-Date: "
+"2018-12-17 "
+"10:33+0200\n"
+"Language: bg\n"
+"Language-Team: bg "
+"<LL@li.org>\n"
+"Plural-Forms: "
+"nplurals=2; "
+"plural=(n != 1);\n"
+"MIME-Version: "
+"1.0\n"
+"Content-Type: "
+"text/plain; "
+"charset=utf-8\n"
+"Content-Transfer-"
+"Encoding: 8bit\n"
+"Generated-By: "
+"Babel 2.6.0\n"
+"Last-"
+"Translator: \n"
+"X-Generator: "
+"Poedit 2.2\n"
+
+# Translations template for Interships.
+# Copyright (C) 2018 Headstarter
+# This file is distributed under the same license as the Internships project.
+# Alex Tsvetanov <alex@alexts.tk>, 2018.
+msgid "Home"
+msgstr "Начало"
