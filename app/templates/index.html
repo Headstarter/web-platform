@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for sector in sectors %}
+        <div class="col-4">
+            <a href='/sector/{{ sector.id }}'>
+                    <h2>{{ sector.name }}</h2>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
