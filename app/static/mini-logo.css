@@ -1,0 +1,34 @@
+.mini-logo {
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 5px 5px 5px 5px;
+}
+
+.mini-logo-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.mini-logo-header {
+    background-color: var(--primary);
+    color: white;
+}
+
+.mini-logo-header h1 {
+    position: relative;
+    text-align: center;
+}
+
+.mini-logo-header .logo {
+    float: left;
+}
+
+.mini-logo-header .description {
+    height: 100%;
+    font-size: 1.5em;
+}

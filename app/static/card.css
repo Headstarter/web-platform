@@ -1,0 +1,31 @@
+.card {
+    padding-right: 25px;
+}
+.card .right-arrow {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -11px;
+    margin-left: -36px;
+    background-color: transparent;
+    color: #009688;
+    border-radius: 100%;
+    font-size: 1.5em;
+}
+
+.card .right-arrow:hover {
+    text-decoration: none;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 0 10px #808080;
+    margin: 10px;
+    padding: 1px 3px;
+    border-radius: 5px;
+    position: relative;
+    padding-right: 24px;
+}
