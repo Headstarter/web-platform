@@ -1,15 +1,42 @@
 {% extends 'template.html' %}
 
+{% block css %} 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='logo.css') }}" >
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        {% for sector in sectors %}
-        <div class="col-4">
-            <a href='/sector/{{ sector.id }}'>
-                    <h2>{{ sector.name }}</h2>
-            </a>
+    <div class="container">
+        <div class="row">
+            <h1>{{ gettext('Sectors') }}</h1>
         </div>
-        {% endfor %}
+        <div class="row">
+            {% for sector in sectors %}
+                <div class="card col-4">
+                    <h2>{{ sector.name }}</h2>
+                    <a href='/sector/{{ sector.id }}' class="fas fa-arrow-circle-right right-arrow"></a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <h1>{{ gettext('Companies') }}</h1>
+        </div>
+        <div class="row">
+            {% for company in companies %}
+                <div class="logo_container col-4">
+                    <img class="image" src='{{company.logo}}' alt='{{company.name}}'>
+                    <div class="overlay">
+                        <div class="text">
+                            <h2>{{ company.name }}</h2>
+                            <small>{{ company.sector.name }}</small><br>
+                            <a href='/company/{{ company.id }}'>View details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

@@ -1,8 +1,8 @@
 .logo_container {
     position: relative;
     width: 50%;
-    display : flex;
-    align-items : center;
+    display: flex;
+    align-items: center;
 }
 
 .logo_container .image {
@@ -21,7 +21,7 @@
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: rgb(27, 42, 65);
+    background-color: var(--gray-dark);
 }
 
 .logo_container:hover .overlay {

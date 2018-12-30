@@ -10,12 +10,14 @@ def get_locale():
 
 @app.route ('/')
 def index ():
-   return render_template ('index.html', sectors=Sector.query.all())
+    print ('index')
+    return render_template ('index.html', companies=Company.query.all(), sectors=Sector.query.all())
 
 @app.route ('/company/<companyId>', methods = ['GET', 'POST'])
 def company_view (companyId):
-	return ''
+	company = Company.query.filter (Company.id == companyId)[0]
+	return render_template ('company.html', company=company)
 
 @app.route ('/sector/<sectorId>', methods = ['GET', 'POST'])
 def sector_view (sectorId):
-   return render_template ('sector.html', companies=Company.query.filter(Company.sector_id == sectorId))
+    return render_template ('sector.html', sector=Sector.query.filter (Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
