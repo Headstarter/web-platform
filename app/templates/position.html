@@ -13,27 +13,22 @@
             <div class="row">
                 <div class="col-md-4 logo">
                     <center>
-                        <img class="mini-logo" src="{{ company.logo }}" />
-                        <h1>{{ company.name }}</h1>
+                        <img class="mini-logo" src="{{ position.company.logo }}" />
+                        <h1>{{ position.company.name }}</h1>
                     </center>
                 </div>
                 <div class="col-md-7 description">
-                    {{ company.description }}
+                    {{ position.company.description }}
                 </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <div id="positions" class="row">
-            <h1>Open positions</h1>
+        <div class="row">
+            <h1>{{position.name}}</h1>
         </div>
         <div class="row">
-            {% for position in company.positions %}
-                <div class="card col-md-4">
-                    <h2>{{ position.name }}</h2>
-                    <a href="/position/{{ position.id }}" class="fas fa-arrow-circle-right right-arrow"></a>
-                </div>
-            {% endfor %}
+            {{ position.description | safe }}
         </div>
     </div>
 {% endblock %}
