@@ -1,5 +1,5 @@
 from app import app, babel, db, migrate, render_template
-from app.models import User, Sector, Company
+from app.models import User, Sector, Company, Position
 from flask import g, request
 
 @babel.localeselector
@@ -21,3 +21,7 @@ def company_view (companyId):
 @app.route ('/sector/<sectorId>', methods = ['GET', 'POST'])
 def sector_view (sectorId):
     return render_template ('sector.html', sector=Sector.query.filter (Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
+
+@app.route ('/position/<positionId>', methods = ['GET', 'POST'])
+def position_view (positionId):
+    return render_template ('position.html', position=Position.query.filter (Position.id == positionId)[0])

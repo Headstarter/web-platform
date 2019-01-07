@@ -11,12 +11,17 @@
     </div>
     <div class="row">
         {% for company in companies %}
-        <div class="logo_container col-4">
-            <img class="image" src='{{company.logo}}' alt='{{company.name}}'>
-            <div class="overlay">
-                <div class="text">
-                    <h2>{{ company.name }}</h2><br>
-                    <a href='/company/{{ company.id }}'>View details</a>
+        <div class="col-xs-12 col-md-4">
+            <div class="card logo_container">
+                <div class="image_parent container-fluid">
+                    <img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
+                </div>
+                <div class="card-body overlay">
+                    <div class="text">
+                        <h2>{{ company.name }}</h2>
+                        <small>{{ company.sector.name }}</small><br>
+                        <a href='/company/{{ company.id }}'>View details</a>
+                    </div>
                 </div>
             </div>
         </div>

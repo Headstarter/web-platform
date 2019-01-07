@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             {% for sector in sectors %}
-                <div class="card col-4">
+                <div class="card col-md-4">
                     <h2>{{ sector.name }}</h2>
                     <a href='/sector/{{ sector.id }}' class="fas fa-arrow-circle-right right-arrow"></a>
                 </div>
@@ -25,10 +25,14 @@
             <h1>{{ gettext('Companies') }}</h1>
         </div>
         <div class="row">
+            {% for i in range (5) %}
             {% for company in companies %}
-                <div class="logo_container col-4">
-                    <img class="image" src='{{company.logo}}' alt='{{company.name}}'>
-                    <div class="overlay">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card logo_container">
+                    <div class="image_parent container-fluid">
+                        <img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
+                    </div>
+                    <div class="card-body overlay">
                         <div class="text">
                             <h2>{{ company.name }}</h2>
                             <small>{{ company.sector.name }}</small><br>
@@ -36,6 +40,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            {% endfor %}
             {% endfor %}
         </div>
     </div>
