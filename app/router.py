@@ -10,6 +10,14 @@ def get_locale():
 
 @app.route ('/')
 def index ():
+	return render_template ('index.html')
+
+@app.route ('/subscribe')
+def subscribe ():
+	email = request.form['email']
+
+@app.route ('/pre')
+def dev_ver ():
     print ('index')
     return render_template ('index.html', companies=Company.query.all(), sectors=Sector.query.all())
 
