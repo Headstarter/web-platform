@@ -1,48 +1,193 @@
-{% extends 'template.html' %}
 
-{% block css %} 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}" >
-    <link rel="stylesheet" href="{{ url_for('static', filename='logo.css') }}" >
-{% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <h1>{{ gettext('Sectors') }}</h1>
-        </div>
-        <div class="row">
-            {% for sector in sectors %}
-                <div class="card col-md-4">
-                    <h2>{{ sector.name }}</h2>
-                    <a href='/sector/{{ sector.id }}' class="fas fa-arrow-circle-right right-arrow"></a>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <h1>{{ gettext('Companies') }}</h1>
-        </div>
-        <div class="row">
-            {% for i in range (5) %}
-            {% for company in companies %}
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="card logo_container">
-                    <div class="image_parent container-fluid">
-                        <img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
-                    </div>
-                    <div class="card-body overlay">
-                        <div class="text">
-                            <h2>{{ company.name }}</h2>
-                            <small>{{ company.sector.name }}</small><br>
-                            <a href='/company/{{ company.id }}'>View details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="google-site-verification" content="eCU54DH_8vQnzWO0Q3fXoQmalvA3rCjiXSH6mZdDgkg" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="Headstarter">
+		<title>Headstarter</title>
+		<!-- Bootstrap Core CSS -->
+		<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+		<!-- Custom Fonts -->
+		<link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+		<link rel='stylesheet'  href='//fonts.googleapis.com/icon?family=Material+Icons'>
+		<!-- Plugin CSS -->
+		<link href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons"/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+		
+		<link href="{{ url_for('static', filename='css/jumbotron.css') }}" rel="stylesheet"/>
+		
+		<!-- Theme CSS -->
+		<link href="{{ url_for('static', filename='css/creative.css') }}" rel="stylesheet">
+		
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-7541062370169405",
+			enable_page_level_ads: true
+			});
+		</script>
+		<style>
+.custom-logo, .navbar-brand {
+	width: 50px !important;
+	height: 50px !important;
+	padding: 0px 0px 0px 0px !important;
+	margin: 0px 0px 0px 0px !important;
+}
+header {
+  background-color: rgba(0,0,0,0.65);
+  background-blend-mode: darken;
+}
+		</style>
+	</head>
+	<body id="page-top">
+		<header>
+		<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand page-scroll" href="#page-top">
+						<!--Headstarter-->
+						<img class="custom-logo" src="{{ url_for('static', filename='img/logo.png') }}">
+					</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a class="page-scroll" href="#services">Системи</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="#about">За нас</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="#contact">Контакти</a>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+			<div class="header-content">
+				<div class="header-content-inner">
+					<h1 id="homeHeading">
+						Headstarter
+					</h1>
+					<hr class="primary">
+					<h2>Headstarter е твоят шанс да израснеш в бизнес среда. Абонирай се сега и получавай пръв новините!</h2>
+					<a href="#services" class="btn btn-primary btn-xl page-scroll">Разбери повече</a>
+				</div>
+			</div>
+		</header>
+		<div id="services">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h2 class="div-heading">Нашите системи</h2>
+						<hr class="primary">
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row" style="margin-bottom: 20px;">
+					<div class="col-lg-4 col-md-6 text-center">
+						<div class="service-box">
+							<i class="fa fa-4x fa-graduation-cap text-primary sr-icons"></i>
+							<h3><a class="text-normal" href="//infocourse.techedu.bg">Internships :: Headstarter</a></h3>
+							<p class="text-muted">Това е студентската ни система, в която има много видео уроци по информатика, последвани от куп упражнения.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bg-primary" id="about">
+			<div class="container">
+				<div class="row">
+					<div class="panel panel-primary">
+						<div class="panel-heading"></div>
+						<div class="panel-body">
+							<div data-href="https://www.facebook.com/headstartercareer/" data-colorscheme="light" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true" style="color:white" class="fb-like fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large"><span style="vertical-align: bottom; width: 500px; height: 64px;"><iframe name="f51b166fba2f7e" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" style="border: medium none; visibility: visible; width: 500px; height: 64px;" src="https://www.facebook.com/v2.8/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F0F7S7QWJ0Ac.js%3Fversion%3D42%23cb%3Df23ed943ca0401e%26domain%3Dinfocourse.techedu.bg%26origin%3Dhttp%253A%252F%252Finfocourse.techedu.bg%252Ff32c9bdc857cc66%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large" class="" width="1000px" height="1000px" frameborder="0"></iframe></span></div>
+						</div>
+					</div>
+					<div id="authors" class="panel panel-primary">
+						<div class="panel-heading">
+							<h4>Екип</h4>
+						</div>
+						<div class="panel-body">
+							<div style="height: 500px;" class="col-md-4">
+								<a href="">
+									<img src="/img/main.jpg" height="150px">
+									<h2>Алекс Цветанов</h2>
+								</a>
+								<br>
+								<h3>Team leader</h3>
+								<p>Програмист, участник в състезания по информатика</p>
+								<p>Бази данни и сървърна поддръжка</p>
+							</div>
+							<div style="height: 500px;" class="col-md-4">
+								<img src="/aboutus/aboutus/dimo.jpg" height="150px">
+								<h2>Надежда Цачева</h2>
+								<br>
+								<h3>Техническа поддръжка</h3>
+								<p>Програмист, участник в състезания по информатика</p>
+								<h3>Admin на <strong>TechEdu++ Judge System</strong></h3>
+							</div>
+						</div>
+					</div>
+					<div id="partners" class="panel panel-primary">
+						<div class="panel-heading">
+							<h4>Партньори</h4>
+						</div>
+						<div class="panel-body">
+							<div class="col-md-4"><a href="https://biodit.com/" class="normal"><img src="" class="img-responsive"></a></div>
+							<div class="col-md-4"><a href="https://techedu.bg/" class="normal"><img src="" class="img-responsive"></a></div>
+							<div class="col-md-4"><a href="https://eso.org/" class="normal"><img src="" class="img-responsive"></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 text-center">
+						<h2 class="div-heading">Ufkjdujr</h2>
+						<hr class="primary">
+					</div>
+					<div class="col-lg-4 col-lg-offset-2 text-center">
+						<i class="fa fa-phone fa-3x sr-contact"></i>
+						<p><a href="tel:+359-988-32-99-31">+359-988-32-99-31</a></p>
+						<p>Алекс Цветанов</p>
+						<p>Team leader</p>
+					</div>
+					<div class="col-lg-4 text-center">
+						<i class="fa fa-envelope-o fa-3x sr-contact"></i>
+						<p><a href="mailto:admin@techedu.bg">admin@techedu.bg</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery -->
+		<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+		<!-- Plugin JavaScript -->
+		<script src="{{ url_for('static', filename='jquery.easing.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='vendor/scrollreveal/scrollreveal.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+		<!-- Theme JavaScript -->
+		<script src="{{ url_for('static', filename='js/creative.min.js') }}"></script>
+	</body>
+</html>
+
+

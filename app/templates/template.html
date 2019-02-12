@@ -3,9 +3,10 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title> {% block title %}{% endblock %} </title>
+		<!--<link rel="stylesheet" href="http://gamedev2.ueuo.com/0%20WEB/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.0.0/dist/css/bootstrap.min.css') }}" >
-		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" >
 		{% block css %} {% endblock %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" >
 	</head>
 	<body>
 		<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-primary">
@@ -38,8 +39,9 @@
 			{% block content %}{% endblock %}
 		</section>
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="http://gamedev2.ueuo.com/0%20WEB/js/jquery.js"></script>
+		<!--<script src="http://gamedev2.ueuo.com/0%20WEB/js/bootstrap.min.js"></script>-->
 		<script src="{{ url_for('static', filename='bootstrap-4.0.0/dist/js/bootstrap.min.js') }}"></script>
+		{% block js %} {% endblock %}
 	</body>
 </html>
