@@ -1,6 +1,12 @@
 from app import app, babel, db, migrate, render_template
 from app.models import User, Sector, Company, Position
-from flask import g, request
+from flask import g, request, session
+from flask_session import Session
+
+# Check Configuration section for more details
+SESSION_TYPE = 'redis'
+app.config.from_object(__name__)
+Session(app)
 
 @babel.localeselector
 def get_locale():
@@ -12,24 +18,20 @@ def get_locale():
 def index ():
 	return render_template ('index.html')
 
-@app.route ('/subscribe')
-def subscribe ():
-	email = request.form['email']
+@app.route ('/login')
+def index ():
+	return render_template ('login.html')
 
-@app.route ('/pre')
-def dev_ver ():
-    print ('index')
-    return render_template ('index.html', companies=Company.query.all(), sectors=Sector.query.all())
+@app.route ('/login/student')
+def student_login ():
+	return render_template ('index.html')
 
-@app.route ('/company/<companyId>', methods = ['GET', 'POST'])
-def company_view (companyId):
-	company = Company.query.filter (Company.id == companyId)[0]
-	return render_template ('company.html', company=company)
+@app.route ('/login/company')
+def company_login ():
+	return render_template ('index.html')
 
-@app.route ('/sector/<sectorId>', methods = ['GET', 'POST'])
-def sector_view (sectorId):
-    return render_template ('sector.html', sector=Sector.query.filter (Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
+from app.v1pre.v1pre import visitors_routes, students_routes, companies_routes
 
-@app.route ('/position/<positionId>', methods = ['GET', 'POST'])
-def position_view (positionId):
-    return render_template ('position.html', position=Position.query.filter (Position.id == positionId)[0])
+for component in [visitors_routes, students_routes, companies_routes]:
+	app.register_blueprint(component, url_prefix='/v1.pre')
+

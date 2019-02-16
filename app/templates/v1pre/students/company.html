@@ -2,8 +2,8 @@
 
 {% block css %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='mini-logo.css') }}" >
-    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
     
 {% endblock %}
 
@@ -31,7 +31,7 @@
             {% for position in company.positions %}
                 <div class="card col-md-4">
                     <h2>{{ position.name }}</h2>
-                    <a href="/position/{{ position.id }}" class="fas fa-arrow-circle-right right-arrow"></a>
+                    <a href="{{ url_for ('position_view', positionId = position.id) }}" class="fas fa-arrow-circle-right right-arrow"></a>
                 </div>
             {% endfor %}
         </div>
