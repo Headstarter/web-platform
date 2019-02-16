@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='logo.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
 {% endblock %}
 
 {% block content %}
@@ -20,7 +20,7 @@
                     <div class="text">
                         <h2>{{ company.name }}</h2>
                         <small>{{ company.sector.name }}</small><br>
-                        <a href='/company/{{ company.id }}'>View details</a>
+						<a href='{{ url_for ('.company_view', companyId = company.id) }}'>View details</a>
                     </div>
                 </div>
             </div>

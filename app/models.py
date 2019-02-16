@@ -38,7 +38,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    company_id = db.Column(db.Integer, db.ForeignKey('Company.id'))
+    company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='employees')
     password_hash = db.Column(db.String(128))
 
@@ -84,11 +84,13 @@ def init ():
     Biodit = Company.query.get (2)
 
     """ CEOs """
-    AlexTsvetanov = User (username='AlexTsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'))
-    JulianSofroniev = User (username='JulianSofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'))
+    AlexTsvetanov = User (username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'))
+    JulianSofroniev = User (username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'))
     db.session.add (AlexTsvetanov)
     db.session.add (JulianSofroniev)
     db.session.commit ()
+    AlexTsvetanov = User.query.get (1)
+    JulianSofroniev = User.query.get (2)
 
     """ Positions """
     for i in range (3):
@@ -185,3 +187,10 @@ description="""
         db.session.add (JuniorFrontEndDeveloper)
         db.session.add (Designer)    
         db.session.commit ()
+
+	# Students
+
+    NadegdaTsacheva = User (username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'))
+    db.session.add (NadegdaTsacheva)
+    db.session.commit ()
+    NadegdaTsacheva = User.query.get (3)

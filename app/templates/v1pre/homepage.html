@@ -1,0 +1,50 @@
+{% extends 'template.html' %}
+
+{% block css %} 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1>{{ gettext('Sectors') }}</h1>
+        </div>
+        <div class="row">
+            {% for sector in sectors %}
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="card">
+						<h2>{{ sector.name }}</h2>
+						<a href='{{ url_for ('.sector_view', sectorId = sector.id) }}' class="fas fa-arrow-circle-right right-arrow"></a>
+					</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h1>{{ gettext('Companies') }}</h1>
+        </div>
+        <div class="row">
+            {% for i in range (5) %}
+            {% for company in companies %}
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card logo_container">
+                    <div class="image_parent container-fluid">
+                        <img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
+                    </div>
+                    <div class="card-body overlay">
+                        <div class="text">
+                            <h2>{{ company.name }}</h2>
+                            <small>{{ company.sector.name }}</small><br>
+                            <a href='{{ url_for ('.company_view', companyId = company.id) }}'>View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
