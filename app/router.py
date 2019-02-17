@@ -4,7 +4,7 @@ from flask import g, request, session
 from flask_session import Session
 
 # Check Configuration section for more details
-SESSION_TYPE = 'redis'
+SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 Session(app)
 
@@ -19,7 +19,7 @@ def index ():
 	return render_template ('index.html')
 
 @app.route ('/login')
-def index ():
+def login ():
 	return render_template ('login.html')
 
 @app.route ('/login/student')
