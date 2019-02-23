@@ -9,6 +9,10 @@ from flask_migrate import Migrate
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config['SECRET_KEY'] = b'_5#y2L"F4Q8z\n\xec]/'
+
 from app import models
 
 from app import router

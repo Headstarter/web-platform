@@ -1,13 +1,5 @@
 from app import db
 
-class Subsribe(db.Model):
-	__tablename__ = 'Subscribe'
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(128))
-
-	def __repr__(self):
-		return '<Subscribe {}>'.format(self.name)  
-
 class Sector(db.Model):
     __tablename__ = 'Sector'
     id = db.Column(db.Integer, primary_key=True)
@@ -41,7 +33,7 @@ class User(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='employees')
     password_hash = db.Column(db.String(128))
-
+    type_registration = db.Column (db.String(64))
     def __repr__(self):
         return '<User {}>'.format(self.username)  
 
@@ -84,8 +76,8 @@ def init ():
     Biodit = Company.query.get (2)
 
     """ CEOs """
-    AlexTsvetanov = User (username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'))
-    JulianSofroniev = User (username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'))
+    AlexTsvetanov = User (username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='standard')
+    JulianSofroniev = User (username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'), type_registration='standard')
     db.session.add (AlexTsvetanov)
     db.session.add (JulianSofroniev)
     db.session.commit ()
@@ -190,7 +182,7 @@ description="""
 
 	# Students
 
-    NadegdaTsacheva = User (username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'))
+    NadegdaTsacheva = User (username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'), type_registration='standard')
     db.session.add (NadegdaTsacheva)
     db.session.commit ()
     NadegdaTsacheva = User.query.get (3)
