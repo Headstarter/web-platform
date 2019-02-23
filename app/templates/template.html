@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="google-site-verification" content="eCU54DH_8vQnzWO0Q3fXoQmalvA3rCjiXSH6mZdDgkg" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="Headstarter">
+
 		<title> {% block title %}{% endblock %} </title>
 		<!--<link rel="stylesheet" href="http://gamedev2.ueuo.com/0%20WEB/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="{{ url_for('.static', filename='bootstrap-4.0.0/dist/css/bootstrap.min.css') }}" >
@@ -19,7 +25,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-							<a class="nav-link" href="{{ url_for('.homepage') }}">{{ gettext('Home') }}</a>
+							<a class="nav-link" href="{{ url_for('visitor_routes.homepage') }}">{{ gettext('Home') }}</a>
 						</li>
 					</ul>
 				</div>
