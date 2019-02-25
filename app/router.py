@@ -7,9 +7,11 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SECRET_KEY'] = b'_5#y2L"F4Q8z\n\xec]/'
 
 # Check Configuration section for more details
-SESSION_TYPE = 'raddit'
+SESSION_TYPE = 'redis'
 app.config.from_object(__name__)
 sess = Session(app)
+
+sess.init_app(app)
 
 @babel.localeselector
 def get_locale():
@@ -21,24 +23,26 @@ def get_locale():
 def index ():
 	return render_template ('index.html')
 
-@app.route ('/login')
-def login ():
-	return render_template ('login.html')
-
 @app.route ('/login/company', methods=['GET', 'POST'])
 def company_login ():
 	if request.method == 'POST':
 		if len(User.query.filter (User.email==request.form ['email']).filter (User.type_registration==request.form ['type']).all ()) == 1:
 			session['email'] = request.form['email']
 			session['company_id'] = User.query.filter (User.email==request.form ['email']).filter (User.type_registration==request.form ['type']).all()[0].company_id
-			session['type'] = 'HR'
+			session['type'] = 'Company'
 
 			return redirect(url_for('index'))
 		else:
-			flash ('User is not registered or user is not login by the correct way.')
+			flash ('User is not registered or user is not login by the correct way.', 'error')
 			return redirect(url_for(company_login))
 	else:
 		return render_template ('company/login.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+	# note that we set the 404 status explicitly
+	flash (request.full_path + 'Error 404: Page not found.', 'danger')
+	return render_template('template.html'), 404
 
 @app.route ('/signup/company', methods=['GET', 'POST'])
 def company_signup ():
@@ -49,3 +53,5 @@ from app.v1pre.v1pre import visitors_routes, students_routes, companies_routes
 for component in [visitors_routes, students_routes, companies_routes]:
 	app.register_blueprint(component, url_prefix='/v1.pre')
 
+from app.blog.blog import routes
+app.register_blueprint(routes, url_prefix='/blog')

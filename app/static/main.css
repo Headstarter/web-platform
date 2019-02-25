@@ -31,6 +31,7 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
+
 }
 
 .col-4 {
@@ -74,4 +75,87 @@
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+}
+
+.logo {
+    width: 50px !important;
+    height: 50px !important;
+    padding: 0px 0px 0px 0px !important;
+    margin: 0px 0px 0px 0px !important;
+}
+
+.bg-primary {
+    background-color: rgb(20,61,85) !important;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,0.65);
+    background-blend-mode: darken;
+}
+
+.banner-text {
+    text-align: left;
+}
+
+.jumbotron {
+    font-size: 150%;
+}
+.jumbotron h1{
+    font-size: 200%;
+}
+.jumbotron h2{
+    font-size: 190%;
+}
+.jumbotron h3{
+    font-size: 180%;
+}
+.jumbotron h4{
+    font-size: 170%;
+}
+.jumbotron h5{
+    font-size: 160%;
+}
+
+aside {
+    padding-left: 25px !important;
+    border-left: 1px solid /*rgb(20,61,85)*/ grey;
+}
+
+#latest .name {
+    font-size: 125% !important;
+    text-decoration: bold;
+}
+
+.nopadleft {
+    padding-left: 0 !important;
+}
+.nopadright {
+    padding-right: 0 !important;
+}
+
+.latest-header {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2rem;
+    -ms-flex: 1 1 0.000000001px;
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 0.000000001px;
+    flex-basis: 0.000000001px;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

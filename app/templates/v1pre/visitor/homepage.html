@@ -1,0 +1,56 @@
+{% extends 'visitor/template.html' %}
+
+{% block title %}
+	Internships :: Headstarter
+{% endblock %}
+
+{% block css %} 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
+{% endblock %}
+
+{% block content %}
+    <header class="jumbotron" style="font-size: 1.5em;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    Tвоят шанс да израснеш в бизнес среда.<br>
+                    <br><p>Разгледай, избери и кандидатствай сега</p>
+                </div>
+                <div class="col-md-3">
+                    <img class="img-fluid" src="{{ url_for ('static', filename='img/banner.png') }}">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <section class="col-md-8">
+                ABOUT TEXT <br>
+                <a class="btn btn-raised btn-primary" href="#" data-toggle="modal" data-target="#student_company">Sign up for free</a>
+            </section>
+            <aside class="col-md-4">
+                <div class="latest-header row">
+                    Latest Internships
+                </div>
+                <hr class="w-100">
+                <div id="latest">
+                    {% for position in positions %}
+                        <div class="row">
+                            <div class="nopadleft middle col-md-4">
+                                <img class="img-fluid" src="{{ position.company.logo}}" />
+                            </div>
+                            <div class="nopadright col-md-8">
+                                <a  href="{{ url_for ('student_routes.position_view', positionId = position.id) }}"><h5>{{ position.name }}</h5></a>
+                                <p class="card-title">{{ position.company.name }}</p>
+                                <a class="btn btn-raised btn-primary" href="{{ url_for ('student_routes.position_view', positionId = position.id) }}">See details</a>
+                            </div>
+                        </div>
+                        <hr class="w-100">
+                    {% endfor %}
+                </div>
+            </aside>
+        </div>
+    </main>
+{% endblock %}
