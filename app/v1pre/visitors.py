@@ -7,24 +7,11 @@ from app.v1pre.config import *
 
 routes = Blueprint('visitor_routes', __name__, template_folder=template_f, static_folder=static_f)
 
-@routes.route ('/')
-@require(role=None)
-def homepage ():
-    return render_template ('homepage.html', companies=Company.query.all(), sectors=Sector.query.all())
 
-@routes.route ('/company/<companyId>', methods = ['GET', 'POST'])
+@routes.route('/')
 @require(role=None)
-def company_view (companyId):
-	company = Company.query.filter (Company.id == companyId)[0]
-	return render_template ('company/company.html', company=company)
-
-@routes.route ('/sector/<sectorId>', methods = ['GET', 'POST'])
-@require(role=None)
-def sector_view (sectorId):
-    return render_template ('company/sector.html', sector=Sector.query.filter (Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
-
-@routes.route ('/position/<positionId>', methods = ['GET', 'POST'])
-@require(role=None)
-def position_view (positionId):
-	return render_template ('company/position.html', position=Position.query.filter (Position.id == positionId)[0])
-
+def homepage():
+    return render_template('visitor/homepage.html',
+                           positions=Position.query.order_by(Position.id.desc()).limit(5),
+                           companies=len(Company.query.all()),
+                           internships=len(Position.query.all()))
