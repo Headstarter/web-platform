@@ -1,5 +1,6 @@
 from app import db
 
+
 class Sector(db.Model):
     __tablename__ = 'Sector'
     id = db.Column(db.Integer, primary_key=True)
@@ -9,6 +10,7 @@ class Sector(db.Model):
 
     def __repr__(self):
         return '<Sector {}>'.format(self.name)  
+
 
 class Company(db.Model):
     __tablename__ = 'Company'
@@ -20,22 +22,33 @@ class Company(db.Model):
     positions = db.relationship("Position", back_populates="company")
 
     name = db.Column(db.String(128), unique=True)
-    description = db.Column(db.String (32768))
+    description = db.Column(db.String(32768))
     logo = db.Column(db.String(256))
 
     def __repr__(self):
         return '<Company {}>'.format(self.name) 
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='employees')
     password_hash = db.Column(db.String(128))
-    type_registration = db.Column (db.String(64))
+    type_registration = db.Column(db.String(64))
+
+
+    def to_dict(self):
+        return {"id": self.id,
+                "name": self.username,
+                "email": self.email,
+                "company": self.company,
+               }
+
     def __repr__(self):
         return '<User {}>'.format(self.username)  
+
 
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,50 +56,59 @@ class Position(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'))
     company = db.relationship('Company', back_populates='positions')
     description = db.Column(db.String(32768))
+    
     def __repr__(self):
         return '<Position {}>'.format(self.name)  
 
+
 import hashlib
 
-def crypto (password):
+
+def crypto(password):
     return hashlib.sha256(bytes(password, 'utf-8')).hexdigest()
 
-def clear ():
-    User.query.filter (True).delete ()
-    Company.query.filter (True).delete ()
-    Sector.query.filter (True).delete ()
-    Position.query.filter (True).delete ()
 
-def init ():
+def clear():
+    User.query.filter(True).delete()
+    Company.query.filter(True).delete()
+    Sector.query.filter(True).delete()
+    Position.query.filter(True).delete()
+
+
+def insert_user(name, email, password, _type, company=None):
+    db.session.add(User(username=name, company=company, email=email, password_hash=crypto(password), type_registration=_type))
+    db.session.commit()
+
+def init():
     """ Sectors """
-    IT_Sector = Sector (name='Information Technologies')
-    db.session.add (IT_Sector)
-    db.session.commit ()
-    IT_Sector = Sector.query.get (1)
+    IT_Sector = Sector(name='Information Technologies')
+    db.session.add(IT_Sector)
+    db.session.commit()
+    IT_Sector = Sector.query.get(1)
 
     """ Companies """
-    TechEdu = Company (name='TechEdu++', logo='http://infocourse.techedu.bg/img/logo.png', 
+    TechEdu = Company(name='TechEdu++', logo='http://infocourse.techedu.bg/img/logo.png', 
                                                 description='The core aim of our projects is to create online learning management system that combines best practices in organizing trainings so that it will be interesting, useful and much easier for students.', sector = IT_Sector)
-    Biodit = Company (name='Biodit Global Technologies', logo='https://biodit.com/wp-content/uploads/2018/12/logo-test.png',
+    Biodit = Company(name='Biodit Global Technologies', logo='/static/img/biodit.png',
                                                 description='BIODIT is an innovative high-technology company specialized in development of state-of-the-art security solutions, based on biometric identification.', sector = IT_Sector)
-    db.session.add (TechEdu)
-    db.session.add (Biodit)
-    db.session.commit ()
-    TechEdu = Company.query.get (1)
-    Biodit = Company.query.get (2)
+    db.session.add(TechEdu)
+    db.session.add(Biodit)
+    db.session.commit()
+    TechEdu = Company.query.get(1)
+    Biodit = Company.query.get(2)
 
     """ CEOs """
-    AlexTsvetanov = User (username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='standard')
-    JulianSofroniev = User (username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'), type_registration='standard')
-    db.session.add (AlexTsvetanov)
-    db.session.add (JulianSofroniev)
-    db.session.commit ()
-    AlexTsvetanov = User.query.get (1)
-    JulianSofroniev = User.query.get (2)
+    AlexTsvetanov = User(username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='fb')
+    JulianSofroniev = User(username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'), type_registration='standard')
+    db.session.add(AlexTsvetanov)
+    db.session.add(JulianSofroniev)
+    db.session.commit()
+    AlexTsvetanov = User.query.get(1)
+    JulianSofroniev = User.query.get(2)
 
     """ Positions """
-    for i in range (3):
-        JuniorFrontEndDeveloper = Position (name='Junior front-end developer', company=TechEdu, 
+    for i in range(3):
+        JuniorFrontEndDeveloper = Position(name='Junior front-end developer', company=TechEdu, 
 description="""
 Takeaway.com is Europe’s leading online and mobile food ordering company, dedicated to connecting consumers with their favorite local restaurants. The people who work at Takeaway.com are our company's greatest asset; each person at Takeaway.com plays an integral part in building tools and technology that help connect and transact our consumers and restaurants - at scale.<br>
 <br>
@@ -100,20 +122,20 @@ Your Profile: <br>
 <br>
 ● At least 3 years of professional experience<br>
 ● Excellent knowledge of HTML 5, CSS 3 and DOM<br>
-● In-depth knowledge of JavaScript (ECMAScript 5)<br>
+● In-depth knowledge of JavaScript(ECMAScript 5)<br>
 ● Experience with frameworks for front-end development - Angular, React, Vue.js, etc<br>
 ● Knowledge of template engines - Smarty, Twig, Blade, Razor, etc<br>
 ● Experience in processing web pages on different platforms<br>
-● Working with Related Micro Services and (RESTful) APIs<br>
+● Working with Related Micro Services and(RESTful) APIs<br>
 ● Practice with Test Driven Development, using device testing technologies<br>
-● Experience with code versioning ( especially Git ) <br>
+● Experience with code versioning( especially Git ) <br>
 <br>
 Advantages : <br>
 <br>
 ● Understanding of the work of the HTTP protocol<br>
 ● Experience with Vue.js<br>
 ● Work with Node.js or Dart<br>
-● Experience with Blade Template Engine (Laravel)<br>
+● Experience with Blade Template Engine(Laravel)<br>
 ● Familiarity or experience with ECMAScript 6 in JavaScript<br>
 ● Familiarity or experience with TypeScript<br>
 ● Task trainer experience - Grunt, Gulp, etc.<br>
@@ -126,7 +148,7 @@ Advantages : <br>
 What We offer? <br>
 <br>
 ● A place where your ideas are heard and where you can really grow and learn with your team.<br>
-● A more than competitive salary with (long term) incentives in accordance with your experience.<br>
+● A more than competitive salary with(long term) incentives in accordance with your experience.<br>
 ● Awesome teams and people, in a fast growing company.<br>
 ● Being part of a young, professional and truly international team.<br>
 ● The opportunity to learn new concepts and practice them in a safe environment.<br>
@@ -141,7 +163,7 @@ If you are interested, follow the link below and please send us your CV / Resume
 We will read all the information on it and we will contact the most suitable candidates.<br>
 Your personal data is protected by Bulgarian law and European General Data Protection Regulation.<br>
 """)
-        Designer = Position (name='Web/Graphic Designer', company=Biodit, 
+        Designer = Position(name='Web/Graphic Designer', company=Biodit, 
 description="""
 <strong>This is why we need you</strong><br><br>We’re proud of the journey across all digital platforms so far, but a major focus for us in 2018 is evolving our brand to the next level and this is where you come in, developing creative ideas and concepts, as well as meeting tight deadlines.<br>We are looking for a full-time Graphic/Web Designer to join Reward Gateway with strong Adobe Creative Suite skills to bring magic to all our clients’ brand by creating high-quality visuals.<br><br><strong>On this position you will be responsible for:</strong><br><ul><li>Communicating with account managers to discuss the client/business objectives and requirements of the job</li>
 <li>Interpreting the client’s business needs and producing web/print visuals in accordance with design briefs and brand guidelines</li>
@@ -174,15 +196,15 @@ description="""
 <li>Free breakfast items and soft drinks</li>
 <li>Food vouchers</li>
 <li>Private Medical Insurance</li>
-</ul><strong></strong><strong>Please, attach a PDF portfolio of your works or specify a link to an online portfolio (Behance, Dribbble, etc). Only candidates with portfolios will be considered or contacted!<br></strong><br><strong> All applications will be treated as strictly confidential.</strong><br><strong> Please, send your CV in English language only!</strong>						 
+</ul><strong></strong><strong>Please, attach a PDF portfolio of your works or specify a link to an online portfolio(Behance, Dribbble, etc). Only candidates with portfolios will be considered or contacted!<br></strong><br><strong> All applications will be treated as strictly confidential.</strong><br><strong> Please, send your CV in English language only!</strong>						 
 """)
-        db.session.add (JuniorFrontEndDeveloper)
-        db.session.add (Designer)    
-        db.session.commit ()
+        db.session.add(JuniorFrontEndDeveloper)
+        db.session.add(Designer)    
+        db.session.commit()
 
 	# Students
 
-    NadegdaTsacheva = User (username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'), type_registration='standard')
-    db.session.add (NadegdaTsacheva)
-    db.session.commit ()
-    NadegdaTsacheva = User.query.get (3)
+    NadegdaTsacheva = User(username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'), type_registration='standard')
+    db.session.add(NadegdaTsacheva)
+    db.session.commit()
+    NadegdaTsacheva = User.query.get(3)

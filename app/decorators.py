@@ -11,8 +11,8 @@ class require(object):
 		@wraps(f)
 		def wrapped_f(*args, **kwargs):
 			if session.get('type') != self.role:
-				flash('Permission denied. (requires role="' + self.role + '", your is role="' + str (session.get ('type')) + '")', 'danger')
-				flash('Please, log in as a ' + self.role + ' to be able to visit this part of our platform.', 'info')
+				flash('Permission denied. (requires role="' + (self.role or "None") + '", your is role="' + str (session.get ('type')) + '")', 'danger')
+				flash('Please, log in as a ' + (self.role or "None") + ' to be able to visit this part of our platform.', 'info')
 				return render_template ('template.html')
 			else:
 				return f(*args, **kwargs)

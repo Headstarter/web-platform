@@ -1,31 +1,28 @@
-from app.decorators import *
-from app import app, babel, db, migrate, render_template
+from app import render_template
 from app.models import User, Sector, Company, Position
-from flask import g, request
-from app.v1pre.v1pre import Blueprint
-from app.v1pre.config import *
 
-routes = Blueprint('student_routes', __name__, template_folder=template_f, static_folder=static_f)
 
-@routes.route ('/')
-@require(role='Student')
-def homepage ():
-    return render_template ('homepage.html', companies=Company.query.all(), sectors=Sector.query.all())
+class Students:
 
-@routes.route ('/company/<companyId>', methods = ['GET', 'POST'])
-@require(role='Student')
-def company_view (companyId):
-	company = Company.query.filter (Company.id == companyId)[0]
-	return render_template ('company/company.html', company=company)
+	@staticmethod
+	def homepage():
+		return render_template('visitor/homepage.html', positions=Position.query.order_by(Position.id.desc()).limit(5))
 
-@routes.route ('/sector/<sectorId>', methods = ['GET', 'POST'])
-@require(role='Student')
-def sector_view (sectorId):
-    return render_template ('company/sector.html', sector=Sector.query.filter (Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
+	@staticmethod
+	def company_view(companyId):
+		company = Company.query.filter(Company.id == companyId)[0]
+		return render_template('students/company.html', company=company)
 
-@routes.route ('/position/<positionId>', methods = ['GET', 'POST'])
-@require(role='Student')
-def position_view (positionId):
-	return render_template ('company/position.html', position=Position.query.filter (Position.id == positionId)[0])
+	@staticmethod
+	def sector_view(sectorId):
+		return render_template('students/sector.html', sector=Sector.query.filter(Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
+
+	@staticmethod
+	def position_view(positionId):
+		return render_template('students/position.html', position=Position.query.filter(Position.id == positionId)[0])
+
+	@staticmethod
+	def all_positions_view(positionId):
+		return render_template('students/position.html', position=Position.query.filter(Position.id == positionId)[0])
 
 
