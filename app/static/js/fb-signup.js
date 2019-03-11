@@ -1,5 +1,5 @@
   // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
+  function statusChangeCallback(callback, response) {
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -8,7 +8,7 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      testAPI();
+      testAPI(callback);
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -19,9 +19,9 @@
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
-  function checkLoginState() {
+  function checkLoginState(callback) {
     FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
+      statusChangeCallback(callback, response);
     });
   }
 
@@ -63,14 +63,19 @@
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
+  function testAPI(callback) {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?locale=en_US&fields=name,email', function(response) {
       console.log('Successful login for: ' + response.name);
       console.log(response);
+      $('[name=name]').val(response.name);
       $('[name=email]').val(response.email);
       $('[name=verify_password]').hide();
       $('[name=password]').hide();
       $('[name=type]').val('fb');
+
+      if (callback !== undefined) {
+        callback();
+      }
     });
   }

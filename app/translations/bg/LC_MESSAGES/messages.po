@@ -43,3 +43,9 @@ msgstr ""
 # Alex Tsvetanov <alex@alexts.tk>, 2018.
 msgid "Home"
 msgstr "Начало"
+
+msgid "Student"
+msgstr "Ученик"
+
+msgid "Company"
+msgstr "Компания"

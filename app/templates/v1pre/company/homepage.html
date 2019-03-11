@@ -10,45 +10,104 @@
     <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
 {% endblock %}
 
+{% block page_nav %}
+    <li class="nav-item">
+        <a href="#latest" class="nav-link page-scroll">Стажове</a>
+    </li>
+    <li class="nav-item">
+        <a href="#about" class="nav-link page-scroll">За нас</a>
+    </li>
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <h1>{{ gettext('Your ') }}</h1>
-        </div>
-        <div class="row">
-            {% for sector in sectors %}
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-						<h2>{{ sector.name }}</h2>
-						<a href='{{ url_for ('.sector_view', sectorId = sector.id) }}' class="fas fa-arrow-circle-right right-arrow"></a>
-					</div>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="https://www.copyblogger.com/cdn-origin/images/learn-lead.jpg" />
                 </div>
-            {% endfor %}
+                <div class="col-md-8">
+                    <h5>
+                        Tвоят шанс да израснеш в бизнес среда.<br>
+                        <br>
+                        <p>Разгледай, избери и кандидатствай сега</p>
+                    </h5>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="container">
+    </header>
+    <main class="container">
         <div class="row">
-            <h1>{{ gettext('Companies') }}</h1>
+            <aside id="latest" class="col-md-12">
+                <div class="title row">
+                    Нови обяви за стажове
+                </div>
+                <hr class="w-100">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+
+                    {% for position in positions %}
+                        {% if loop.index == 1 %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+                        {% else %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index - 1 }}"></li>
+                        {% endif %}
+                    {% endfor %}
+                  </ol>
+                  <div class="carousel-inner" role="listbox">
+
+                    {% for position in positions %}
+                        {% if loop.index == 1 %}
+                            <div class="carousel-item active">
+                        {% else %}
+                            <div class="carousel-item">
+                        {% endif %}
+                                <div class="position container">
+                                    <div class="row">
+                                        <div class="logo-container col-md-4">
+                                            <img class="img-fluid" src="{{ position.company.logo}}" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>{{ position.name }}</h5>
+                                            <p class="card-title">{{ position.company.name }}</p>
+                                            <a class="btn btn-raised btn-headstarter-secondary" href="{{ url_for ('v1pre_routes.position_view', positionId = position.id) }}">Виж повече</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+            </aside>
+            <section id="about" class="col-12">
+                <div class="title row">
+                    За нас
+                </div>
+                <hr>
+                <p>Headstarter е технологична платформа, която цели да свърже най-обещаващите, тепърва стартиращи таланти с компаниите, предлагащи възможност за работа. Целевата група са ученици 16-18 г., студенти, гимназии, висши учебни заведения, работодатели, предлагащи стажове.</p>
+                <p>Платформата предоставя обединено и централизирано място, което дава възможност на всеки ученик/студент да се информира за отворените стажантски позиции, да създаде своето резюме, да се запознае с дейността, бизнеса и културата на компаниите, както и да кандидатства за желаната от него позиция, за да придобие нови познания и да развие уменията си.</p>
+                <p>Компаниите могат да създадат профили, да качват обяви за стажове, полудневни работи, както и такива подходящи за студенти. Целта на платформата е да предостави бърз, лесен и удобен начин за връзка между търсещите да натрупат работен опит и бизнеса.</p>
+                <center>
+                    <a class="btn btn-raised btn-headstarter-primary important-button" href="#" data-toggle="modal" data-target="#signup_student_company">Присъедини се към нас</a>
+                </center>
+            </section>
         </div>
-        <div class="row">
-            {% for i in range (5) %}
-				{% for company in companies %}
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<div class="card logo_container">
-						<div class="image_parent container-fluid">
-							<img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
-						</div>
-						<div class="card-body overlay">
-							<div class="text">
-								<h2>{{ company.name }}</h2>
-								<small>{{ company.sector.name }}</small><br>
-								<a href='{{ url_for ('.company_view', companyId = company.id) }}'>View details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-            {% endfor %}
-        </div>
-    </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+		<!-- Plugin JavaScript -->
+		<script src="/static/jquery.easing.min.js"></script>
+		<script src="/static/vendor/scrollreveal/scrollreveal.min.js"></script>
+		<script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<!-- Theme JavaScript -->
+		<script src="/static/js/creative.min.js"></script>
 {% endblock %}

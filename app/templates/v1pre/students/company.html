@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+{{a}} <br> {{b}} <br>
     <div class="mini-logo-header row">
         <div class="container">
             <div class="row">
@@ -31,7 +32,7 @@
             {% for position in company.positions %}
                 <div class="card col-md-4">
                     <h2>{{ position.name }}</h2>
-                    <a href="{{ url_for ('position_view', positionId = position.id) }}" class="fas fa-arrow-circle-right right-arrow"></a>
+                    <a href="{{ url_for ('v1pre_routes.position_view', positionId = position.id) }}" class="fas fa-arrow-circle-right right-arrow"></a>
                 </div>
             {% endfor %}
         </div>
