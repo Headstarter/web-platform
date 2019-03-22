@@ -1,0 +1,31 @@
+{% extends 'template.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>{{ sector.name }}</h1>
+    </div>
+    <div class="row">
+        {% for company in companies %}
+        <div class="col-xs-12 col-md-4">
+            <div class="card logo_container">
+                <div class="image_parent container-fluid">
+                    <img class="card-img-top image" src="{{company.logo}}" alt="{{company.name}}">
+                </div>
+                <div class="card-body overlay">
+                    <div class="text">
+                        <h2>{{ company.name }}</h2>
+                        <small>{{ company.sector.name }}</small><br>
+						<a href='{{ url_for ('.company_view', companyId = company.id) }}'>View details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

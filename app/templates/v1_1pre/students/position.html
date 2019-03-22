@@ -1,0 +1,41 @@
+{% extends 'template.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+    
+{% endblock %}
+
+{% block content %}
+    <div class="mini-logo-header bg-headstarter-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 logo">
+                    <center>
+                        <img class="mini-logo" src="{{ position.company.logo }}" />
+                        <h1>{{ position.company.name }}</h1>
+                    </center>
+                </div>
+                <div class="col-md-7 description">
+                    <div>{{ position.company.description }}</div>
+                    <br>
+                    <small>
+                    <small>
+                        <p class="data">Website: <a href="{{ position.company.website }}" class="text-info">{{ position.company.website }}</a></p>
+                        <p class="data">{{ position.company.contacts | safe }} </p>
+                    </small>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h1>{{position.name}}</h1>
+        </div>
+        <div class="row">
+            {{ position.description | safe }}
+        </div>
+    </div>
+{% endblock %}

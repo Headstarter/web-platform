@@ -32,6 +32,39 @@
     --headstarter-primary: rgb(0, 81, 95);
 }
 
+.inline-block {
+    display: inline-block !important;
+}
+
+.custom-header {
+    padding-bottom: 15px;
+}
+
+.custom-header > center > div {
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white !important;
+    padding: 15px 15px;
+}
+
+body {
+    background-image: linear-gradient(var(--headstarter-primary), lightblue, var(--headstarter-primary)); /* var(--headstarter-secondary),  */
+}
+
+body .formater>* {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+body .formater>*:first-child {
+    padding-top: 15px;
+}
+body .formater {
+    background: white;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
 .row.is-flex {
     display: flex;
     flex-wrap: wrap;
@@ -64,8 +97,8 @@
 }
 
 .logo {
-    width: 50px !important;
-    height: 50px !important;
+    width: 30px !important;
+    height: 30px !important;
     padding: 0px 0px 0px 0px !important;
     margin: 0px 0px 0px 0px !important;
 }
@@ -207,11 +240,13 @@
     background-color: var(--headstarter-secondary) !important;
 }
 
-.btn.btn-headstarter-secondary {
+.btn.btn-headstarter-secondary,
+.btn.btn-headstarter-primary:hover {
     color: #fff;
     background-color: var(--headstarter-secondary) !important;
     border-color: var(--headstarter-secondary) !important;
 }
+.btn.btn-headstarter-secondary:hover,
 .btn.btn-headstarter-primary {
     color: #fff;
     background-color: var(--headstarter-primary) !important;
@@ -258,6 +293,9 @@ footer {
 	padding: 45px 0;
 	margin-top: 100px;
 }
+footer ul.row>li {
+    padding-bottom: 15px;
+}
 .btn.btn-success, .btn.btn-success:hover, .btn.btn-success:focus  {
 	background-color: #009688 !important;
 }
@@ -295,4 +333,20 @@ ul.social li {
 }
 footer hr {
     background: white;
+}
+.data {
+    text-align: left !important;
+}
+.modal-content {
+    color: black;
+}
+
+@media (min-width: 992px) {
+    .col-md-border:not(:last-child) {
+        border-right: 1px solid #d7d7d7;
+    }
+    .col-md-border + .col-md-border {
+        border-left: 1px solid #d7d7d7;
+        margin-left: -1px;
+    }
 }

@@ -24,6 +24,11 @@ class Company(db.Model):
     name = db.Column(db.String(128), unique=True)
     description = db.Column(db.String(32768))
     logo = db.Column(db.String(256))
+    website = db.Column(db.String(256))
+    contacts = db.Column(db.String(32768))
+
+    email = db.Column(db.String(1024))
+    password = db.Column(db.String(128))
 
     def __repr__(self):
         return '<Company {}>'.format(self.name) 
@@ -56,7 +61,10 @@ class Position(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'))
     company = db.relationship('Company', back_populates='positions')
     description = db.Column(db.String(32768))
-    
+    available = db.Column(db.Boolean)
+    time = db.Column(db.String(12))
+    place = db.Column(db.String())
+
     def __repr__(self):
         return '<Position {}>'.format(self.name)  
 
@@ -79,6 +87,16 @@ def insert_user(name, email, password, _type, company=None):
     db.session.add(User(username=name, company=company, email=email, password_hash=crypto(password), type_registration=_type))
     db.session.commit()
 
+
+def insert_company(sector_id, name, description, logo, website, contacts):
+    sector = Sector.query.filter(Sector.id == sector_id).one()
+    db.session.add(Company(
+        sector_id=sector, sector=sector,
+        name=name, description=description,
+        logo=logo, website=website, contacts=contacts))
+    db.session.commit()
+
+
 def init():
     """ Sectors """
     IT_Sector = Sector(name='Information Technologies')
@@ -87,9 +105,9 @@ def init():
     IT_Sector = Sector.query.get(1)
 
     """ Companies """
-    TechEdu = Company(name='TechEdu++', logo='http://infocourse.techedu.bg/img/logo.png', 
+    TechEdu = Company(password=crypto('sample password'), email='headstarter@techedu.bg', name='TechEdu++', website='http://techedu.bg', contacts='Mail Us: contact@techedu.bg', logo='http://infocourse.techedu.bg/img/logo.png',
                                                 description='The core aim of our projects is to create online learning management system that combines best practices in organizing trainings so that it will be interesting, useful and much easier for students.', sector = IT_Sector)
-    Biodit = Company(name='Biodit Global Technologies', logo='/static/img/biodit.png',
+    Biodit = Company(password=crypto('sample password'), email='headstarter@biodit.com', name='Biodit Global Technologies', website='https://biodit.com', contacts='Visit Us: бул. „св. Климент Охридски“ 125, 1756 кв. Малинова долина, София<br>Mail Us: pr@biodit.com, office@biodit.com', logo='/static/img/biodit.png',
                                                 description='BIODIT is an innovative high-technology company specialized in development of state-of-the-art security solutions, based on biometric identification.', sector = IT_Sector)
     db.session.add(TechEdu)
     db.session.add(Biodit)
@@ -108,7 +126,7 @@ def init():
 
     """ Positions """
     for i in range(3):
-        JuniorFrontEndDeveloper = Position(name='Junior front-end developer', company=TechEdu, 
+        JuniorFrontEndDeveloper = Position(place="Remote", time="Full-time", available=True, name='Junior front-end developer', company=TechEdu,
 description="""
 Takeaway.com is Europe’s leading online and mobile food ordering company, dedicated to connecting consumers with their favorite local restaurants. The people who work at Takeaway.com are our company's greatest asset; each person at Takeaway.com plays an integral part in building tools and technology that help connect and transact our consumers and restaurants - at scale.<br>
 <br>
@@ -163,7 +181,7 @@ If you are interested, follow the link below and please send us your CV / Resume
 We will read all the information on it and we will contact the most suitable candidates.<br>
 Your personal data is protected by Bulgarian law and European General Data Protection Regulation.<br>
 """)
-        Designer = Position(name='Web/Graphic Designer', company=Biodit, 
+        Designer = Position(time="Part-time", place="Remote", available=True, name='Web/Graphic Designer', company=Biodit,
 description="""
 <strong>This is why we need you</strong><br><br>We’re proud of the journey across all digital platforms so far, but a major focus for us in 2018 is evolving our brand to the next level and this is where you come in, developing creative ideas and concepts, as well as meeting tight deadlines.<br>We are looking for a full-time Graphic/Web Designer to join Reward Gateway with strong Adobe Creative Suite skills to bring magic to all our clients’ brand by creating high-quality visuals.<br><br><strong>On this position you will be responsible for:</strong><br><ul><li>Communicating with account managers to discuss the client/business objectives and requirements of the job</li>
 <li>Interpreting the client’s business needs and producing web/print visuals in accordance with design briefs and brand guidelines</li>
@@ -202,7 +220,7 @@ description="""
         db.session.add(Designer)    
         db.session.commit()
 
-	# Students
+    # Students
 
     NadegdaTsacheva = User(username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'), type_registration='standard')
     db.session.add(NadegdaTsacheva)

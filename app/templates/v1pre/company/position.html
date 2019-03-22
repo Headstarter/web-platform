@@ -14,31 +14,39 @@
                 <div class="col-md-4 logo">
                     <center>
                         <img class="mini-logo" src="{{ position.company.logo }}" />
-                        <h1 class="summernote">{{ position.company.name }}</h1>
+                        <h1>{{ position.company.name }}</h1>
                     </center>
                 </div>
-                <div class="col-md-7 description"><span class="summernote">{{ position.company.description }}</span></div>
+                <div class="col-md-7 description">
+                    <div>{{ position.company.description }}</div>
+                    <br>
+                    <small>
+                    <small>
+                        <p class="data">Website: <a href="{{ position.company.website }}" class="text-info">{{ position.company.website }}</a></p>
+                        <p class="data">{{ position.company.contacts | safe }} </p>
+                    </small>
+                    </small>
+                    <button type="button" class="btn btn-info" id="submit">Запази</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="container editor">
         <div class="row">
             <h1>Въведи позицията на стажа</h1>
-            <h1 class="summernote">{{position.name}}</h1>
+            <h1 data-id="{{ position.id }}" data-name="position.name" class="summernote">{{position.name}}</h1>
         </div>
         <div class="row">
             <h1>Въведи описание на стажа</h1>
-            <span class="summernote">{{ position.description | safe }}</span>
+            <span data-id="{{ position.id }}" data-name="position.description" class="summernote">{{ position.description | safe }}</span>
         </div>
     </div>
 {% endblock %}
 
 {% block js %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+    <!-- include summernote-bg-BG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-bg-BG.js"></script>
     <script src="{{ url_for ('.static', filename='js/editable.js') }}"> </script>
 {% endblock %}

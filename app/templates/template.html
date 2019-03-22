@@ -9,49 +9,51 @@
 		<meta name="author" content="Headstarter">
 
 		<title> {% block title %}{% endblock %} </title>
-		<!--<link rel="stylesheet" href="http://gamedev2.ueuo.com/0%20WEB/css/bootstrap.min.css">-->
+		<!--<link rel="stylesheet" href="http://gamedev2.ueuo.com/0%20WEB/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="{{ url_for('.static', filename='bootstrap-4.0.0/dist/css/bootstrap.min.css') }}" >
-		{% block css %} {% endblock %}
-		<link rel="stylesheet" href="{{ url_for('.static', filename='main.css') }}" >
+    	{% block css %} {% endblock %}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    	<link rel="stylesheet" href="{{ url_for('.static', filename='main.css') }}" >
 	</head>
 	<body>
-		<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-headstarter-primary">
-			<div class="container">
-				<a class="navbar-brand" href="#"><center><img class="logo" src="{{ url_for ('static', filename='img/logo.png') }}" /> Headstarter</center></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link" href="{{ url_for('v1pre_routes.homepage') }}">Начало</a>
-						</li>
-						{% block page_nav %}
-						{% endblock %}
-						<li class="nav-item">
-							<a class="nav-link disabled" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
-						</li>
-					</ul>
-
-					<ul class="nav navbar-nav navbar-right">
-						{% if session.name and session['type'] != "Visitor" %}
-					  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
-					  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> {{ session ['name'] }}</a></li>
-						{% else %}
-						{% if session['type'] != "Visitor" %}
-					  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
-					  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> {{ session ['company'] }}</a></li>
-						{% else %}
-					  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
-						{% endif %}
-						{% endif %}
-					</ul>
-				</div>
-			</div>
-		</nav>
 		<header>
-			{% block header %}{% endblock %}
+			<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-headstarter-primary">
+				<div class="container">
+					<a class="navbar-brand" href="/p"><center><img class="logo" src="{{ url_for ('static', filename='img/logo.png') }}" /></center></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active">
+								<a class="nav-link" href="/p">Начало</a>
+							</li>
+							{% block page_nav %}
+							{% endblock %}
+							<li class="nav-item">
+								<a class="nav-link disabled" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							{% if session.name and session['type'] != "Visitor" %}
+						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
+						  <li><a class="nav-link" href="{{ url_for ('v1pre_routes.profile') }}"><i class="fas fa-user"></i> {{ session ['name'] }}{{ session ['name_addon'] | safe }}</a></li>
+							{% else %}
+							{% if session['type'] != "Visitor" %}
+						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
+						  <li><a class="nav-link" href="{{ url_for ('v1pre_routes.profile') }}"><i class="fas fa-user"></i> {{ session ['company'] }}</a></li>
+							{% else %}
+						  <!--<li><a class="nav-link" href="#" data-toggle="modal" data-target="#signup_student_company"><i class="fas fa-user"></i> Регистрация</a></li>-->
+						  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
+							{% endif %}
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</nav>
 		</header>
 		<section class="container alerts">
 			{% for category, message in get_flashed_messages(with_categories=true) %}
@@ -60,6 +62,14 @@
 				</div>
 			{% endfor %}
 		</section>
+		<div class="container custom-header">
+			<center>
+				<div class="inline-block">
+					{% block header %}{% endblock %}
+				</div>
+			</center>
+		</div>
+		<div class="container formater">
 		<section>
 			{% block content %}{% endblock %}
 		</section>
@@ -92,12 +102,13 @@
 							<p>© 2019 Headstarter</p>
 							<p>Всички права запазени.</p>
 							<p> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/2.5/in/88x31.png"></a></p>
+							<p> <a rel="terms" href="/terms">Terms & conditions</a></p>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</footer>
-
+		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="student_company" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
@@ -111,15 +122,15 @@
 			  <div class="modal-body">
 				<div class="row">
 					<div class="col-md-6">
-						<a class="w-100 btn btn-primary" href="{{ url_for ('student_login') }}"><h1>Ученик</h1></a>
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_login') }}"><h1>Ученик</h1></a>
 					</div>
 					<div class="col-md-6">
-						<a class="w-100 btn btn-primary" href="{{ url_for ('company_login') }}"><h1>Компания</h1></a>
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_login') }}"><h1>Компания</h1></a>
 					</div>
 				</div>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Close</button>
 			  </div>
 			</div>
 		  </div>
@@ -138,22 +149,28 @@
 			  <div class="modal-body">
 				<div class="row">
 					<div class="col-md-6">
-						<a class="w-100 btn btn-primary bg-primary" href="{{ url_for ('student_signup') }}"><h1>Ученик</h1></a>
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_signup') }}"><h1>Ученик</h1></a>
 					</div>
 					<div class="col-md-6">
-						<a class="w-100 btn btn-primary bg-primary" href="{{ url_for ('company_signup') }}"><h1>Компания</h1></a>
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_signup') }}"><h1>Компания</h1></a>
 					</div>
 				</div>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-raised btn-headstarter-secondary" data-dismiss="modal">Close</button>
 			  </div>
 			</div>
 		  </div>
 		</div>
-
 		<script src="{{ url_for('.static', filename='js/jquery.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 		<script src="{{ url_for('.static', filename='bootstrap-4.0.0/dist/js/bootstrap.min.js') }}"></script>
+		<script src="{{ url_for('.static', filename='js/main.js') }}"></script>
+		<!--
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>-->
+
 		{% block js %} {% endblock %}
 	</body>
 </html>
