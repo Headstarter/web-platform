@@ -1,4 +1,4 @@
-from app import render_template
+from app import render_template, flash
 from app.models import User, Sector, Company, Position
 from flask import session
 
@@ -6,7 +6,7 @@ class Companies:
 
 	@staticmethod
 	def homepage():
-		return render_template('visitor/homepage.html', positions=Position.query.filter(Position.company_id==session['company_id']).order_by(Position.id.desc()).limit(5))
+		return render_template('visitor/homepage.html', positions=Position.query.filter(Position.company_id == session['company_id']).filter(Position.available	== True).order_by(Position.id.desc()).limit(5))
 
 	@staticmethod
 	def company_view(companyId):
@@ -22,8 +22,18 @@ class Companies:
 
 	@staticmethod
 	def position_view(positionId):
-		position = Position.query.filter(Position.id == positionId)[0]
-		if True: #position.company_id == session['company_id']:
-			return render_template('company/position.html', position=position, a=position.company_id, b = session['company_id'])
+		if len(Position.query.filter(Position.id == positionId).filter(Position.available == True).all()) == 0:
+			flash('This position is not available.', 'danger')
+			return render_template('template.html'), 404
+
+		position = Position.query.filter(Position.id == positionId).filter(Position.available == True)[0]
+		if position.company_id == session['company_id']:
+			return render_template('company/position.html', position=position)
 		else:
-			return render_template('students/position.html', position=position, a=position.company_id, b = session['company_id'])
+			return render_template('students/position.html', position=position)
+
+	@staticmethod
+	def profile():
+		company = Company.query.filter(Company.id == session['company_id'])[0]
+		return render_template('company/profile.html', company=company)
+

@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
+<link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+
+{% endblock %}
+
+{% block content %}
+<div class="offset-md-4 col-md-4">
+    <div class="card">
+        <div class="card-body">
+            <a href="{{ url_for ('company_login')}}" class="float-right btn btn-outline-primary">Sign in</a>
+            <h4 class="card-title mb-4 mt-1">Sign up</h4>
+            <div class="row">
+                <form class="col-md-12" method="POST">
+                    <div class="form-group">
+                        <input name="name" class="form-control" placeholder="Company's name" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <textarea placeholder="Company's description" name="description" class="form-control"></textarea>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input name="company" class="form-control" placeholder="Company's name" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input name="logo" class="form-control" placeholder="Link to your logo" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input name="website" class="form-control" placeholder="Link to your website" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <textarea placeholder="Contacts with your company - email, phone number" name="contacts" class="form-control"></textarea>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input placeholder="Enter email for some notifications from us" name="email" class="form-control" type="email">
+                    </div> <!-- form-group// -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Sign up  </button>
+                            </div> <!-- form-group// -->
+                        </div>
+                    </div> <!-- .row// -->
+                </form>
+            </div>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+{% endblock %}

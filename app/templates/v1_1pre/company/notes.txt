@@ -1,0 +1,1 @@
+Firstly, we need to get in contact with companies that want to join the platform, then we will add them to the database and will give'em unique ID for their HRs that MUST be written correctly on the registration.

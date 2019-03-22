@@ -1,0 +1,32 @@
+.square:before {
+  content: '';
+  width: 0;
+}
+
+.square:before {
+  white-space: normal;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.square:before {
+  padding-top: 100%;
+  /* makes expand to a square */
+}
+
+.circled {
+  border: 1px solid white;
+  border-radius: 10000px;
+}
+/*
+[class^="col"] {
+  white-space: nowrap;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 5px white;
+  padding: 0;
+  text-align: center;
+  background: url(http://lorempixel.com/400/200) tomato;
+  background-size: cover;
+}
+*/

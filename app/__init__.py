@@ -1,9 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash
 app = Flask (__name__)
 
 from flask_babel import Babel, gettext
 app.config.from_pyfile ('config.cfg')
-babel = Babel (app)
+babel = Babel(app)
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 db = SQLAlchemy(app)

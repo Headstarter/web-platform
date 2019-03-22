@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="mini-logo-header">
+    <div class="mini-logo-header bg-headstarter-primary">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 logo">
@@ -18,7 +18,14 @@
                     </center>
                 </div>
                 <div class="col-md-7 description">
-                    {{ position.company.description }}
+                    <div>{{ position.company.description }}</div>
+                    <br>
+                    <small>
+                    <small>
+                        <p class="data">Website: <a href="{{ position.company.website }}" class="text-info">{{ position.company.website }}</a></p>
+                        <p class="data">{{ position.company.contacts | safe }} </p>
+                    </small>
+                    </small>
                 </div>
             </div>
         </div>
