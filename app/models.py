@@ -1,22 +1,19 @@
 from app import db
 
 
-class Sector(db.Model):
-    __tablename__ = 'Sector'
+class Tag(db.Model):
+    __tablename__ = 'Tag'
     id = db.Column(db.Integer, primary_key=True)
-    companies = db.relationship("Company", back_populates="sector")
-
     name = db.Column(db.String(128))
+    positions = db.relationship("Position", back_populates="tag")
 
     def __repr__(self):
-        return '<Sector {}>'.format(self.name)  
+        return '<Tag ' + str(self.id) + ' - ' + str(self.name) + '>'
 
 
 class Company(db.Model):
     __tablename__ = 'Company'
     id = db.Column(db.Integer, primary_key=True)
-    sector_id = db.Column(db.Integer, db.ForeignKey('Sector.id'))
-    sector = db.relationship("Sector", back_populates="companies")
 
     employees = db.relationship("User", back_populates="company")
     positions = db.relationship("Position", back_populates="company")
@@ -35,6 +32,7 @@ class Company(db.Model):
 
 
 class User(db.Model):
+    __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
@@ -43,6 +41,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     type_registration = db.Column(db.String(64))
 
+    applications = db.relationship("Application", back_populates="user")
 
     def to_dict(self):
         return {"id": self.id,
@@ -56,21 +55,33 @@ class User(db.Model):
 
 
 class Position(db.Model):
+    __tablename__ = 'Position'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'))
     company = db.relationship('Company', back_populates='positions')
     description = db.Column(db.String(32768))
     available = db.Column(db.Boolean)
-    time = db.Column(db.String(12))
-    place = db.Column(db.String())
+    duration = db.Column(db.Integer)
+    hours_per_day = db.Column(db.Integer)
+    age_required = db.Column(db.String(128))
+    tag_id = db.Column(db.Integer, db.ForeignKey('Tag.id'))
+    tag = db.relationship('Tag', back_populates='positions')
+    applications = db.relationship("Application", back_populates="position")
 
-    def __repr__(self):
-        return '<Position {}>'.format(self.name)  
+
+class Application (db.Model):
+    __tablename__ = 'Application'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+    user = db.relationship('User', back_populates='applications')
+    position_id = db.Column(db.Integer, db.ForeignKey('Position.id'))
+    position = db.relationship('Position', back_populates='applications')
+    company_id = db.Column(db.Integer)
 
 
 import hashlib
-
 
 def crypto(password):
     return hashlib.sha256(bytes(password, 'utf-8')).hexdigest()
@@ -79,7 +90,7 @@ def crypto(password):
 def clear():
     User.query.filter(True).delete()
     Company.query.filter(True).delete()
-    Sector.query.filter(True).delete()
+    Tag.query.filter(True).delete()
     Position.query.filter(True).delete()
 
 
@@ -88,46 +99,61 @@ def insert_user(name, email, password, _type, company=None):
     db.session.commit()
 
 
-def insert_company(sector_id, name, description, logo, website, contacts):
-    sector = Sector.query.filter(Sector.id == sector_id).one()
+def insert_application(user_id, position_id, company_id):
+    db.session.add(Application(user_id=user_id, position_id=position_id, company_id=company_id))
+    db.session.commit()
+
+
+def insert_company(name, description, logo, website, contacts):
     db.session.add(Company(
-        sector_id=sector, sector=sector,
         name=name, description=description,
         logo=logo, website=website, contacts=contacts))
     db.session.commit()
 
 
 def init():
-    """ Sectors """
-    IT_Sector = Sector(name='Information Technologies')
-    db.session.add(IT_Sector)
+    """ Posts
+    FirstPost = Post(name="Test Post", content='<strong>Test post</strong>')
+    db.session.add(FirstPost)
     db.session.commit()
-    IT_Sector = Sector.query.get(1)
-
+    """
+    """ Tag """
+    tags = [
+        'Software Engineer', '&nbsp;&nbsp;&nbsp; Mobile Developer', '&nbsp;&nbsp;&nbsp; Frontend Developer', '&nbsp;&nbsp;&nbsp; Backend Developer', '&nbsp;&nbsp;&nbsp; Full-Stack Developer', '&nbsp;&nbsp;&nbsp; Engineering Manager', '&nbsp;&nbsp;&nbsp; QA Engineer', '&nbsp;&nbsp;&nbsp; DevOps', '&nbsp;&nbsp;&nbsp; Software Architect', 'Designer', '&nbsp;&nbsp;&nbsp; UI/UX Designer', '&nbsp;&nbsp;&nbsp; User Researcher', '&nbsp;&nbsp;&nbsp; Visual Designer', '&nbsp;&nbsp;&nbsp; Creative Director', 'Operations', '&nbsp;&nbsp;&nbsp; Finance/Accounting', '&nbsp;&nbsp;&nbsp; H.R.', '&nbsp;&nbsp;&nbsp; Office Manager', '&nbsp;&nbsp;&nbsp; Recruiter', '&nbsp;&nbsp;&nbsp; Customer Service', '&nbsp;&nbsp;&nbsp; Operations Manager', 'Sales', '&nbsp;&nbsp;&nbsp; Business Development', '&nbsp;&nbsp;&nbsp; Sales Development', '&nbsp;&nbsp;&nbsp; Account Executive', '&nbsp;&nbsp;&nbsp; BD Manager', '&nbsp;&nbsp;&nbsp; Account Manager', '&nbsp;&nbsp;&nbsp; Sales Manager', 'Marketing', '&nbsp;&nbsp;&nbsp; Growth Hacker', '&nbsp;&nbsp;&nbsp; Marketing Manager', '&nbsp;&nbsp;&nbsp; Content Creator', 'Hardware Engineer', 'Mechanical Engineer', 'Systems Engineer', 'Business Analyst', 'Data Scientist', 'Product Manager', 'Project Manager'#, 'Attorney', '&nbsp;&nbsp;&nbsp; CEO', '&nbsp;&nbsp;&nbsp; CFO', '&nbsp;&nbsp;&nbsp; CMO', '&nbsp;&nbsp;&nbsp; COO', '&nbsp;&nbsp;&nbsp; CTO'
+    ]
+    Tags_db = []
+    for x in tags:
+        tag = Tag(name=x)
+        db.session.add(tag)
+        db.session.commit()
+        print(Tag.query.get(len(Tags_db) + 1), end=' ')
+        Tags_db.append(Tag.query.get(len(Tags_db) + 1))
+    print()
     """ Companies """
-    TechEdu = Company(password=crypto('sample password'), email='headstarter@techedu.bg', name='TechEdu++', website='http://techedu.bg', contacts='Mail Us: contact@techedu.bg', logo='http://infocourse.techedu.bg/img/logo.png',
-                                                description='The core aim of our projects is to create online learning management system that combines best practices in organizing trainings so that it will be interesting, useful and much easier for students.', sector = IT_Sector)
-    Biodit = Company(password=crypto('sample password'), email='headstarter@biodit.com', name='Biodit Global Technologies', website='https://biodit.com', contacts='Visit Us: бул. „св. Климент Охридски“ 125, 1756 кв. Малинова долина, София<br>Mail Us: pr@biodit.com, office@biodit.com', logo='/static/img/biodit.png',
-                                                description='BIODIT is an innovative high-technology company specialized in development of state-of-the-art security solutions, based on biometric identification.', sector = IT_Sector)
-    db.session.add(TechEdu)
-    db.session.add(Biodit)
+    Headstarter = Company(password=crypto('sample password'), email='headstarter@headstarter.eu',
+                      name='Headstarter', website='https://headstarter.eu',
+                      contacts='Mail Us: contact@headstarter.eu', logo='/static/img/logo.png',
+                      description='Example of description')
+    db.session.add(Headstarter)
     db.session.commit()
-    TechEdu = Company.query.get(1)
-    Biodit = Company.query.get(2)
+    Headstarter = Company.query.get(1)
 
     """ CEOs """
-    AlexTsvetanov = User(username='Alex Tsvetanov', company=TechEdu, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='fb')
-    JulianSofroniev = User(username='Julian Sofroniev', company=Biodit, email='julian@biodit.com', password_hash=crypto('sample password'), type_registration='standard')
+    AlexTsvetanov = User(username='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='fb')
     db.session.add(AlexTsvetanov)
-    db.session.add(JulianSofroniev)
     db.session.commit()
     AlexTsvetanov = User.query.get(1)
-    JulianSofroniev = User.query.get(2)
 
     """ Positions """
     for i in range(3):
-        JuniorFrontEndDeveloper = Position(place="Remote", time="Full-time", available=True, name='Junior front-end developer', company=TechEdu,
-description="""
+        example = Position(name='Python Web Developer', company=Headstarter,
+                           description="<strong>Пробно</strong> <i>описание</i> на <u>стажанстка програма</u>",
+                           available=True, duration=3, hours_per_day=8,
+                           age_required='Поне 16 г.', tag=Tags_db[3])
+        db.session.add(example)
+        db.session.commit()
+        example = Position(name='Python Web Developer', company=Headstarter,
+                           description="""
 Takeaway.com is Europe’s leading online and mobile food ordering company, dedicated to connecting consumers with their favorite local restaurants. The people who work at Takeaway.com are our company's greatest asset; each person at Takeaway.com plays an integral part in building tools and technology that help connect and transact our consumers and restaurants - at scale.<br>
 <br>
 The company’s online and mobile ordering platforms allow meals to order directly from more than 40,000 takeout restaurants all over Europe and beyond. The Takeaway.com portfolio of brands includes Takeaway.com, Thuisbezorgd.nl, Lieferando.de, Pyszne.pl, Lieferservice.at and Vietnammm.com. The working atmosphere at Takeaway.com is characterized by team spirit, trust and open communication as well as a high degree of personal responsibility. Bringing in your own ideas is encouraged and creativity, motivation and commitment are much appreciated.<br>
@@ -180,49 +206,13 @@ How to apply?<br>
 If you are interested, follow the link below and please send us your CV / Resume.<br>
 We will read all the information on it and we will contact the most suitable candidates.<br>
 Your personal data is protected by Bulgarian law and European General Data Protection Regulation.<br>
-""")
-        Designer = Position(time="Part-time", place="Remote", available=True, name='Web/Graphic Designer', company=Biodit,
-description="""
-<strong>This is why we need you</strong><br><br>We’re proud of the journey across all digital platforms so far, but a major focus for us in 2018 is evolving our brand to the next level and this is where you come in, developing creative ideas and concepts, as well as meeting tight deadlines.<br>We are looking for a full-time Graphic/Web Designer to join Reward Gateway with strong Adobe Creative Suite skills to bring magic to all our clients’ brand by creating high-quality visuals.<br><br><strong>On this position you will be responsible for:</strong><br><ul><li>Communicating with account managers to discuss the client/business objectives and requirements of the job</li>
-<li>Interpreting the client’s business needs and producing web/print visuals in accordance with design briefs and brand guidelines</li>
-<li>Producing visuals with high impact - both in print and web media&nbsp;</li>
-<li>Online design including&nbsp;Web page layouts build through our SmartHub® product Other web and social network visuals</li>
-</ul><strong>Technical knowledge and skills:</strong><br><ul><li>Proficiency in Adobe Creative Suite – good skills in Photoshop, Illustrator and InDesign. Proficiency in InDesign is a big plus!&nbsp;</li>
-<li>Fluent in spoken and written English</li>
-<li>Experience in creating web graphics</li>
-<li>Excellent attention to detail and proven ability to meet deadlines</li>
-<li>Able to act on own initiative, delivering projects without immediate supervision</li>
-<li>A 'can do' approach, willingness to learn</li>
-<li>Ability to work well under pressure</li>
-<li>An enthusiastic team player</li>
-<li>Good working knowledge of Mac is desirable, but not compulsory</li>
-</ul><br><strong>This is what we do</strong><br><br>We create products for HR. Products that are innovative, easy to use and deliver high engagement for every one of our clients. High engagement is what makes our clients happy and that client number is growing fast. We currently work with over 1700 companies including American Express, Groupon, Yahoo!, IBM, and McDonald’s. Each client uses our core product SmartHub, an employee engagement platform which allows them to build an employee experience unique to their organisation.<br><br>We strictly “solve for HR,” if you ever join us you’ll hear us say that a lot. HR is our customer, we understand their world and their world only, we care passionately about what they achieve in their role, and we’re here to help them. Our mission is to make the world a better place to work.<br><br><strong>This is how we take care of you<br></strong>
-<ul><li>35 days holiday including public holidays</li>
-<li>Employee Share Ownership</li>
-<li>Family Leave</li>
-<li>Parental Leave</li>
-<li>Wellbeing Choice - Annual allowance to spend on your wellbeing</li>
-<li>Life Insurance</li>
-<li>Bonus if you suggest someone who we hire</li>
-<li>Bonus if you get married or have a civil partnership</li>
-<li>Bonus if you have or adopt a child</li>
-<li>6 month unpaid sabbatical after 5 years</li>
-<li>Salary Advance</li>
-<li>Volunteer Days</li>
-<li>Book benefit</li>
-<li>Bring your dog to work</li>
-<li>Free breakfast items and soft drinks</li>
-<li>Food vouchers</li>
-<li>Private Medical Insurance</li>
-</ul><strong></strong><strong>Please, attach a PDF portfolio of your works or specify a link to an online portfolio(Behance, Dribbble, etc). Only candidates with portfolios will be considered or contacted!<br></strong><br><strong> All applications will be treated as strictly confidential.</strong><br><strong> Please, send your CV in English language only!</strong>						 
-""")
-        db.session.add(JuniorFrontEndDeveloper)
-        db.session.add(Designer)    
+""",
+                           available=True, duration=3, hours_per_day=8,
+                           age_required='Поне 16 г.', tag=Tags_db[3])
+        db.session.add(example)
         db.session.commit()
-
     # Students
-
-    NadegdaTsacheva = User(username='Nadegda Tsacheva', company=None, email='nadegda@headstarter.eu', password_hash=crypto('sample password'), type_registration='standard')
+    NadegdaTsacheva = User(username='Nadegda Tsacheva', company=None, email='', password_hash=crypto('sample password'), type_registration='standard')
     db.session.add(NadegdaTsacheva)
     db.session.commit()
     NadegdaTsacheva = User.query.get(3)

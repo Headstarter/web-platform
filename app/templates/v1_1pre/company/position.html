@@ -26,7 +26,6 @@
                         <p class="data">{{ position.company.contacts | safe }} </p>
                     </small>
                     </small>
-                    <button type="button" class="btn btn-info" id="submit">Запази</button>
                 </div>
             </div>
         </div>
@@ -39,6 +38,9 @@
         <div class="row">
             <h1>Въведи описание на стажа</h1>
             <span data-id="{{ position.id }}" data-name="position.description" class="summernote">{{ position.description | safe }}</span>
+        </div>
+        <div class="row d-flex justify-content-end">
+            <button type="button" id="submit" style="margin-right: 15px;color: white;" class="btn btn-right">Запази</button>
         </div>
     </div>
 {% endblock %}

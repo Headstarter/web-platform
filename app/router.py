@@ -1,5 +1,5 @@
 from app import app, babel, db, migrate, render_template
-from app.models import insert_user, insert_company, User, Sector, Company, Position, crypto
+from app.models import insert_user, insert_company, User, Tag, Company, Position, crypto
 from flask import request, session, flash, redirect, url_for
 #from flask_session import Session
 
@@ -52,7 +52,7 @@ def company_signup():
 		if 'code' in request.form and request.form['code'] == '12':
 			return render_template('company/register.html')
 		else:
-			flash('Verify code is incorrect. Try again or ask for another one.')
+			flash('Verify code is incorrect. Try again or ask for another one.', 'danger')
 			return render_template('company/prelogin.html')
 	elif 'type' in request.form and request.method == 'POST':
 		logout()
@@ -120,6 +120,7 @@ def student_login():
 				return redirect(url_for('student_login'))
 
 			session['email'] = request.form['email']
+			session['id'] = curr.id
 			if curr.company_id:
 				session['company_id'] = curr.company_id
 				session['type'] = 'Company'

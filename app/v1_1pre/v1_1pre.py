@@ -1,6 +1,6 @@
 from app import app, babel, db, migrate, render_template
 from app.router import session
-from app.models import User, Sector, Company, Position
+from app.models import User, Tag, Company, Position
 from flask import g, request, Blueprint, flash, url_for
 from app.v1_1pre.config import *
 
@@ -23,6 +23,19 @@ def _homepage():
         return mapped_routes[session['type']].homepage()
     except AttributeError:
         return mapped_routes['Visitor'].homepage()
+
+
+@routes.route('/browse', methods=['GET', 'POST'])
+def browse_offers():
+    if session['type'] == 'Company':
+        return mapped_routes['Company'].browse_students()
+    else:
+        return mapped_routes['Visitor'].browse_offers()
+
+
+@routes.route('/apply/<position>', methods=['GET', 'POST'])
+def apply_students(position):
+    return mapped_routes['Visitor'].apply_student(position)
 
 
 @routes.route('/profile')

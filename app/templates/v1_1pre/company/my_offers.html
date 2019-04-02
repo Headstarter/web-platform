@@ -1,0 +1,147 @@
+{% extends 'template.html' %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/homepage.css') }}" >
+    <style>
+        .formater {
+            background: transparent !important;
+            color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+        }
+        .formater .collapse .card-body {
+            background: transparent !important;
+            color: white !important;
+        }
+        select {
+            background: #474a51 !important;
+            color: white !important;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+	Homepage :: Headstarter
+{% endblock %}
+
+{% block page_nav %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="header-content-inner container">
+            <form action="" method="post">
+                <center>
+                    <span id="homeHeading" style="border-bottom: 1px solid white;">
+                        Headstarter<small>.eu</small>
+                    </span>
+                    <br>
+                    <span>Get your headstart on<br>the road to business.</span>
+                </center>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <a href="#" onclick="$('#filters').show();" class="col-sm-4 btn btn-big btn-rounded btn-left">Филтрирай</a>
+                    <div class="col-sm-2"></div>
+                    <button type="submit" class="col-sm-4 btn-rounded btn btn-big btn-rounded btn-right">Търси <i class="fas fa-search"></i></button>
+                    <div class="col-sm-1"></div>
+                </div>
+                <div id="filters" style="display: none;" class="row">
+                    <div class="col-12 form-group">
+                        Позиция:
+                        <select class="form-control" name="position"><!-- size="1">-->
+                            <option selected value="-1">Всички</option>
+                            {% for tag in tags %}
+                                <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        {% for internship in positions %}
+            <div class="row">
+                <div class="col-2">
+                    <img class="img-fluid" src="{{internship.company.logo}}">
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <big>{{internship.company.name}}</big>
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="badge badge-active">Активна</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            {{internship.name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            {{internship.duration}} месеца
+                        </div>
+                        <div class="col-sm-3">
+                            {{internship.hours_per_day}} ч./ден
+                        </div>
+                        <div class="col-sm-3">
+                            {{internship.age_required}}
+                        </div>
+                        <!--
+                        <div class="col-2">
+                            {{internship.salary}}
+                        </div>
+                        -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2" id="short{{loop.index}}" style="height: 24px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                            {{internship.description | safe}}
+                        </div>
+                        <div class="col-sm-3">
+                            <a onclick="$('#short{{loop.index}}').animate({opacity: +($('#collapse{{loop.index}}').hasClass('show'))});" style="font-size: 1rem;" class="btn-rounded btn btn-left" data-toggle="collapse" href="#collapse{{loop.index}}" role="button" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+                                Виж повече
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row collapse" id="collapse{{loop.index}}">
+              <div class="card card-body">
+                    <p>
+                        {{internship.description | safe}}
+                    </p>
+                    <div class="offset-9 col-3 d-flex justify-content-end">
+                        <a href="{{url_for('v1pre_routes.apply_students', position=internship.id)}}" style="font-size: 1rem;" class="btn-rounded btn btn-right" data-toggle="collapse" href="#collapse{{loop.index}}" role="button" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+                            Кандидатствай
+                        </a>
+                    </div>
+              </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </main>
+{% endblock %}
+
+{% block js %}
+		<!-- Plugin JavaScript -->
+		<script src="/static/jquery.easing.min.js"></script>
+		<script src="/static/vendor/scrollreveal/scrollreveal.min.js"></script>
+		<script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<!-- Theme JavaScript -->
+		<script src="/static/js/creative.min.js"></script>
+<script>
+    $('#myCollapsible').on('hidden.bs.collapse', function () {
+      $('').show();
+    });
+    $('#myCollapsible').on('hidden.bs.collapse', function () {
+      $('').show();
+    });
+</script>
+{% endblock %}

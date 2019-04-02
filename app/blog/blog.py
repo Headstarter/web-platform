@@ -1,6 +1,6 @@
 from app.decorators import *
 from app import app, babel, db, migrate, render_template
-from app.models import User, Sector, Company, Position
+from app.models import User, Tag, Company, Position
 from flask import g, request
 from flask import Blueprint
 from app.blog.config import *

@@ -1,5 +1,5 @@
 from app import render_template, flash
-from app.models import User, Sector, Company, Position
+from app.models import User, Tag, Company, Position
 
 
 class Students:
