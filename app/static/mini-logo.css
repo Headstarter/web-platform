@@ -26,8 +26,8 @@
 
 .mini-logo-header .logo {
     height: 100% !important;
-    background: white !important;
-    color: black !important;
+    background: transparent !important;
+    color: white !important;
 }
 
 .mini-logo-header .description {

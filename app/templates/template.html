@@ -55,6 +55,8 @@
 				</div>
 			</nav>
 		</header>
+
+		
 		<section class="container alerts">
 			{% for category, message in get_flashed_messages(with_categories=true) %}
 				<div class="alert alert-{{category}}" role="alert">
@@ -62,13 +64,7 @@
 				</div>
 			{% endfor %}
 		</section>
-		<div class="container custom-header">
-			<center>
-				<div class="inline-block">
-					{% block header %}{% endblock %}
-				</div>
-			</center>
-		</div>
+		{% block header %}{% endblock %}
 		<div class="container formater">
 		<section>
 			{% block content %}{% endblock %}

@@ -15,8 +15,8 @@
   /* makes expand to a square */
 }
 
-.circled {
-  border: 1px solid white;
+.circled, .btn-rounded {
+  border: 1px solid transperant;
   border-radius: 10000px;
 }
 /*
@@ -30,3 +30,36 @@
   background-size: cover;
 }
 */
+.header-content-inner * {
+    font-size: 48pt;
+    line-height: 1 !important;
+}
+.header-content-inner small {
+    font-size: 36pt;
+}
+.btn-left {
+    text-transform: none !important;
+    background-image: linear-gradient(to right, #66cc66, #0099ff);
+}
+
+.btn-right {
+    text-transform: none !important;
+    background-image: linear-gradient(to right, #0099ff, #6600ff);
+}
+
+.left-back {
+    background-image: linear-gradient(to right, #66cc66, #0099ff);
+}
+
+.right-back {
+    background-image: linear-gradient(to right, #0099ff, #6600ff);
+}
+
+.btn {
+    max-width: 100%;
+    font-size: 3rem;
+}
+
+.bg-page {
+    background-color: #474a51;
+}

@@ -15,7 +15,7 @@
 		<link rel='stylesheet'  href='//fonts.googleapis.com/icon?family=Material+Icons'>
 		<!-- Plugin CSS -->
 		<link href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+		<link rel="stylesheet" href="https://www.wfonts.com/download/data/2014/11/30/century-gothic/CenturyGothic.ttf"/>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons"/>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
 		
@@ -24,14 +24,7 @@
 		<!-- Theme CSS -->
 		<link href="{{ url_for('static', filename='css/creative.css') }}" rel="stylesheet">
 		<link href="{{ url_for('static', filename='css/starting.css') }}" rel="stylesheet">
-		
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<script>
-			(adsbygoogle = window.adsbygoogle || []).push({
-			google_ad_client: "ca-pub-7541062370169405",
-			enable_page_level_ads: true
-			});
-		</script>
+
 		<style>
 .custom-logo, .navbar-brand {
 	width: 50px !important;
@@ -40,125 +33,46 @@
 	margin: 0px 0px 0px 0px !important;
 }
 header {
-  background-color: rgba(0,0,0,0.65);
-  background-blend-mode: darken;
+  /*background-color: rgba(0,0,0,0.65);
+  background-blend-mode: darken;*/
 }
 		</style>
 	</head>
 	<body id="page-top">
 		<header>
-		<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-					</button>
-					<a class="navbar-brand page-scroll" href="#page-top">
-						<!--Headstarter-->
-						<img class="custom-logo" src="{{ url_for('static', filename='img/logo.png') }}">
-					</a>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a class="page-scroll" href="#services">Системи</a>
-						</li>
-						<li>
-							<a class="page-scroll" href="#about">За нас</a>
-						</li>
-						<li>
-							<a class="page-scroll" href="#contact">Контакти</a>
-						</li>
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
 			<div class="header-content">
 				<div class="header-content-inner">
-					<h1 id="homeHeading">
+					<span id="homeHeading">
 						Headstarter<small>.eu</small>
-					</h1>
+					</span>
 					<hr class="primary">
-					<h2>Headstarter е твоят шанс да израснеш в бизнес среда.
-
-
-<div class="container">
-  <div class="row section-box">
-    <div class="col-sm-2 square circled text-center description-text p-0">
-      За нас
-    </div>
-    <div class="col-sm-2 square circled text-center description-text p-0">
-      Начало
-    </div>
-  </div>
-  <div class="row section-box">
-    <div class="col-sm-3 square circled text-center description-text p-0">
-      Стажове
-    </div>
-    <div class="col-sm-3 square circled text-center description-text p-0">
-      Профил
-    </div>
-  </div>
-  <div class="row section-box">
-    <div class="col-sm-3 square circled text-center description-text p-0">
-      Вход
-    </div>
-    <div class="col-sm-3 square circled text-center description-text p-0">
-      Регистрация
-    </div>
-  </div>
-</div>
-
-					<br><br>Абонирай се сега и получавай пръв новините!</h2>
-					<a href="#services" class="btn btn-primary btn-xl page-scroll">Разбери повече </a>
-					<center>
-					<a href="#services" class="page-scroll">
-					<div style="-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);width: 50px; height: 50px; border-right: 1px solid white; border-bottom: 1px solid white;"> </div>
-					</a>
-					</center>
+					<span>Get your headstart on<br>the road to business.</span>
+					<br><br><br>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<a href="{{ url_for ('v1pre_routes.browse_offers') }}" class="col-sm-4 btn btn-big btn-rounded btn-left">Намери стаж</a>
+						<div class="col-sm-2"></div>
+						<a href="{{ url_for ('company_login') }}" class="col-sm-4 btn btn-big btn-rounded btn-right">Предложи стаж</a>
+						<div class="col-sm-1"></div>
+					</div>
 				</div>
 			</div>
 		</header>
-		<div id="services">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<h2 class="div-heading">Нашите системи</h2>
-						<hr class="primary">
-					</div>
-				</div>
-			</div>
-			<div class="container">
-				<div class="row" style="margin-bottom: 20px;">
-					<div class="col-lg-12 col-md-12 text-center">
-						<div class="service-box">
-							<i class="fa fa-4x fa-graduation-cap text-primary sr-icons"></i>
-							<h3><a class="text-normal" href="{{ url_for ('logout') }} ">Internships :: Headstarter</a></h3>
-							<p class="text-muted">Това е система, в която ученици в гимназиална възраст могат да намерят подходящ стаж, а фирми от различни сфери - млади нахъсани стажанти.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="bg-primary" id="about">
+		<div class="bg-page" id="about">
 			<div class="container">
 				<div class="row">
 					<div class="panel panel-primary">
-						<div class="panel-heading"></div>
+						<div class="panel-heading left-back"></div>
 						<div class="panel-body">
 							<div data-href="https://www.facebook.com/headstartercareer/" data-colorscheme="light" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true" style="color:white" class="fb-like fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large"><span style="vertical-align: bottom; width: 500px; height: 64px;"><iframe name="f51b166fba2f7e" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" style="border: medium none; visibility: visible; width: 500px; height: 64px;" src="https://www.facebook.com/v2.8/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F0F7S7QWJ0Ac.js%3Fversion%3D42%23cb%3Df23ed943ca0401e%26domain%3Dinfocourse.techedu.bg%26origin%3Dhttp%253A%252F%252Finfocourse.techedu.bg%252Ff32c9bdc857cc66%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large" class="" width="1000px" height="1000px" frameborder="0"></iframe></span></div>
 						</div>
 					</div>
 					<div id="authors" class="panel panel-primary">
-						<div class="panel-heading">
+						<div class="panel-heading right-back">
 							<h4>Екип</h4>
 						</div>
 						<div class="panel-body">
-							<div style="height: 450px;" class="col-md-6">
+							<div style="height: 450px;" class="col-xs-6">
 								<!--<img src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-9/39968450_1043890412438606_6174136399919316992_n.jpg?_nc_cat=103&_nc_ht=scontent-sof1-1.xx&oh=02a5608dcf6c3eb6117020eaa089860b&oe=5D26FB69" height="150px">-->
 								<img src="{{ url_for ('static', filename='img/alex.png') }} " height="150px">
 								<h2>Алекс Цветанов</h2>
@@ -166,21 +80,21 @@ header {
 								<h3>Изпълнителен директор</h3>
 								<p>Експерт „Бъдещо развитие“ и „Уеб системи“</p>
 							</div>
-							<div style="height: 450px;" class="col-md-6">
+							<div style="height: 450px;" class="col-xs-6">
 								<img src="https://scontent-sof1-1.cdninstagram.com/vp/7307e73597abe63791d6937ec29ef467/5CF1DE72/t51.2885-15/e35/50633127_996628673864100_4234096268517915149_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" height="150px">
 								<h2>Надежда Цачева</h2>
 								<br>
 								<h3>PR &amp; Marketing</h3>
 								<p>Експерт „Връзки с обществеността“</p>
 							</div>
-							<div style="height: 450px;" class="col-md-6">
+							<div style="height: 450px;" class="col-xs-6">
 								<img src="https://scontent-sof1-1.cdninstagram.com/vp/7fcadfd1e0d071f202808b2e95b5b95c/5D02786B/t51.2885-15/e35/49933566_2258693534453721_2337537523196968266_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" height="150px">
 								<h2>Радостина Богословова</h2>
 								<br>
 								<h3>Design</h3>
 								<p>Експерт „Продуктов дизайн“</p>
 							</div>
-							<div style="height: 450px;" class="col-md-6">
+							<div style="height: 450px;" class="col-xs-6">
 								<img src="{{ url_for ('static', filename='img/rangel.jpg') }}" height="150px">
 								<h2>Рангел Плачков</h2>
 								<br>
@@ -190,7 +104,7 @@ header {
 						</div>
 					</div>
 					<div id="partners" class="panel panel-primary">
-						<div class="panel-heading">
+						<div class="panel-heading left-back">
 							<h4>Партньори</h4>
 						</div>
 						<div class="panel-body">

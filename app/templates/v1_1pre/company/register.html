@@ -4,11 +4,29 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
 <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
+<style> .formater { background-color: transparent !important; } </style>
+{% endblock %}
 
+{% block title %}
+	Register :: Company :: Headstarter
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="header-content-inner container">
+            <center>
+                <span id="homeHeading" style="border-bottom: 1px solid white;">
+                    Headstarter<small>.eu</small>
+                </span>
+                <br>
+                <span>Get your headstart on<br>the road to business.</span>
+            </center>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-<div class="offset-md-4 col-md-4">
+<div class="offset-md-2 col-md-8">
     <div class="card">
         <div class="card-body">
             <a href="{{ url_for ('company_login')}}" class="float-right btn btn-outline-primary">Sign in</a>

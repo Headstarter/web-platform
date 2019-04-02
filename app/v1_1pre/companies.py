@@ -1,12 +1,25 @@
 from app import render_template, flash
-from app.models import User, Sector, Company, Position
+from app.models import User, Tag, Company, Position, Application
 from flask import session
+
 
 class Companies:
 
 	@staticmethod
 	def homepage():
-		return render_template('visitor/homepage.html', positions=Position.query.filter(Position.company_id == session['company_id']).filter(Position.available	== True).order_by(Position.id.desc()).limit(5))
+		return render_template('company/homepage.html', positions=Position.query.filter(Position.company_id == session['company_id']).filter(Position.available	== True).order_by(Position.id.desc()).limit(5))
+
+	@staticmethod
+	def browse_students():
+		return render_template('company/browse_students.html',
+							   positions=Position.query.filter(Position.company_id == int(session['company_id'])),
+							   students=Application.query.filter(Application.company_id == int(session['company_id'])))
+
+	@staticmethod
+	def my_offers():
+		return render_template('company/my_offers.html',
+							   positions=Position.query.filter(Position.company_id == int(session['company_id'])),
+							   students=Application.query.filter(Application.company_id == int(session['company_id'])))
 
 	@staticmethod
 	def company_view(companyId):

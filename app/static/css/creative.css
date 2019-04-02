@@ -160,7 +160,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../img/header2.png');
+  background-image: url('/static/img/page.png');
   text-align: center;
   color: white;
 }
