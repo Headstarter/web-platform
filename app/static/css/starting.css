@@ -19,23 +19,25 @@
   border: 1px solid transperant;
   border-radius: 10000px;
 }
-/*
-[class^="col"] {
-  white-space: nowrap;
-  box-sizing: border-box;
-  box-shadow: inset 0 0 0 5px white;
-  padding: 0;
-  text-align: center;
-  background: url(http://lorempixel.com/400/200) tomato;
-  background-size: cover;
-}
-*/
+
 .header-content-inner * {
     font-size: 48pt;
     line-height: 1 !important;
 }
 .header-content-inner small {
     font-size: 36pt;
+}
+@media(max-width: 769px) {
+.header-content-inner * {
+    font-size: 36pt;
+    line-height: 1 !important;
+}
+.header-content-inner small {
+    font-size: 24pt;
+}
+.col-xs-6 h2 {
+    font-size: 170%;
+}
 }
 .btn-left {
     text-transform: none !important;
@@ -61,5 +63,5 @@
 }
 
 .bg-page {
-    background-color: #474a51;
+    background-color: #2e3035;
 }

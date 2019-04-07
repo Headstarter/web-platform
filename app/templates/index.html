@@ -4,7 +4,10 @@
 		<meta name="google-site-verification" content="eCU54DH_8vQnzWO0Q3fXoQmalvA3rCjiXSH6mZdDgkg" />
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+     name='viewport'
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+		/>
 		<meta name="description" content="">
 		<meta name="author" content="Headstarter">
 		<title>Headstarter</title>
@@ -33,12 +36,38 @@
 	margin: 0px 0px 0px 0px !important;
 }
 header {
-  /*background-color: rgba(0,0,0,0.65);
-  background-blend-mode: darken;*/
+	background-color: rgba(0,0,0,0.35);
+	background-blend-mode: darken;
+}
+body {
+	background: #474a51;
+}
+#contact {
+	box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 1), 0 -6px 20px 0 rgba(0, 0, 0, 1);
+}
+#about .panel {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+	margin-bottom: 23px;
+}
+#about, .panel-body, #contact {
+	background: #2e3035 !important;
+	color: white !important;
+}
+.panel-body *, #contact * {
+	color: white !important;
 }
 		</style>
 	</head>
 	<body id="page-top">
+	<div id="fb-root"></div>
+
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 		<header>
 			<div class="header-content">
 				<div class="header-content-inner">
@@ -64,7 +93,7 @@ header {
 					<div class="panel panel-primary">
 						<div class="panel-heading left-back"></div>
 						<div class="panel-body">
-							<div data-href="https://www.facebook.com/headstartercareer/" data-colorscheme="light" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true" style="color:white" class="fb-like fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large"><span style="vertical-align: bottom; width: 500px; height: 64px;"><iframe name="f51b166fba2f7e" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" style="border: medium none; visibility: visible; width: 500px; height: 64px;" src="https://www.facebook.com/v2.8/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F0F7S7QWJ0Ac.js%3Fversion%3D42%23cb%3Df23ed943ca0401e%26domain%3Dinfocourse.techedu.bg%26origin%3Dhttp%253A%252F%252Finfocourse.techedu.bg%252Ff32c9bdc857cc66%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=1080&amp;href=https%3A%2F%2Fwww.facebook.com%2FTechEducationGroup%2F&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=large" class="" width="1000px" height="1000px" frameborder="0"></iframe></span></div>
+							<div class="fb-like" data-href="http://headstarter.eu" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 						</div>
 					</div>
 					<div id="authors" class="panel panel-primary">
@@ -77,7 +106,7 @@ header {
 								<img src="{{ url_for ('static', filename='img/alex.png') }} " height="150px">
 								<h2>Алекс Цветанов</h2>
 								<br>
-								<h3>Изпълнителен директор</h3>
+								<h3>Dev lead</h3>
 								<p>Експерт „Бъдещо развитие“ и „Уеб системи“</p>
 							</div>
 							<div style="height: 450px;" class="col-xs-6">
@@ -105,7 +134,7 @@ header {
 					</div>
 					<div id="partners" class="panel panel-primary">
 						<div class="panel-heading left-back">
-							<h4>Партньори</h4>
+							<h4>С подкрепата на </h4>
 						</div>
 						<div class="panel-body">
 							<div style="height: 225px;" class="col-md-6">
@@ -120,7 +149,7 @@ header {
 								<h2>Юлиан Софрониев</h2>
 							</center>
 							</div>
-							<div class="col-md-4"><center><a href="https://biodit.com/" class="normal"><img src="{{ url_for ('static', filename='img/biodit.png') }}" class="img-responsive"></a></center></div>
+							<div class="col-md-4"><center><a href="https://biodit.com/" class="normal"><img style="background-color: white !important;" src="{{ url_for ('static', filename='img/biodit.png') }}" class="img-responsive"></a></center></div>
 							<div class="col-md-4"><center><a href="https://techedu.bg/" class="normal"><img src="http://techedu.bg/img/acdemy4_logo.png" class="img-responsive"></a></center></div>
 							<div class="col-md-4"><center><a href="https://teenovator.bg/" class="normal"><img src="https://scontent-sof1-1.cdninstagram.com/vp/732b1ec727692883e8233eca1c55bb99/5D2889B6/t51.2885-19/s150x150/44591729_2221183161452009_3518858652549120000_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" class="img-responsive"></a></center></div>
 						</div>
@@ -139,7 +168,7 @@ header {
 						<i class="fa fa-phone fa-3x sr-contact"></i>
 						<p><a href="tel:+359-988-32-99-31">+359-988-32-99-31</a></p>
 						<p>Алекс Цветанов</p>
-						<p>CEO</p>
+						<p>Dev lead</p>
 					</div>
 					<div class="col-lg-4 text-center">
 						<i class="fa fa-phone fa-3x sr-contact"></i>

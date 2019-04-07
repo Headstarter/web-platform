@@ -35,3 +35,7 @@ aside .card {
     padding: 1px 1px;
     padding-right: 1px;
 }
+
+.card .card-title {
+    color: black !important;
+}

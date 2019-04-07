@@ -68,11 +68,51 @@ $(document).ready(function() {
     init_loading_modal ();
 
     var end_modal = "";
-    var updates_done = $('.summernote').length;
+    var updates_done = $('.category').length + $('.availability').length + $('.summernote').length;
     $('.summernote').each (function (_) {
         var code = $(this).summernote ('code');
         var data_id = $(this).attr ('data-id');
         var data_name = $(this).attr ('data-name').replace('<p>', '').replace('</p>', '');
+
+        $.post('/p/update', {
+            code: code,
+            id: data_id,
+            name: data_name
+        }).done(function(response) {
+            console.log(response);
+            console.log (response.value);
+            end_modal += ('<p class="success">Променихте ' + data_name + ' успешно.</p>')
+            updates_done -= 1;
+        }).fail(function(response) {
+            end_modal += ('<p class="danger">Не променихте ' + data_name + ': ' + response.status.toString () + '</p>')
+            console.log (response.status);
+            updates_done -= 1;
+        });
+    });
+    $('.availability').each (function (_) {
+        var code = ($('[name=available]:checked').length == 1);
+        var data_id = $(this).attr ('data-id');
+        var data_name = $(this).attr ('data-name');
+
+        $.post('/p/update', {
+            code: code,
+            id: data_id,
+            name: data_name
+        }).done(function(response) {
+            console.log(response);
+            console.log (response.value);
+            end_modal += ('<p class="success">Променихте ' + data_name + ' успешно.</p>')
+            updates_done -= 1;
+        }).fail(function(response) {
+            end_modal += ('<p class="danger">Не променихте ' + data_name + ': ' + response.status.toString () + '</p>')
+            console.log (response.status);
+            updates_done -= 1;
+        });
+    });
+    $('.category').each (function (_) {
+        var code = ($('[name=position] option:selected').val());
+        var data_id = $(this).attr ('data-id');
+        var data_name = $(this).attr ('data-name');
 
         $.post('/p/update', {
             code: code,

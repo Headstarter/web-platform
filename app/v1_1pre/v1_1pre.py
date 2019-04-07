@@ -33,6 +33,28 @@ def browse_offers():
         return mapped_routes['Visitor'].browse_offers()
 
 
+@routes.route('/my_offers', methods=['GET', 'POST'])
+def my_offers():
+    if session['type'] == 'Company':
+        return mapped_routes['Company'].my_offers()
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.my_offers')
+        return render_template('template.html')
+
+
+@routes.route('/create_offer', methods=['GET', 'POST'])
+def create_offer():
+    if session['type'] == 'Company':
+        return mapped_routes['Company'].create_offer()
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.create_offer')
+        return render_template('template.html')
+
+
 @routes.route('/apply/<position>', methods=['GET', 'POST'])
 def apply_students(position):
     return mapped_routes['Visitor'].apply_student(position)
@@ -114,6 +136,17 @@ def position_view(positionId):
         return render_template('template.html')
 
 
+@routes.route('/application/<applicationId>', methods=['GET', 'POST'])
+def application_view(applicationId):
+    try:
+        return mapped_routes[session['type']].application_view(applicationId)
+    except:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.application_view', applicationId=applicationId)
+        return render_template('template.html')
+
+
 @routes.route('/update', methods=['POST'])
 def update_data():
     from flask import jsonify
@@ -162,6 +195,53 @@ def update_data():
             db.session.commit()
             return jsonify({'value': data}), 200
         else:
-            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id, 'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
+    elif name == 'position.available':
+        if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
+            Position.query.filter(Position.id == id).update({'available': (data != 'false')})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
+    elif name == 'position.tag_id':
+        if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
+            Position.query.filter(Position.id == id).update({'tag_id': data})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
+    elif name == 'position.duration':
+        if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
+            Position.query.filter(Position.id == id).update({'duration': int(data)})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
+    elif name == 'position.hours_per_day':
+        if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
+            Position.query.filter(Position.id == id).update({'hours_per_day': int(data)})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
+    elif name == 'position.age_required':
+        if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
+            Position.query.filter(Position.id == id).update({'age_required': data})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
+                            'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
+
     else:
         return jsonify({'status': 'data-name is not recognized'}), 400

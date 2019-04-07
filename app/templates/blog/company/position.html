@@ -33,7 +33,7 @@
     <div class="container editor">
         <div class="row">
             <div class="col-md-6"><center>
-                Стажът е изтекъл&nbsp;&nbsp;
+                Стажът е изтекла&nbsp;&nbsp;
                 <label data-id="{{ position.id }}" data-name="position.available" class="availability switch">
                     {% if position.available %}
                         <input name="available" type="checkbox" checked>
@@ -42,7 +42,7 @@
                     {% endif %}
                     <span class="slider round"></span>
                 </label>
-                &nbsp;&nbsp;Стажът е наличeн
+                &nbsp;&nbsp;Стажът е налична
             </center></div>
             <div class="col-md-6"><center>
                 <select data-id="{{ position.id }}" data-name="position.tag_id"
@@ -68,13 +68,6 @@
                 <small>Моля, въвеждайте само цифри.</small>
                 <h1 data-id="{{ position.id }}" data-name="position.hours_per_day" class="summernote">{{position.hours_per_day}}</h1>
             </center></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12"><center>
-            <h1>Основна информация за стажа:</h1>
-			<span>Например „Над 14 г.“</span>
-            <span data-id="{{ position.id }}" data-name="position.age_required" class="summernote">{{ position.age_required | safe }}</span>
-			</center></div>
         </div>
         <div class="row">
             <h1>Въведи позицията на стажа</h1>

@@ -23,21 +23,16 @@
             <div class="row">
                 <div class="col-md-4 logo">
                     <center>
-                        <img class="mini-logo" src="{{ company.logo }}" />
-                        <h1>Име на фирмата:</h1>
-                        <h1 data-id="{{ company.id }}" data-name="company.name" class="summernote">{{ company.name }}</h1>
+                        <img class="mini-logo" src="{{ application.position.company.logo }}" />
+                        <h1>{{ application.user.username }}</h1>
                     </center>
                 </div>
                 <div class="col-md-7 description">
-                    <h1>Описание на фирмата:</h1>
-                    <span data-id="{{ company.id }}" data-name="company.description" class="summernote">{{ company.description }}</span>
+                    <span></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 description">
-                    <h1>Контакти с фирмата:</h1>
-                    <span data-id="{{ company.id }}" data-name="company.contacts" class="summernote">{{ company.contacts | safe }}</span>
-                    <button class="btn-rounded btn btn-big btn-rounded btn-right" id="submit">Запази</button>
                 </div>
             </div>
         </div>

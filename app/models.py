@@ -104,12 +104,28 @@ def insert_application(user_id, position_id, company_id):
     db.session.commit()
 
 
-def insert_company(name, description, logo, website, contacts):
+def insert_company(name, description, logo, website, contacts, email, password):
     db.session.add(Company(
         name=name, description=description,
-        logo=logo, website=website, contacts=contacts))
+        logo=logo, website=website, contacts=contacts,
+        email=email, password=crypto(password)))
     db.session.commit()
 
+
+def insert_position(name, company_id, description, available, duration, hours_per_day, age_required, tag_id):
+    p = Position(
+        name=name,
+        company_id=company_id,
+        description=description,
+        available=available,
+        duration=duration,
+        hours_per_day=hours_per_day,
+        age_required=age_required,
+        tag_id=tag_id
+    )
+    db.session.add(p)
+    db.session.commit()
+    return p.id
 
 def init():
     """ Posts
