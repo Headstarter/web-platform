@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-	Homepage :: Headstarter
+	Login :: Student :: Headstarter
 {% endblock %}
 
 {% block header %}
@@ -26,25 +26,38 @@
 {% endblock %}
 
 {% block content %}
+<div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=145071102807525&autoLogAppEvents=1"></script>
+<script src="/static/js/fb-login.js"></script>
+
 <div class="offset-md-2 col-md-8">
     <div class="card">
-        <article class="card-body">
-            <a href="{{ url_for ('company_login') }}" class="float-right btn btn-outline-primary">Sign in</a>
-            <h4 class="card-title mb-4 mt-1">Sign up</h4>
+        <div class="card-body">
+            <a href="{{ url_for ('student_signup') }}" class="float-right btn btn-outline-primary">Sign up</a>
+            <h4 class="card-title mb-4 mt-1">Sign in</h4>
             <div class="row">
-                <form class="col-md-12" method="POST">
+                <form class="col-md-border col-md-7" method="POST">
                     <div class="form-group">
-                        <input name="code" class="form-control" placeholder="Verification code" type="text">
+                        <input name="email" class="form-control" placeholder="Email" type="email">
                     </div> <!-- form-group// -->
-                    <input name="type" type="hidden" value="prelogin">
+                    <div class="form-group">
+                        <input name="password" class="form-control" placeholder="Password" type="password">
+                    </div> <!-- form-group// -->
+                    <input name="type" type="hidden" value="standard">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Start your registration </button>
+                                <button type="submit" class="btn btn-primary btn-block"> Login  </button>
                             </div> <!-- form-group// -->
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a class="small" href="#">Recover password?</a>
                         </div>
                     </div> <!-- .row// -->
                 </form>
+                <p class="col-md-border col-md-5">
+                    <a href="#" class="btn btn-block btn-outline-primary" onclick="checkLoginState(function(){$('form').submit();});"> <i class="fab fa-facebook-f"></i> Login</a>
+                </p>
             </div>
         </article>
     </div> <!-- card.// -->

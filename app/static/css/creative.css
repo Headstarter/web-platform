@@ -1,3 +1,5 @@
+body { overflow-x: hidden; }
+
 html,
 body {
   height: 100%;
@@ -155,12 +157,14 @@ header {
   position: relative;
   width: 100%;
   min-height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain;
+  -o-background-size: contain;
   background-position: center;
-  background-image: url('/static/img/page.png');
+  background-image: url('/background.png');
+  background-color: #474a51;
+  background-repeat: no-repeat;
   text-align: center;
   color: white;
 }

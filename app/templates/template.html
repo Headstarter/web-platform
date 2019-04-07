@@ -32,8 +32,8 @@
 							</li>
 							{% block page_nav %}
 							{% endblock %}
-							<li class="nav-item">
-								<a class="nav-link disabled" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
+							<li class="nav-item disabled">
+								<a class="nav-link" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
 							</li>
 						</ul>
 
@@ -44,9 +44,19 @@
 							{% else %}
 							{% if session['type'] != "Visitor" %}
 						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
-						  <li><a class="nav-link" href="{{ url_for ('v1pre_routes.profile') }}"><i class="fas fa-user"></i> {{ session ['company'] }}</a></li>
+						  <li class="dropdown">
+							  <a class="nav-link"  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								  <i class="fas fa-user"></i> {{ session ['company'] }}
+							  </a>
+
+							  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							    <a class="dropdown-item" href="{{ url_for ('v1pre_routes.profile') }}">Профил</a>
+							    <a class="dropdown-item" href="{{ url_for ('v1pre_routes.browse_offers') }}">Моите стажанти</a>
+							    <a class="dropdown-item" href="{{ url_for ('v1pre_routes.my_offers') }}">Моите стажове</a>
+							  </div>
+						  </li>
 							{% else %}
-						  <!--<li><a class="nav-link" href="#" data-toggle="modal" data-target="#signup_student_company"><i class="fas fa-user"></i> Регистрация</a></li>-->
 						  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
 							{% endif %}
 							{% endif %}
@@ -56,7 +66,9 @@
 			</nav>
 		</header>
 
-		
+		<section id="heading_banner">
+		{% block header %}{% endblock %}
+		</section>
 		<section class="container alerts">
 			{% for category, message in get_flashed_messages(with_categories=true) %}
 				<div class="alert alert-{{category}}" role="alert">
@@ -64,7 +76,6 @@
 				</div>
 			{% endfor %}
 		</section>
-		{% block header %}{% endblock %}
 		<div class="container formater">
 		<section>
 			{% block content %}{% endblock %}

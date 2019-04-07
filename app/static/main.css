@@ -29,7 +29,7 @@
     --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 
     --headstarter-secondary: #474a51;/*rgb(20, 98, 125);*/
-    --headstarter-primary: rgb(71, 74, 81);/*rgb(0, 81, 95);*/
+    --headstarter-primary: #2e3035;/*rgb(71, 74, 81);rgb(0, 81, 95);*/
 }
 
 .inline-block {
@@ -48,10 +48,15 @@
 }
 
 body {
-    /*background-image: linear-gradient(var(--headstarter-primary), lightblue, var(--headstarter-primary)); /* var(--headstarter-secondary),  */
-    background-color: #474a51;
+    /*background-image: linear-gradient(var(--headstarter-primary), lightblue, var(--headstarter-primary)); /* var(--headstarter-secondary),  
+    */
+	background-color: #2e3035;
 }
-
+#heading_banner {
+	padding-bottom: 0px !important;
+	padding-top: 0px !important;
+	background-color: #474a51;
+}
 body .formater>* {
     padding-left: 15px;
     padding-right: 15px;
@@ -360,22 +365,36 @@ footer hr {
   border-radius: 10000px;
 }
 .btn-left {
+    color: white !important;
     text-transform: none !important;
     background-image: linear-gradient(to right, #66cc66, #0099ff);
 }
 
 .btn-right {
+    color: white !important;
     text-transform: none !important;
     background-image: linear-gradient(to right, #0099ff, #6600ff);
 }
-
+.btn-left-right {
+    color: white !important;
+    text-transform: none !important;
+    background-image: linear-gradient(to right, #66cc66, #0099ff, #6600ff);
+}
 .jumbotron {
-  background-repeat: no-repeat;
-  background-position: 0% 0%;
-  background-size: 100% 100%;
-  background-image: url('/static/img/page.png');
-  color: white;
-  font-size: 2rem !important;
+	background-color: rgba(0,0,0,0.35);
+	background-blend-mode: darken;
+	position: relative;
+	width: 100%;
+	min-height: auto;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	background-size: contain;
+	-o-background-size: contain;
+	background-position: center;
+	background-image: url('/background.png');
+	background-repeat: no-repeat;
+	text-align: center;
+	color: white;
 }
 
 .jumbotron span {
@@ -389,11 +408,6 @@ footer hr {
 
 @media (max-width: 992px) {
     .jumbotron {
-      background-repeat: no-repeat;
-      background-position: 0% 0%;
-      background-size: 100% 100%;
-      background-image: url('/static/img/page.png');
-      color: white;
       font-size: 1.5rem !important;
     }
 
@@ -414,4 +428,114 @@ footer hr {
     font-size: 0.9rem;
     background: #6c6;
     color: rgba(0,0,0,0.5);
+}
+
+ /* unvisited link */
+a.link-default:link, .data a:link {
+  color: white;
+}
+
+/* visited link */
+a.link-default:visited, .data a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a.link-default:hover, .data a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* selected link */
+a.link-default:active, .data a:active {
+  color: white;
+  text-decoration: underline;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #474a51;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #7aceb6;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #7aceb6;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dropdown-menu {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+}
+
+.dropdown-menu, .dropdown-item {
+    background-color: #474a51;
+    color: white;
+}
+
+select {
+    background: #474a51 !important;
+    color: white !important;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+a[aria-disabled="true"] {
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
 }

@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-	Homepage :: Headstarter
+	Login :: Company :: Headstarter
 {% endblock %}
 
 {% block header %}
@@ -29,19 +29,25 @@
 <div class="offset-md-2 col-md-8">
     <div class="card">
         <article class="card-body">
-            <a href="{{ url_for ('company_login') }}" class="float-right btn btn-outline-primary">Sign in</a>
-            <h4 class="card-title mb-4 mt-1">Sign up</h4>
+            <a href="{{ url_for ('company_signup') }}" class="float-right btn btn-outline-primary">Sign up</a>
+            <h4 class="card-title mb-4 mt-1">Sign in</h4>
             <div class="row">
-                <form class="col-md-12" method="POST">
+                <form class="col-md-border col-md-12" method="POST">
                     <div class="form-group">
-                        <input name="code" class="form-control" placeholder="Verification code" type="text">
+                        <input name="email" class="form-control" placeholder="Email" type="email">
                     </div> <!-- form-group// -->
-                    <input name="type" type="hidden" value="prelogin">
+                    <div class="form-group">
+                        <input name="password" class="form-control" placeholder="Password" type="password">
+                    </div> <!-- form-group// -->
+                    <input name="type" type="hidden" value="standard">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Start your registration </button>
+                                <button type="submit" class="btn btn-primary btn-block"> Login  </button>
                             </div> <!-- form-group// -->
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a class="small" href="#">Forgot password?</a>
                         </div>
                     </div> <!-- .row// -->
                 </form>

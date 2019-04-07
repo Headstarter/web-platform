@@ -5,11 +5,16 @@
     <link rel="stylesheet" href="{{ url_for('.static', filename='logo.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='css/homepage.css') }}" >
     <style>
+        .formater {
+            background: transparent !important;
+            color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+        }
     </style>
 {% endblock %}
 
 {% block title %}
-	Homepage :: Headstarter
+	Blog :: Headstarter
 {% endblock %}
 
 {% block page_nav %}
@@ -37,9 +42,9 @@
             <br><br>
             <div class="row">
                 <div class="col-sm-1"></div>
-                <a href="{{ url_for ('v1pre_routes.browse_offers') }}" class="col-sm-4 btn btn-big btn-rounded btn-left">Намери стажант</a>
+                <a href="{{ url_for ('v1pre_routes.browse_offers') }}" class="col-sm-4 btn btn-big btn-rounded btn-left">Намери стаж</a>
                 <div class="col-sm-2"></div>
-                <a href="{{ url_for ('v1pre_routes.browse_offers') }}" class="col-sm-4 btn btn-big btn-rounded btn-right">Предложи стаж</a>
+                <a href="{{ url_for ('company_login') }}" class="col-sm-4 btn btn-big btn-rounded btn-right">Предложи стаж</a>
                 <div class="col-sm-1"></div>
             </div>
         </div>
@@ -54,7 +59,7 @@
                     <center style="width: 100%;"><big>Какво правим?</big></center>
                 </div>
                 <hr>
-                <p>Ние свързваме учениците с българските компании, които предлагат възможност младите да получат нужния опит и знания за бъдещата си работна среда. С наша помощ учениците и студентите получават лесен, удобен и достъпен начин, за да открият правилния стаж, който пасва на желанията им.</p>
+                <p>Ние от Headstarter ти помагаме да напишеш свое CV и да намериш стаж, който да удовлетворява интересите ти. Ние мислим за твоето бъдеще и искаме да направим професионалните ти решения по-лесни за вземане.</p>
             </section>
             <section class="col-6">
                 <img class="img-fluid" src="/static/img/logo.png">

@@ -26,3 +26,9 @@ section {
     color:white;
     text-decoration: none;
 }
+
+        .formater {
+            background-color: transparent !important;
+            color: white !important;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1) !important;
+        }
