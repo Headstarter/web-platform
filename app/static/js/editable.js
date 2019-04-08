@@ -68,7 +68,7 @@ $(document).ready(function() {
     init_loading_modal ();
 
     var end_modal = "";
-    var updates_done = $('.category').length + $('.availability').length + $('.summernote').length;
+    var updates_done = $('.checkbox').length + $('.option').length + $('.plain').length + $('.summernote').length;
     $('.summernote').each (function (_) {
         var code = $(this).summernote ('code');
         var data_id = $(this).attr ('data-id');
@@ -89,8 +89,25 @@ $(document).ready(function() {
             updates_done -= 1;
         });
     });
-    $('.availability').each (function (_) {
-        var code = ($('[name=available]:checked').length == 1);
+    $('.checkbox').each (function (_) {
+        var code = ($('[name=' + $(this).attr('data-fname') + ']:checked').length == 1);
+        var data_id = $(this).attr ('data-id');
+        var data_name = $(this).attr ('data-name');
+
+        $.post('/p/update', {
+            code: code,
+            id: data_id,
+            name: data_name
+        }).done(function(response) {
+            end_modal += ('<p class="success">Променихте ' + data_name + ' успешно.</p>')
+            updates_done -= 1;
+        }).fail(function(response) {
+            end_modal += ('<p class="danger">Не променихте ' + data_name + ': ' + response.status.toString () + '</p>')
+            updates_done -= 1;
+        });
+    });
+    $('.option').each (function (_) {
+        var code = ($('[name=' + $(this).attr('name') + '] option:selected').val());
         var data_id = $(this).attr ('data-id');
         var data_name = $(this).attr ('data-name');
 
@@ -109,8 +126,8 @@ $(document).ready(function() {
             updates_done -= 1;
         });
     });
-    $('.category').each (function (_) {
-        var code = ($('[name=position] option:selected').val());
+    $('.plain').each (function (_) {
+        var code = ($(this).val());
         var data_id = $(this).attr ('data-id');
         var data_name = $(this).attr ('data-name');
 

@@ -165,7 +165,7 @@ header {
   background-image: url('/background.png');
   background-color: #474a51;
   background-repeat: no-repeat;
-  text-align: center;
+  /*text-align: center;*/
   color: white;
 }
 header .header-content {

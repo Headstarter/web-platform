@@ -1,7 +1,7 @@
 from app import app, babel, db, migrate, render_template
-from app.models import insert_user, insert_company, User, Tag, Company, Position, crypto
+from app.models import insert_user, User, Tag, Company, Position, crypto
 from flask import request, session, flash, redirect, url_for, send_file
-from flask import Session
+import sys
 
 # Set the secret key to some random bytes. Keep this really secret!
 from datetime import timedelta
@@ -10,9 +10,6 @@ app.config['SESSION_TYPE'] = 'filesystem' #redis
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
 
 app.config.from_object(__name__)
-#sess = Session(app)
-
-#sess.init_app(app)
 
 from uuid import uuid4
 
@@ -64,59 +61,57 @@ def page_not_found(e):
 	flash(request.full_path + ': Error 404: Page not found.', 'danger')
 	return render_template('template.html'), 404
 
+
 @app.errorhandler(500)
 def internal_server_error(e):
 	flash(request.full_path + ': Error 500: Could be caused by invalid parameters.', 'danger')
 	return render_template('template.html'), 500
 
-@app.route('/signup/company', methods=['GET', 'POST'])
-def company_signup():
-	if 'type' in request.form and request.form['type'] == 'prelogin' and request.method == 'POST':
-		if 'code' in request.form and request.form['code'] == '12':
-			return render_template('company/register.html')
-		else:
-			flash('Verification code is incorrect. Try again or ask for another one.', 'danger')
-			return render_template('company/prelogin.html')
-	elif request.method == 'POST':
-		logout()
-		if len(Company.query.filter(Company.email == request.form['email']).all()) == 0 \
-				and (request.form['password'] == request.form['verify_password']):
 
-			insert_company(request.form['name'],
-						   request.form['description'],
-						   request.form['logo'],
-						   request.form['website'],
-						   request.form['contacts'],
-						   request.form['email'],
-						   request.form['password'])
+@app.route('/register/company', methods=['GET', 'POST'])
+def company_signup():
+	print(request.form, file=sys.stderr)
+	if request.method == 'POST':
+		logout()
+		if len(Company.query.filter(Company.uid == request.form['company_code']).all()) == 1 \
+			and (request.form['password'] == request.form['verify_password'])\
+			and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
+
+			insert_user(request.form['fname'] + ' ' + request.form['lname'],
+						request.form['email'],
+						request.form['password'],
+						Company.query.filter(Company.uid == request.form['company_code']).one())
 
 			session['email'] = request.form['email']
-			session['company_id'] = Company.query.filter(Company.email == request.form['email']).one().id
-			session['company'] = request.form['name']
+			session['company_id'] = Company.query.filter(Company.uid == request.form['company_code']).one().id
+			session['name'] = request.form['fname'] + ' ' + request.form['lname']
+			session['company'] = Company.query.filter(Company.uid == request.form['company_code']).one().name
 			session['type'] = 'Company'
+			random()
 
-			return redirect('/p')
+			return redirect(url_for('v1pre_routes.create_offer'))
 		else:
 			flash('Company is already registered or passwords are not matching.', 'danger')
 			return redirect(url_for('company_signup'))
 	else:
-		return render_template('company/prelogin.html')
+		return render_template('company/register.html')
 
 
 @app.route('/login/company', methods=['GET', 'POST'])
 def company_login():
 	logout()
 	if request.method == 'POST':
-		if len(Company.query.filter(Company.email == request.form['email']).all()) == 1:
-			company = Company.query.filter(Company.email == request.form['email']).one()
+		if len(User.query.filter(User.email == request.form['email']).all()) == 1:
+			user = User.query.filter(User.email == request.form['email']).one()
 
-			if company.password != crypto(request.form['password']):
+			if user.password_hash != crypto(request.form['password']):
 				flash('Incorrect password.', 'danger')
 				return redirect(url_for('company_login'))
 
 			session['email'] = request.form['email']
-			session['company_id'] = company.id
-			session['company'] = company.name
+			session['company_id'] = user.company_id
+			session['name'] = user.name
+			session['company'] = user.company.name
 			session['type'] = 'Company'
 			random()
 
@@ -129,9 +124,6 @@ def company_login():
 		else:
 			flash('User is not registered or user is not login by the correct way.', 'danger')
 			return redirect(url_for('company_login'))
-	elif request.method == 'POST' and len(User.query.filter(User.email == request.form['email'],
-				User.type_registration == request.form['type']).all()) == 1:
-		return student_login()
 	else:
 		return render_template('company/login.html')
 
@@ -140,9 +132,8 @@ def company_login():
 def student_login():
 	logout()
 	if request.method == 'POST':
-		if len(User.query.filter(User.email == request.form['email']).filter(
-				User.type_registration == request.form['type']).all()) == 1:
-			curr = User.query.filter(User.email == request.form['email'], User.type_registration == request.form['type']).one()
+		if len(User.query.filter(User.email == request.form['email']).all()) == 1:
+			curr = User.query.filter(User.email == request.form['email']).one()
 			if curr.password_hash != crypto(request.form['password']):
 				flash('Incorrect password.', 'danger')
 				return redirect(url_for('student_login'))
@@ -151,14 +142,13 @@ def student_login():
 			session['id'] = curr.id
 			if curr.company_id:
 				session['company_id'] = curr.company_id
-				session['type'] = 'Student'
-				session['name'] = curr.username
-				session['name_addon'] = '<br>(' + curr.company.name + ')'
+				session['type'] = 'Company'
+				session['name'] = curr.name
+				session['company'] = curr.company.name
 			else:
-				session['name'] = curr.username
+				session['name'] = curr.name
 				session['company_id'] = None
 				session['type'] = 'Student'
-				session['name_addon'] = ''
 			random()
 
 			if 'redirect' in session:
@@ -178,14 +168,13 @@ def student_login():
 def student_signup():
 	if request.method == 'POST':
 		if len(User.query.filter(User.email == request.form['email']).all()) == 0 \
-				and (request.form['type'] == 'fb'
-				or request.form['password'] == request.form['verify_password']):
+				and (request.form['password'] == request.form['verify_password']):
 
-			insert_user(request.form['name'], request.form['email'], request.form['password'], request.form['type'])
+			insert_user(request.form['name'], request.form['email'], request.form['password'])
 
 			session['email'] = request.form['email']
 			session['name'] = User.query.filter(User.email == request.form['email']).filter(
-				User.type_registration == request.form['type']).all()[0].username
+				User.type_registration == request.form['type']).all()[0].name
 			session['company_id'] = None
 			session['type'] = 'Student'
 
@@ -204,7 +193,7 @@ def logout():
 	session['company_id'] = None
 	session['type'] = 'Visitor'
 	session['name'] = None
-	session['name_addon'] = None
+	session['company'] = None
 
 	return redirect('/p')
 

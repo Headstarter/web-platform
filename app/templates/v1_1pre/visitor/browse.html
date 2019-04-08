@@ -57,6 +57,15 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="col-12 form-group">
+                        Компания:
+                        <select class="form-control" name="company"><!-- size="1">-->
+                            <option selected value="-1">Всички</option>
+                            {% for company in companies %}
+                                <option value="{{ company.id }}">{{ company.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </form>
         </div>
@@ -65,38 +74,33 @@
 
 {% block content %}
     <main class="container">
-        {% if positions.length == 0 %}
-            <div class="row">
-
-            </div>
-        {% endif %}
         {% for internship in positions %}
             <div class="row">
-                <div class="col-2">
-                    <img class="img-fluid" src="{{internship.company.logo}}">
-                </div>
+                <div class="col-2"><center style="height:100%;">
+                    <img class="h-50 img-fluid" src="{{internship.company.logo}}">
+                </center></div>
                 <div class="col-10">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-12">
                             <big>{{internship.company.name}}</big>
-                        </div>
-                        <div class="col-sm-1">
+                        </div><!--
+                        <div class="col-sm-8">
                             <span class="badge badge-active">Активна</span>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             {{internship.name}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             {{internship.duration}} месеца
                         </div>
-                        <div class="col-sm-3">
-                            {{internship.hours_per_day}} ч./ден
+                        <div class="col-sm-4">
+                            {{internship.hours_per_day}}/ден
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             {{internship.age_required}}
                         </div>
                         <!--
@@ -105,11 +109,11 @@
                         </div>
                         -->
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2" id="short{{loop.index}}" style="height: 24px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                    <div style="margin-top: 7px;" class="row">
+                        <div class="col-sm-8" id="short{{loop.index}}" style="height: 24px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                             {{internship.description | safe}}
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <a onclick="$('#short{{loop.index}}').animate({opacity: +($('#collapse{{loop.index}}').hasClass('show'))});" style="font-size: 1rem;" class="btn-rounded btn btn-left" data-toggle="collapse" href="#collapse{{loop.index}}" role="button" aria-expanded="false" aria-controls="collapse{{loop.index}}">
                                 Виж повече
                             </a>

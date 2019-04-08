@@ -30,24 +30,36 @@
 							<li class="nav-item active">
 								<a class="nav-link" href="/p">Начало</a>
 							</li>
-							{% block page_nav %}
-							{% endblock %}
+							<li class="nav-item">
+							{% if session['type'] == "Student" or session['type'] == 'Visitor' %}
+								<a class="nav-link" href="{{ url_for ('v1pre_routes.browse_offers') }}">Намери стаж</a>
+							{% endif %}
+							</li>
+							<li class="nav-item">
+							{% if session['type'] == 'Visitor' %}
+								<a class="nav-link" href="{{ url_for ('company_signup') }}">Предложи стаж</a>
+							{% else %}
+							{% if session['type'] == 'Company' %}
+								<a class="nav-link" href="{{ url_for ('v1pre_routes.create_offer') }}">Предложи стаж</a>
+							{% endif %}
+							{% endif %}
+							</li>
 							<li class="nav-item disabled">
 								<a class="nav-link" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
 							</li>
 						</ul>
 
 						<ul class="nav navbar-nav navbar-right">
-							{% if session.name and session['type'] != "Visitor" %}
-						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
-						  <li><a class="nav-link" href="{{ url_for ('v1pre_routes.profile') }}"><i class="fas fa-user"></i> {{ session ['name'] }}{{ session ['name_addon'] | safe }}</a></li>
+							{% if session['type'] == "Student" %}
+						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fas fa-sign-out-alt"></i> Изход</a></li>
+						  <li><a class="nav-link" href="{{ url_for ('v1pre_routes.profile') }}"><i class="fas fa-user"></i> {{ session ['name'] }}</a></li>
 							{% else %}
-							{% if session['type'] != "Visitor" %}
-						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fa fa-sign-out"></i> Изход</a></li>
+							{% if session['type'] == "Company" %}
+						  <li><a class="nav-link" href="{{ url_for ('logout') }}"><i class="fas fa-sign-out-alt"></i> Изход</a></li>
 						  <li class="dropdown">
 							  <a class="nav-link"  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-								  <i class="fas fa-user"></i> {{ session ['company'] }}
+								  <i class="fas fa-user"></i> {{ session ['name'] }}<br>{{ session ['company'] }}
 							  </a>
 
 							  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -57,7 +69,8 @@
 							  </div>
 						  </li>
 							{% else %}
-						  <li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
+						  		<li><a class="nav-link" href="#" data-toggle="modal" data-target="#signup_student_company"><i class="fas fa-user-plus"></i> Регистрация</a></li>
+					  			<li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
 							{% endif %}
 							{% endif %}
 						</ul>
@@ -109,7 +122,7 @@
 							<p>© 2019 Headstarter</p>
 							<p>Всички права запазени.</p>
 							<p> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/2.5/in/88x31.png"></a></p>
-							<p> <a rel="terms" href="/terms">Terms & conditions</a></p>
+							<p> <a rel="terms" href="/terms">Terms &amp; conditions</a></p>
 						</div>
 					</li>
 				</ul>
@@ -128,22 +141,22 @@
 			  </div>
 			  <div class="modal-body">
 				<div class="row">
-					<div class="col-md-6">
-						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_login') }}"><h1>Ученик</h1></a>
+					<div class="col-md-4 offset-md-1">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_login') }}"><h4>Ученик</h4></a>
 					</div>
-					<div class="col-md-6">
-						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_login') }}"><h1>Компания</h1></a>
+					<div class="col-md-4 offset-md-2">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_login') }}"><h4>Компания</h4></a>
 					</div>
 				</div>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Close</button>
+				<a class="btn btn-raised" data-dismiss="modal"><h4>Затвори</h4></a>
 			  </div>
 			</div>
 		  </div>
 		</div>
 
-		<!-- Modal -->
+		<!-- Modal-->
 		<div class="modal fade" id="signup_student_company" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -155,16 +168,16 @@
 			  </div>
 			  <div class="modal-body">
 				<div class="row">
-					<div class="col-md-6">
-						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_signup') }}"><h1>Ученик</h1></a>
+					<div class="offset-md-1 col-md-4">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_signup') }}"><h4>Ученик</h4></a>
 					</div>
-					<div class="col-md-6">
-						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_signup') }}"><h1>Компания</h1></a>
+					<div class="col-md-4 offset-md-2">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_signup') }}"><h4>Компания</h4></a>
 					</div>
 				</div>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-raised btn-headstarter-secondary" data-dismiss="modal">Close</button>
+				<a class="btn btn-raised" data-dismiss="modal"><h4>Затвори</h4></a>
 			  </div>
 			</div>
 		  </div>

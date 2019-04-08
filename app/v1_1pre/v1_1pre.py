@@ -147,6 +147,14 @@ def application_view(applicationId):
         return render_template('template.html')
 
 
+@routes.route('/remove', methods=['POST'])
+def remove_offer():
+    from flask import jsonify
+    id = int(request.form['id'])
+    Position.query.filter(Position.id == id).delete()
+    return jsonify({}), 200
+
+
 @routes.route('/update', methods=['POST'])
 def update_data():
     from flask import jsonify
@@ -227,7 +235,7 @@ def update_data():
 
     elif name == 'position.hours_per_day':
         if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:
-            Position.query.filter(Position.id == id).update({'hours_per_day': int(data)})
+            Position.query.filter(Position.id == id).update({'hours_per_day': data})
             db.session.commit()
             return jsonify({'value': data}), 200
         else:
