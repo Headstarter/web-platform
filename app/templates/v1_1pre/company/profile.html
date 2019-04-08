@@ -21,7 +21,19 @@
     <div class="mini-logo-header bg-headstarter-primary">
         <div class="container">
             <div class="row">
-                <img class="mini-logo" src="{{ company.logo }}" />
+                <div class="form-group">
+                    <h1>Фирмено лого: (До 16 МБ)</h1>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse… <input type="file" name="logo" id="imgInp">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                    <br>
+                    <img class="mini-logo" src="{{ company.logo }}" id='img-upload' />
+                </div>
             </div>
             <div class="row">
                 <h1>Име на фирмата:</h1>

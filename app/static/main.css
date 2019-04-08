@@ -565,10 +565,6 @@ main.container > hr {
     display: block;
 }
 
-#img-upload {
-    width: 100%;
-}
-
 .navbar-nav.mr-auto {
     position: relative;
     display: inline-block;

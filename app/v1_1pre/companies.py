@@ -1,9 +1,39 @@
-from app import render_template, flash
+from app import render_template, flash, app
 from app.models import User, Tag, Company, Position, Application, insert_position
-from flask import session, request,redirect,url_for
+from flask import session, request, redirect, url_for
+import os
+from werkzeug.utils import secure_filename
+
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+app.config['UPLOAD_FOLDER'] = 'static/img/company/'
+
+
+def allowed_image(filename):
+	return '.' in filename and \
+			filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
 
 
 class Companies:
+
+	@staticmethod
+	def upload_logo():
+		from flask import jsonify
+		if request.method == 'POST':
+			# check if the post request has the file part
+			if 'logo' not in request.files:
+				return jsonify({'value': 'No logo field available.'}), 400
+			file = request.files['logo']
+			# if user does not select file, browser also
+			# submit a empty part without filename
+			if file.filename == '':
+				flash('No selected file')
+				return jsonify({'value': 'No file selected.'}), 400
+			if file and allowed_image(file.filename):
+				filename = secure_filename(file.filename)
+				file.save(os.path.join(app.config['APP_ROOT'], Company.query.filter(Company.id == session['company_id']).one().logo[1:]))
+				return jsonify({'value': 'Uploaded'}), 200
 
 	@staticmethod
 	def homepage():
