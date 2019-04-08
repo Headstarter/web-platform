@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='editor.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('.static', filename='position.css') }}" >
 {% endblock %}
 
 {% block content %}
@@ -32,9 +33,14 @@
     </div>
     <div class="container editor">
         <div class="row">
-            <div class="col-md-6"><center>
+            <h2>Длъжност:</h2>
+            <input data-id="{{ position.id }}" data-name="position.name"
+                class="form-control plain" value="{{position.name}}" type="text">
+        </div><br>
+        <div class="row">
+            <div class="col-md-6" style="font-size: 1.5em;"><center>
                 Стажът е изтекъл&nbsp;&nbsp;
-                <label data-id="{{ position.id }}" data-name="position.available" class="availability switch">
+                <label data-id="{{ position.id }}" data-name="position.available" data-fname="available" class="checkbox switch">
                     {% if position.available %}
                         <input name="available" type="checkbox" checked>
                     {% else %}
@@ -46,7 +52,7 @@
             </center></div>
             <div class="col-md-6"><center>
                 <select data-id="{{ position.id }}" data-name="position.tag_id"
-                        class="category form-control" name="position"><!-- size="1">-->
+                        class="option form-control" name="position">
                     {% for tag in tags %}
                         {% if tag.id == position.tag_id %}
                             <option selected="selected" value="{{ tag.id }}">{{ tag.name | safe }}</option>
@@ -58,33 +64,40 @@
             </center></div>
         </div>
         <div class="row">
-            <div class="col-md-6"><center>
-                <h1>Период на стажа (месеци):</h1>
-                <small>Моля, въвеждайте само цифри.</small>
-                <h1 data-id="{{ position.id }}" data-name="position.duration" class="summernote">{{position.duration}}</h1>
-            </center></div>
-            <div class="col-md-6"><center>
-                <h1>Работни часове на ден:</h1>
-                <small>Моля, въвеждайте само цифри.</small>
-                <h1 data-id="{{ position.id }}" data-name="position.hours_per_day" class="summernote">{{position.hours_per_day}}</h1>
-            </center></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12"><center>
-            <h1>Основна информация за стажа:</h1>
-			<span>Например „Над 14 г.“</span>
-            <span data-id="{{ position.id }}" data-name="position.age_required" class="summernote">{{ position.age_required | safe }}</span>
-			</center></div>
-        </div>
-        <div class="row">
-            <h1>Въведи позицията на стажа</h1>
-            <h1 data-id="{{ position.id }}" data-name="position.name" class="summernote">{{position.name}}</h1>
-        </div>
-        <div class="row">
-            <h1>Въведи описание на стажа</h1>
+            <h2>Описание на стажа</h2>
             <span data-id="{{ position.id }}" data-name="position.description" class="summernote">{{ position.description | safe }}</span>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+            <h2>Ограничения за стажа:</h2>
+            <select data-id="{{ position.id }}" data-name="position.age_required"
+                    class="option form-control" name="age_required">
+                    <option selected="selected" value="16+">Поне 16 г.</option>
+                    <option value="16-18">Между 16 и 18 г.</option>
+                    <option value="18+">Поне 18 г.</option>
+            </select>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Продължителност на стажа (месеци):</h2>
+                <input data-id="{{ position.id }}" data-name="position.duration"
+                       class="form-control" value="{{position.duration}}" type="number"
+                       min="0">
+            </div>
+            <div class="col-md-12">
+                <h2>Работни часове на ден:</h2>
+
+                <select data-id="{{ position.id }}" data-name="position.hours_per_day"
+                        class="option form-control" name="hours_per_day">
+                        <option selected="selected" value="До 4ч.">До 4ч.</option>
+                        <option value="4-7ч.">Между 4 и 7ч.</option>
+                        <option value="8ч.">8ч.</option>
+                </select>
+            </div>
+        </div><br>
         <div class="row d-flex justify-content-end">
+            <a href="{{ url_for('v1pre_routes.my_offers') }}" style="margin-right: 15px;color: white;" class="btn btn-left">Виж „Моите обяви“</a>
             <button type="button" id="submit" style="margin-right: 15px;color: white;" class="btn btn-right">Запази</button>
         </div>
     </div>

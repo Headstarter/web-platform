@@ -21,24 +21,24 @@
     <div class="mini-logo-header bg-headstarter-primary">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 logo">
-                    <center>
-                        <img class="mini-logo" src="{{ company.logo }}" />
-                        <h1>Име на фирмата:</h1>
-                        <h1 data-id="{{ company.id }}" data-name="company.name" class="summernote">{{ company.name }}</h1>
-                    </center>
-                </div>
-                <div class="col-md-7 description">
-                    <h1>Описание на фирмата:</h1>
-                    <span data-id="{{ company.id }}" data-name="company.description" class="summernote">{{ company.description }}</span>
-                </div>
+                <img class="mini-logo" src="{{ company.logo }}" />
             </div>
             <div class="row">
-                <div class="col-md-12 description">
-                    <h1>Контакти с фирмата:</h1>
-                    <span data-id="{{ company.id }}" data-name="company.contacts" class="summernote">{{ company.contacts | safe }}</span>
-                    <button class="btn-rounded btn btn-big btn-rounded btn-right" id="submit">Запази</button>
-                </div>
+                <h1>Име на фирмата:</h1>
+                <input data-id="{{ company.id }}" data-name="company.name" class="form-control" value="{{ company.name }}" />
+            </div>
+            <div class="row">
+                <h1>Описание на фирмата:</h1>
+                <textarea data-id="{{ company.id }}" data-name="company.description" class="form-control plain">{{ company.description }}</textarea>
+            </div>
+            <div class="row">
+                <h1>Контакти с фирмата:</h1>
+            </div>
+            <div class="row">
+                <span data-id="{{ company.id }}" data-name="company.contacts" class="form-control summernote">{{ company.contacts | safe }}</span>
+            </div>
+            <div class="row">
+                <button class="btn-rounded btn btn-big btn-rounded btn-right" id="submit">Запази</button>
             </div>
         </div>
     </div>

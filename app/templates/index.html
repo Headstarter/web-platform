@@ -27,48 +27,45 @@
 		<!-- Theme CSS -->
 		<link href="{{ url_for('static', filename='css/creative.css') }}" rel="stylesheet">
 		<link href="{{ url_for('static', filename='css/starting.css') }}" rel="stylesheet">
-
+		<link href="{{ url_for('static', filename='css/homehomepage.css') }}" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 		<style>
-.custom-logo, .navbar-brand {
-	width: 50px !important;
-	height: 50px !important;
-	padding: 0px 0px 0px 0px !important;
-	margin: 0px 0px 0px 0px !important;
-}
-header {
-	background-color: rgba(0,0,0,0.35);
-	background-blend-mode: darken;
-}
-body {
-	background: #474a51;
-}
-#contact {
-	box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 1), 0 -6px 20px 0 rgba(0, 0, 0, 1);
-}
-#about .panel {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
-	margin-bottom: 23px;
-}
-#about, .panel-body, #contact {
-	background: #2e3035 !important;
-	color: white !important;
-}
-.panel-body *, #contact * {
-	color: white !important;
-}
+
 		</style>
 	</head>
 	<body id="page-top">
-	<div id="fb-root"></div>
-
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
 		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/p"><img class="logo" src="/static/img/logo.png"></a>
+					</div>
+					<div id="navbar" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="/p">Headstarter</a></li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ url_for ('v1pre_routes.browse_offers') }}">Намери 	стаж</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ url_for ('company_signup') }}">Предложи стаж</a>
+							</li>
+							<li class="nav-item disabled">
+								<a class="nav-link" aria-disabled="true" href="{{ url_for('blog_routes.homepage') }}">Блог</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+								<li><a class="nav-link" href="#" data-toggle="modal" data-target="#signup_student_company"><i class="fas fa-user-plus"></i> Регистрация</a></li>
+								<li><a class="nav-link" href="#" data-toggle="modal" data-target="#student_company"><i class="fas fa-user"></i> Вход</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</nav>
 			<div class="header-content">
 				<div class="header-content-inner">
 					<span id="homeHeading">
@@ -90,99 +87,80 @@ body {
 		<div class="bg-page" id="about">
 			<div class="container">
 				<div class="row">
-					<div class="panel panel-primary">
-						<div class="panel-heading left-back"></div>
-						<div class="panel-body">
-							<div class="fb-like" data-href="http://headstarter.eu" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+					<section id="doing" class="col-md-6">
+						<div class="title row">
+							<center style="width: 100%;"><big>Какво правим?</big></center>
 						</div>
-					</div>
-					<div id="authors" class="panel panel-primary">
-						<div class="panel-heading right-back">
-							<h4>Екип</h4>
-						</div>
-						<div class="panel-body">
-							<div style="height: 450px;" class="col-xs-6">
-								<!--<img src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-9/39968450_1043890412438606_6174136399919316992_n.jpg?_nc_cat=103&_nc_ht=scontent-sof1-1.xx&oh=02a5608dcf6c3eb6117020eaa089860b&oe=5D26FB69" height="150px">-->
-								<img src="{{ url_for ('static', filename='img/alex.png') }} " height="150px">
-								<h2>Алекс Цветанов</h2>
-								<br>
-								<h3>Dev lead</h3>
-								<p>Експерт „Бъдещо развитие“ и „Уеб системи“</p>
-							</div>
-							<div style="height: 450px;" class="col-xs-6">
-								<img src="https://scontent-sof1-1.cdninstagram.com/vp/7307e73597abe63791d6937ec29ef467/5CF1DE72/t51.2885-15/e35/50633127_996628673864100_4234096268517915149_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" height="150px">
-								<h2>Надежда Цачева</h2>
-								<br>
-								<h3>PR &amp; Marketing</h3>
-								<p>Експерт „Връзки с обществеността“</p>
-							</div>
-							<div style="height: 450px;" class="col-xs-6">
-								<img src="https://scontent-sof1-1.cdninstagram.com/vp/7fcadfd1e0d071f202808b2e95b5b95c/5D02786B/t51.2885-15/e35/49933566_2258693534453721_2337537523196968266_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" height="150px">
-								<h2>Радостина Богословова</h2>
-								<br>
-								<h3>Design</h3>
-								<p>Експерт „Продуктов дизайн“</p>
-							</div>
-							<div style="height: 450px;" class="col-xs-6">
-								<img src="{{ url_for ('static', filename='img/rangel.jpg') }}" height="150px">
-								<h2>Рангел Плачков</h2>
-								<br>
-								<h3>Full stack Developer</h3>
-								<p>Експерт „Уеб системи“</p>
-							</div>
-						</div>
-					</div>
-					<div id="partners" class="panel panel-primary">
-						<div class="panel-heading left-back">
-							<h4>С подкрепата на </h4>
-						</div>
-						<div class="panel-body">
-							<div style="height: 225px;" class="col-md-6">
-							<center>
-								<img src="https://scontent-sof1-1.cdninstagram.com/vp/c864cd3bbb213f727222897db06203e2/5CEAC187/t51.2885-15/e35/45826501_372010800299908_9177671197555614791_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" height="150px">
-								<h2>Августина Пашеева</h2>
-							</center>
-							</div>
-							<div style="height: 225px;" class="col-md-6">
-							<center>
-								<img src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-9/26166546_125652951562739_1034363009425497484_n.jpg?_nc_cat=110&_nc_ht=scontent-sof1-1.xx&oh=4b48fbda69bd1e10e2ea63488a26d309&oe=5CE290D2" height="150px">
-								<h2>Юлиан Софрониев</h2>
-							</center>
-							</div>
-							<div class="col-md-4"><center><a href="https://biodit.com/" class="normal"><img style="background-color: white !important;" src="{{ url_for ('static', filename='img/biodit.png') }}" class="img-responsive"></a></center></div>
-							<div class="col-md-4"><center><a href="https://techedu.bg/" class="normal"><img src="http://techedu.bg/img/acdemy4_logo.png" class="img-responsive"></a></center></div>
-							<div class="col-md-4"><center><a href="https://teenovator.bg/" class="normal"><img src="https://scontent-sof1-1.cdninstagram.com/vp/732b1ec727692883e8233eca1c55bb99/5D2889B6/t51.2885-19/s150x150/44591729_2221183161452009_3518858652549120000_n.jpg?_nc_ht=scontent-sof1-1.cdninstagram.com" class="img-responsive"></a></center></div>
-						</div>
-					</div>
+						<hr>
+						<p>Ние от Headstarter ти помагаме да напишеш свое CV и да намериш стаж, който да удовлетворява интересите ти. Ние мислим за твоето бъдеще и искаме да направим професионалните ти решения по-лесни за вземане.</p>
+					</section>
+					<section class="col-md-6">
+						<img class="img-fluid" src="/static/img/logo.png">
+					</section>
 				</div>
-			</div>
-		</div>
-		<div id="contact">
-			<div class="container">
+				<hr>
 				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2 text-center">
-						<h2 class="div-heading">Контакти</h2>
-						<hr class="primary">
-					</div>
-					<div class="col-lg-4 text-center">
-						<i class="fa fa-phone fa-3x sr-contact"></i>
-						<p><a href="tel:+359-988-32-99-31">+359-988-32-99-31</a></p>
-						<p>Алекс Цветанов</p>
-						<p>Dev lead</p>
-					</div>
-					<div class="col-lg-4 text-center">
-						<i class="fa fa-phone fa-3x sr-contact"></i>
-						<p><a href="tel:+359-988-32-99-31">+359-877-33-83-66</a></p>
-						<p>Надежда Цачева</p>
-						<p>PR &amp; Marketing</p>
-					</div>
-					<div class="col-lg-4 text-center">
-						<i class="fa fa-envelope-o fa-3x sr-contact"></i>
-						<p><a href="mailto:contactus@headstarter.eu">contactus@headstarter.eu</a></p>
-					</div>
+					<section class="col-md-6">
+						<img class="img-fluid" src="/static/img/logo.png">
+					</section>
+					<section id="aim" class="col-md-6">
+						<div class="title row">
+							<center style="width: 100%;"><big>Какво целим?</big></center>
+						</div>
+						<hr>
+						<p>Бизнесът в България страда от дефицит на млади кадри, които „бягат“ от България заради липсата на работни места, които да удовлетворяват нуждите на младите и да не изискват предварителен работен стаж. Ние от Headstarter информираме учениците за стажантските програми. Целта ни е да предоставим бърз, лесен и удобен начин за връзка между учениците и студентите, които искат да натрупат професионален опит, и бизнеса.</p>
+					</section>
+				</div>
+				<hr>
+				<div class="row">
+					<section id="aboutus" class="col-md-6">
+						<div class="title row">
+							<center style="width: 100%;"><big>Кои сме ние?</big></center>
+						</div>
+						<hr>
+						<p>Ние сме екип от ученици от Софийската математическа гимназия. Разбираме колко натоварващо може да бъде избирането на перфектната специалност или намирането на работа, с която да усъвършенстваш наученото в университета. Затова и разработваме проект, който да е в твоя полза.</p>
+					</section>
+					<section class="col-md-6">
+						<img class="img-fluid" src="/static/img/logo.png">
+					</section>
 				</div>
 			</div>
 		</div>
+		<footer class="bg-page" style="width:100%;">
+			<div class="container container-holder">
+				<ul class="row">
+					<li class="col-md-4 col-sm-12 col-xs-12 footer-list-wrapper">
+						<h3 class="list-title">Headstarter</h3>
+						<hr>
+						<ul class="footer-list">
+							<li><a href="/p#about">За нас</a></li>
+							<li><a href="/#about">Екип</a></li>
+						</ul>
+					</li>
+					<li class="col-md-4 col-sm-12 col-xs-12 footer-list-wrapper">
+						<h3 class="list-title">С подкрепата на</h3>
+						<hr>
+						<ul class="footer-list">
+							<li><a target="_blank" href="https://techedu.bg/">TechEdu++</a></li>
+							<li><a target="_blank" href="https://biodit.com/">Biodit</a></li>
+							<li><a target="_blank" href="https://teenovator.bg/">Teenovator</a></li>
+						</ul>
+					</li>
+					<li class="col-md-4 col-sm-12 col-xs-12 footer-list-wrapper">
+						<ul class="social">
+							<li><a href="https://www.facebook.com/headstartercareer" target="_blank" class="icon-btn"><span class="fab fa-2x fa-facebook-f"></span></a></li>
+							<li><a href="http://github.com/Headstarter/" target="_blank" class="icon-btn"><span class="fab fa-2x fa-github"></span></a></li>
+						</ul>
+						<div class="all-rights-reserved">
+							<p>© 2019 Headstarter</p>
+							<p>Всички права запазени.</p>
+							<p> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/2.5/in/88x31.png"></a></p>
+							<p> <a rel="terms" href="/terms">Terms &amp; conditions</a></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</footer>
 		<!-- jQuery -->
 		<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap Core JavaScript -->
@@ -193,6 +171,7 @@ body {
 		<script src="{{ url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 		<!-- Theme JavaScript -->
 		<script src="{{ url_for('static', filename='js/creative.min.js') }}"></script>
+		<script src="{{ url_for('.static', filename='js/main.js') }}"></script>
 	</body>
 </html>
 

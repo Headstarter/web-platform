@@ -427,7 +427,13 @@ footer hr {
 .badge-active {
     font-size: 0.9rem;
     background: #6c6;
-    color: rgba(0,0,0,0.5);
+    color: black;
+}
+
+.badge-inactive {
+    font-size: 0.9rem;
+    background: #324fff;
+    color: white;
 }
 
  /* unvisited link */
@@ -524,18 +530,55 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
     color: white;
 }
 
-select {
-    background: #474a51 !important;
-    color: white !important;
-}
-
 .disabled {
   cursor: not-allowed;
   opacity: 0.5;
   text-decoration: none;
 }
 a[aria-disabled="true"] {
-  display: inline-block;  /* For IE11/ MS Edge bug */
+  display: inline-block;  /* For IE11 / MS Edge bug */
   pointer-events: none;
   text-decoration: none;
+}
+main.container > hr {
+	color: white !important;
+	border-top-width: 2px;
+	border-top-color: white !important;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload {
+    width: 100%;
+}
+
+.navbar-nav.mr-auto {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-nav.mr-auto li {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.company_logo {
+    background: white;
 }

@@ -11,7 +11,7 @@ class Companies:
 
 	@staticmethod
 	def create_offer():
-		id = insert_position('', session['company_id'], '', True, 0, 0, '', 1)
+		id = insert_position('', session['company_id'], '', False, 0, 0, '', 1)
 		return redirect(url_for('v1pre_routes.position_view', positionId=id))
 
 	@staticmethod
@@ -24,23 +24,29 @@ class Companies:
 			position = int(request.form.get('position')) - 1
 
 		if position == -2:
+			applications = Application.query.filter(Application.company_id == int(session['company_id'])).all()
+			if len(applications) == 0:
+				flash('За момента няма кандидати за Вашите стажове.', 'info')
 			return render_template('company/browse_students.html',
-									positions=Position.query.filter(Position.company_id == int(session['company_id'])),
-									students=Application.query.filter(Application.company_id == int(session['company_id'])))
+									positions=Position.query.filter(Position.company_id == int(session['company_id'])).order_by(Position.id.desc()),
+									students=applications)
 		else:
+			applications = Application.query.filter(Application.company_id == int(session['company_id']) and
+																	  Application.position_id == position)
+			if len(applications) == 0:
+				flash('За момента няма кандидати за Вашите стажове.', 'info')
 			return render_template('company/browse_students.html',
-									positions=Position.query.filter(Position.company_id == int(session['company_id'])),
-									students=Application.query.filter(Application.company_id == int(session['company_id']) and
-																	  Application.position_id == position))
+									positions=Position.query.filter(Position.company_id == int(session['company_id'])).order_by(Position.id.desc()),
+									students=applications)
 
 	@staticmethod
 	def my_offers():
 		return render_template('company/my_offers.html',
-							   positions=Position.query.filter(Position.company_id == int(session['company_id'])))
+							   positions=Position.query.filter(Position.company_id == int(session['company_id'])).order_by(Position.id.desc()).all())
 
 	@staticmethod
 	def application_view(applicationId):
-		application = Application.query.filter(Application.id==applicationId).one()
+		application = Application.query.filter(Application.id == applicationId).one()
 		if application.company_id != session['company_id']:
 			flash('Тази кандидатура не е по обява на Вашата фирма.', 'danger')
 			return render_template('template.html')

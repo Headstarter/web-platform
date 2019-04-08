@@ -14,6 +14,7 @@ class Tag(db.Model):
 class Company(db.Model):
     __tablename__ = 'Company'
     id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer)
 
     employees = db.relationship("User", back_populates="company")
     positions = db.relationship("Position", back_populates="company")
@@ -24,34 +25,31 @@ class Company(db.Model):
     website = db.Column(db.String(256))
     contacts = db.Column(db.String(32768))
 
-    email = db.Column(db.String(1024))
-    password = db.Column(db.String(128))
-
     def __repr__(self):
         return '<Company {}>'.format(self.name) 
 
 
 class User(db.Model):
     __tablename__ = 'User'
+
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64))
+    name = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='employees')
     password_hash = db.Column(db.String(128))
-    type_registration = db.Column(db.String(64))
 
     applications = db.relationship("Application", back_populates="user")
 
     def to_dict(self):
         return {"id": self.id,
-                "name": self.username,
+                "name": self.name,
                 "email": self.email,
                 "company": self.company,
                }
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)  
+        return '<User {}>'.format(self.name)
 
 
 class Position(db.Model):
@@ -64,7 +62,7 @@ class Position(db.Model):
     description = db.Column(db.String(32768))
     available = db.Column(db.Boolean)
     duration = db.Column(db.Integer)
-    hours_per_day = db.Column(db.Integer)
+    hours_per_day = db.Column(db.String(128))
     age_required = db.Column(db.String(128))
     tag_id = db.Column(db.Integer, db.ForeignKey('Tag.id'))
     tag = db.relationship('Tag', back_populates='positions')
@@ -82,6 +80,12 @@ class Application (db.Model):
 
 
 import hashlib
+import uuid
+
+
+def gen_uid():
+    return str(uuid.uuid4())
+
 
 def crypto(password):
     return hashlib.sha256(bytes(password, 'utf-8')).hexdigest()
@@ -94,21 +98,13 @@ def clear():
     Position.query.filter(True).delete()
 
 
-def insert_user(name, email, password, _type, company=None):
-    db.session.add(User(username=name, company=company, email=email, password_hash=crypto(password), type_registration=_type))
+def insert_user(name, email, password, company=None):
+    db.session.add(User(name=name, company=company, email=email, password_hash=crypto(password)))
     db.session.commit()
 
 
 def insert_application(user_id, position_id, company_id):
     db.session.add(Application(user_id=user_id, position_id=position_id, company_id=company_id))
-    db.session.commit()
-
-
-def insert_company(name, description, logo, website, contacts, email, password):
-    db.session.add(Company(
-        name=name, description=description,
-        logo=logo, website=website, contacts=contacts,
-        email=email, password=crypto(password)))
     db.session.commit()
 
 
@@ -127,12 +123,8 @@ def insert_position(name, company_id, description, available, duration, hours_pe
     db.session.commit()
     return p.id
 
+
 def init():
-    """ Posts
-    FirstPost = Post(name="Test Post", content='<strong>Test post</strong>')
-    db.session.add(FirstPost)
-    db.session.commit()
-    """
     """ Tag """
     tags = [
         'Software Engineer', '&nbsp;&nbsp;&nbsp; Mobile Developer', '&nbsp;&nbsp;&nbsp; Frontend Developer', '&nbsp;&nbsp;&nbsp; Backend Developer', '&nbsp;&nbsp;&nbsp; Full-Stack Developer', '&nbsp;&nbsp;&nbsp; Engineering Manager', '&nbsp;&nbsp;&nbsp; QA Engineer', '&nbsp;&nbsp;&nbsp; DevOps', '&nbsp;&nbsp;&nbsp; Software Architect', 'Designer', '&nbsp;&nbsp;&nbsp; UI/UX Designer', '&nbsp;&nbsp;&nbsp; User Researcher', '&nbsp;&nbsp;&nbsp; Visual Designer', '&nbsp;&nbsp;&nbsp; Creative Director', 'Operations', '&nbsp;&nbsp;&nbsp; Finance/Accounting', '&nbsp;&nbsp;&nbsp; H.R.', '&nbsp;&nbsp;&nbsp; Office Manager', '&nbsp;&nbsp;&nbsp; Recruiter', '&nbsp;&nbsp;&nbsp; Customer Service', '&nbsp;&nbsp;&nbsp; Operations Manager', 'Sales', '&nbsp;&nbsp;&nbsp; Business Development', '&nbsp;&nbsp;&nbsp; Sales Development', '&nbsp;&nbsp;&nbsp; Account Executive', '&nbsp;&nbsp;&nbsp; BD Manager', '&nbsp;&nbsp;&nbsp; Account Manager', '&nbsp;&nbsp;&nbsp; Sales Manager', 'Marketing', '&nbsp;&nbsp;&nbsp; Growth Hacker', '&nbsp;&nbsp;&nbsp; Marketing Manager', '&nbsp;&nbsp;&nbsp; Content Creator', 'Hardware Engineer', 'Mechanical Engineer', 'Systems Engineer', 'Business Analyst', 'Data Scientist', 'Product Manager', 'Project Manager'#, 'Attorney', '&nbsp;&nbsp;&nbsp; CEO', '&nbsp;&nbsp;&nbsp; CFO', '&nbsp;&nbsp;&nbsp; CMO', '&nbsp;&nbsp;&nbsp; COO', '&nbsp;&nbsp;&nbsp; CTO'
@@ -145,31 +137,37 @@ def init():
         print(Tag.query.get(len(Tags_db) + 1), end=' ')
         Tags_db.append(Tag.query.get(len(Tags_db) + 1))
     print()
+
     """ Companies """
-    Headstarter = Company(password=crypto('sample password'), email='headstarter@headstarter.eu',
-                      name='Headstarter', website='https://headstarter.eu',
-                      contacts='Mail Us: contact@headstarter.eu', logo='/static/img/logo.png',
-                      description='Example of description')
+    Headstarter = Company(name='Headstarter', website='https://headstarter.eu',
+                          contacts='Mail Us: contact@headstarter.eu', logo='/static/img/company/headstarter.png',
+                          description='We are connecting students and business.', uid=gen_uid())
     db.session.add(Headstarter)
     db.session.commit()
-    Headstarter = Company.query.get(1)
+
+    Biodit = Company(name='Biodit Global Technologies', website='https://biodit.com',
+                     contacts="""
+                     Visit Us: бул. „св. Климент Охридски“ 125, 1756 кв. Малинова долина, София<br>
+                     Mail Us: pr@biodit.com, office@biodit.com""", logo='/static/img/company/biodit.png',
+                     description='Example of description', uid=gen_uid())
+    db.session.add(Biodit)
+    db.session.commit()
 
     """ CEOs """
-    AlexTsvetanov = User(username='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password_hash=crypto('sample password'), type_registration='fb')
+    AlexTsvetanov = User(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password_hash=crypto('password'))
     db.session.add(AlexTsvetanov)
     db.session.commit()
-    AlexTsvetanov = User.query.get(1)
 
     """ Positions """
-    for i in range(3):
-        example = Position(name='Python Web Developer', company=Headstarter,
-                           description="<strong>Пробно</strong> <i>описание</i> на <u>стажанстка програма</u>",
-                           available=True, duration=3, hours_per_day=8,
-                           age_required='Поне 16 г.', tag=Tags_db[3])
-        db.session.add(example)
-        db.session.commit()
-        example = Position(name='Python Web Developer', company=Headstarter,
-                           description="""
+    example1 = Position(name='Python Web Developer', company=Headstarter,
+                       description="<strong>Пробно</strong> <i>описание</i> на <u>стажанстка програма</u>",
+                       available=True, duration=3, hours_per_day="7-8ч.",
+                       age_required='Поне 16 г.', tag=Tags_db[3])
+    db.session.add(example1)
+    db.session.commit()
+
+    example2 = Position(name='C/C++ Back-end Developer', company=Headstarter,
+                       description="""
 Takeaway.com is Europe’s leading online and mobile food ordering company, dedicated to connecting consumers with their favorite local restaurants. The people who work at Takeaway.com are our company's greatest asset; each person at Takeaway.com plays an integral part in building tools and technology that help connect and transact our consumers and restaurants - at scale.<br>
 <br>
 The company’s online and mobile ordering platforms allow meals to order directly from more than 40,000 takeout restaurants all over Europe and beyond. The Takeaway.com portfolio of brands includes Takeaway.com, Thuisbezorgd.nl, Lieferando.de, Pyszne.pl, Lieferservice.at and Vietnammm.com. The working atmosphere at Takeaway.com is characterized by team spirit, trust and open communication as well as a high degree of personal responsibility. Bringing in your own ideas is encouraged and creativity, motivation and commitment are much appreciated.<br>
@@ -223,12 +221,12 @@ If you are interested, follow the link below and please send us your CV / Resume
 We will read all the information on it and we will contact the most suitable candidates.<br>
 Your personal data is protected by Bulgarian law and European General Data Protection Regulation.<br>
 """,
-                           available=True, duration=3, hours_per_day=8,
-                           age_required='Поне 16 г.', tag=Tags_db[3])
-        db.session.add(example)
-        db.session.commit()
+                       available=True, duration=6, hours_per_day="До 4ч.",
+                       age_required='Поне 16 г.', tag=Tags_db[3])
+    db.session.add(example2)
+    db.session.commit()
+
     # Students
-    NadegdaTsacheva = User(username='Nadegda Tsacheva', company=None, email='', password_hash=crypto('sample password'), type_registration='standard')
+    NadegdaTsacheva = User(name='Nadegda Tsacheva', company=None, email='nadeto@headstarter.eu', password_hash=crypto('password'))
     db.session.add(NadegdaTsacheva)
     db.session.commit()
-    NadegdaTsacheva = User.query.get(3)
