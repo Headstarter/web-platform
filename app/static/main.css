@@ -582,3 +582,6 @@ main.container > hr {
 .company_logo {
     background: white;
 }
+a.col-sm-4.btn.btn-big.btn-rounded {
+    white-space: pre-line;
+}

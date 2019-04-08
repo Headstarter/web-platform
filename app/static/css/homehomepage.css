@@ -175,3 +175,7 @@ hr {
 hr.primary {
     max-width: 300px !important;
 }
+
+a.col-sm-4.btn.btn-big.btn-rounded {
+    white-space: pre-line;
+}
