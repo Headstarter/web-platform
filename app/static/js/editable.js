@@ -68,7 +68,34 @@ $(document).ready(function() {
     init_loading_modal ();
 
     var end_modal = "";
-    var updates_done = $('.checkbox').length + $('.option').length + $('.plain').length + $('.summernote').length;
+    var updates_done = $('input#imgInp').length + $('.checkbox').length + $('.option').length + $('.plain').length + $('.summernote').length;
+    console.log ($('input#imgInp').length);
+    if ($('input#imgInp').length > 0)
+        $('input#imgInp').each (function (_) {
+            var fd = new FormData();
+            console.log(fd);
+            fd.append("logo", $("#imgInp")[0].files[0]);
+
+            $.ajax({
+                url: '/p/upload/logo',
+                method: 'POST',
+                cache: false,
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    console.log (response.value);
+                    end_modal += ('<p class="success">Променихте company.logo успешно.</p>')
+                    updates_done -= 1;
+                },
+                error: function(response) {
+                    end_modal += ('<p class="danger">Не променихте company.logo: ' + response.status.toString () + '</p>')
+                    console.log (response.status);
+                    updates_done -= 1;
+                }
+            });
+        });
     $('.summernote').each (function (_) {
         var code = $(this).summernote ('code');
         var data_id = $(this).attr ('data-id');

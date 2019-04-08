@@ -2,16 +2,20 @@ from app import app, babel, db, migrate, render_template
 from app.models import insert_user, User, Tag, Company, Position, crypto
 from flask import request, session, flash, redirect, url_for, send_file
 import sys
+import os
 
 # Set the secret key to some random bytes. Keep this really secret!
 from datetime import timedelta
 app.config['SECRET_KEY'] = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SESSION_TYPE'] = 'filesystem' #redis
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config['APP_ROOT'] = os.path.dirname(os.path.abspath(__file__))
 
 app.config.from_object(__name__)
 
 from uuid import uuid4
+
 
 def random():
 	session['number'] = str(uuid4())

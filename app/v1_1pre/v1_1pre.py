@@ -33,6 +33,17 @@ def browse_offers():
         return mapped_routes['Visitor'].browse_offers()
 
 
+@routes.route('/upload/logo', methods=['POST'])
+def upload_logo():
+    if session['type'] == 'Company':
+        return mapped_routes['Company'].upload_logo()
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.upload_logo')
+        return render_template('template.html')
+
+
 @routes.route('/my_offers', methods=['GET', 'POST'])
 def my_offers():
     if session['type'] == 'Company':
@@ -172,22 +183,22 @@ def update_data():
         else:
             return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id, 'company_id': session['company_id'], 'status': 'You are not part of this company'}), 200
     elif name == 'company.description':
-            if int(session['company_id']) == int(id):
-                Company.query.filter(Company.id == id).update({'description': data})
-                db.session.commit()
-                return jsonify({'value': data}), 200
-            else:
-                return jsonify({'position_id': id, 'company_id': session['company_id'],
-                                'status': 'You are not part of this company'}), 403
+        if int(session['company_id']) == int(id):
+            Company.query.filter(Company.id == id).update({'description': data})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': id, 'company_id': session['company_id'],
+                            'status': 'You are not part of this company'}), 403
 
     elif name == 'company.contacts':
-            if int(session['company_id']) == int(id):
-                Company.query.filter(Company.id == id).update({'contacts': data})
-                db.session.commit()
-                return jsonify({'value': data}), 200
-            else:
-                return jsonify({'position_id': id, 'company_id': session['company_id'],
-                                'status': 'You are not part of this company'}), 403
+        if int(session['company_id']) == int(id):
+            Company.query.filter(Company.id == id).update({'contacts': data})
+            db.session.commit()
+            return jsonify({'value': data}), 200
+        else:
+            return jsonify({'position_id': id, 'company_id': session['company_id'],
+                            'status': 'You are not part of this company'}), 403
 
     elif name == 'position.name':
         if int(session['company_id']) == Position.query.filter(Position.id == id).one().company_id:

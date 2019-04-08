@@ -140,7 +140,7 @@ def init():
 
     """ Companies """
     Headstarter = Company(name='Headstarter', website='https://headstarter.eu',
-                          contacts='Mail Us: contact@headstarter.eu', logo='/static/img/company/headstarter.png',
+                          contacts='Mail Us: contact@headstarter.eu', logo='/static/img/company/1.png',
                           description='We are connecting students and business.', uid=gen_uid())
     db.session.add(Headstarter)
     db.session.commit()
@@ -148,7 +148,7 @@ def init():
     Biodit = Company(name='Biodit Global Technologies', website='https://biodit.com',
                      contacts="""
                      Visit Us: бул. „св. Климент Охридски“ 125, 1756 кв. Малинова долина, София<br>
-                     Mail Us: pr@biodit.com, office@biodit.com""", logo='/static/img/company/biodit.png',
+                     Mail Us: pr@biodit.com, office@biodit.com""", logo='/static/img/company/2.png',
                      description='Example of description', uid=gen_uid())
     db.session.add(Biodit)
     db.session.commit()
