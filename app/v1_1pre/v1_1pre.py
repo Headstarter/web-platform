@@ -66,7 +66,7 @@ def create_offer():
         return render_template('template.html')
 
 
-@routes.route('/apply/<position>', methods=['GET', 'POST'])
+@routes.route('/apply/<position>')
 def apply_students(position):
     return mapped_routes['Visitor'].apply_student(position)
 
@@ -138,7 +138,7 @@ def position_view(positionId):
         except:
             flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
             flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-            session['redirect'] = url_for('v1pre_routes.profile')
+            session['redirect'] = url_for('v1pre_routes.position_view', positionId=positionId)
             return render_template('template.html')
     except:
         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')

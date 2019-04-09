@@ -581,3 +581,10 @@ main.container > hr {
 a.col-sm-4.btn.btn-big.btn-rounded {
     white-space: pre-line;
 }
+.h-50.img-fluid {
+    height: auto !important;
+}
+.img-fluid {
+    max-height: 50% !important;
+    max-width: 100% !important;
+}
