@@ -537,3 +537,34 @@ body .container-fluid .well p {
 	background-color: white !important;
 	color: rgb(20,105,209) !important;
 }
+
+
+.bg-headstarter-secondary {
+    background-color: var(--headstarter-secondary) !important;
+}
+
+.btn.btn-headstarter-secondary,
+.btn.btn-headstarter-primary:hover {
+    color: #fff;
+    background-color: var(--headstarter-secondary) !important;
+    border-color: var(--headstarter-secondary) !important;
+}
+.btn.btn-headstarter-secondary:hover,
+.btn.btn-headstarter-primary {
+    color: #fff;
+    background-color: var(--headstarter-primary) !important;
+    border-color: var(--headstarter-primary) !important;
+}
+
+.modal-body .row .col-md-4:nth-child(1) {
+    float: left;
+}
+.modal-body .row .col-md-4:nth-child(2) {
+    float: right;
+}
+.modal-footer .btn.btn-raised {
+    color: #000000;
+}
+.modal-title {
+    display: inline-block;
+}

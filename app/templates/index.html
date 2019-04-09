@@ -100,15 +100,15 @@
 				</div>
 				<hr>
 				<div class="row">
-					<section class="col-md-6">
-						<img class="img-fluid" src="/static/img/logo.png">
-					</section>
 					<section id="aim" class="col-md-6">
 						<div class="title row">
 							<center style="width: 100%;"><big>Какво целим?</big></center>
 						</div>
 						<hr>
 						<p>Бизнесът в България страда от дефицит на млади кадри, които „бягат“ от България заради липсата на работни места, които да удовлетворяват нуждите на младите и да не изискват предварителен работен стаж. Ние от Headstarter информираме учениците за стажантските програми. Целта ни е да предоставим бърз, лесен и удобен начин за връзка между учениците и студентите, които искат да натрупат професионален опит, и бизнеса.</p>
+					</section>
+					<section class="col-md-6">
+						<img class="img-fluid" src="/static/img/logo.png">
 					</section>
 				</div>
 				<hr>
@@ -161,6 +161,59 @@
 				</ul>
 			</div>
 		</footer>
+		<!-- Modal -->
+		<div class="modal fade" id="student_company" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Влез в системата като</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<div class="row">
+					<div class="col-md-4 offset-md-1">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_login') }}"><h4>Ученик</h4></a>
+					</div>
+					<div class="col-md-4 offset-md-2">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_login') }}"><h4>Компания</h4></a>
+					</div>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<a class="btn btn-raised" data-dismiss="modal"><h4>Затвори</h4></a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+		<!-- Modal-->
+		<div class="modal fade" id="signup_student_company" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="signup_exampleModalLabel">Регистрирай се в системата като</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<div class="row">
+					<div class="offset-md-1 col-md-4">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('student_signup') }}"><h4>Ученик</h4></a>
+					</div>
+					<div class="col-md-4 offset-md-2">
+						<a class="w-100 btn btn-raised btn-headstarter-primary" href="{{ url_for ('company_signup') }}"><h4>Компания</h4></a>
+					</div>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<a class="btn btn-raised" data-dismiss="modal"><h4>Затвори</h4></a>
+			  </div>
+			</div>
+		  </div>
+		</div>
 		<!-- jQuery -->
 		<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap Core JavaScript -->

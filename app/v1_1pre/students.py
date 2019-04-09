@@ -19,7 +19,7 @@ class Students:
 			flash('This position is not available.', 'danger')
 			return render_template('template.html'), 404
 
-		return render_template('students/position.html', tags=Tag.query.all(), position=Position.query.filter(Position.id == positionId).filter(Position.available == True)[0])
+		return render_template('students/position.html', tags=Tag.query.all(), position=Position.query.filter(Position.id == positionId).filter(Position.available == True).one())
 
 	@staticmethod
 	def all_positions_view(positionId):

@@ -4,6 +4,7 @@ from flask import request, redirect, url_for
 from app.models import User, Company, Position, Tag, Application, insert_application
 import sys
 
+
 class Visitors:
 
     @staticmethod
@@ -16,12 +17,9 @@ class Visitors:
     @staticmethod
     def apply_student(position_id):
         if session['type'] != 'Student':
-            session['redirect'] = request.full_path
+            session['redirect'] = url_for('v1pre_routes.apply_students', position=position_id)
             return redirect(url_for('student_signup'))
         else:
-            #flash(position_id, 'info')
-            #flash(len(Position.query.filter(id==position_id).all()), 'info')
-            #flash(Position.query.filter(id==int(position_id)).all(), 'info')
             position_id = int(position_id)
             insert_application(session['id'], position_id, Position.query.filter(Position.id==position_id).one().company_id);
             flash('Кандидатстването Ви беше успешно.<style>.formater { background: transparent !important; }</style>', 'success')
