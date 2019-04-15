@@ -1,0 +1,53 @@
+.picture {
+    width: 100%;
+}
+.section-title {
+    font-size: 2em;
+}
+hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-color: white;
+}
+.name {
+    text-transform: uppercase;
+}
+a, a:focus, a:hover, a:visited {
+    color: white;
+}
+pre {
+    white-space: pre-wrap;
+    color: white;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+}
+
+@media print {
+    footer {
+        display: none;
+    }
+
+    @page {
+      size: A4;
+      margin: 2em;
+    }
+
+    * {
+      page-break-after: avoid;
+      page-break-before: avoid;
+    }
+
+    hr {
+        border-color: black;
+    }
+
+    @page:right{
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    pre {
+        border: 0px solid black !important;
+    }
+}

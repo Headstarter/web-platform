@@ -1,11 +1,16 @@
 from app import render_template, flash
-from app.router import session
+from flask import session
 from flask import request, redirect, url_for
 from app.models import User, Company, Position, Tag, Application, insert_application
 import sys
 
 
 class Visitors:
+
+    @staticmethod
+    def profile_view(studentId):
+        student = User.query.filter(User.id == studentId).one()
+        return render_template('visitor/profileView.html', student=student)
 
     @staticmethod
     def homepage():
@@ -20,6 +25,10 @@ class Visitors:
             session['redirect'] = url_for('v1pre_routes.apply_students', position=position_id)
             return redirect(url_for('student_signup'))
         else:
+            if User.query.filter(User.id == session['id']).one().cv_id is None:
+                pass
+            session['redirect'] = request.full_url
+            # redirect to /profile -> profile redirects to this with POST
             position_id = int(position_id)
             insert_application(session['id'], position_id, Position.query.filter(Position.id==position_id).one().company_id);
             flash('Кандидатстването Ви беше успешно.<style>.formater { background: transparent !important; }</style>', 'success')

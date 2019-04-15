@@ -1,6 +1,6 @@
 from app import app, babel, db, migrate, render_template
 from app.router import session
-from app.models import User, Tag, Company, Position
+from app.models import User, Tag, Company, Position, CV
 from flask import g, request, Blueprint, flash, url_for
 from app.v1_1pre.config import *
 
@@ -25,6 +25,11 @@ def _homepage():
         return mapped_routes['Visitor'].homepage()
 
 
+@routes.route('/profile/<user_id>')
+def profile_view(user_id):
+    return mapped_routes['Visitor'].profile_view(user_id)
+
+
 @routes.route('/browse', methods=['GET', 'POST'])
 def browse_offers():
     if session['type'] == 'Company':
@@ -37,6 +42,17 @@ def browse_offers():
 def upload_logo():
     if session['type'] == 'Company':
         return mapped_routes['Company'].upload_logo()
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.upload_logo')
+        return render_template('template.html')
+
+
+@routes.route('/upload/cv/picture', methods=['POST'])
+def upload_cv_picture():
+    if session['type'] == 'Student':
+        return mapped_routes['Student'].upload_cv_picture()
     else:
         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
@@ -75,7 +91,7 @@ def apply_students(position):
 def profile():
     try:
         return mapped_routes[session['type']].profile()
-    except AttributeError:
+    except:
         try:
             return mapped_routes['Visitor'].profile()
         except:
@@ -83,6 +99,12 @@ def profile():
             flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
             session['redirect'] = url_for('v1pre_routes.profile')
             return render_template('template.html')
+
+
+@routes.route('/profile/<studentId>/view')
+def profileView(studentId):
+    try:
+        return mapped_routes['Visitor'].profile(studentId)
     except:
         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
@@ -262,5 +284,13 @@ def update_data():
             return jsonify({'position_id': Position.query.filter(Position.id == id).one().company_id,
                             'company_id': session['company_id'], 'status': 'This position is not your company\'s'}), 403
 
+    elif name.startswith('student.cv.'):
+        import sys
+        print('\t', data, name, id, file=sys.stderr)
+        CV.query.filter(CV.id == User.query.filter(User.id == id).one().cv_id).update({name[len('student.cv.'):]: data})
+        db.session.commit()
+        return jsonify({'value': data}), 200
     else:
+        import sys
+        print('\t', data, name, id, file=sys.stderr)
         return jsonify({'status': 'data-name is not recognized'}), 400
