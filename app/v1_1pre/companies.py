@@ -31,7 +31,7 @@ class Companies:
 				flash('No selected file')
 				return jsonify({'value': 'No file selected.'}), 400
 			if file and allowed_image(file.filename):
-				filename = secure_filename(file.filename)
+				# filename = secure_filename(file.filename)
 				file.save(os.path.join(app.config['APP_ROOT'], Company.query.filter(Company.id == session['company_id']).one().logo[1:]))
 				return jsonify({'value': 'Uploaded'}), 200
 

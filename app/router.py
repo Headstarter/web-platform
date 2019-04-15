@@ -1,21 +1,11 @@
 from app import app, babel, db, migrate, render_template
 from app.models import insert_user, User, Tag, Company, Position, crypto
 from flask import request, session, flash, redirect, url_for, send_file
-from flask_session import Session
+#from flask_session import Session
 import sys
-import os
-from uuid import uuid4
 
-# Set the secret key to some random bytes. Keep this really secret!
-from datetime import timedelta
-# app.config['SECRET_KEY'] = b'_5#y2L"F4Q8z\n\xec]/'
-app.config['SESSION_TYPE'] = 'filesystem' #redis
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-app.config['APP_ROOT'] = os.path.dirname(os.path.abspath(__file__))
-
-app.config.from_object(__name__)
-Session(app)
+app.secret_key = 'b94079a3717eda429c4580496be97bc9675d3ea4eb0ae50d'
+#Session(app)
 
 
 @babel.localeselector
@@ -37,7 +27,7 @@ def set_response_headers(response):
 def init_session():
 	if 'type' not in session:
 		session['type'] = 'Visitor'
-	print(session, file=sys.stderr)
+	print(request.full_path + ': ' + str(session.sid) + ': ' + str(session), file=sys.stderr)
 
 
 @app.route('/background.png')
@@ -140,11 +130,13 @@ def student_login():
 				session['name'] = curr.name
 				session['company_id'] = None
 				session['type'] = 'Student'
-
-			if session['redirect']:
-				return redirect(session['redirect'])
-			else:
-				return redirect('/p')
+			try:
+				if session['redirect']:
+					return redirect(session['redirect'])
+				else:
+					return redirect('/p')
+			except:
+					return redirect('/p')
 		else:
 			flash('User is not registered or user is not login by the correct way.', 'danger')
 			return redirect(url_for('student_login'))
@@ -162,13 +154,17 @@ def student_signup():
 
 			session['email'] = request.form['email']
 			session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
+			session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
 			session['company_id'] = None
 			session['type'] = 'Student'
 
-			if session['redirect']:
-				return redirect(session['redirect'])
-			else:
-				return redirect('/p')
+			try:
+				if session['redirect']:
+					return redirect(session['redirect'])
+				else:
+					return redirect('/p')
+			except:
+					return redirect('/p')
 		else:
 			flash('User is already registered or passwords does not match.', 'danger')
 			return redirect(url_for('student_signup'))
@@ -194,6 +190,7 @@ def change_redirect():
 	session['redirect'] = request.args ['redirect']
 
 	return redirect('/p')
+
 
 @app.route('/terms')
 def terms():

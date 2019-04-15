@@ -1,5 +1,5 @@
 from app import db
-
+import json
 
 class Tag(db.Model):
     __tablename__ = 'Tag'
@@ -35,9 +35,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
+
+    cv_id = db.Column(db.Integer, db.ForeignKey('CV.id'), nullable=True)
+    cv = db.relationship('CV', back_populates='user', uselist=False)
+
     company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='employees')
-    password_hash = db.Column(db.String(128))
 
     applications = db.relationship("Application", back_populates="user")
 
@@ -45,11 +49,53 @@ class User(db.Model):
         return {"id": self.id,
                 "name": self.name,
                 "email": self.email,
-                "company": self.company,
+                "company": self.company
                }
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
+
+
+class CV(db.Model):
+    __tablename__ = 'CV'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    user = db.relationship("User", back_populates="cv")
+
+    photo = db.Column(db.String(256))
+    name = db.Column(db.String(256))
+    email = db.Column(db.String(256))
+    # telephone = db.Column(db.String(16))
+    # birthday = db.Column(db.String(256))
+    age = db.Column(db.String(16))
+    location = db.Column(db.String(256))
+    about = db.Column(db.String(512))
+    # achievements
+
+    education = db.Column(db.String(2048))
+    projects = db.Column(db.String(2048))
+    skills = db.Column(db.String(512))
+    languages = db.Column(db.String(512))
+    hobbies = db.Column(db.String(512))
+
+    def get_skills(self):
+        return json.loads(self.skills)
+
+    def get_projects(self):
+        return json.loads(self.projects)
+
+    def get_education(self):
+        return json.loads(self.education)
+
+    def get_languages(self):
+        return json.loads(self.languages)
+
+    def get_hobbies(self):
+        return json.loads(self.hobbies)
+
+    def __repr__(self):
+        return '<CV {}>'.format(self.name)
 
 
 class Position(db.Model):
@@ -98,8 +144,40 @@ def clear():
     Position.query.filter(True).delete()
 
 
+def create_cv(student):
+    cv = CV(photo='/static/img/cv/' + str(student.id) + '.jpg',
+            name='',
+            email='',
+            age='',
+            location='',
+            about='',
+            education='[]',
+            projects='[]',
+            skills='[]',
+            languages='[]',
+            hobbies='[]'
+            )
+    db.session.add(cv)
+    User.query.filter(User.id == student.id).update({'cv_id': cv.id})
+    db.session.commit()
+
+
 def insert_user(name, email, password, company=None):
-    db.session.add(User(name=name, company=company, email=email, password_hash=crypto(password)))
+    if company is None:
+        db.session.add(User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
+                                             name='',
+                                             email='',
+                                             age='',
+                                             location='',
+                                             about='',
+                                             education='[]',
+                                             projects='[]',
+                                             skills='[]',
+                                             languages='[]',
+                                             hobbies='[]'
+                                             ), company=company, email=email, password_hash=crypto(password)))
+    else:
+        db.session.add(User(name=name, cv=None, company=company, email=email, password_hash=crypto(password)))
     db.session.commit()
 
 
@@ -154,9 +232,7 @@ def init():
     db.session.commit()
 
     """ CEOs """
-    AlexTsvetanov = User(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password_hash=crypto('password'))
-    db.session.add(AlexTsvetanov)
-    db.session.commit()
+    insert_user(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password=crypto('password'))
 
     """ Positions """
     example1 = Position(name='Python Web Developer', company=Headstarter,
@@ -227,6 +303,4 @@ Your personal data is protected by Bulgarian law and European General Data Prote
     db.session.commit()
 
     # Students
-    NadegdaTsacheva = User(name='Nadegda Tsacheva', company=None, email='nadeto@headstarter.eu', password_hash=crypto('password'))
-    db.session.add(NadegdaTsacheva)
-    db.session.commit()
+    insert_user(name='Nadegda Tsacheva', company=None, email='nadeto@headstarter.eu', password=crypto('password'))

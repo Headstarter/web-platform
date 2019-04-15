@@ -1,0 +1,37 @@
+ul.list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.list li.add {
+  padding-left: 1em;
+}
+
+ul.list li.add:before {
+  content: "+";
+  padding-right: 5px;
+}
+
+ul.list li:not(.add) {
+  padding-left: 1em;
+}
+
+ul.list li:not(.add):before {
+  content: "•";
+  padding-right: 5px;
+}
+
+.mini-logo-header .form-control {
+    text-align: left;
+}
+
+ul.list li *:not(:first-child) {
+  margin-left: 1em;
+}
+.hidden {
+    display: none;
+}
+.btn-danger {
+    color: white !important;
+}
