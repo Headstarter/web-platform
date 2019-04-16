@@ -1,7 +1,7 @@
 from app import render_template, flash
 from flask import session
 from flask import request, redirect, url_for
-from app.models import User, Company, Position, Tag, Application, insert_application
+from app.models import User, Company, Position, Tag, Application, insert_application, create_cv
 import sys
 
 
@@ -25,14 +25,19 @@ class Visitors:
             session['redirect'] = url_for('v1pre_routes.apply_students', position=position_id)
             return redirect(url_for('student_signup'))
         else:
-            if User.query.filter(User.id == session['id']).one().cv_id is None:
-                pass
-            session['redirect'] = request.full_url
-            # redirect to /profile -> profile redirects to this with POST
+            student = User.query.filter(User.id == session['id']).one()
+            if student.cv_id is None:
+                create_cv(User.query.filter(User.id == session['id']).one())
+            try:
+                if request.args['cv_confirmed'] != '1':
+                    raise Exception('Not confirmed')
+            except:
+                session['redirect'] = request.full_path + 'cv_confirmed=1'
+                return redirect(url_for('v1pre_routes.cv_confirm'))
             position_id = int(position_id)
             insert_application(session['id'], position_id, Position.query.filter(Position.id==position_id).one().company_id);
             flash('Кандидатстването Ви беше успешно.<style>.formater { background: transparent !important; }</style>', 'success')
-            return render_template('template.html')
+            return render_template('visitor/profileView.html', student=student)
 
     @staticmethod
     def browse_offers():

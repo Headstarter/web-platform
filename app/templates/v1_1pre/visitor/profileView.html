@@ -5,46 +5,43 @@
     <link rel="stylesheet" href="{{ url_for('.static', filename='mini-logo.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='css/cv_preview.css') }}" >
-<style>
-.formater {
-    background: transparent !important;
-}
-.mini-logo-header .logo {
-    height: 100% !important;
-    background: transparent !important;
-    color: white !important;
-}
-</style>
+    <style>
+    .formater {
+        background: transparent !important;
+    }
+    .mini-logo-header .logo {
+        height: 100% !important;
+        background: transparent !important;
+        color: white !important;
+    }
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="bg-headstarter-primary">
         <div class="container">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <img class="picture" src="{{ student.cv.photo }}" />
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <h1 class="name">{{ student.cv.name }}</h1><br>
                     <div class="contacts w-100">
-                        <div class="col-6 d-inline"><i class="fas fa-envelope"></i> <a href="mailto:{{student.cv.email}}">{{ student.cv.email }}</a></div>
-                        <div class="col-6 d-inline"><i class="fas fa-map-marker-alt"></i> {{ student.cv.location }}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="about w-100">
-                        <span class="section-title">About me</span>
-                        <hr>
-                        <pre>{{ student.cv.about }}</pre>
+                        <div class="row">
+                            <div class="col-6 d-inline"><i class="fas fa-envelope"></i> <a href="mailto:{{student.cv.email}}">{{ student.cv.email }}</a></div>
+                            <div class="col-6 d-inline"><i class="fas fa-map-marker-alt"></i> {{ student.cv.location }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 d-inline"><i class="fas fa-birthday-cake"></i> {{ student.cv.birthday }}</div>
+                            <div class="col-6 d-inline"><i class="fas fa-phone"></i> <a href="tel:{{ student.cv.telephone }}">{{ student.cv.telephone }}</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="education w-100">
-                        <span class="section-title">Education</span>
+                        <span class="section-title">Образование</span>
                         <hr>
                         <ul class="w-100">
                             {% for course in student.cv.get_education() %}
@@ -57,7 +54,7 @@
                         </ul>
                     </div>
                     <div class="skills w-100">
-                        <span class="section-title">Soft skills</span>
+                        <span class="section-title">Личностни умения</span>
                         <hr>
                         <ul class="w-100">
                             {% for skill in student.cv.get_skills() %}
@@ -70,7 +67,7 @@
                 </div>
                 <div class="col-6">
                     <div class="projects w-100">
-                        <span class="section-title">Projects</span>
+                        <span class="section-title">Проекти</span>
                         <hr>
                         <ul class="w-100">
                             {% for project in student.cv.get_projects() %}
@@ -83,7 +80,7 @@
                         </ul>
                     </div>
                     <div class="hobbies w-100">
-                        <span class="section-title">Hobbies</span>
+                        <span class="section-title">Хобита</span>
                         <hr>
                         <ul class="w-100">
                             {% for hobby in student.cv.get_hobbies() %}
@@ -94,7 +91,7 @@
                         </ul>
                     </div>
                     <div class="languages w-100">
-                        <span class="section-title">Languages</span>
+                        <span class="section-title">Езици</span>
                         <hr>
                         <ul class="w-100">
                             {% for lang in student.cv.get_languages() %}
@@ -106,6 +103,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="about w-100">
+                        <span class="section-title">Още за мен</span>
+                        <hr>
+                        <pre>{{ student.cv.about }}</pre>
+                    </div>
+                </div>
+            </div>
+            {% if confirm %}
+                <div class="row">
+                    <a class="btn btn-raised btn-left" href="{{ confirm }}">Редактирай</a> <a class="btn btn-raised btn-right" href="{{ current }}cv_confirmed=1">Изпрати</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

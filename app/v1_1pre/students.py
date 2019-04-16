@@ -1,5 +1,5 @@
 from app import render_template, flash, app
-from flask import session, request
+from flask import session, request, url_for, redirect
 from app.models import User, Tag, Company, Position, create_cv
 import os
 from werkzeug.utils import secure_filename
@@ -60,4 +60,16 @@ class Students:
 		student = User.query.filter(User.id == session['id'])[0]
 		print(student.cv.get_education(), file=sys.stderr)
 		return render_template('students/profile.html', student=student)
+
+	@staticmethod
+	def cv_confirm():
+		try:
+			# return str(session['redirect'])
+			if request.args['cv_confirmed'] == '1':
+				return redirect(session['redirect'])
+		except:
+			pass
+		student = User.query.filter(User.id == session['id'])[0]
+		return render_template('visitor/profileView.html', student=student, current=request.full_path, confirm=url_for('v1pre_routes.profile',
+																							studentId=session['id']))
 

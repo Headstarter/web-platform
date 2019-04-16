@@ -35,3 +35,20 @@ ul.list li *:not(:first-child) {
 .btn-danger {
     color: white !important;
 }
+
+li, .btn-danger {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+br {
+    display: block;
+    content: " ";
+    line-height: 100%;
+    width: 100%;
+}
+#filename {
+    display: none;
+}
+h4 {
+    width: 110%;
+}

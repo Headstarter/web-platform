@@ -30,7 +30,7 @@
                                 Browse… <input type="file" name="photopic" id="imgInp">
                             </span>
                         </span>
-                        <input type="text" class="form-control" readonly>
+                        <input id="filename" type="text" class="form-control" readonly>
                     </div>
                     <br>
                     <img class="mini-logo" src="{{ student.cv.photo }}" id='img-upload' />
@@ -50,12 +50,17 @@
                        value="{{ student.cv.location }}"/>
             </div>
             <div class="row">
-                <h1>Кратък текст за теб:</h1><br>
-                <h4>(твой постижения, награди от състезания)</h4>
-                <textarea data-id="{{ student.id }}" data-name="student.cv.about" class="form-control plain">{{ student.cv.about }}</textarea>
+                <h1>Дата на раждане:</h1>
+                <input data-id="{{ student.id }}" data-name="student.cv.birthday" class="form-control plain"
+                       value="{{ student.cv.birthday }}"/>
             </div>
             <div class="row">
-                <h1>Образование:</h1><br>
+                <h1>Телефон:</h1>
+                <input data-id="{{ student.id }}" data-name="student.cv.telephone" class="form-control plain"
+                       value="{{ student.cv.telephone }}"/>
+            </div>
+            <div class="row">
+                <h1>Образование:</h1>
                 <h4>(училище, курсове и сертификати)</h4>
                 <ul data-id="{{ student.id }}" data-name="student.cv.education" class="form-control list">
                     <a onclick="$(this).parent('ul').append($('li.edu.hidden')[0].outerHTML.replace(' hidden',''));">
@@ -131,7 +136,6 @@
                 <h1>Хобита:</h1>
                 <ul data-id="{{ student.id }}" data-name="student.cv.hobbies" class="form-control list">
                     <a onclick="$(this).parent('ul').append($('li.hobby.hidden')[0].outerHTML.replace(' hidden',''));">
-                    <a onclick="$(this).parent('ul').append($('li.hobby.hidden')[0].outerHTML.replace(' hidden',''));">
                         <li class="add">Добави още</li>
                     </a>
                     <li class="hobby hidden">
@@ -143,6 +147,11 @@
                     </li>
                     {% endfor %}
                 </ul>
+            </div>
+            <div class="row">
+                <h1>Разкажи още за себе си:</h1><br>
+                <h4>(твои постижения, награди от състезания, извънкласни дейностти, абе само да са положителни гледай)</h4>
+                <textarea data-id="{{ student.id }}" data-name="student.cv.about" class="form-control plain">{{ student.cv.about }}</textarea>
             </div>
             <div class="row">
                 <button class="btn-rounded btn btn-big btn-rounded btn-right" id="submit">Запази</button>

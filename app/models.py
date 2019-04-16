@@ -66,9 +66,9 @@ class CV(db.Model):
     photo = db.Column(db.String(256))
     name = db.Column(db.String(256))
     email = db.Column(db.String(256))
-    # telephone = db.Column(db.String(16))
-    # birthday = db.Column(db.String(256))
-    age = db.Column(db.String(16))
+    telephone = db.Column(db.String(16))
+    birthday = db.Column(db.String(256))
+    # age = db.Column(db.String(16))
     location = db.Column(db.String(256))
     about = db.Column(db.String(512))
     # achievements
@@ -117,12 +117,12 @@ class Position(db.Model):
 
 class Application (db.Model):
     __tablename__ = 'Application'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+    id = db.Column(db.String(2048), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
     user = db.relationship('User', back_populates='applications')
-    position_id = db.Column(db.Integer, db.ForeignKey('Position.id'))
+    position_id = db.Column(db.Integer, db.ForeignKey('Position.id'), primary_key=True)
     position = db.relationship('Position', back_populates='applications')
-    company_id = db.Column(db.Integer)
+    company_id = db.Column(db.Integer, primary_key=True)
 
 
 import hashlib
@@ -148,7 +148,8 @@ def create_cv(student):
     cv = CV(photo='/static/img/cv/' + str(student.id) + '.jpg',
             name='',
             email='',
-            age='',
+            birthday='',
+            telephone='',
             location='',
             about='',
             education='[]',
@@ -167,7 +168,8 @@ def insert_user(name, email, password, company=None):
         db.session.add(User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
                                              name='',
                                              email='',
-                                             age='',
+                                             birthday='',
+                                             telephone='',
                                              location='',
                                              about='',
                                              education='[]',
@@ -182,7 +184,7 @@ def insert_user(name, email, password, company=None):
 
 
 def insert_application(user_id, position_id, company_id):
-    db.session.add(Application(user_id=user_id, position_id=position_id, company_id=company_id))
+    db.session.add(Application(id=str(user_id)+'_'+str(position_id), user_id=user_id, position_id=position_id, company_id=company_id))
     db.session.commit()
 
 

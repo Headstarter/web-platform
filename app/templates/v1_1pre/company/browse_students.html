@@ -67,13 +67,13 @@
     <main class="container">
         {% for student in students %}
             <div class="row">
-                <big>{{ student.user.username }}</big>
+                <big>{{ student.user.name }}</big>
             </div>
             <div class="row">
                 <a href="{{url_for('v1pre_routes.position_view', positionId=student.position_id)}}" class="link-default">{{student.position.name}}</a>
             </div>
             <div class="row">
-                <a href="{{url_for('v1pre_routes.application_view', applicationId=student.id)}}" style="font-size: 1rem;" class="btn-rounded btn btn-rounded btn-right">Разгледай кандидатурата</a>
+                <a href="{{url_for('v1pre_routes.profile_view', user_id=student.user.id)}}" style="font-size: 1rem;" class="btn-rounded btn btn-rounded btn-right">Разгледай кандидатурата</a>
             </div>
             <hr>
         {% endfor %}

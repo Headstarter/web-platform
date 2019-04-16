@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ff309e7e5371
+Revision ID: 83ec6c762bf2
 Revises: 
-Create Date: 2019-04-11 01:52:30.444325
+Create Date: 2019-04-16 17:18:29.102541
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ff309e7e5371'
+revision = '83ec6c762bf2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,8 @@ def upgrade():
     sa.Column('photo', sa.String(length=256), nullable=True),
     sa.Column('name', sa.String(length=256), nullable=True),
     sa.Column('email', sa.String(length=256), nullable=True),
-    sa.Column('age', sa.String(length=16), nullable=True),
+    sa.Column('telephone', sa.String(length=16), nullable=True),
+    sa.Column('birthday', sa.String(length=256), nullable=True),
     sa.Column('location', sa.String(length=256), nullable=True),
     sa.Column('about', sa.String(length=512), nullable=True),
     sa.Column('education', sa.String(length=2048), nullable=True),
@@ -77,10 +78,12 @@ def upgrade():
     op.create_index(op.f('ix_User_email'), 'User', ['email'], unique=True)
     op.create_table('Application',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('position_id', sa.Integer(), nullable=True),
-    sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('position_id', sa.Integer(), nullable=False),
+    sa.Column('company_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['position_id'], ['Position.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['user_id'], ['User.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'position_id', 'company_id')
     )
     # ### end Alembic commands ###
 
