@@ -25,7 +25,7 @@ def _homepage():
         return mapped_routes['Visitor'].homepage()
 
 
-@routes.route('/profile/<user_id>')
+@routes.route('/cv/<user_id>')
 def profile_view(user_id):
     return mapped_routes['Visitor'].profile_view(user_id)
 
@@ -99,6 +99,17 @@ def profile():
             flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
             session['redirect'] = url_for('v1pre_routes.profile')
             return render_template('template.html')
+
+
+@routes.route('/cv/confirm')
+def cv_confirm():
+    #try:
+        return mapped_routes[session['type']].cv_confirm()
+    #except:
+    #    flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+    #    flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+    #    session['redirect'] = url_for('v1pre_routes.profile')
+    #    return render_template('template.html')
 
 
 @routes.route('/profile/<studentId>/view')

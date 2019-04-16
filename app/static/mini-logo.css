@@ -3,45 +3,7 @@
     min-height: 100px;
     max-height: 100px;
     padding: 5px 5px 5px 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     background: white;
-}
-
-.mini-logo-header {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-.mini-logo-header {
-    background-color: var(--primary);
-    color: white;
-}
-
-.mini-logo-header h1 {
-    position: relative;
-    text-align: center;
-}
-
-.mini-logo-header .logo {
-    height: 100% !important;
-    background: transparent !important;
-    color: white !important;
-}
-
-.mini-logo-header .description {
-    height: 100%;
-    max-height: 100%;
-    min-height: 100%;
-    font-size: 1.5em;
-}
-
-.edit input,
-.edit_area input,
-.edit_area textarea {
-    max-width: 100%;
-    max-height: 100%;
-    overflow: scroll;
 }
