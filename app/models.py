@@ -233,6 +233,23 @@ def init():
     db.session.add(Biodit)
     db.session.commit()
 
+    Deamix = Company(name='Dreamix', website='',
+                     contacts="", logo='/static/img/company/3.png',
+                     description='', uid=gen_uid())
+
+    BICA_services = Company(name='BICA services', website='',
+                     contacts="", logo='/static/img/company/4.png',
+                     description='', uid=gen_uid())
+
+    iGreet = Company(name='iGreet', website='',
+                     contacts="", logo='/static/img/company/5.png',
+                     description='', uid=gen_uid())
+
+    db.session.add(Deamix)
+    db.session.add(BICA_services)
+    db.session.add(iGreet)
+    db.session.commit()
+
     """ CEOs """
     insert_user(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password=crypto('password'))
 
