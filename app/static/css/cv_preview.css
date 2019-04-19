@@ -1,26 +1,122 @@
+@font-face {
+    font-family: "AcariSans";
+    src: url("/static/fonts/AcariSans-Light.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-LightItalic.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-Medium.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-MediumItalic.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-Regular.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-Semi600.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-Semi600Italic.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-600.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-600Italic.ttf") format("truetype"),
+         url("/static/fonts/AcariSans-Italic.ttf") format("truetype")
+    ;
+}
+
 .picture {
     width: 100%;
 }
+
 .section-title {
-    font-size: 2em;
+    font-weight: 600;
 }
+
 hr {
     margin-top: 2px;
     margin-bottom: 2px;
     border-color: white;
 }
-.name {
-    text-transform: uppercase;
+.header-info .period {
+    text-align: right;
+    display: inline-block;
+    width: 23% !important;
 }
+
+.header-info .name, .header-info .degree {
+    text-align: left;
+    display: inline-block;
+    width: 75% !important;
+    font-weight: 600;
+    font-size: 14pt;
+}
+
+.school {
+    color: lightgreen;
+}
+
 a, a:focus, a:hover, a:visited {
     color: white;
 }
+
 pre {
     white-space: pre-wrap;
     color: white;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 1rem;
 }
+
+.your-name {
+    font-size: 16pt;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 14pt;
+}
+
+.bg-headstarter-primary {
+    font-size: 12pt;
+}
+
+.period {
+    font-size: 10pt;
+}
+
+.description.w-100 {
+    font-weight: 100;
+    opacity: 0.75;
+}
+
+li.project, li.edu {
+    /*list-style: none;*/
+    margin-bottom: 7px;
+}
+
+li.hobby, li.lang, li.skill {
+    list-style: disclosure-closed;
+}
+
+.period::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f073";
+    font-weight: 400;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    margin-right: 3px;
+}
+
+.contacts {
+    font-size: 10pt;
+}
+
+.cv {
+    /*font-family: "GoudyOldStyleT-Italic" ;
+    letter-spacing: 0.1em;
+    font-family: "AcariSans", sans-serif;*/
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+.cv .row {
+    margin-bottom: 10px;
+}
+
+
+
 
 @media print {
     footer {
@@ -49,5 +145,18 @@ pre {
 
     pre {
         border: 0px solid black !important;
+    }
+
+
+    .school {
+        color: green;
+    }
+
+    .header-info .name, .header-info .degree {
+        text-align: left;
+        display: inline-block;
+        width: 75% !important;
+        font-weight: 600;
+        font-size: 14pt;
     }
 }

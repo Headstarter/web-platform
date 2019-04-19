@@ -18,6 +18,9 @@
             background: #474a51 !important;
             color: white !important;
         }
+        .row {
+            margin-bottom: 5px;
+        }
     </style>
 {% endblock %}
 
@@ -69,9 +72,11 @@
             <div class="row">
                 <big>{{ student.user.name }}</big>
             </div>
+            <div class="row"></div>
             <div class="row">
                 <a href="{{url_for('v1pre_routes.position_view', positionId=student.position_id)}}" class="link-default">{{student.position.name}}</a>
             </div>
+            <div class="row"></div>
             <div class="row">
                 <a href="{{url_for('v1pre_routes.profile_view', user_id=student.user.id)}}" style="font-size: 1rem;" class="btn-rounded btn btn-rounded btn-right">Разгледай кандидатурата</a>
             </div>

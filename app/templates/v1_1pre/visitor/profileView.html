@@ -18,14 +18,14 @@
 {% endblock %}
 
 {% block content %}
-    <div class="bg-headstarter-primary">
+    <div class="bg-headstarter-primary cv">
         <div class="container">
             <div class="row">
                 <div class="col-2">
                     <img class="picture" src="{{ student.cv.photo }}" />
                 </div>
                 <div class="col-10">
-                    <h1 class="name">{{ student.cv.name }}</h1><br>
+                    <h1 class="your-name">{{ student.cv.name }}</h1><br>
                     <div class="contacts w-100">
                         <div class="row">
                             <div class="col-6 d-inline"><i class="fas fa-envelope"></i> <a href="mailto:{{student.cv.email}}">{{ student.cv.email }}</a></div>
@@ -46,7 +46,10 @@
                         <ul class="w-100">
                             {% for course in student.cv.get_education() %}
                             <li class="edu w-100">
-                                <div class="degree w-100">{{ course.degree }}</div>
+                                <div class="header-info w-100">
+                                    <div class="degree">{{ course.degree }}</div>
+                                    <div class="period">{{ course.period }}</div>
+                                </div>
                                 <div class="profile w-100">{{ course.profile }}</div>
                                 <div class="school w-100">{{ course.school }}</div>
                             </li>
@@ -72,8 +75,10 @@
                         <ul class="w-100">
                             {% for project in student.cv.get_projects() %}
                             <li class="project">
-                                <div class="name w-100">{{ project.name }}</div>
-                                <div class="period w-100">{{ project.period }}</div>
+                                <div class="header-info w-100">
+                                    <div class="name">{{ project.name }}</div>
+                                    <div class="period">{{ project.period }}</div>
+                                </div>
                                 <div class="description w-100">{{ project.description }}</div>
                             </li>
                             {% endfor %}

@@ -6,13 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('.static', filename='card.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='editor.css') }}" >
     <link rel="stylesheet" href="{{ url_for('.static', filename='position.css') }}" >
+    <style>
+        .row {
+            margin-bottom: 10px;
+        }
+    </style>
+
 {% endblock %}
 
 {% block content %}
-    <div class="mini-logo-header bg-headstarter-primary">
+    <div class="bg-headstarter-primary">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 logo">
+                <div class="col-md-4">
                     <center>
                         <img class="mini-logo" src="{{ position.company.logo }}" />
                         <h1>{{ position.company.name }}</h1>
@@ -21,12 +27,8 @@
                 <div class="col-md-7 description">
                     <div>{{ position.company.description }}</div>
                     <br>
-                    <small>
-                    <small>
-                        <p class="data">Website: <a href="{{ position.company.website }}" class="link-default">{{ position.company.website }}</a></p>
-                        <p class="data">{{ position.company.contacts | safe }} </p>
-                    </small>
-                    </small>
+                    <p class="data">Website: <a href="{{ position.company.website }}" class="link-default">{{ position.company.website }}</a></p>
+                    <p class="data">{{ position.company.contacts | safe }} </p>
                 </div>
             </div>
         </div>
@@ -36,7 +38,7 @@
             <h2>Длъжност:</h2>
             <input data-id="{{ position.id }}" data-name="position.name"
                 class="form-control plain" value="{{position.name}}" type="text">
-        </div><br>
+        </div>
         <div class="row">
             <div class="col-md-6" style="font-size: 1.5em;"><center>
                 Стажът е изтекъл&nbsp;&nbsp;

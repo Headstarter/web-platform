@@ -56,6 +56,7 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
 	flash(request.full_path + ': Error 500: Could be caused by invalid parameters.', 'danger')
+	flash(e, 'danger')
 	return render_template('template.html'), 500
 
 
