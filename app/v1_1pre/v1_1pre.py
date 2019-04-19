@@ -82,6 +82,17 @@ def create_offer():
         return render_template('template.html')
 
 
+@routes.route('/delete_offer/<positionId>', methods=['GET', 'POST'])
+def delete_offer(positionId):
+    if session['type'] == 'Company':
+        return mapped_routes['Company'].delete_offer(positionId)
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.create_offer')
+        return render_template('template.html')
+
+
 @routes.route('/apply/<position>')
 def apply_students(position):
     return mapped_routes['Visitor'].apply_student(position)
@@ -115,7 +126,7 @@ def cv_confirm():
 @routes.route('/profile/<studentId>/view')
 def profileView(studentId):
     try:
-        return mapped_routes['Visitor'].profile(studentId)
+        return mapped_routes['Visitor'].profile_view(studentId)
     except:
         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')

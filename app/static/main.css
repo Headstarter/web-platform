@@ -588,3 +588,8 @@ a.col-sm-4.btn.btn-big.btn-rounded {
     max-height: 50% !important;
     max-width: 100% !important;
 }
+
+.card {
+    box-shadow: 0 0 0 transparent;
+    border: 0px solid rgba(0,0,0,.125);
+}

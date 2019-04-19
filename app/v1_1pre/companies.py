@@ -1,5 +1,5 @@
 from app import render_template, flash, app
-from app.models import User, Tag, Company, Position, Application, insert_position
+from app.models import User, Tag, Company, Position, Application, insert_position, db
 from flask import session, request, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
@@ -43,6 +43,21 @@ class Companies:
 	def create_offer():
 		id = insert_position('', session['company_id'], '', False, 0, 0, '', 1)
 		return redirect(url_for('v1pre_routes.position_view', positionId=id))
+
+	@staticmethod
+	def delete_offer(positionId):
+		import sys
+		print(positionId, file=sys.stderr)
+		positionId=int(positionId)
+		print(Position.query.filter(Position.id == positionId).one().company_id, file=sys.stderr)
+		print(session['company_id'], file=sys.stderr)
+		if Position.query.filter(Position.id == positionId).one().company_id == session['company_id']:
+			Position.query.filter(Position.id == positionId).delete()
+			db.session.commit()
+			return redirect(url_for('v1pre_routes.my_offers'))
+		else:
+			flash("Access denied.", 'danger')
+			return render_template('template.html'), 401
 
 	@staticmethod
 	def browse_students():

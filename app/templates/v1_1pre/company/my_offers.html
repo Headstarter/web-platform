@@ -106,17 +106,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2" id="short{{loop.index}}" style="height: 24px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                        <div class="col-sm-3" id="short{{loop.index}}" style="height: 24px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                             {{internship.description | safe}}
-                        </div>
-                        <div class="col-sm-3">
-                            <a onclick="$('#short{{loop.index}}').animate({opacity: +($('#collapse{{loop.index}}').hasClass('show'))});" style="font-size: 1rem;" class="btn-rounded btn btn-left" data-toggle="collapse" href="#collapse{{loop.index}}" role="button" aria-expanded="false" aria-controls="collapse{{loop.index}}">
-                                Виж повече
-                            </a>
                         </div>
                         <div class="col-sm-3">
                             <a href="{{ url_for ('v1pre_routes.position_view', positionId=internship.id) }} "  style="font-size: 1rem;" class="btn-rounded btn btn-left" role="button">
                                 Промени
+                            </a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{{ url_for ('v1pre_routes.delete_offer', positionId=internship.id) }} "  style="font-size: 1rem;" class="btn-rounded btn btn-left" role="button">
+                                Изтрий
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a onclick="$('#short{{loop.index}}').animate({opacity: +($('#collapse{{loop.index}}').hasClass('show'))});" style="font-size: 1rem;" class="btn-rounded btn btn-left" data-toggle="collapse" href="#collapse{{loop.index}}" role="button" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+                                Виж повече
                             </a>
                         </div>
                     </div>

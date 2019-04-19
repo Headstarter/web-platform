@@ -67,15 +67,17 @@
                     <li class="add">Добави още</li>
                     </a>
                     <li class="edu hidden">
-                        <input type="text" name="degree" placeholder="Степ" /> <small>Това може да е основно, средно или висше образование или свободен текст, ако е някакъв вид извънкласно обучение</small><br>
+                        <input type="text" name="degree" placeholder="Взета степ" /> <small>Това може да е основно, средно или висше образование или свободен текст, ако е някакъв вид извънкласно обучение</small><br>
                         <input type="text" name="profile" placeholder="Какво си учил?" /><br>
                         <input type="text" name="school" placeholder="Къде си учил?" /><br>
+                        <input type="text" name="period" placeholder="Кога си учил?" /><br>
                     </li>
                     {% for course in student.cv.get_education() %}
                     <li class="edu">
                         <input type="text" name="degree" placeholder="Взета степен" value="{{ course.degree }}" /><br>
                         <input type="text" name="profile" placeholder="Какво си учил?" value="{{ course.profile }}" /><br>
                         <input type="text" name="school" placeholder="Къде си учил?" value="{{ course.school }}" /><br>
+                        <input type="text" name="period" placeholder="Кога си учил?" value="{{ course.period }}" /><br>
                     </li>
                     {% endfor %}
                 </ul>
@@ -101,7 +103,7 @@
                 </ul>
             </div>
             <div class="row">
-                <h1>Soft skills:</h1>
+                <h1>Личностни умения:</h1>
                 <ul data-id="{{ student.id }}" data-name="student.cv.skills" class="form-control list">
                     <a onclick="$(this).parent('ul').append($('li.skill.hidden')[0].outerHTML.replace(' hidden',''));">
                     <li class="add">Добави още</li>
