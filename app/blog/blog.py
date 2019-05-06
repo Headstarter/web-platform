@@ -2,11 +2,11 @@ from app import app, babel, db, migrate, render_template
 from app.router import session
 from app.models import User, Tag, Company, Position
 from flask import g, request, Blueprint, flash, url_for
-from app.v1_1pre.config import *
+from app.v1.config import *
 
-from app.v1_1pre.visitors import Visitors
-from app.v1_1pre.students import Students
-from app.v1_1pre.companies import Companies
+from app.v1.visitors import Visitors
+from app.v1.students import Students
+from app.v1.companies import Companies
 
 mapped_routes = {
     'Visitor': Visitors,

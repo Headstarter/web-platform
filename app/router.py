@@ -1,11 +1,17 @@
 from app import app, babel, db, migrate, render_template
 from app.models import insert_user, User, Tag, Company, Position, crypto
-from flask import request, session, flash, redirect, url_for, send_file
-#from flask_session import Session
+from flask import request, session, flash, redirect, url_for, send_file, Response
 import sys
 
+app.config['STATIC_FOLDER'] = '/static/wt_prod-20039'
 app.secret_key = 'b94079a3717eda429c4580496be97bc9675d3ea4eb0ae50d'
-#Session(app)
+
+
+def my_redirect(path):
+	import flask
+	response = flask.Response(response=render_template("redirect.html"), status=200)
+	response.headers['X-Response-URL'] = path
+	return response
 
 
 @babel.localeselector
@@ -25,41 +31,165 @@ def set_response_headers(response):
 
 @app.before_request
 def init_session():
+	if '_flashes' not in session:
+		session['_flashes'] = []
 	if 'type' not in session:
 		session['type'] = 'Visitor'
-	print(request.full_path + ': ' + str(session.sid) + ': ' + str(session), file=sys.stderr)
+	
+	print(request.full_path + ': ' + str(session) + ': ' + str(session), file=sys.stderr)
 
 
-@app.route('/background.png')
-def image():
-	if session['type'] == 'Visitor':
-		filename = '2page.png'
-	elif session['type'] == 'Company':
-		filename = '2page.png'
+@app.route('/css/<path:filename>')
+def css(filename):
+	return send_file('static/wt_prod-20039/css/' + filename, mimetype='text/css')
+
+
+@app.route('/js/<path:filename>')
+def js(filename):
+	return send_file('static/wt_prod-20039/js/' + filename, mimetype='text/javascript')
+
+
+@app.route('/images/<path:filename>')
+def images(filename):
+	if filename.endswith('.jpg'):
+		return send_file('static/wt_prod-20039/images/' + filename, mimetype='image/jpeg')
 	else:
-		filename = 'RIS.png'
-	return send_file('static/img/' + filename, mimetype='image/png')
+		return send_file('static/wt_prod-20039/images/' + filename, mimetype='image/png')
 
 
-@app.route('/')
-def index():
-	return render_template('index.html')
+@app.route('/fonts/<path:filename>')
+def fonts(filename):
+	if filename.endswith('.svg'):
+		return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='image/svg+xml')
+	elif filename.endswith('.eot'):
+		return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='application/vnd.ms-fontobject')
+	elif filename.endswith('.ttf'):
+		return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/ttf')
+	elif filename.endswith('.woff'):
+		return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/woff')
+	elif filename.endswith('.woff2'):
+		return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/woff2')
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-	# note that we set the 404 status explicitly
-	flash(request.full_path + ': Error 404: Page not found.', 'danger')
-	return render_template('template.html'), 404
+    return render_template('404.html'), 404
 
 
-@app.errorhandler(500)
+@app.errorhandler(503)
 def internal_server_error(e):
-	flash(request.full_path + ': Error 500: Could be caused by invalid parameters.', 'danger')
-	flash(e, 'danger')
-	return render_template('template.html'), 500
+    return render_template('503.html'), 503
 
 
+@app.route('/join', methods=['GET', 'POST'])
+def login_register():
+	type_user = 'Both'
+	action = 'register'
+	try:
+		type_user = request.args['type']
+	except KeyError:
+		pass
+	try:
+		action = request.args['action']
+	except KeyError:
+		pass
+	return render_template('core/visitor/login-register.html', action=action, type=type_user)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+	
+	print(request.form, file=sys.stderr)
+	
+	company = request.form['company']
+
+	if company == '':
+		if len(User.query.filter(User.email == request.form['email']).all()) == 0 \
+                and (request.form['password'] == request.form['password-confirm']):
+
+			insert_user(request.form['name'], request.form['email'], request.form['password'])
+
+			session['email'] = request.form['email']
+			session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
+			session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
+			session['company_id'] = None
+			session['type'] = 'Student'
+
+			try:
+				if session['redirect']:
+					return my_redirect(session['redirect'])
+				else:
+					return my_redirect('/')
+			except:
+				return my_redirect('/')
+		else:
+			flash('User is already registered or passwords does not match.', 'danger')
+			flash('Please, just log in.', 'info')
+			return my_redirect(url_for('login_register', type="Student", action='register'))
+	else:
+		if len(Company.query.filter(Company.uid == company).all()) == 1 \
+                and (request.form['password'] == request.form['password-confirm'])\
+                and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
+
+			insert_user(request.form['name'],
+                        request.form['email'],
+                        request.form['password'],
+                        Company.query.filter(Company.uid == company).one())
+
+			session['email'] = request.form['email']
+			session['company_id'] = Company.query.filter(Company.uid == company).one().id
+			session['name'] = request.form['name']
+			session['company'] = Company.query.filter(Company.uid == company).one().name
+			session['type'] = 'Company'
+			
+			try:
+				if session['redirect']:
+					return my_redirect(session['redirect'])
+				else:
+					return my_redirect('/')
+			except:
+				return my_redirect('/')
+		else:
+			flash('User is already registered or passwords are not matching.', 'danger')
+			flash('Please, just log in.', 'info')
+			return my_redirect(url_for('login_register', type="Company", action='register'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	
+	if len(User.query.filter(User.email == request.form['email']).all()) == 1:
+		user = User.query.filter(User.email == request.form['email']).one()
+
+		if user.password_hash != crypto(request.form['password']):
+			flash('Incorrect password.', 'danger')
+			return redirect(url_for('login_register', action="login"))
+
+		if user.company_id is None:
+			session['email'] = request.form['email']
+			session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
+			session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
+			session['company_id'] = None
+			session['type'] = 'Student'
+		else:
+			session['email'] = request.form['email']
+			session['company_id'] = user.company_id
+			session['name'] = user.name
+			session['company'] = user.company.name
+			session['type'] = 'Company'
+
+		try:
+			if session['redirect']:
+				return my_redirect(session['redirect'])
+			else:
+				return my_redirect('/')
+		except:
+			return my_redirect('/')
+	else:
+		flash('User is not registered.', 'danger')
+		return my_redirect(url_for('login_register', action="login"))
+
+"""
 @app.route('/register/company', methods=['GET', 'POST'])
 def company_signup():
 	print(request.form, file=sys.stderr)
@@ -171,7 +301,7 @@ def student_signup():
 			return redirect(url_for('student_signup'))
 	else:
 		return render_template('students/register.html')
-
+"""
 
 @app.route('/logout')
 def logout():
@@ -186,21 +316,14 @@ def logout():
 	return redirect('/p')
 
 
-@app.route('/redirect')
-def change_redirect():
-	session['redirect'] = request.args ['redirect']
-
-	return redirect('/p')
-
-
 @app.route('/terms')
 def terms():
-	return render_template('terms.html')
+	return render_template('privacy-policy.html')
 
 
-from app.v1_1pre.v1_1pre import routes
+from app.v1.core import routes
 
-app.register_blueprint(routes, url_prefix='/p')
+app.register_blueprint(routes, url_prefix='/')
 
 from app.blog.blog import routes
 app.register_blueprint(routes, url_prefix='/blog')
