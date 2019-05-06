@@ -179,3 +179,85 @@ hr.primary {
 a.col-sm-4.btn.btn-big.btn-rounded {
     white-space: pre-line;
 }
+
+.masthead {
+    -webkit-background-size: contain !important;
+    -moz-background-size: contain !important;
+    background-size: contain !important;
+    -o-background-size: contain !important;
+    background-position: center !important;
+    background-image: url('/background.png') !important;
+    background-color: rgba(0,0,0,0.35) !important;
+    background-blend-mode: darken !important;
+    background-repeat: no-repeat !important;
+}
+.masthead h1, .masthead p {
+    font-size: 3.5rem !important;
+}
+#mainNav.navbar-scrolled {
+    -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    background-color: rgb(46, 48, 53) !important;
+}
+a, a:focus, a:hover, a:visited,
+.btn, .btn:focus, .btn:hover, .btn:visited {
+    color: white;
+}
+.nav-link {
+    background-color: rgba(0, 0, 0, 0) !important;
+    box-sizing: border-box !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    display: block !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+    list-style-image: none !important;
+    list-style-position: outside !important;
+    list-style-type: none !important;
+    padding-bottom: 8px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    padding-top: 8px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-decoration-color: rgba(255, 255, 255, 0.5) !important;
+    text-decoration-line: none !important;
+    text-decoration-style: solid !important;
+}
+
+.btn.btn-headstarter-secondary,
+.btn.btn-headstarter-primary:hover {
+    color: #fff !important;
+    background-color: var(--headstarter-secondary) !important;
+    border-color: var(--headstarter-secondary) !important;
+}
+.btn.btn-headstarter-secondary:hover,
+.btn.btn-headstarter-primary {
+    color: #fff !important;
+    background-color: var(--headstarter-primary) !important;
+    border-color: var(--headstarter-primary) !important;
+}
+
+a.col-sm-4.btn.btn-big.btn-rounded {
+    white-space: pre-line;
+    font-size: 32px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+a[aria-disabled="true"] {
+    display: inline-block;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    a.col-sm-4.btn.btn-big.btn-rounded {
+        font-size: 1.25rem !important;
+    }
+}
