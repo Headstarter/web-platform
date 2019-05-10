@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/app/v1/core.py" line="104" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="baa5826c-0b44-41b8-bac6-17701f275601" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
@@ -47,7 +50,9 @@
       <change beforePath="$PROJECT_DIR$/app/sessions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/sessions-FORGETABOUTIT.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/css/creative.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/creative.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/css/homehomepage.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/homehomepage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/company/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/img/company/1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/img/company/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/img/company/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/cv/alex_tsvetanov_2002@abv.bg.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/js/creative.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/creative.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/js/creative.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/creative.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
@@ -169,114 +174,109 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/v1/core.py">
+        <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/resume-page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
+            <state relative-caret-position="-843">
               <folding>
-                <element signature="e#0#56#0" expanded="true" />
-                <element signature="e#520#659#0" />
-                <element signature="e#743#991#0" />
-                <element signature="e#1093#1351#0" />
-                <element signature="e#1413#1665#0" />
-                <element signature="e#2065#2123#0" />
-                <element signature="e#2295#2379#0" />
-                <element signature="e#2415#2656#0" />
-                <element signature="e#2315#2748#0" />
+                <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/v1/visitors.py">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+            <state relative-caret-position="204">
+              <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="190" selection-end-column="30" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="n#section#2;n#!!top" />
+                <element signature="n#section#4;n#!!top" />
+                <element signature="n#section#6;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/models.py">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/company/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="378" column="55" selection-start-line="378" selection-start-column="55" selection-end-line="378" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="492">
+              <caret line="190" column="30" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/tags">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/app/templates/core/company/list_offers.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="641">
+              <caret line="49" column="103" selection-start-line="49" selection-start-column="74" selection-end-line="49" selection-end-column="103" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/students/edit_cv.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9316">
+              <caret line="364" column="76" selection-start-line="364" selection-start-column="76" selection-end-line="364" selection-end-column="76" />
+              <folding>
+                <element signature="n#script#3;n#!!top" />
+                <element signature="n#div#1;n#div#2;n#div#0;n#div#0;n#section#1;n#!!top" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/companies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="183" column="18" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
+            <state relative-caret-position="1700">
+              <caret line="56" column="51" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
-                <element signature="e#1450#2083#0" />
-                <element signature="e#1357#1813#0" />
-                <element signature="e#1851#3082#0" />
-                <element signature="e#3235#4305#0" />
-                <element signature="e#3228#3561#0" />
-                <element signature="e#4978#5617#0" />
-                <element signature="e#5651#5787#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/core/company/profile.html">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/students/cv.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="96" column="53" selection-end-line="150" selection-end-column="14" />
+            <state relative-caret-position="1326">
+              <caret line="39" column="95" selection-start-line="39" selection-start-column="95" selection-end-line="39" selection-end-column="95" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/static/js/editable.js">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/students/template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="71" column="25" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="25" />
+            <state relative-caret-position="1632">
+              <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/static/js/main.js">
+        <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/add.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="16" selection-start-line="16" selection-end-line="50" selection-end-column="7" />
+            <state relative-caret-position="544">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/script.max.js">
+        <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/submit-resume.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="45" column="44" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/company-page.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+            <state relative-caret-position="7888">
+              <caret line="375" column="16" selection-start-line="375" selection-start-column="16" selection-end-line="376" selection-end-column="118" />
+              <folding>
+                <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -292,9 +292,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get</find>
-      <find>rdMail</find>
-      <find>1599.98px</find>
       <find>form</find>
       <find>form-</find>
       <find>form-type</find>
@@ -322,6 +319,9 @@
       <find>posi</find>
       <find>alert</find>
       <find>v1</find>
+      <find>company</find>
+      <find>v1pre_routes</find>
+      <find>&lt;input</find>
     </findStrings>
     <replaceStrings>
       <replace>/static/</replace>
@@ -339,9 +339,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/static/css/wordpress-version/index-override.css" />
-        <option value="$PROJECT_DIR$/app/static/css/wordpress-version/index.css" />
-        <option value="$PROJECT_DIR$/app/templates/wp-index.html" />
         <option value="$PROJECT_DIR$/app/v1_1pre/visitors.py" />
         <option value="$PROJECT_DIR$/app/templates/wp-template.html" />
         <option value="$PROJECT_DIR$/app/templates/v1_1pre/visitor/wp-browse.html" />
@@ -353,18 +350,14 @@
         <option value="$PROJECT_DIR$/app/templates/v1_1pre/visitor/index.html" />
         <option value="$PROJECT_DIR$/app/v1/v1_1pre.py" />
         <option value="$PROJECT_DIR$/app/templates/core/students/index.html" />
-        <option value="$PROJECT_DIR$/app/templates/core/students/template.html" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/js/script.js" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/css/style.css" />
         <option value="$PROJECT_DIR$/app/templates/500.html" />
         <option value="$PROJECT_DIR$/app/templates/404.html" />
         <option value="$PROJECT_DIR$/app/templates/503.html" />
         <option value="$PROJECT_DIR$/app/templates/core/company/edit-offer.html" />
-        <option value="$PROJECT_DIR$/app/templates/core/visitor/index.html" />
-        <option value="$PROJECT_DIR$/app/templates/core/company/index.html" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/forms.html" />
-        <option value="$PROJECT_DIR$/app/templates/core/visitor/template.html" />
         <option value="$PROJECT_DIR$/app/templates/redirect.html" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/post-a-job.html" />
         <option value="$PROJECT_DIR$/app/static/wt_prod-20039/js/core.max.js" />
@@ -385,9 +378,18 @@
         <option value="$PROJECT_DIR$/app/templates/core/company/profile.html" />
         <option value="$PROJECT_DIR$/app/v1/companies.py" />
         <option value="$PROJECT_DIR$/app/v1/visitors.py" />
-        <option value="$PROJECT_DIR$/app/v1/core.py" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/company-page.html" />
+        <option value="$PROJECT_DIR$/app/templates/privacy-policy.html" />
+        <option value="$PROJECT_DIR$/app/templates/core/students/cv.html" />
+        <option value="$PROJECT_DIR$/app/templates/core/visitor/template.html" />
+        <option value="$PROJECT_DIR$/app/templates/core/students/template.html" />
+        <option value="$PROJECT_DIR$/app/v1/core.py" />
+        <option value="$PROJECT_DIR$/app/static/wt_prod-20039/js/add.js" />
+        <option value="$PROJECT_DIR$/app/templates/core/students/edit_cv.html" />
+        <option value="$PROJECT_DIR$/app/v1/students.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/app/templates/core/visitor/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/core/company/index.html" />
       </list>
     </option>
   </component>
@@ -440,7 +442,7 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="cv" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
@@ -455,7 +457,7 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="wt_prod-20039" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
@@ -469,6 +471,22 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="students" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
@@ -496,6 +514,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\students" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\company" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\v1_1pre\visitor" />
@@ -538,8 +557,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49885058" visible="true" weight="0.133687" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49885058" visible="true" weight="0.20795757" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5011494" side_tool="true" weight="0.24986738" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -581,81 +601,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/404-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="192" column="16" lean-forward="true" selection-start-line="170" selection-start-column="6" selection-end-line="192" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/503-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="170" selection-start-line="170" selection-end-line="193" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/503.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/structural.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-1792402000/sys.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/candidates.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/search-results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6834">
-          <caret line="201" column="14" selection-start-line="192" selection-start-column="14" selection-end-line="201" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/job-listing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="498" column="16" selection-start-line="186" selection-start-column="6" selection-end-line="498" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="8" column="81" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
-          <folding>
-            <element signature="n#section#2;n#!!top" />
-            <element signature="n#section#3;n#!!top" />
-            <element signature="n#section#4;n#!!top" />
-            <element signature="n#section#6;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/company/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/core.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -740,17 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="10" column="43" selection-start-line="7" selection-start-column="38" selection-end-line="10" selection-end-column="53" />
-          <folding>
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="746">
@@ -766,16 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/login-register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/core.max.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -783,23 +707,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/v1/students.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="66" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/company/edit-offer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1535">
-          <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/company/edit-offer.html" />
     <entry file="file://$PROJECT_DIR$/app/v1/config.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -834,13 +742,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/notes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="100" column="87" selection-start-line="100" selection-start-column="87" selection-end-line="100" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/notes" />
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -851,24 +753,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/company/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="63" column="116" lean-forward="true" selection-start-line="63" selection-start-column="116" selection-end-line="63" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/core/company/list_candidates.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/company/list_offers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="709">
-          <caret line="51" column="30" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="51" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -896,54 +784,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/script.max.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/editable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="71" column="25" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="16" selection-start-line="16" selection-end-line="50" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/company/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="96" column="53" selection-end-line="150" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/v1/companies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="183" column="18" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <element signature="e#1450#2083#0" />
-            <element signature="e#1357#1813#0" />
-            <element signature="e#1851#3082#0" />
-            <element signature="e#3235#4305#0" />
-            <element signature="e#3228#3561#0" />
-            <element signature="e#4978#5617#0" />
-            <element signature="e#5651#5787#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/visitors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
+        <state relative-caret-position="1530">
           <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
@@ -951,41 +794,222 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/tags">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/editable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2414">
+          <caret line="71" column="25" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="16" selection-start-line="16" selection-end-line="50" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/script.max.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/company-page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/privacy-policy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/login-register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/students/profile.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/search-results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="762">
+          <caret line="201" column="14" selection-start-line="192" selection-start-column="14" selection-end-line="201" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/company/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="136" column="86" lean-forward="true" selection-start-line="135" selection-start-column="22" selection-end-line="136" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="51" column="122" selection-start-line="51" selection-start-column="122" selection-end-line="51" selection-end-column="122" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/company/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="47" column="51" lean-forward="true" selection-end-line="165" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="278" column="31" lean-forward="true" selection-start-line="278" selection-start-column="31" selection-end-line="278" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#2630#4318#0" />
+            <element signature="e#4352#4793#0" />
+            <element signature="e#4841#4865#0" />
+            <element signature="e#4891#4950#0" />
+            <element signature="e#4967#5107#0" />
+            <element signature="e#5135#5482#0" />
+            <element signature="e#5540#6130#0" />
+            <element signature="e#6192#6343#0" />
+            <element signature="e#6474#6803#0" />
+            <element signature="e#6947#7275#0" />
+            <element signature="e#7339#7505#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
+        <state relative-caret-position="2856">
+          <caret line="119" column="21" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="21" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
             <element signature="e#520#659#0" />
             <element signature="e#743#991#0" />
             <element signature="e#1093#1351#0" />
             <element signature="e#1413#1665#0" />
+            <element signature="e#1730#1986#0" />
             <element signature="e#2065#2123#0" />
-            <element signature="e#2295#2379#0" />
-            <element signature="e#2415#2656#0" />
-            <element signature="e#2315#2748#0" />
+            <element signature="e#2546#2801#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/company-page.html">
+    <entry file="file://$PROJECT_DIR$/app/v1/students.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/tags">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="378" column="55" selection-start-line="378" selection-start-column="55" selection-end-line="378" selection-end-column="55" />
+        <state relative-caret-position="2074">
+          <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/students/edit_cv.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9316">
+          <caret line="364" column="76" selection-start-line="364" selection-start-column="76" selection-end-line="364" selection-end-column="76" />
+          <folding>
+            <element signature="n#script#3;n#!!top" />
+            <element signature="n#div#1;n#div#2;n#div#0;n#div#0;n#section#1;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/v1/companies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1700">
+          <caret line="56" column="51" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/students/cv.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="39" column="95" selection-start-line="39" selection-start-column="95" selection-end-line="39" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/students/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1632">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/submit-resume.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7888">
+          <caret line="375" column="16" selection-start-line="375" selection-start-column="16" selection-end-line="376" selection-end-column="118" />
+          <folding>
+            <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/resume-page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-843">
+          <folding>
+            <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/company/list_offers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="49" column="103" selection-start-line="49" selection-start-column="74" selection-end-line="49" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="190" selection-end-column="30" />
+          <folding>
+            <element signature="n#section#2;n#!!top" />
+            <element signature="n#section#4;n#!!top" />
+            <element signature="n#section#6;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/company/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="190" column="30" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
         </state>
       </provider>
     </entry>

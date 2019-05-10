@@ -73,7 +73,8 @@ def offer_view(position_id):
 # @routes.route('/cv/<user_id>')
 # def profile_view(user_id):
 #     return mapped_routes['Visitor'].profile_view(user_id)
-#
+
+
 @routes.route('/profile')
 def profile():
     return mapped_routes[session['type']].profile()
@@ -94,6 +95,16 @@ def edit_company_profile():
         return redirect(url_for('login_register', type="Company"))
 
 
+@routes.route('/student/profile/edit', methods=['POST'])
+def edit_student_profile():
+    if session['type'] == 'Student':
+    	return mapped_routes[session['type']].edit_student_profile()
+    else:
+        session['redirect'] = request.full_path
+        session.modified = True
+        return redirect(url_for('login_register', type="Student"))
+
+
 @routes.route('/upload/logo', methods=['POST'])
 def upload_logo():
     if session['type'] == 'Company':
@@ -105,16 +116,16 @@ def upload_logo():
         return render_template('template.html')
 
 
-# @routes.route('/upload/cv/picture', methods=['POST'])
-# def upload_cv_picture():
-#     if session['type'] == 'Student':
-#         return mapped_routes['Student'].upload_cv_picture()
-#     else:
-#         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
-#         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-#         session['redirect'] = url_for('v1pre_routes.upload_logo')
-#         return render_template('template.html')
-#
+@routes.route('/upload/cv/picture', methods=['POST'])
+def upload_cv_picture():
+    if session['type'] == 'Student':
+        return mapped_routes['Student'].upload_cv_picture()
+    else:
+        flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
+        flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
+        session['redirect'] = url_for('v1pre_routes.upload_logo')
+        return render_template('template.html')
+
 #
 # @routes.route('/apply/<position>')
 # def apply_students(position):

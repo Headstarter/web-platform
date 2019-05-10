@@ -69,7 +69,6 @@ class CV(db.Model):
 	email = db.Column(db.String(256))
 	telephone = db.Column(db.String(16))
 	birthday = db.Column(db.String(256))
-	# age = db.Column(db.String(16))
 	location = db.Column(db.String(256))
 	about = db.Column(db.String(512))
 	# achievements
@@ -98,7 +97,9 @@ class CV(db.Model):
 	def __repr__(self):
 		return '<CV {}>'.format(self.name)
 
+
 import datetime as DT
+
 
 class Position(db.Model):
 	__tablename__ = 'Position'
@@ -260,9 +261,34 @@ def update_company(company_id, name, website, description):
 	return company_id
 
 
+def update_cv(student_id, name, email, telephone, location,
+			  birthday, languages, education, projects, description, skills, hobbies):
+	import sys
+	print(student_id, name, email, telephone, location,
+			  birthday, languages, education, projects, description, file=sys.stderr)
+	print('All User with id', student_id, 'are', User.query.filter(User.id == student_id).all(), file=sys.stderr)
+	cv_id = User.query.filter(User.id == student_id).one().cv_id
+	print(cv_id, file=sys.stderr)
+	CV.query.filter(CV.id == cv_id).update({
+		'name': name,
+		'email': email,
+		'telephone': telephone,
+		'location': location,
+		'birthday': birthday,
+		'languages': languages,
+		'education': education,
+		'projects': projects,
+		'skills': skills,
+		'hobbies': hobbies,
+		'about': description
+	})
+	db.session.commit()
+	return cv_id
+
+
 def activate_position(position_id):
 	Position.query.filter(Position.id == position_id).update({
-		available: True
+		'available': True
 	})
 	db.session.commit()
 	return position_id
@@ -270,7 +296,7 @@ def activate_position(position_id):
 
 def deactivate_position(position_id):
 	Position.query.filter(Position.id == position_id).update({
-		available: True
+		'available': True
 	})
 	db.session.commit()
 	return position_id
@@ -372,6 +398,7 @@ def init():
 	
 	index = 1
 	companies = ['Headstarter', 'Axway', 'Biodit', 'Codix', 'DoITwise', 'ДЗИ', 'ОББ', 'HP', 'IT hub Kaufland', 'Nestle', 'Paraflow']
+	#                            Radi                       IviRadi                   Ivi                         Rangel     Rangel
 	uids = ['4c716bc2-40c9-467e-9474-11f61d40d0ae', 'c2d952d8-7b14-4aeb-b49d-f9e1a45d4aad', 'cfdfa522-a0f1-43f8-bc60-eca0c9baf3f6', 'a3c3eed4-08bf-44fa-8238-c4df7d88ffc0', '2d479f9e-c75e-4a5d-9a8a-aeb7af9ea8f1', 'a86bb922-c025-4921-9e04-e0b54fb76e14', '0609133d-13d1-45ba-b524-c87e60466a09', '4c6e0b7f-d819-4c10-be26-65ba9934398b', 'b3991016-f948-4b2b-b178-202e2c100439', 'e41a9dc3-b44c-4a05-bbce-c816578e2b60', 'f397ec8f-dc2d-4df5-bf46-ada57bb02cf8']
 	for company in companies:
 		curr_company = Company(name=company, website='',
@@ -379,11 +406,14 @@ def init():
 					 description='', uid=uids[index - 1])
 		print(company, gen_uid())
 		db.session.add(curr_company)
+		index += 1
 	db.session.commit()
+	
 
 	""" CEOs """
 	# insert_user(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password=crypto('password'))
-
+	#
+	
 	""" Positions """
 	# example1 = Position(name='Python Web Developer', company=Headstarter,
 	# 				   description="<strong>Пробно</strong> <i>описание</i> на <u>стажанстка програма</u>",

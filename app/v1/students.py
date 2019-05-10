@@ -1,6 +1,7 @@
 from app import render_template, flash, app
+from app.router import my_redirect
 from flask import session, request, url_for, redirect
-from app.models import User, Tag, Company, Position, create_cv
+from app.models import User, Tag, Company, Position, create_cv, update_cv
 import os
 from werkzeug.utils import secure_filename
 
@@ -36,30 +37,44 @@ class Students:
 					# filename = secure_filename(file.filename)
 					file.save(destination)
 				return jsonify({'value': 'Uploaded'}), 200
-
+	
 	@staticmethod
-	def company_view(companyId):
-		company = Company.query.filter(Company.id == companyId)[0]
-		return render_template('students/company.html', company=company)
-
-	@staticmethod
-	def sector_view(sectorId):
-		return render_template('students/sector.html', sector=Sector.query.filter(Sector.id == sectorId)[0], companies=Company.query.filter(Company.sector_id == sectorId).all())
-
-	@staticmethod
-	def position_view(positionId):
-		if len(Position.query.filter(Position.id == positionId).filter(Position.available == True).all()) == 0:
-			flash('This position is not available.', 'danger')
-			return render_template('template.html'), 404
-
-		return render_template('students/position.html', tags=Tag.query.all(), position=Position.query.filter(Position.id == positionId).filter(Position.available == True).one())
-
+	def edit_student_profile():
+		curr_user = User.query.filter(User.id == int(session['id'])).all()
+		print(curr_user)
+		if len(curr_user) != 1:
+			flash('This offer not found.', 'info')
+			return render_template("404.html"), 404
+		
+		curr_user = curr_user[0]
+		
+		import sys
+		print('\n\n', curr_user, '\n\n', file=sys.stderr)
+		import sys
+		print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
+		
+		x = update_cv(session['id'],
+				request.form['name'],
+				request.form['email'],
+				request.form['telephone'],
+				request.form['location'],
+				request.form['birthday'],
+				request.form['languages'],
+				request.form['education'],
+				request.form['projects'],
+				request.form['resume-content'],
+				request.form['skills'],
+				request.form['hobbies'])
+		print('\n\n' + str(x) + '\n\n', file=sys.stderr)
+		
+		return my_redirect(url_for('core.profile'))
+		
 	@staticmethod
 	def profile():
 		import sys
 		student = User.query.filter(User.id == session['id'])[0]
 		print(student.cv.get_education(), file=sys.stderr)
-		return render_template('students/profile.html', student=student)
+		return render_template('core/students/edit_cv.html', student=student)
 
 	@staticmethod
 	def cv_confirm():

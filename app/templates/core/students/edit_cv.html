@@ -1,0 +1,375 @@
+{% extends 'core/students/template.html' %}
+
+{% block js %}
+<link href="/css/summernote-bs4.css" rel="stylesheet">
+<style>
+    .hidden, #blank_edu, #blank_project, #blank_lang, #blank_skill, #blank_hobby {
+        display: none;
+    }
+</style>
+<script src="/js/add.js"></script>
+<script src="/js/summernote-bs4.js"></script>
+<!-- include summernote-bg-BG -->
+<script src="/js/summernote-bg-BG.js"></script>
+<script>
+$(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        //if( log ) alert(log);
+		    }
+
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		});
+	});
+  $(document).ready(function() {
+      $('.summernote').summernote({
+        lang: 'bg-BG' // default: 'en-US'
+      });
+      $(".note-editable.card-block[role=textbox]").addClass ('default-styles');
+      $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
+        $('[name=resume-content]').html($(this).html());
+      });
+      $('button[type="submit"]').on('click', function () {
+      if ($('input#imgInp').length > 0)
+        $('input#imgInp').each (function (_) {
+            var fd = new FormData();
+            fd.append("logo", $("#imgInp")[0].files[0]);
+
+            $.ajax({
+                url: "{{ url_for('core.upload_cv_picture') }}",
+                method: 'POST',
+                cache: false,
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                },
+                error: function(response) {
+                }
+            });
+        });
+      });
+  });
+</script>
+{% endblock %}
+{% block banner %}
+<section class="section breadcrumbs-custom">
+    <div class="breadcrumbs-custom-main bg-image bg-primary">
+      <div class="container">
+        <h3 class="breadcrumbs-custom-title">Създай своето CV</h3>
+      </div>
+    </div>
+</section>
+{% endblock %}
+{% block content %}
+      <section class="section section-md">
+        <div class="container">
+          <div class="block-form">
+            <form class="rd-mailform" id="submit-resume-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_student_profile') }}">
+            </form>
+            <h4>Обща информация за вас</h4>
+            <hr>
+            <!-- RD Mailform-->
+            <div class="rd-form rd-mailform form-lg">
+              <div class="row row-40">
+                  <article class="col-md-12 company-light">
+                    <div class="form-wrap">
+                        <label class="form-label-outside">Твоя снимка: (До 16 МБ)</label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                    Browse… <input type="file" name="logo" id="imgInp">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <figure class="company-light-logo">
+                        <img class="company-light-logo-image" id='img-upload' src="{{ student.cv.photo }}" alt="">
+                    </figure>
+                  </article>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-name">Име и фамилия</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-name" form="submit-resume-form"
+                             type="text" name="name" data-constraints="@Required" value="{{ student.cv.name }}">
+                      <label class="form-label" for="general-information-name">Въведете Вашите име и фамилия</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-email">E-mail за връзка с Вас</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="submit-resume-form"
+                             type="email" name="email" data-constraints="@Email @Required" value="{{ student.cv.email }}">
+                      <label class="form-label" for="general-information-email">Въведете е-mail за връзка</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-telephone">Телефон за връзка с Вас</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-telephone" form="submit-resume-form"
+                             type="text" name="telephone" data-constraints="@Required"  value="{{ student.cv.telephone }}">
+                      <label class="form-label" for="general-information-telephone">Въведете телефон за връзка</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-location">Местоживеене</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-location" form="submit-resume-form"
+                             type="text" name="location" data-constraints="@Required"  value="{{ student.cv.location }}">
+                      <label class="form-label" for="general-information-location">напр. “София, България”</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-birthday">Дата на раждане</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-birthday" form="submit-resume-form"
+                             type="text" name="birthday" data-constraints="@Required" value="{{ student.cv.email }}">
+                      <label class="form-label" for="general-information-birthday">напр. “29/02/2021”</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="language_list" class="block-form">
+                <h4>Изучавани езици</h4>
+                <hr>
+                <div id="blank_lang" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Език</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="language"
+                             required placeholder="напр. „Английски език“" >
+                    </div>
+                  </div>
+                </div>
+                {% for lang in student.cv.get_languages() %}
+                <div class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Език</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="language"
+                             required placeholder="напр. „Английски език“" value="{{ lang.language }}">
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="languages">
+            </div>
+            <button type="button" class="add_lang button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави език</button>
+            <div id="education_list" class="block-form">
+                <h4>Образование</h4>
+                <hr>
+                <div id="blank_edu" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Къде си учил?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="school-name" required placeholder="напр. „СМГ“, „НПМГ“ или дори „Telerik Kids Academy“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Какво си учил/Какъв ти е бил профила</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="qualification" required placeholder="напр. „Математика и информатика“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Кога си се учил там?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="period" required placeholder="напр. 2000-2019 г.">
+                    </div>
+                  </div>
+                </div>
+                {% for edu in student.cv.get_education() %}
+                <div class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Къде си учил?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="school-name"
+                             required placeholder="напр. „СМГ“, „НПМГ“ или дори „Telerik Kids Academy“"
+                             value="{{ edu['school-name'] }}">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Какво си учил/Какъв ти е бил профила</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="qualification"
+                             required placeholder="напр. „Математика и информатика“"
+                             value="{{ edu['qualification'] }}">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Кога си се учил там?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="period"
+                             required placeholder="напр. 2000-2019 г."
+                             value="{{ edu['period'] }}">
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="education">
+            </div>
+            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави образование</button>
+            <div id="project_list" class="block-form">
+                <h4>Проекти</h4>
+                <hr>
+                <!-- RD Mailform-->
+                <div id="blank_project" class="rd-form rd-mailform form-lg form-corporate">
+              <div class="form-wrap">
+                <label class="form-label-outside">Име на проекта/извънкласната дейност</label>
+                <div class="form-wrap-inner">
+                  <input class="form-input" type="text" name="project_name"required placeholder="Име">
+                </div>
+              </div>
+              <div class="form-wrap">
+                <label class="form-label-outside">Период на разработка/участие в проекта</label>
+                <div class="form-wrap-inner">
+                  <input class="form-input" type="text" name="project_period"  required placeholder="напр. 2007-2009">
+                </div>
+              </div>
+              <div class="form-wrap">
+                <label class="form-label-outside">Описание на проекта</label>
+                <div class="form-wrap-inner">
+                  <textarea class="form-input" name="project_notes" required placeholder="Кратко описание на проекта"></textarea>
+                </div>
+              </div>
+            </div>
+                {% for proj in student.cv.get_projects() %}
+                <div class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Име на проекта/извънкласната дейност</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="project_name"
+                             required placeholder="Име"
+                             value="{{ proj['project_name'] }}">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Период на разработка/участие в проекта</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="project_period"
+                             required placeholder="напр. 2007-2009"
+                             value="{{ proj['project_period'] }}">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Описание на проекта</label>
+                    <div class="form-wrap-inner">
+                      <textarea class="form-input" name="project_notes"
+                                required placeholder="Кратко описание на проекта">
+                          {{ proj['project_notes'] }}
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="projects">
+            </div>
+            <button type="button" class="add_project button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави проект</button>
+
+              <div id="skill_list" class="block-form">
+                <h4>Личностни унения</h4>
+                <hr>
+                <div id="blank_skill" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Умение</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="skill" required placeholder="напр. „Работа в екип“, „Креативност“ и др.">
+                    </div>
+                  </div>
+                </div>
+                  {% for skill in student.cv.get_skills() %}
+                  <div class="rd-form rd-mailform form-lg form-corporate">
+                      <div class="form-wrap">
+                        <label class="form-label-outside">Умение</label>
+                        <div class="form-wrap-inner">
+                          <input class="form-input" type="text" name="skill"
+                                 required placeholder="напр. „Работа в екип“, „Креативност“ и др."
+                                 value="{{ skill['skill'] }}">
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="skills">
+            </div>
+            <button type="button" class="add_skill button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави умение</button>
+              <div id="hobby_list" class="block-form">
+                <h4>Твой хобита</h4>
+                <hr>
+                <div id="blank_hobby" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Хоби</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="hobby" required placeholder="напр. „Футбол“, „Рисуване“ и др.">
+                    </div>
+                  </div>
+                </div>
+                  {% for hobby in student.cv.get_hobbies() %}
+                <div class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Хоби</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="hobby"
+                             required placeholder="напр. „Футбол“, „Рисуване“ и др."
+                             value="{{ hobby.hobby }}">
+                    </div>
+                  </div>
+                </div>
+                  {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="hobbies">
+            </div>
+            <button type="button" class="add_hobby button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави хоби</button>
+            <div class="block-form">
+                <div class="col-12">
+                  <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-resume-content"><h4>Нещо повече за теб</h4></label>
+                      <hr>
+                    <div class="form-wrap-inner">
+                      <label class="form-label" for="general-information-resume-content">Информация за теб, която не си описал по-горе</label>
+                      <textarea class="form-input hidden" id="general-information-resume-content" form="submit-resume-form" name="resume-content" data-constraints="@Required">{{ student.cv.about | safe }}</textarea>
+                      <span class="summernote">{{ student.cv.about | safe }}</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+              <br><br><button class="button button-lg button-secondary" type="submit" form="submit-resume-form">Запази</button>
+
+          </div>
+        </div>
+      </section>
+{% endblock %}

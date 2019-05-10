@@ -168,7 +168,7 @@
                 <table class="table-job-offers table-responsive">
                   {% for offer in positions %}
                   <tr>
-                    <td class="table-job-offers-date"><span>TODO DATE</span></td>
+                    <td class="table-job-offers-date"><span>{{ offer.get_date () }}</span></td>
                     <td class="table-job-offers-main">
                       <!-- Company Light-->
                       <article class="company-light">
@@ -184,9 +184,9 @@
                       <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-cash"></span><span>TODO SALARY</span></div>
                     </td>-->
                     <td class="table-job-offers-meta">
-                      <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>TODO LOCATION</span></div>
+                      <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></div>
                     </td>
-                    <td class="table-job-offers-badge"><span class="badge">TODO TYPE</span></td>
+                    <td class="table-job-offers-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
                   </tr>
                   {% endfor %}
                 </table>
