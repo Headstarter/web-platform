@@ -1427,3 +1427,11 @@ var _hs_response;
 $('[name=member]').change(function() {
     $('[name=company]').parent().toggle(this.checked);
 });
+$('a[target^="_blank"]').each(function() {
+    $(this).attr('data-href', $(this).attr('href'));
+    $(this).attr('href', '#');
+});
+$('a[target^="_blank"]').click(function(e) {
+    e.preventDefault();
+    window.open($(this).attr('data-href'), '_blank');
+});

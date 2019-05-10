@@ -175,7 +175,7 @@
                         <figure class="company-light-figure"><img class="company-light-image" src="{{ offer.company.logo }}" alt=""/>
                         </figure>
                         <div class="company-light-main">
-                          <h5 class="company-light-title"><a href="job-details.html">{{ offer.name }}</a></h5>
+                          <h5 class="company-light-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
                           <p class="text-color-default">{{ offer.company.name }}</p>
                         </div>
                       </article>
@@ -192,7 +192,7 @@
                 </table>
               </div>
             </div>
-            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="#todo">Show More Jobs</a></div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for ('core.browse') }}">Show More Jobs</a></div>
           </div>
         </div>
       </section>

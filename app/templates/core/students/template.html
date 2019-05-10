@@ -45,9 +45,9 @@
                 <div class="rd-navbar-main-element">
                   <div class="rd-navbar-nav-wrap">
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Обяви</a></li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Компании</a></li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+                      <!--<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Компании</a></li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>-->
                       <li class="rd-nav-item"><a class="rd-nav-link" href="#">Други полезни неща</a>
                         <ul class="rd-menu rd-navbar-dropdown">
                           <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">За нас</a></li>
@@ -58,7 +58,7 @@
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
                         <ul class="rd-menu rd-navbar-dropdown">
-                          <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">Профил</a></li>
+                          <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">CV</a></li>
                           <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
                         </ul>
                       </li>

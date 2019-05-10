@@ -48,8 +48,8 @@
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="#">За учениците</a>
                         <ul class="rd-menu rd-navbar-dropdown">
-                          <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="job-listing.html">Обяви</a></li>
-                          <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="companies.html">Компании</a></li>
+                          <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+                          <!--<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="companies.html">Компании</a></li>-->
                         </ul>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="#">За фирми</a>
@@ -73,7 +73,8 @@
                 </div>
                 <div class="rd-navbar-aside">
                   <div class="rd-navbar-aside-item">
-                    <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle" data-rd-navbar-toggle="#rd-navbar-register"><span class="icon mdi mdi-account"></span>Sign Up</button>
+                    <a href="{{ url_for('login_register', action='register') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-account"></span>Sign Up</a>
+                    <!--<button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle" data-rd-navbar-toggle="#rd-navbar-register"><span class="icon mdi mdi-account"></span>Sign Up</button>
                     <div class="rd-navbar-popup bg-gray-100" id="rd-navbar-register">
                       <h5 class="rd-navbar-popup-title">Sign Up</h5>
                       <form class="rd-form rd-mailform form-compact" data-form-output="form-output-global" data-form-type="contact" method="post" action="/register">
@@ -106,10 +107,11 @@
                           <button class="button button-block button-primary" type="submit">Създай профил</button>
                         </div>
                       </form>
-                    </div>
+                    </div>-->
                   </div>
                   <div class="rd-navbar-aside-item">
-                    <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle" data-rd-navbar-toggle="#rd-navbar-login"><span class="icon mdi mdi-import"></span>Login</button>
+                    <a href="{{ url_for('login_register', action='login') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-import"></span>Login</a>
+                    <!--<button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle" data-rd-navbar-toggle="#rd-navbar-login"><span class="icon mdi mdi-import"></span>Login</button>
                     <div class="rd-navbar-popup bg-gray-100" id="rd-navbar-login">
                       <h5 class="rd-navbar-popup-title">Login</h5>
                       <form class="rd-form form-compact" data-form-output="form-output-global" data-form-type="contact" method="post" action="/login">
@@ -124,7 +126,7 @@
                           <button class="button button-block button-primary" type="submit">Login</button>
                         </div>
                       </form>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>

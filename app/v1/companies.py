@@ -161,6 +161,20 @@ class Companies:
 							   )
 	
 	@staticmethod
+	def offer_details(id):
+		try:
+			return render_template('core/company/offer-details.html',
+								   recents=Position.query.filter(Position.available == True)
+								   .order_by(Position.id.desc())
+								   .limit(5).all()
+								   ,
+								   offer=Position.query.filter(Position.available == True)
+								   .filter(Position.id == id).one())
+		except:
+			flash('This offer was not found.', "warn")
+			return render_template("404.html"), 404
+	
+	@staticmethod
 	def list_my_candidates():
 		candidates = []
 		import sys
@@ -173,10 +187,10 @@ class Companies:
 		
 		# JUST TESTING = REMOVE BEFORE RELEASE
 		if candidates.count() == 0:
-			candidates = filter_offers_by_tag(company=session['company_id'])
+			flash('Все още няма постъпили кандидати', 'info')
 			
 		return render_template('core/company/list_candidates.html',
-							   tags=Tag.query.all(),
+							   tags=Position.query.filter(Position.company_id == session['company_id']).all(),
 							   candidates=candidates.all()
 							   )
 	

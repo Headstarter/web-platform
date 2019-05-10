@@ -1,10 +1,10 @@
-{% extends 'core/company/template.html' %}
+{% extends 'core/visitor/template.html' %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">Мойте обяви</h3>
+            <h3 class="breadcrumbs-custom-title">Всички обяви</h3>
           </div>
         </div>
 </section>
@@ -19,8 +19,17 @@
             </div>-->
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
-              <select class="form-input select" id="form-region" data-placeholder="Всички обяви" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички обяви">Всички обяви</option>
+              <select class="form-input select" id="form-company" data-placeholder="Всички фирми" name="company" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+                <option value="0" label="Всички фирми">Всички фирми</option>
+                {% for tag in companies %}
+                  <option value="{{ tag.id }}">{{ tag.name }}</option>
+                {% endfor %}
+              </select><span class="icon fl-bigmug-line-big104"></span>
+            </div>
+            <div class="form-wrap form-wrap-icon">
+              <!-- Select 2-->
+              <select class="form-input select" id="form-region" data-placeholder="Всички категории" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+                <option value="0" label="Всички категории">Всички категории</option>
                 {% for tag in tags %}
                   <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                 {% endfor %}
@@ -32,22 +41,25 @@
           </form>
           <div class="row row-50 flex-lg-row-reverse">
             <div class="col-lg-12 col-xl-12">
-                  {% for person in candidates %}
-                <article class="profile-minimal">
-                <div class="profile-minimal-inner">
-                  <div class="profile-minimal-main-outer">
-                    <div class="profile-minimal-main"><img class="profile-minimal-image" src="{{ person.user.cv.photo }}" alt="">
-                      <div class="profile-minimal-main-info">
-                        <h5 class="profile-minimal-name"><a href="{{ url_for ('core.profileView', id=person.user.id) }}">{{ person.user.cv.name }}</a></h5>
-                        <p><a href="{{ url_for ('core.offer_view', position_id=person.position.id) }}">{{ person.position.name }}</a></p>
-                        <p class="profile-minimal-position"><a href="mailto:{{ person.user.cv.email }}">{{ person.user.cv.email }}</a>, <a href="tel:{{ person.user.cv.telephone }}">{{ person.user.cv.telephone }}</a></p>
+              <table class="table-job-listing table-responsive">
+                  {% for offer in positions %}
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
                       </div>
-                    </div>
-                  </div>
-                  <div class="profile-minimal-meta"> <span class="icon mdi mdi-map-marker"></span><span>{{ person.user.cv.location }}</span></div>
-                </div>
-              </article>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
                   {% endfor %}
+              </table>
               <!-- Bootstrap Pagination
               <nav class="pagination-outer text-center" aria-label="Page navigation">
                 <div class="pagination">
