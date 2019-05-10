@@ -211,10 +211,14 @@ def insert_user(name, email, password, company=None):
 	db.session.commit()
 
 
-def insert_application(user_id, position_id, company_id):
-	db.session.add(Application(id=str(user_id)+'_'+str(position_id), user_id=user_id, position_id=position_id, company_id=company_id))
-	db.session.commit()
-
+def insert_application(user_id, position_id):
+	try:
+		company_id = Position.query.filter(Position.id == position_id).one().company_id
+		db.session.add(Application(id=str(user_id)+'_'+str(position_id), user_id=user_id, position_id=position_id, company_id=company_id))
+		db.session.commit()
+	except:
+		return False
+	
 
 def insert_position(name, email, location, company_id, description, available, duration, hours_per_day, age_required, tag_id):
 	p = Position(
