@@ -2,6 +2,14 @@ from app import db
 import json
 
 
+class Mapper(db.Model):
+	__tablename__ = 'Mapper'
+	id = db.Column(db.Integer, primary_key=True)
+	company_name = db.Column(db.String(128))
+	company_id = db.Column(db.Integer, db.ForeignKey('Company.id'), nullable=True)
+	company = db.relationship('Company', back_populates='mapper')
+
+
 class Tag(db.Model):
 	__tablename__ = 'Tag'
 	id = db.Column(db.Integer, primary_key=True)
@@ -17,6 +25,7 @@ class Company(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	uid = db.Column(db.Integer)
 
+	mapper = db.relationship("Mapper", back_populates="company")
 	employees = db.relationship("User", back_populates="company")
 	positions = db.relationship("Position", back_populates="company")
 
@@ -27,7 +36,7 @@ class Company(db.Model):
 	contacts = db.Column(db.String(32768))
 
 	def __repr__(self):
-		return '<Company {}>'.format(self.name)
+		return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
 
 
 class User(db.Model):
@@ -253,6 +262,22 @@ def update_position(position_id, email, location, name, company_id, description,
 	})
 	db.session.commit()
 	return position_id
+
+
+def insert_company(name):
+	company = Company(
+		uid=gen_uid(),
+		name=name,
+		website='',
+		description=''
+	)
+	db.session.add(company)
+	db.session.commit()
+	db.session.add(Mapper(company_name=name, company_id=Company.query.filter(Company.name == name).one().id))
+	db.session.commit()
+	import sys
+	print('returned Company', Company.query.filter(Company.name == name).one(), file=sys.stderr)
+	return Company.query.filter(Company.name == name).one()
 
 
 def update_company(company_id, name, website, description):

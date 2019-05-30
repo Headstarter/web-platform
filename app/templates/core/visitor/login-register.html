@@ -1,4 +1,4 @@
-{% extends 'core/visitor/template.html' %}
+{% extends 'core/template.html' %}
 
 {% block banner %}
 
@@ -62,15 +62,13 @@
                                 </div>
                                 <div class="form-wrap" id="company" style="display:none;">
                                   <input class="form-input" id="rd-navbar-register-company1" type="text" name="company" />
-                                  <label class="form-label" for="rd-navbar-register-company1">Код на фирмата</label>
+                                  <label class="form-label" for="rd-navbar-register-company1">Име на Вашата фирма</label>
                                 </div>
                             {% else %}
                                 {% if type == 'Company' %}
                                     <div class="form-wrap" id="company">
                                       <input class="form-input" id="rd-navbar-register-company1" type="text" name="company" />
-                                      <label class="form-label" for="rd-navbar-register-company1">Код на фирмата</label>
-                                    </div>
-                                {% endif %}
+                                      <label class="form-label" for="rd-navbar-register-company1">Име на Вашата фирма</label>                                {% endif %}
                             {% endif %}
                             <div class="form-wrap">
                               <button class="button button-block button-primary" type="submit">Създай профил</button>

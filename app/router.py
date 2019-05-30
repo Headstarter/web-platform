@@ -1,5 +1,5 @@
 from app import app, babel, db, migrate, render_template
-from app.models import insert_user, User, Tag, Company, Position, crypto
+from app.models import insert_user, User, Tag, Company, Position, crypto, Mapper, insert_company
 from flask import request, session, flash, redirect, url_for, send_file, Response
 import sys
 
@@ -127,19 +127,24 @@ def register():
 			flash('Please, just log in.', 'info')
 			return my_redirect(url_for('login_register', type="Student", action='register'))
 	else:
-		if len(Company.query.filter(Company.uid == company).all()) == 1 \
-                and (request.form['password'] == request.form['password-confirm'])\
+		if (request.form['password'] == request.form['password-confirm'])\
                 and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
 
-			insert_user(request.form['name'],
-                        request.form['email'],
-                        request.form['password'],
-                        Company.query.filter(Company.uid == company).one())
+			my_company = {}
+			
+			if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
+				print('\t\t\tMapper found', file=sys.stderr)
+				my_company = Company.query.filter(Company.id == Mapper.query.filter(Mapper.company_name == request.form['company']).one().company_id).one()
+			else:
+				print('\t\t\tMapper NOT found', file=sys.stderr)
+				my_company = insert_company(request.form['company'])
+			print('', my_company.name, my_company.id, my_company.uid, file=sys.stderr)
+			insert_user(request.form['name'], request.form['email'], request.form['password'], my_company)
 
 			session['email'] = request.form['email']
-			session['company_id'] = Company.query.filter(Company.uid == company).one().id
+			session['company_id'] = my_company.id
 			session['name'] = request.form['name']
-			session['company'] = Company.query.filter(Company.uid == company).one().name
+			session['company'] = my_company.name
 			session['type'] = 'Company'
 			
 			try:
