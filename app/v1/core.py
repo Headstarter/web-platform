@@ -65,6 +65,11 @@ def list_my_offers():
 		return redirect(url_for('login_register', type="Company"))
 
 
+@routes.route('/faq')
+def faq():
+	return render_template('core/visitor/faq.html')
+
+
 @routes.route('/candidates/my')
 def list_my_candidates():
 	if session['type'] == 'Company':
@@ -140,6 +145,11 @@ def candidate(positionId):
 		insert_application(session['id'], int(positionId))
 		flash('Подадохте си CV-то успешно.', 'success')
 		return render_template('core/students/template.html')
+
+
+@routes.route('/about')
+def about():
+	return render_template('core/visitor/about.html')
 
 
 @routes.route('/upload/cv/picture', methods=['POST'])

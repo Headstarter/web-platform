@@ -16617,4 +16617,6 @@ padding-left: 25px;
 position: relative;
 text-align: left;
 -moz-text-size-adjust: none;
+a[href='/terms'] {
+    display: none;
 }
