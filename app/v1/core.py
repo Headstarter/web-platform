@@ -70,6 +70,17 @@ def faq():
 	return render_template('core/visitor/faq.html')
 
 
+@routes.route('/news')
+def news():
+	return render_template('core/visitor/news.html')
+
+
+@routes.route('/videos/<id>')
+def videos(id):
+	if str(id) == "0":
+		return redirect("http://news.bnt.bg/bg/a/mladezhi-spechelikha-sstezanie-s-platforma-za-namirane-na-stazh#")
+
+
 @routes.route('/candidates/my')
 def list_my_candidates():
 	if session['type'] == 'Company':

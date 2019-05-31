@@ -16617,6 +16617,15 @@ padding-left: 25px;
 position: relative;
 text-align: left;
 -moz-text-size-adjust: none;
+}
+
 a[href='/terms'] {
     display: none;
+}
+
+a.normal, a.normal:focus, a.normal:active, a.normal:hover {
+    color: #4abdac;
+    text-decoration: underline;
+    background-color: transparent;
+    display: inline;
 }
