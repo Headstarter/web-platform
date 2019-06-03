@@ -1,0 +1,76 @@
+{% extends 'core/template.html' %}
+
+{% block js %}
+{% endblock %}
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Профил на {{ session['company'] }}</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+      <section class="section section-md">
+        <div class="container">
+          <div class="block-form">
+            <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_company_profile') }}">
+            <h4>Обща информация за фирмата</h4>
+            <hr>
+                <article class="company-light">
+                    <label class="form-label-outside">Фирмено лого: (До 16 МБ)</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse… <input type="file" name="logo" id="imgInp">
+                            </span>
+                        </span>
+                    </div>
+                    <figure class="company-light-logo">
+                        <img class="company-light-logo-image" id='img-upload' src="{{ company.logo }}" alt="">
+                    </figure>
+                  </article>
+</div>
+            <!-- RD Mailform-->
+            <div class="rd-form rd-mailform form-lg">
+              <div class="row row-40">
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-title">Име на фирмата</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text" name="company-name" value="{{ company.name }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-job-title">Въведете име на фирмата</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-email">Уеб сайт на фирмата</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="website" value="{{ company.website }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-email">Въведете уеб сайт на фирмата</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-description">Описание на фирмата</label>
+                    <div class="form-wrap-inner">
+                      <label class="form-label" for="general-information-description">Предоставете пълно описание на фирмата</label>
+                      <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required">{{ company.description | safe }}</textarea>
+                      <span class="summernote">{{ company.description | safe }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-form">
+                <hr>
+                <button class="button button-secondary" type="submit" form="post-a-job-form">Запази</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
