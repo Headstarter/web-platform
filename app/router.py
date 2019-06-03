@@ -17,7 +17,8 @@ def my_redirect(path):
 @babel.localeselector
 def get_locale():
 	translations = [str(translation) for translation in babel.list_translations()]
-	print(translations)
+	import sys
+	print(request.accept_languages.best_match(translations), file=sys.stderr)
 	return request.accept_languages.best_match(translations)
 
 
