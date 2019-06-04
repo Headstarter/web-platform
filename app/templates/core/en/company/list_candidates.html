@@ -1,0 +1,67 @@
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
+
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">My posts</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+    <section class="section section-md">
+        <div class="container">
+          <form class="form-layout-search form-lg">
+            <!--<div class="form-wrap form-wrap-icon">
+              <input class="form-input" id="form-employer" type="text" name="employer" data-constraints="@Required">
+              <label class="form-label" for="form-employer">Search Keywords</label><span class="icon fl-bigmug-line-search74"></span>
+            </div>-->
+            <div class="form-wrap form-wrap-icon">
+              <!-- Select 2-->
+              <select class="form-input select" id="form-region" data-placeholder="Всички обяви" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+                <option value="0" label="Всички обяви">All posts</option>
+                {% for tag in tags %}
+                  <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                {% endfor %}
+              </select><span class="icon fl-bigmug-line-big104"></span>
+            </div>
+            <div class="form-wrap form-wrap-button">
+              <button class="button button-lg button-primary" type="submit">Search</button>
+            </div>
+          </form>
+          <div class="row row-50 flex-lg-row-reverse">
+            <div class="col-lg-12 col-xl-12">
+                  {% for person in candidates %}
+                <article class="profile-minimal">
+                <div class="profile-minimal-inner">
+                  <div class="profile-minimal-main-outer">
+                    <div class="profile-minimal-main"><img class="profile-minimal-image" src="{{ person.user.cv.photo }}" alt="">
+                      <div class="profile-minimal-main-info">
+                        <h5 class="profile-minimal-name"><a href="{{ url_for ('core.profileView', id=person.user.id) }}">{{ person.user.cv.name }}</a></h5>
+                        <p><a href="{{ url_for ('core.offer_view', position_id=person.position.id) }}">{{ person.position.name }}</a></p>
+                        <p class="profile-minimal-position"><a href="mailto:{{ person.user.cv.email }}">{{ person.user.cv.email }}</a>, <a href="tel:{{ person.user.cv.telephone }}">{{ person.user.cv.telephone }}</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-minimal-meta"> <span class="icon mdi mdi-map-marker"></span><span>{{ person.user.cv.location }}</span></div>
+                </div>
+              </article>
+                  {% endfor %}
+              <!-- Bootstrap Pagination
+              <nav class="pagination-outer text-center" aria-label="Page navigation">
+                <div class="pagination">
+                  <div class="page-item page-item-control"><a class="page-link" href="job-listing.html#" aria-label="Previous">Prev</a></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">1</a></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">2</a></div>
+                  <div class="page-item active"><span class="page-link">3</span></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">4</a></div>
+                  <div class="page-item page-item-control"><a class="page-link" href="job-listing.html#" aria-label="Next">Next</a></div>
+                </div>
+              </nav>-->
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

@@ -16,9 +16,7 @@ def my_redirect(path):
 
 @babel.localeselector
 def get_locale():
-	translations = [str(translation) for translation in babel.list_translations()]
-	import sys
-	print(request.accept_languages.best_match(translations), file=sys.stderr)
+	translations = ['bg', 'en']
 	return request.accept_languages.best_match(translations)
 
 
@@ -32,6 +30,9 @@ def set_response_headers(response):
 
 @app.before_request
 def init_session():
+	if 'language' not in session:
+		session['language'] = get_locale()
+	#session['language'] = get_locale()
 	if '_flashes' not in session:
 		session['_flashes'] = []
 	if 'type' not in session:
@@ -94,7 +95,7 @@ def login_register():
 		action = request.args['action']
 	except KeyError:
 		pass
-	return render_template('core/visitor/login-register.html', action=action, type=type_user)
+	return render_template('core/' + str(session['language']) + '/visitor/login-register.html', action=action, type=type_user)
 
 
 @app.route('/register', methods=['GET', 'POST'])
