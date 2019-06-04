@@ -1,0 +1,129 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Home {% endblock %}
+
+{% block banner %}
+    <section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">FAQ</h3>
+          </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+      <!-- Welcome to Headstarter.eu -->
+      <section class="section section-md">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-7">
+              <!-- Bootstrap collapse-->
+              <div class="card-group-custom card-group-corporate" id="accordion1" role="tablist" aria-multiselectable="false">
+                <!-- Bootstrap card-->
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-1" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-1" aria-controls="accordion1-collapse-1" aria-expanded="true">
+                            Проблем с влизането в системата, какво да правя?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse show" id="accordion1-collapse-1" role="tabpanel" aria-labelledby="accordion1-heading-1" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>Провери дали изписваш имейла и паролата си правилно и опитай отново! Ако проблемът продължава ни пиши на: <a class="normal" href="mailto: contact_us@headstarter.eu">contact_us@headstarter.eu</a></p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-2" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-2" aria-controls="accordion1-collapse-2" aria-expanded="true">
+                            Как да се регистрирам?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-2" role="tabpanel" aria-labelledby="accordion1-heading-2" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                        <li><a class="normal" href="/join?type=student&action=register">Ако си ученик, натисни тук</a></li>
+                        <li><a class="normal" href="/join?type=company&action=register">Ако сте фирма, натисни тук</a></li>
+                      </ul>
+                      <p>Ако имате проблем при регистрация, не се колебайте да ни пишете на <a class="normal" href="mailto: contact_us@headstarter.eu">contact_us@headstarter.eu</a>. Ние винаги сме на линия да помогнем.</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-3" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-3" aria-controls="accordion1-collapse-3" aria-expanded="true">
+                            Как да разберa, че кандидатурата ми е приета?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-3" role="tabpanel" aria-labelledby="accordion1-heading-3" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                        <li>От нас - ще получиш съобщение, че кандидатурата ти е изпратена успешно на работодателя </li>
+                        <li>От работодателя - от съответната компания, ще разгледат твоята кандидатура и ще се свържат с теб</li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-4" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-4" aria-controls="accordion1-collapse-4" aria-expanded="true">
+                            Как фирмата ще се свърже с мен?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-4" role="tabpanel" aria-labelledby="accordion1-heading-4" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>Фирмата ще се свърже с теб чрез контактите, които си оставил в профила си. Провери дали са верни! 😄</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-5" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-5" aria-controls="accordion1-collapse-5" aria-expanded="true">
+                            Къде ще получа обратна връзка?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-5" role="tabpanel" aria-labelledby="accordion1-heading-5" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                          <li>По имейл</li>
+                          <li>По телефон</li>
+                      </ul>
+                      <p>Фирмата ще ти изпрати обратна връзка на един от контактите, които си дал (най-често по имейл).</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-6" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-6" aria-controls="accordion1-collapse-6" aria-expanded="true">
+                            Как мога да се свържа с работодателя?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-6" role="tabpanel" aria-labelledby="accordion1-heading-6" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>С работодателя може да се свържеш, чрез контактите ,които са посочени от фирмата в нейният профил на сайта.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

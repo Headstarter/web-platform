@@ -17,7 +17,7 @@ def my_redirect(path):
 @babel.localeselector
 def get_locale():
 	translations = ['bg', 'en']
-	return request.accept_languages.best_match(translations)
+	return request.accept_languages.best_match(translations) or 'en'
 
 
 @app.after_request
@@ -30,9 +30,10 @@ def set_response_headers(response):
 
 @app.before_request
 def init_session():
-	if 'language' not in session:
+	if 'language' not in session or session['language'] is None:
 		session['language'] = get_locale()
-	#session['language'] = get_locale()
+	# session['language'] = 'en'
+	# session['language'] = get_locale()
 	if '_flashes' not in session:
 		session['_flashes'] = []
 	if 'type' not in session:
@@ -95,7 +96,7 @@ def login_register():
 		action = request.args['action']
 	except KeyError:
 		pass
-	return render_template('core/' + str(session['language']) + '/visitor/login-register.html', action=action, type=type_user)
+	return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -319,6 +320,7 @@ def logout():
 	session['name'] = None
 	session['company'] = None
 	session['redirect'] = None
+	session['language'] = get_locale()
 
 	return redirect('/p')
 
