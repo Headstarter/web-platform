@@ -60,7 +60,7 @@ class Companies:
 	
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language']) + '/company/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/company/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(Position.available == True).count(),
 								open=[Position.query.filter(Position.available == True)
@@ -73,7 +73,7 @@ class Companies:
 	@staticmethod
 	def post_offer():
 		if request.method == 'GET':
-			return render_template('core/' + str(session['language']) + '/company/post-offer.html', positionId=-1, tags=Tag.query.all())
+			return render_template('core/' + str(session['language'] or get_locale()) + '/company/post-offer.html', positionId=-1, tags=Tag.query.all())
 		else:
 			import sys
 			print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
@@ -125,7 +125,7 @@ class Companies:
 		import sys
 		print('\n\n', curr_position, '\n\n', file=sys.stderr)
 		if request.method == 'GET':
-			return render_template('core/' + str(session['language']) + '/company/post-offer.html', positionId=positionId, tags=Tag.query.all(), position=curr_position)
+			return render_template('core/' + str(session['language'] or get_locale()) + '/company/post-offer.html', positionId=positionId, tags=Tag.query.all(), position=curr_position)
 		else:
 			import sys
 			print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
@@ -155,7 +155,7 @@ class Companies:
 		else:
 			positions = filter_offers_by_tag(company=session['company_id'])
 		
-		return render_template('core/' + str(session['language']) + '/company/list_offers.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/company/list_offers.html',
 							   tags=Tag.query.all(),
 							   positions=positions.all()
 							   )
@@ -163,7 +163,7 @@ class Companies:
 	@staticmethod
 	def offer_details(id):
 		try:
-			return render_template('core/' + str(session['language']) + '/company/offer-details.html',
+			return render_template('core/' + str(session['language'] or get_locale()) + '/company/offer-details.html',
 								   recents=Position.query.filter(Position.available == True)
 								   .order_by(Position.id.desc())
 								   .limit(5).all()
@@ -189,7 +189,7 @@ class Companies:
 		if candidates.count() == 0:
 			flash('Все още няма постъпили кандидати', 'info')
 			
-		return render_template('core/' + str(session['language']) + '/company/list_candidates.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/company/list_candidates.html',
 							   tags=Position.query.filter(Position.company_id == session['company_id']).all(),
 							   candidates=candidates.all()
 							   )
@@ -197,7 +197,7 @@ class Companies:
 	@staticmethod
 	def profile():
 		company = Company.query.filter(Company.id == session['company_id']).one()
-		return render_template('core/' + str(session['language']) + '/company/profile.html', company=company)
+		return render_template('core/' + str(session['language'] or get_locale()) + '/company/profile.html', company=company)
 #"""
 #	@staticmethod
 #	def create_offer():

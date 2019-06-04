@@ -9,7 +9,7 @@ class Visitors:
 
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language']) + '/visitor/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/index.html',
 							   tags=Tag.query.all(),
 							   number_offers=Position.query.filter(Position.available == True).count(),
 							   open=[Position.query.filter(Position.available == True)
@@ -22,7 +22,7 @@ class Visitors:
 	@staticmethod
 	def offer_details(id):
 		try:
-			return render_template('core/' + str(session['language']) + '/visitor/offer-details.html',
+			return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/offer-details.html',
 								   recents=Position.query.filter(Position.available == True)
 														.order_by(Position.id.desc())
 														.limit(5).all()
@@ -47,7 +47,7 @@ class Visitors:
 		elif request.args.get('tag') is None and request.args['company'] != '0':
 			positions = filter_offers_by_tag(company=int(request.args['company']))
 		
-		return render_template('core/' + str(session['language']) + '/visitor/browse.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/browse.html',
 							   tags=Tag.query.all(),
 							   companies=Company.query.all(),
 							   positions=positions.all()
@@ -63,7 +63,7 @@ class Visitors:
 	@staticmethod
 	def company_view(id):
 		try:
-			return render_template('core/' + str(session['language']) + '/visitor/company-page.html',
+			return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/company-page.html',
 								   positions=Position.query.filter(Position.available == True)
 								   						.filter(Position.company_id == id)
 														.order_by(Position.id.desc())

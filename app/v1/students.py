@@ -19,7 +19,7 @@ def allowed_image(filename):
 class Students:
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language']) + '/students/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/students/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(Position.available == True).count(),
 								open=[Position.query.filter(Position.available == True)
@@ -85,7 +85,7 @@ class Students:
 		import sys
 		student = User.query.filter(User.id == session['id'])[0]
 		print(student.cv.get_education(), file=sys.stderr)
-		return render_template('core/' + str(session['language']) + '/students/edit_cv.html', student=student)
+		return render_template('core/' + str(session['language'] or get_locale()) + '/students/edit_cv.html', student=student)
 
 	@staticmethod
 	def cv_confirm():
@@ -102,7 +102,7 @@ class Students:
 	@staticmethod
 	def offer_details(id):
 		try:
-			return render_template('core/' + str(session['language']) + '/visitor/offer-details.html',
+			return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/offer-details.html',
 								   recents=Position.query.filter(Position.available == True)
 								   .order_by(Position.id.desc())
 								   .limit(5).all()

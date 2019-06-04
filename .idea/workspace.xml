@@ -5,162 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baa5826c-0b44-41b8-bac6-17701f275601" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blog/blog.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blog/blog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/026e6936-615a-11e9-b45c-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/57d62d0c-5e07-11e9-b034-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/57dc6a64-5e07-11e9-b639-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/57f4b2be-5e07-11e9-a4e4-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/57fcda0a-5e07-11e9-9d84-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/5810ec8a-5e07-11e9-9483-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/5811138a-5e07-11e9-8161-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/58197224-5e07-11e9-8c05-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/581f66ae-5e07-11e9-87cd-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/582b2406-5e07-11e9-9727-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/58327a58-5e07-11e9-8c65-5cea1d48352c-3228" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/6ef3c012-6055-11e9-b1a2-5cea1d48352c-9256" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/74feb3dc-5f3d-11e9-baee-5cea1d48352c-4516" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/8024bdf6-6272-11e9-ad9c-5cea1d48352c-14500" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/aa47e1e2-5ed4-11e9-be9a-5cea1d48352c-6428" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd2ce536-6157-11e9-a90f-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd478718-6157-11e9-9383-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd48717e-6157-11e9-a49d-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd48bec6-6157-11e9-a8f0-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd495a9a-6157-11e9-b88e-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd498192-6157-11e9-b024-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd4e8726-6157-11e9-b6c4-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd590778-6157-11e9-8509-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd629db0-6157-11e9-9876-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd67caae-6157-11e9-a9d4-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd6977a8-6157-11e9-bd74-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd69c4b0-6157-11e9-a8ea-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd6b2418-6157-11e9-97ff-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd6d92dc-6157-11e9-afda-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd7492b8-6157-11e9-8301-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bd7507cc-6157-11e9-bc6c-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bdb44074-6157-11e9-afbd-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bdb74bb6-6157-11e9-93c4-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/bdfe5d90-6157-11e9-91ea-5cea1d48352c-12860" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/c24706b8-61ee-11e9-bfaf-5cea1d48352c-12772" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/cb480394-61ee-11e9-be1f-5cea1d48352c-12772" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flask_session/d414ec90-61ee-11e9-b9be-5cea1d48352c-12772" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/core/en/visitor/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/core/en/visitor/faq.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/core/en/visitor/news.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sessions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/sessions-FORGETABOUTIT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/creative.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/creative.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/homehomepage.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/homehomepage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/img/company/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/img/company/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/img/company/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/img/company/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/img/cv/alex_tsvetanov_2002@abv.bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/js/creative.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/creative.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/js/creative.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/creative.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/animated.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/bordered-pulled.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/core.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/fixed-width.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/font-awesome.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/icons.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/larger.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/list.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/mixins.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/path.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/rotated-flipped.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/screen-reader.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/stacked.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/less/variables.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_animated.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_bordered-pulled.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_core.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_fixed-width.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_larger.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_list.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_path.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_rotated-flipped.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_screen-reader.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_stacked.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/font-awesome/scss/font-awesome.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/jquery/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/magnific-popup/jquery.magnific-popup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/magnific-popup/jquery.magnific-popup.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/magnific-popup/magnific-popup.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/scrollreveal/scrollreveal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/vendor/scrollreveal/scrollreveal.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/application.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/browse_students.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/company.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/homepage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/my_offers.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/notes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/position.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/prelogin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/company/sector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/students/company.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/students/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/students/position.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/students/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/students/sector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/visitor/browse.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blog/visitor/homepage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/terms.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/application.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/browse_students.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/company.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/homepage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/my_offers.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/notes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/position.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/company/sector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/company.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/position.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/students/sector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/visitor/browse.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/visitor/homepage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/v1_1pre/visitor/profileView.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/v1_1pre/companies.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/companies.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/v1_1pre/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/v1_1pre/students.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/students.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/v1_1pre/v1_1pre.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/core.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/v1_1pre/visitors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/visitors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/770a0d7fac74_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/83ec6c762bf2_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/companies.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/companies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/core.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/students.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/students.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/visitors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/visitors.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/router.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3688">
-              <caret line="144" column="31" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="31" />
+            <state relative-caret-position="442">
+              <caret line="19" column="67" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -188,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/core/template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="247" column="14" lean-forward="true" selection-start-line="247" selection-start-column="14" selection-end-line="247" selection-end-column="14" />
+            <state relative-caret-position="4352">
+              <caret line="247" column="14" selection-start-line="247" selection-start-column="14" selection-end-line="247" selection-end-column="14" />
               <folding>
                 <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#header#0;n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
@@ -204,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/faq.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+            <state relative-caret-position="714">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
               <folding>
                 <element signature="n#article#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#!!top" />
                 <element signature="n#article#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#!!top" />
@@ -221,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/faq.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1583">
+            <state relative-caret-position="3502">
               <caret line="246" selection-start-line="187" selection-end-line="246" />
               <folding>
                 <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
@@ -230,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="69" column="49" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+            <state relative-caret-position="-340">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -243,10 +97,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/core/en/visitor/about.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="16604" column="1" selection-start-line="16604" selection-start-column="1" selection-end-line="16604" selection-end-column="15" />
+            <state relative-caret-position="388">
+              <caret line="16515" column="1" selection-start-line="16515" selection-start-column="1" selection-end-line="16515" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -289,9 +152,9 @@
       <find>print</find>
       <find>{% extends 'core/visitor/template.html' %}</find>
       <find>extends 'core/.*/template.html'</find>
-      <find>extends 'core/.*/template.html'</find>
       <find>h4</find>
       <find>=&quot;#accordion.&quot;</find>
+      <find>str(session['language'])</find>
     </findStrings>
     <replaceStrings>
       <replace>/static/</replace>
@@ -305,7 +168,11 @@
       <replace>extends 'core/template.html'</replace>
       <replace>h5</replace>
       <replace>=&quot;#accordion1&quot;</replace>
+      <replace>str(session['language'] or get_locale())</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\alex\Documents\GitHub\Internships\web-server\app</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -356,21 +223,21 @@
         <option value="$PROJECT_DIR$/app/templates/core/students/template.html" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/login-register.html" />
         <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/router.py" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/template.html" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/browse.html" />
-        <option value="$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css" />
         <option value="$PROJECT_DIR$/app/templates/core/template.html" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/about.html" />
         <option value="$PROJECT_DIR$/app/templates/core/visitor/faq.html" />
         <option value="$PROJECT_DIR$/app/v1/core.py" />
+        <option value="$PROJECT_DIR$/app/router.py" />
+        <option value="$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-6" />
     <option name="width" value="3852" />
-    <option name="height" value="1047" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -382,73 +249,85 @@
         <subPane>
           <expand>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="flask_session" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="wt_prod-20039" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="wt_prod-20039" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="bg" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="students" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="bg" type="462c0819:PsiDirectoryNode" />
               <item name="visitor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Internships - Wordpress theme" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internships - Wordpress theme" type="462c0819:PsiDirectoryNode" />
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="en" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="en" type="462c0819:PsiDirectoryNode" />
+              <item name="visitor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="v1" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -460,15 +339,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex\Documents\GitHub\Internships\web-server\app\templates\core\en\visitor" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\visitor" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\students" />
       <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates\core\company" />
-      <recent name="C:\Users\alex\Documents\GitHub\Internships\Internships - Wordpress theme\app\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -506,10 +386,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="3852" height="1047" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49885058" visible="true" weight="0.119442254" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49885058" visible="true" weight="0.24084881" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5011494" side_tool="true" weight="0.24986738" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -551,9 +431,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/static/editor.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/js/summernote-bs4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -885,13 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="16604" column="1" selection-start-line="16604" selection-start-column="1" selection-end-line="16604" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/about.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -905,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/core/template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="247" column="14" lean-forward="true" selection-start-line="247" selection-start-column="14" selection-end-line="247" selection-end-column="14" />
+        <state relative-caret-position="4352">
+          <caret line="247" column="14" selection-start-line="247" selection-start-column="14" selection-end-line="247" selection-end-column="14" />
           <folding>
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#header#0;n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
@@ -917,20 +787,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/faq.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1583">
-          <caret line="246" selection-start-line="187" selection-end-line="246" />
-          <folding>
-            <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/core/visitor/faq.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+        <state relative-caret-position="714">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
           <folding>
             <element signature="n#article#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#!!top" />
             <element signature="n#article#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#!!top" />
@@ -942,23 +802,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/router.py">
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/faq.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3688">
-          <caret line="144" column="31" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="31" />
+        <state relative-caret-position="3502">
+          <caret line="246" selection-start-line="187" selection-end-line="246" />
+          <folding>
+            <element signature="n#header#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/core/en/visitor/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/v1/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/v1/core.py">
+    <entry file="file://$PROJECT_DIR$/app/router.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="69" column="49" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+        <state relative-caret-position="442">
+          <caret line="19" column="67" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/wt_prod-20039/css/style.max.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="16515" column="1" selection-start-line="16515" selection-start-column="1" selection-end-line="16515" selection-end-column="1" />
         </state>
       </provider>
     </entry>

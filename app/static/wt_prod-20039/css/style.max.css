@@ -651,7 +651,7 @@ p .link-press {
 .icon.box-line-icon {
     font-size: 48px;
     line-height: 1;
-    color: #4abdac;
+    color: #fc4a1a;
     transition: .22s
 }
 
@@ -1662,7 +1662,7 @@ html .list-inline-md>* {
     font-size: 40px;
     line-height: 1;
     background: #fff;
-    color: #4abdac;
+    color: #fc4a1a;
     box-shadow: 0 2px 13px 0 rgba(0, 0, 0, .06)
 }
 
@@ -1674,7 +1674,7 @@ html .list-inline-md>* {
     bottom: 7px;
     left: 7px;
     border-radius: inherit;
-    border: 1px solid rgba(16, 135, 235, .43)
+    border: 1px solid rgba(74, 189, 172, .43)
 }
 
 .ll-item-icon.icon {
@@ -2512,8 +2512,8 @@ hr {
 .button-primary,
 .button-primary:focus {
     color: #fff;
-    background-color: #4abdac;
-    border-color: #4abdac
+    background-color: #f7b733;
+    border-color: #f7b733
 }
 
 .button-primary:hover,
@@ -2599,22 +2599,22 @@ hr {
 .button-default-outline:hover,
 .button-default-outline:active {
     color: #fff;
-    background-color: #4abdac;
-    border-color: #4abdac
+    background-color: #fc4a1a;
+    border-color: #fc4a1a
 }
 
 .button-primary-outline,
 .button-primary-outline:focus {
-    color: #4abdac;
+    color: #f7b733;
     background-color: transparent;
-    border-color: #4abdac
+    border-color: #f7b733
 }
 
 .button-primary-outline:hover,
 .button-primary-outline:active {
     color: #fff;
-    background-color: #4abdac;
-    border-color: #4abdac
+    background-color: #fc4a1a;
+    border-color: #fc4a1a
 }
 
 .bg-primary .button-primary-outline,
@@ -5488,7 +5488,7 @@ p.footer-modern-title {
 
 .footer-creative-main {
     padding: 35px 0;
-    background: #4abdac
+    background: #48a597
 }
 
 .footer-creative-main a {
@@ -5517,7 +5517,7 @@ p.footer-creative-title {
 
 .footer-creative-aside {
     padding: 25px 0;
-    background: #4abdac;
+    background: #48a597;
     text-align: center
 }
 
