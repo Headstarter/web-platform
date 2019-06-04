@@ -67,12 +67,12 @@ def list_my_offers():
 
 @routes.route('/faq')
 def faq():
-	return render_template('core/visitor/faq.html')
+	return render_template('core/' + str(session['language']) + '/visitor/faq.html')
 
 
 @routes.route('/news')
 def news():
-	return render_template('core/visitor/news.html')
+	return render_template('core/' + str(session['language']) + '/visitor/news.html')
 
 
 @routes.route('/videos/<id>')
@@ -155,12 +155,12 @@ def candidate(positionId):
 	else:
 		insert_application(session['id'], int(positionId))
 		flash('Подадохте си CV-то успешно.', 'success')
-		return render_template('core/students/template.html')
+		return render_template('core/' + str(session['language']) + '/students/template.html')
 
 
 @routes.route('/about')
 def about():
-	return render_template('core/visitor/about.html')
+	return render_template('core/' + str(session['language']) + '/visitor/about.html')
 
 
 @routes.route('/upload/cv/picture', methods=['POST'])

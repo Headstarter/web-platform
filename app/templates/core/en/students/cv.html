@@ -1,0 +1,77 @@
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
+
+{% block js %}
+{% endblock %}
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Profile of {{ session['company'] }}</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+      <section class="section section-md">
+        <div class="container">
+          <div class="block-form">
+            <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_company_profile') }}">
+            <h4>Short information for the company</h4>
+            <hr>
+                <article class="company-light">
+                    <label class="form-label-outside">Logo: (max 16 MB)</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse… <input type="file" name="logo" id="imgInp">
+                            </span>
+                        </span>
+                    </div>
+                    <figure class="company-light-logo">
+                        <img class="company-light-logo-image" id='img-upload' src="{{ company.logo }}" alt="">
+                    </figure>
+                  </article>
+</div>
+            <!-- RD Mailform-->
+            <div class="rd-form rd-mailform form-lg">
+              <div class="row row-40">
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-title">Company name</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text" name="company-name" value="{{ company.name }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-job-title">type company name</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-email">company website</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="website" value="{{ company.website }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-email">type the website</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-description">company description</label>
+                    <div class="form-wrap-inner">
+                      <label class="form-label" for="general-information-description">All details for the company</label>
+                      <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required">{{ company.description | safe }}</textarea>
+                      <span class="summernote">{{ company.description | safe }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-form">
+                <hr>
+                <button class="button button-secondary" type="submit" form="post-a-job-form">Save</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

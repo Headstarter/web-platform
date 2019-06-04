@@ -1,0 +1,70 @@
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
+
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">My posts</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+    <section class="section section-md">
+        <div class="container">
+          <form class="form-layout-search form-lg">
+            <!--<div class="form-wrap form-wrap-icon">
+              <input class="form-input" id="form-employer" type="text" name="employer" data-constraints="@Required">
+              <label class="form-label" for="form-employer">Search Keywords</label><span class="icon fl-bigmug-line-search74"></span>
+            </div>-->
+            <div class="form-wrap form-wrap-icon">
+              <!-- Select 2-->
+              <select class="form-input select" id="form-region" data-placeholder="Всички категории" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+                <option value="0" label="Всички категории">All categories</option>
+                {% for tag in tags %}
+                  <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                {% endfor %}
+              </select><span class="icon fl-bigmug-line-big104"></span>
+            </div>
+            <div class="form-wrap form-wrap-button">
+              <button class="button button-lg button-primary" type="submit">Search</button>
+            </div>
+          </form>
+          <div class="row row-50 flex-lg-row-reverse">
+            <div class="col-lg-12 col-xl-12">
+              <table class="table-job-listing table-responsive">
+                  {% for offer in positions %}
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.edit_offer', positionId=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
+                      </div>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
+                  {% endfor %}
+              </table>
+              <!-- Bootstrap Pagination
+              <nav class="pagination-outer text-center" aria-label="Page navigation">
+                <div class="pagination">
+                  <div class="page-item page-item-control"><a class="page-link" href="job-listing.html#" aria-label="Previous">Prev</a></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">1</a></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">2</a></div>
+                  <div class="page-item active"><span class="page-link">3</span></div>
+                  <div class="page-item"><a class="page-link" href="job-listing.html#">4</a></div>
+                  <div class="page-item page-item-control"><a class="page-link" href="job-listing.html#" aria-label="Next">Next</a></div>
+                </div>
+              </nav>-->
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

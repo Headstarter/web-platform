@@ -1,0 +1,195 @@
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
+
+{% block js %}
+<link href="/css/summernote-bs4.css" rel="stylesheet">
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<script src="/js/summernote-bs4.js"></script>
+<!-- include summernote-bg-BG -->
+<script src="/js/summernote-bg-BG.js"></script>
+<script>
+  $(document).ready(function() {
+      $('.summernote').summernote({
+        lang: 'bg-BG' // default: 'en-US'
+      });
+      $(".note-editable.card-block[role=textbox]").addClass ('default-styles');
+      $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
+        $('[name=description]').html($(this).html());
+      });
+  });
+</script>
+{% endblock %}
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Publish {{'new' if positionId == -1 else 'changed'}} post</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+      <section class="section section-md">
+        <div class="container">
+          <div class="block-form">
+            {% if positionId != -1 %}
+              <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_offer', positionId=positionId) }}">
+            {% else %}
+                  <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.post_offer') }}">
+            {% endif %}
+            <h4>short information abot the position</h4>
+            <hr>
+            <!-- RD Mailform-->
+            <div class="rd-form rd-mailform form-lg">
+              <div class="row row-40">
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-title">Work as</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text" name="job-title" value="{{ position.name if positionId != -1 }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-job-title">position (name)</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-email">E-mail for the applications</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="email" name="email" value="{{ position.email if positionId != -1 }}" data-constraints="@Email @Required">
+                      <label class="form-label" for="general-information-email">type E-mail</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-type">job type</label>
+                    <div class="form-wrap-inner">
+                      <!-- Select 2-->
+                      <select class="form-input select" id="general-information-job-type"
+                              form="post-a-job-form" data-placeholder="Изберете тип"
+                              name="job-type" data-minimum-results-for-search="Infinity"
+                              data-constraints="@Selected">
+                        <option label="Изберете тип"></option>
+                        <option value="До 4ч." {{ 'selected' if positionId != -1 and position.hours_per_day == 'До 4ч.' }}>less than 4h.</option>
+                        <option value="4-7ч." {{ 'selected' if positionId != -1 and position.hours_per_day == '4-7ч.' }}>Between 4h. and 7h.</option>
+                        <option value="8ч." {{ 'selected' if positionId != -1 and position.hours_per_day == '8ч.' }}>8h.</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-age">Required age</label>
+                    <div class="form-wrap-inner">
+                      <!-- Select 2-->
+                      <select class="form-input select" id="general-information-job-age"
+                              form="post-a-job-form" data-placeholder="Изберете необходими навършени години" name="job-age"
+                              data-minimum-results-for-search="Infinity"
+                              data-constraints="@Selected">
+                        <option label="Изберете необходими навършени години"></option>
+                        <option value="16+" {{ 'selected' if positionId != -1 and position.age_required == '16+' }}>Atleast 16 y.</option>
+                        <option value="16-18" {{ 'selected' if positionId != -1 and position.age_required == '16-18' }}>Between 16 and 18 y.</option>
+                        <option value="18+" {{ 'selected' if positionId != -1 and position.age_required == '18+' }}>Atleast 18 y.</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-duration">Въведете продължителност (в месеци)</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-duration" form="post-a-job-form" type="number" name="duration" value="{{ position.duration if positionId != -1 }}" data-constraints="@Numeric @Min(value=1) @Required">
+                      <label class="form-label" for="general-information-duration">Въведете продължителност (в месеци)</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-location">Work palce</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-location" form="post-a-job-form" type="text" name="location" value="{{ position.location if positionId != -1 }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-location">example. „Bisness park, building 2, floor 1“</label>
+                    </div>
+                  </div>
+                </div>
+                  <!--
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-salary">Salary</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-salary" form="post-a-job-form" type="text" name="salary" data-constraints="@Required">
+                      <label class="form-label" for="general-information-salary">e.g. $20000</label>
+                    </div>
+                  </div>
+                </div>-->
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-category">Category</label>
+                    <div class="form-wrap-inner">
+                      <!-- Select 2-->
+                      <select class="form-input select" id="general-information-job-category"
+                              form="post-a-job-form" data-placeholder="Избери категория"
+                              name="job-category" data-minimum-results-for-search="Infinity"
+                              data-constraints="@Selected">
+                        <option label="Избери категория"></option>
+                        {% for tag in tags %}
+                            {% if positionId != -1 and tag.id == position.tag_id %}
+                                <option selected="selected" value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                            {% else %}
+                                <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                            {% endif %}
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                  <!--
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-tags">Job Tags  (optional)</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-tags" form="post-a-job-form" type="text" name="tags">
+                      <label class="form-label" for="general-information-tags">e.g. “Web Designer”</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-url">URL(s) (optional)</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-url" form="post-a-job-form" type="text" name="url">
+                      <label class="form-label" for="general-information-url">Enter URL</label>
+                    </div>
+                  </div>
+                </div>-->
+                <div class="col-12">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-description">Explain the job</label>
+                    <div class="form-wrap-inner">
+                      <label class="form-label" for="general-information-description">All details</label>
+                        {% if positionId == -1 %}
+                      <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required"></textarea>
+                      <span class="summernote"></span>
+                        {% else %}
+                      <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required">{{ position.description | safe }}</textarea>
+                      <span class="summernote">{{ position.description | safe }}</span>
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="id" value="{{ positionId }}">
+              <div class="block-form">
+                <hr>
+                <button class="button button-secondary" type="submit" form="post-a-job-form">Save</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
