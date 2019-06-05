@@ -96,7 +96,11 @@ def login_register():
 		action = request.args['action']
 	except KeyError:
 		pass
-	return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user)
+
+	import sys
+	print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n', file=sys.stderr)
+	
+	return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user, companies=Company.query.all())
 
 
 @app.route('/register', methods=['GET', 'POST'])
