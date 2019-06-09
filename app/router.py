@@ -32,7 +32,7 @@ def set_response_headers(response):
 def init_session():
 	if 'language' not in session or session['language'] is None:
 		session['language'] = get_locale()
-	# session['language'] = 'en'
+	session['language'] = 'bg'
 	# session['language'] = get_locale()
 	if '_flashes' not in session:
 		session['_flashes'] = []
