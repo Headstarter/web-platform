@@ -16546,7 +16546,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     width: 18px;
     height: 3px;
     vertical-align: middle;
-    background: #1087eb;
+    background: #4abdac;
 }
 
 .default-styles ul > li {
@@ -16633,12 +16633,6 @@ a.normal, a.normal:focus, a.normal:active, a.normal:hover {
 .footer-creative-title {
 text-align: center;
 width: 100%;
-}
-.footer-creative-main .row {
-    padding-bottom: 25px!important;
-    padding-left: 0px!important;
-    padding-right: 0px!important;
-    padding-top: 25px !important;
 }
 .footer-creative-main {
     padding: 25px 0;
