@@ -58,7 +58,7 @@
                             {% if type == 'Both' %}
                                 <div class="form-wrap">
                                   <label class="checkbox-inline">
-                                    <input name="member" value="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Служител на фирма съм
+                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Служител на фирма съм
                                   </label>
                                 </div>
                                 <div class="form-wrap" id="company" style="display:none;">
@@ -67,22 +67,20 @@
                                     <option value="{{company.name}}">{{company.name}}</option> 
                                     {% endfor %}
                                     <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                    <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input> 
                                   </select>
-                                  <label class="form-label" for="rd-navbar-register-company1">Име на Вашата фирма</label> 
+                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
                                 </div>
                             {% else %}
                                 {% if type == 'Company' %}
                                     <div class="form-wrap" id="company">
-                                      <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                      <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                                        <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
                                         {% for company in companies %}
                                         <option value="{{company.name}}">{{company.name}}</option> 
                                         {% endfor %}
-                                        <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                        <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input> 
                                       </select>
-                                      <label class="form-label" for="rd-navbar-register-company1">Име на Вашата фирма</label>     
-                                    </div>                        
+                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                                    </div>
                                 {% endif %}
                             {% endif %}
                             <div class="form-wrap">

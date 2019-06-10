@@ -82,6 +82,14 @@ def videos(id):
 	elif str(id) == "1":
 		return redirect("https://www.bloombergtv.bg/update/2019-06-02/kakvi-vazmozhnosti-pred-uchenitsite-i-biznesa-dava-programata-teenovator")
 
+
+@routes.route('/post/<id>')
+def posts(id):
+	if str(id) == "1":
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/how_to_cv.html')
+	elif str(id) == "2":
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/how_to_hire.html')
+
 @routes.route('/candidates/my')
 def list_my_candidates():
 	if session['type'] == 'Company':

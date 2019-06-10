@@ -110,7 +110,7 @@ def register():
 	
 	company = request.form['company']
 
-	if company == '':
+	if request.form['member'] != 'on':
 		if len(User.query.filter(User.email == request.form['email']).all()) == 0 \
                 and (request.form['password'] == request.form['password-confirm']):
 
