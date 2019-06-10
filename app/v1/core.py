@@ -79,7 +79,8 @@ def news():
 def videos(id):
 	if str(id) == "0":
 		return redirect("http://news.bnt.bg/bg/a/mladezhi-spechelikha-sstezanie-s-platforma-za-namirane-na-stazh#")
-
+	elif str(id) == "1":
+		return redirect("https://www.bloombergtv.bg/update/2019-06-02/kakvi-vazmozhnosti-pred-uchenitsite-i-biznesa-dava-programata-teenovator")
 
 @routes.route('/candidates/my')
 def list_my_candidates():
