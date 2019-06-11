@@ -157,31 +157,25 @@
             </div>
             <div class="col-12">
               <div class="table-job-offers-outer">
-                <table class="table-job-offers table-responsive">
+              <table class="table-job-listing table-responsive">
                   {% for offer in positions %}
-                  <tr>
-                    <td class="table-job-offers-date"><span>{{ offer.get_date () }}</span></td>
-                    <td class="table-job-offers-main">
-                      <!-- Company Light-->
-                      <article class="company-light">
-                        <figure class="company-light-figure"><img class="company-light-image" src="{{ offer.company.logo }}" alt=""/>
-                        </figure>
-                        <div class="company-light-main">
-                          <h5 class="company-light-title"><a href="job-details.html">{{ offer.name }}</a></h5>
-                          <p class="text-color-default">{{ offer.company.name }}</p>
-                        </div>
-                      </article>
-                    </td>
-                    <!--<td class="table-job-offers-meta">
-                      <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-cash"></span><span>TODO SALARY</span></div>
-                    </td>-->
-                    <td class="table-job-offers-meta">
-                      <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></div>
-                    </td>
-                    <td class="table-job-offers-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
-                  </tr>
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
+                      </div>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
                   {% endfor %}
-                </table>
+              </table>
               </div>
             </div>
             <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="#todo">Show More Jobs</a></div>
