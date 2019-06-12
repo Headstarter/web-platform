@@ -32,7 +32,7 @@ jobs: # A basic unit of work in a run
             - "/usr/local/bin"
             - "/usr/local/lib/python3.7/site-packages"
       - run:
-        command: |
+          command: |
             python -m pip install flask flask-sqlalchemy flask_babel flask_session flask_migrate flask_script
       - run:
           command: |
