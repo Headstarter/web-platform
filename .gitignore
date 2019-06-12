@@ -1,3 +1,10 @@
+# flask_session
+/flask_session
+/__pycache__
+/app/__pycache__
+/.idea
+
+
 # http://www.gnu.org/software/automake
 
 Makefile.in
