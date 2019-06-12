@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<testsuite errors="0" failures="0" name="test_base.APITestCase-20190612181432" tests="1" time="0.076">
-	<testcase classname="test_base.APITestCase" name="test_404" time="0.076"/>
-	<system-out>
-<![CDATA[]]>	</system-out>
-	<system-err>
-<![CDATA[/wrong/url?: <SecureCookieSession {'language': 'bg', '_flashes': [], 'type': 'Visitor'}>: <SecureCookieSession {'language': 'bg', '_flashes': [], 'type': 'Visitor'}>
-]]>	</system-err>
-</testsuite>

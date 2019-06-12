@@ -39,7 +39,7 @@ def init_session():
 	if 'type' not in session:
 		session['type'] = 'Visitor'
 	
-	print(request.full_path + ': ' + str(session) + ': ' + str(session), file=sys.stderr)
+	print(request.full_path + ': ' + str(session) + ': ' + str(session))
 
 
 @app.route('/css/<path:filename>')
@@ -98,14 +98,14 @@ def login_register():
 		pass
 
 	import sys
-	print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n', file=sys.stderr)
+	print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n')
 	
 	return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user, companies=Company.query.all())
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-	
+	import sys
 	print(request.form, file=sys.stderr)
 	
 	company = request.form['company']
@@ -140,12 +140,12 @@ def register():
 			my_company = {}
 			
 			if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
-				print('\t\t\tMapper found', file=sys.stderr)
+				print('\t\t\tMapper found')
 				my_company = Company.query.filter(Company.id == Mapper.query.filter(Mapper.company_name == request.form['company']).one().company_id).one()
 			else:
-				print('\t\t\tMapper NOT found', file=sys.stderr)
+				print('\t\t\tMapper NOT found')
 				my_company = insert_company(request.form['company'])
-			print('', my_company.name, my_company.id, my_company.uid, file=sys.stderr)
+			print('', my_company.name, my_company.id, my_company.uid)
 			insert_user(request.form['name'], request.form['email'], request.form['password'], my_company)
 
 			session['email'] = request.form['email']
@@ -204,7 +204,7 @@ def login():
 """
 @app.route('/register/company', methods=['GET', 'POST'])
 def company_signup():
-	print(request.form, file=sys.stderr)
+	print(request.form)
 	if request.method == 'POST':
 		if len(Company.query.filter(Company.uid == request.form['company_code']).all()) == 1 \
 			and (request.form['password'] == request.form['verify_password'])\

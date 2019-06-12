@@ -30,5 +30,18 @@ class APITestCase(unittest.TestCase):
         self.assertIn('You may have mistyped the address or the page may have moved', responseHTML)
         self.assertIn('<a class="button button-gray-800-outline" href="/">Go to home page</a>', responseHTML)
 
+
+    def test_404(self):
+        response = self.client.get(
+            '/wrong/url',
+            headers='')
+        responseHTML = str(response.data)
+        self.assertTrue(response.status_code == 404)
+        self.assertIn('Oops!', responseHTML)
+        self.assertIn('Page Not found', responseHTML)
+        self.assertIn('404', responseHTML)
+        self.assertIn('You may have mistyped the address or the page may have moved', responseHTML)
+        self.assertIn('<a class="button button-gray-800-outline" href="/">Go to home page</a>', responseHTML)
+
 if __name__ == '__main__':
     unittest.main()

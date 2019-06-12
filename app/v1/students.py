@@ -60,9 +60,9 @@ class Students:
 		curr_user = curr_user[0]
 		
 		import sys
-		print('\n\n', curr_user, '\n\n', file=sys.stderr)
+		print('\n\n', curr_user, '\n\n')
 		import sys
-		print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
+		print('\n\n' + str(dict(request.form)) + '\n\n')
 		
 		x = update_cv(session['id'],
 				request.form['name'],
@@ -76,7 +76,7 @@ class Students:
 				request.form['resume-content'],
 				request.form['skills'],
 				request.form['hobbies'])
-		print('\n\n' + str(x) + '\n\n', file=sys.stderr)
+		print('\n\n' + str(x) + '\n\n')
 		
 		return my_redirect(url_for('core.profile'))
 		
@@ -84,7 +84,7 @@ class Students:
 	def profile():
 		import sys
 		student = User.query.filter(User.id == session['id'])[0]
-		print(student.cv.get_education(), file=sys.stderr)
+		print(student.cv.get_education())
 		return render_template('core/' + str(session['language'] or get_locale()) + '/students/edit_cv.html', student=student)
 
 	@staticmethod

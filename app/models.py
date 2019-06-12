@@ -378,7 +378,7 @@ def update_cv(student_id, name, email, telephone, location,
     print('All User with id', student_id, 'are', User.query.filter(
         User.id == student_id).all(), file=sys.stderr)
     cv_id = User.query.filter(User.id == student_id).one().cv_id
-    print(cv_id, file=sys.stderr)
+    print(cv_id)
     CV.query.filter(CV.id == cv_id).update({
         'name': name,
         'email': email,
