@@ -38,8 +38,8 @@ class Visitors:
 	def browse():
 		positions = []
 		import sys
-		print(request.args.get('tag'), file=sys.stderr)
-		print(request.args.get('company'), file=sys.stderr)
+		print(request.args.get('tag'))
+		print(request.args.get('company'))
 		if request.args.get('company') is None and \
 				request.args.get('tag') is None:
 			positions = filter_offers_by_tag()

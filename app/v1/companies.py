@@ -48,9 +48,9 @@ class Companies:
 		curr_position = curr_company[0]
 		
 		import sys
-		print('\n\n', curr_position, '\n\n', file=sys.stderr)
+		print('\n\n', curr_position, '\n\n')
 		import sys
-		print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
+		print('\n\n' + str(dict(request.form)) + '\n\n')
 		update_company(session['company_id'],
 						request.form['company-name'],
 						request.form['website'],
@@ -76,7 +76,7 @@ class Companies:
 			return render_template('core/' + str(session['language'] or get_locale()) + '/company/post-offer.html', positionId=-1, tags=Tag.query.all())
 		else:
 			import sys
-			print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
+			print('\n\n' + str(dict(request.form)) + '\n\n')
 			positionId = -1
 			if request.form['id'] == '-1':
 				positionId = insert_position(request.form['job-title'],
@@ -123,12 +123,12 @@ class Companies:
 			return render_template("404.html"), 404
 		
 		import sys
-		print('\n\n', curr_position, '\n\n', file=sys.stderr)
+		print('\n\n', curr_position, '\n\n')
 		if request.method == 'GET':
 			return render_template('core/' + str(session['language'] or get_locale()) + '/company/post-offer.html', positionId=positionId, tags=Tag.query.all(), position=curr_position)
 		else:
 			import sys
-			print('\n\n' + str(dict(request.form)) + '\n\n', file=sys.stderr)
+			print('\n\n' + str(dict(request.form)) + '\n\n')
 			positionId = update_position(
 							positionId,
 							request.form['email'],
@@ -148,8 +148,8 @@ class Companies:
 	def list_my_offers():
 		positions = []
 		import sys
-		print(request.form.get('tag'), file=sys.stderr)
-		print(request.args.get('tag'), file=sys.stderr)
+		print(request.form.get('tag'))
+		print(request.args.get('tag'))
 		if request.args.get('tag') and request.args['tag'] != '0':
 			positions = filter_offers_by_tag(int(request.args['tag']), session['company_id'])
 		else:
@@ -178,8 +178,8 @@ class Companies:
 	def list_my_candidates():
 		candidates = []
 		import sys
-		print(request.form.get('tag'), file=sys.stderr)
-		print(request.args.get('tag'), file=sys.stderr)
+		print(request.form.get('tag'))
+		print(request.args.get('tag'))
 		if request.args.get('tag') and request.args['tag'] != '0':
 			candidates = filter_applications(int(request.args['tag']), session['company_id'])
 		else:
@@ -207,10 +207,10 @@ class Companies:
 #	@staticmethod
 #	def delete_offer(positionId):
 #		import sys
-#		print(positionId, file=sys.stderr)
+#		print(positionId)
 #		positionId=int(positionId)
-#		print(Position.query.filter(Position.id == positionId).one().company_id, file=sys.stderr)
-#		print(session['company_id'], file=sys.stderr)
+#		print(Position.query.filter(Position.id == positionId).one().company_id)
+#		print(session['company_id'])
 #		if Position.query.filter(Position.id == positionId).one().company_id == session['company_id']:
 #			Position.query.filter(Position.id == positionId).delete()
 #			db.session.commit()

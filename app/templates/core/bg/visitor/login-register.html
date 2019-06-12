@@ -79,8 +79,11 @@
                                         <option value="{{company.name}}">{{company.name}}</option> 
                                         {% endfor %}
                                       </select>
+                                    <input name="member" type="hidden" value="on" class="checkbox-custom" />
                                       <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
                                     </div>
+                                {% else %}
+                                    <input name="member" type="hidden" value="off" class="checkbox-custom" />
                                 {% endif %}
                             {% endif %}
                             <div class="form-wrap">
