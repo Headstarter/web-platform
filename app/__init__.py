@@ -4,8 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 
+os.environ['CONFIG'] = os.environ['CONFIG'] or 'config.cfg'
+
 app = Flask(__name__)
-app.config.from_pyfile('config.cfg')
+app.config.from_pyfile(os.environ['CONFIG'])
 babel = Babel(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
