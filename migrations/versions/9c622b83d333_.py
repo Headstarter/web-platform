@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 16b9c2c7140e
+Revision ID: 9c622b83d333
 Revises: 
-Create Date: 2019-06-13 18:55:28.946521
+Create Date: 2019-06-14 00:23:55.864216
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '16b9c2c7140e'
+revision = '9c622b83d333'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +43,6 @@ def upgrade():
     sa.Column('website', sa.String(length=256), nullable=True),
     sa.Column('contacts', sa.String(length=32768), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name'),
     sa.UniqueConstraint('name')
     )
     op.create_table('Tag',
@@ -86,8 +85,8 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('cv_id', sa.Integer(), nullable=True),
-    sa.Column('company_id', sa.Integer(), nullable=True),
     sa.Column('verification_id', sa.Integer(), nullable=True),
+    sa.Column('company_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['Company.id'], ),
     sa.ForeignKeyConstraint(['cv_id'], ['CV.id'], ),
     sa.ForeignKeyConstraint(['verification_id'], ['Verify.id'], ),
