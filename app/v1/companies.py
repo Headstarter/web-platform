@@ -32,9 +32,22 @@ class Companies:
 			if file.filename == '':
 				flash('No selected file')
 				return jsonify({'value': 'No file selected.'}), 400
+
 			if file and allowed_image(file.filename):
-				# filename = secure_filename(file.filename)
-				file.save(os.path.join(app.config['APP_ROOT'], Company.query.filter(Company.id == session['company_id']).one().logo[1:]))
+				saved = False
+				while saved:
+					try:
+						file.save(os.ath.join(os.environ['basedir'], 'static/wt_prod-20039' + Company.query.filter(Company.id == session['company_id']).one().logo))
+						saved = True
+					except FileNotFoundError:
+						import shutil
+						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'), os.path.join(
+						    os.environ['basedir'], 'static/wt_prod-20039/images/company/' + str(uid) + '.png'))
+					except TypeError:
+						uid = Company.query.filter(Company.id == session['company_id']).one().uid
+						Company.query.filter(Company.id == session['company_id']).update({'logo':'/images/company/' + str(uid) + '.png'});
+						db.session.commit()
+
 				return jsonify({'value': 'Uploaded'}), 200
 
 	@staticmethod
@@ -198,7 +211,7 @@ class Companies:
 	def profile():
 		company = Company.query.filter(Company.id == session['company_id']).one()
 		return render_template('core/' + str(session['language'] or get_locale()) + '/company/profile.html', company=company)
-#"""
+# """
 #	@staticmethod
 #	def create_offer():
 #		id = insert_position('', session['company_id'], '', False, 0, 0, '', 1)
@@ -281,5 +294,5 @@ class Companies:
 #	def profile():
 #		company = Company.query.filter(Company.id == session['company_id'])[0]
 #		return render_template('company/profile.html', company=company)
-#"""
+# """
 #

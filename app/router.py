@@ -106,7 +106,7 @@ def login_register():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	import sys
-	print(request.form, file=sys.stderr)
+	print(request.form)
 	
 	company = request.form['company']
 

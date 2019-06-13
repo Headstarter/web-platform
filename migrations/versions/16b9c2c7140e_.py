@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: be3b4b007363
+Revision ID: 16b9c2c7140e
 Revises: 
-Create Date: 2019-05-06 03:56:08.305578
+Create Date: 2019-06-13 18:55:28.946521
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'be3b4b007363'
+revision = '16b9c2c7140e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,11 +43,24 @@ def upgrade():
     sa.Column('website', sa.String(length=256), nullable=True),
     sa.Column('contacts', sa.String(length=32768), nullable=True),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name'),
     sa.UniqueConstraint('name')
     )
     op.create_table('Tag',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('Verify',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('code', sa.String(length=6), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('Mapper',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('company_name', sa.String(length=128), nullable=True),
+    sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['company_id'], ['Company.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Position',
@@ -74,8 +87,10 @@ def upgrade():
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('cv_id', sa.Integer(), nullable=True),
     sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.Column('verification_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['Company.id'], ),
     sa.ForeignKeyConstraint(['cv_id'], ['CV.id'], ),
+    sa.ForeignKeyConstraint(['verification_id'], ['Verify.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_User_email'), 'User', ['email'], unique=True)
@@ -98,6 +113,8 @@ def downgrade():
     op.drop_index(op.f('ix_User_email'), table_name='User')
     op.drop_table('User')
     op.drop_table('Position')
+    op.drop_table('Mapper')
+    op.drop_table('Verify')
     op.drop_table('Tag')
     op.drop_table('Company')
     op.drop_table('CV')

@@ -19,7 +19,7 @@ def allowed_image(filename):
 class Students:
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language'] or get_locale()) + '/students/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(Position.available == True).count(),
 								open=[Position.query.filter(Position.available == True)
