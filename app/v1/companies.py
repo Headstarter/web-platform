@@ -5,6 +5,7 @@ from app.models import User, Tag, Company, Position, Application, insert_positio
 from flask import session, request, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
+from app.v1.target import Target_Group
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -81,9 +82,7 @@ class Companies:
 		return render_template('core/' + str(session['language'] or get_locale()) + '/company/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(Position.available == True).count(),
-								open=[Position.query.filter(Position.available == True)
-													.filter(Position.tag_id == x.id)
-													.count() for x in Tag.query.all()],
+								open=Target_Group.groupTags(),
 								positions=Position.query.filter(Position.available == True)
 														.order_by(Position.id.desc())
 														.limit(5))
