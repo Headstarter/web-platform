@@ -58,55 +58,6 @@ class User(db.Model):
     cv_id = db.Column(db.Integer, db.ForeignKey('CV.id'), nullable=True)
     cv = db.relationship('CV', back_populates='user', uselist=False)
 
-    company_id = db.Column(
-        db.Integer, db.ForeignKey('Company.id'), nullable=True)
-    company = db.relationship('Company', back_populates='employees')
-
-    applications = db.relationship("Application", back_populates="user")
-
-    def to_dict(self):
-        return {"id": self.id,
-                "name": self.name,
-                "email": self.email,
-                "company": self.company
-                }
-
-    def __repr__(self):
-        return '<User {}>'.format(self.name)
-
-
-class Company(db.Model):
-    __tablename__ = 'Company'
-   
-    id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
-
-    mapper = db.relationship("Mapper", back_populates="company")
-    employees = db.relationship("User", back_populates="company")
-    positions = db.relationship("Position", back_populates="company")
-
-    name = db.Column(db.String(128), unique=True)
-    description = db.Column(db.String(32768))
-    logo = db.Column(db.String(256))
-    website = db.Column(db.String(256))
-    contacts = db.Column(db.String(32768))
-
-    def __repr__(self):
-        return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
-
-
-class User(db.Model):
-    __tablename__ = 'User'
-   
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
-
-    cv_id = db.Column(db.Integer, db.ForeignKey('CV.id'), nullable=True)
-    cv = db.relationship('CV', back_populates='user', uselist=False)
-
     verification_id = db.Column(
         db.Integer, db.ForeignKey('Verify.id'), nullable=True)
     verification = db.relationship(
@@ -144,7 +95,6 @@ class Verify(db.Model):
 
 class CV(db.Model):
     __tablename__ = 'CV'
-   
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -252,6 +202,10 @@ def clear():
     Company.query.filter(True).delete()
     Tag.query.filter(True).delete()
     Position.query.filter(True).delete()
+    Mapper.query.filter(True).delete()
+    CV.query.filter(True).delete()
+    Application.query.filter(True).delete()
+    Verify.query.filter(True).delete()
 
 
 def create_cv(student):
@@ -481,120 +435,17 @@ def init():
     print()
 
     """ Companies """
-    # Headstarter = Company(name='Headstarter', website='https://headstarter.eu',
-    # 					  contacts='Mail Us: contact@headstarter.eu', logo='/static/img/company/1.png',
-    # 					  description='We are connecting students and business.', uid="f1d6d91e-affc-4141-9cf8-ccf16e082b56")
-    # db.session.add(Headstarter)
-    # db.session.commit()
-
-    # Biodit = Company(name='Biodit Global Technologies', website='https://biodit.com',
-    # 				 contacts="""
-    # 				 Visit Us: бул. „св. Климент Охридски“ 125, 1756 кв. Малинова долина, София<br>
-    # 				 Mail Us: pr@biodit.com, office@biodit.com""", logo='/static/img/company/2.png',
-    # 				 description='Example of description', uid="da39ec10-7eba-4325-907e-40aa38d76c22")
-    # db.session.add(Biodit)
-    # db.session.commit()
-
-    # Deamix = Company(name='Dreamix', website='',
-    # 				 contacts="", logo='/static/img/company/3.png',
-    # 				 description='', uid="8f4aaa61-eba2-4578-b0ed-f1738088b4b0")
-
-    # BICA_services = Company(name='BICA services', website='',
-    # 				 contacts="", logo='/static/img/company/4.png',
-    # 				 description='', uid="fe639fe8-5028-44c7-bfc6-185e557cc32b")
-
-    # iGreet = Company(name='iGreet', website='',
-    # 				 contacts="", logo='/static/img/company/5.png',
-    #				 description='', uid="299b9e13-a34f-4c04-bc72-1f3bc72a92b8")
-
-    # db.session.add(Deamix)
-    # db.session.add(BICA_services)
-    # db.session.add(iGreet)
-    # db.session.commit()
-
-    #index = 1
-    # companies = ['Headstarter', 'Axway', 'Biodit', 'Codix', 'DoITwise',
-    #             'ДЗИ', 'ОББ', 'HP', 'IT hub Kaufland', 'Nestle', 'Paraflow']
-    # uids = ['4c716bc2-40c9-467e-9474-11f61d40d0ae', 'c2d952d8-7b14-4aeb-b49d-f9e1a45d4aad', 'cfdfa522-a0f1-43f8-bc60-eca0c9baf3f6', 'a3c3eed4-08bf-44fa-8238-c4df7d88ffc0', '2d479f9e-c75e-4a5d-9a8a-aeb7af9ea8f1',
-    #        'a86bb922-c025-4921-9e04-e0b54fb76e14', '0609133d-13d1-45ba-b524-c87e60466a09', '4c6e0b7f-d819-4c10-be26-65ba9934398b', 'b3991016-f948-4b2b-b178-202e2c100439', 'e41a9dc3-b44c-4a05-bbce-c816578e2b60', 'f397ec8f-dc2d-4df5-bf46-ada57bb02cf8']
-    # for company in companies:
-    #    curr_company = Company(name=company, website='',
-    #                           contacts="", logo='/static/img/company/' + str(index) + '.png',
-    #                           description='', uid=uids[index - 1])
-    #    print(company, gen_uid())
-    #    db.session.add(curr_company)
-    #    index += 1
-    # db.session.commit()
-
+    CodixBG = Company(name='Codix Bulgaria', website='https://www.codix.eu/en',
+                        contacts='', logo=None,
+                        description='<blockquote class="blockquote"><p class="codix-container-title"> Software solution for Commercial Finance, Supply chain Finance, Consumer Finance & Debt collection</p></blockquote>\n          \n          CODIX is the software company, which has developed iMX – a \nunique software solution, providing businesses with an event-driven \nsystem for the management of their activities, such as Factoring, \nCommercial Finance, Supply Chain Finance (SCF), Trade and Corporate \nFinance, Debt Collection and Legal, Accounts Receivable, Consumer \nFinance, Leasing, Credit Insurance, etc. Given the achievements and \ncapabilities of iMX, it is one of the best commercial finance softwares \non the market.\n            <br><br>\n          iMX is an innovative software solution, which enables our \nclients to manage all business processes within a single technical \nstructure, which can be easily customised to meet their specific needs. \nTo see how iMX software handles commercial finance system and it\'s full \ncapabilities, check out our Line of Business pages.\n            ',
+                        uid="3d2f8616-f3be-45c4-8a0c-fda9702e1ff6")
+    db.session.add(CodixBG)
+    db.session.commit()
+    """ Mappers """
+    CodixBGMapper = Mapper(company_name='Codix Bulgaria', company=CodixBG)
+    db.session.add(CodixBGMapper)
+    db.session.commit()
     """ CEOs """
-    # insert_user(name='Alex Tsvetanov', company=Headstarter, email='alex@alexts.tk', password=crypto('password'))
-    #
-
-    """ Positions """
-    # example1 = Position(name='Python Web Developer', company=Headstarter,
-    # 				   description="<strong>Пробно</strong> <i>описание</i> на <u>стажанстка програма</u>",
-    # 				   available=True, duration=3, hours_per_day="7-8ч.",
-    # 				   age_required='Поне 16 г.', tag=Tags_db[3], email="headstarter@headstarter.eu", location="Някъде", date='{}'.format(DT.datetime.now()))
-    # db.session.add(example1)
-    # db.session.commit()
-
-    # example2 = Position(name='C/C++ Back-end Developer', company=Headstarter, email="headstarter@headstarter.eu",
-# 					   description="""
-# Takeaway.com is Europe’s leading online and mobile food ordering company, dedicated to connecting consumers with their favorite local restaurants. The people who work at Takeaway.com are our company's greatest asset; each person at Takeaway.com plays an integral part in building tools and technology that help connect and transact our consumers and restaurants - at scale.<br>
-# <br>
-# The company’s online and mobile ordering platforms allow meals to order directly from more than 40,000 takeout restaurants all over Europe and beyond. The Takeaway.com portfolio of brands includes Takeaway.com, Thuisbezorgd.nl, Lieferando.de, Pyszne.pl, Lieferservice.at and Vietnammm.com. The working atmosphere at Takeaway.com is characterized by team spirit,
-# trust and open communication as well as a high degree of personal responsibility. Bringing in your own ideas is encouraged and creativity, motivation and commitment are much appreciated.<br>
-# <br>
-# The Position: <br>
-# <br>
-# We are looking for talented Front-End Developers to join our multinational and multicultural IT organization. You will play a key role in helping on our journey towards high performance teams following agile values and principles.<br>
-# <br>
-# Your Profile: <br>
-# <br>
-# ● At least 3 years of professional experience<br>
-# ● Excellent knowledge of HTML 5, CSS 3 and DOM<br>
-# ● In-depth knowledge of JavaScript(ECMAScript 5)<br>
-# ● Experience with frameworks for front-end development - Angular, React, Vue.js, etc<br>
-# ● Knowledge of template engines - Smarty, Twig, Blade, Razor, etc<br>
-# ● Experience in processing web pages on different platforms<br>
-# ● Working with Related Micro Services and(RESTful) APIs<br>
-# ● Practice with Test Driven Development, using device testing technologies<br>
-# ● Experience with code versioning( especially Git ) <br>
-# <br>
-# Advantages : <br>
-# <br>
-# ● Understanding of the work of the HTTP protocol<br>
-# ● Experience with Vue.js<br>
-# ● Work with Node.js or Dart<br>
-# ● Experience with Blade Template Engine(Laravel)<br>
-# ● Familiarity or experience with ECMAScript 6 in JavaScript<br>
-# ● Familiarity or experience with TypeScript<br>
-# ● Task trainer experience - Grunt, Gulp, etc.<br>
-# ● Familiarity or experience with Webpack and / or Laravel-mix<br>
-# ● Knowledge of CSS preprocessors -LESS, SASS<br>
-# ● Experience with Bootstrap framework<br>
-# ● Experience with Test Driven Development, using device testing technologies<br>
-# ● Experience or familiarity with the Scrum methodology<br>
-# <br>
-# What We offer? <br>
-# <br>
-# ● A place where your ideas are heard and where you can really grow and learn with your team.<br>
-# ● A more than competitive salary with(long term) incentives in accordance with your experience.<br>
-# ● Awesome teams and people, in a fast growing company.<br>
-# ● Being part of a young, professional and truly international team.<br>
-# ● The opportunity to learn new concepts and practice them in a safe environment.<br>
-# ● The freedom to go where no one in our company has gone before.<br>
-# ● Free drinks, fruit, several sports benefits and regular awesome team events<br>
-# <br>
-# Takeaway offers career advancement and lucrative compensation. The Technology department has regular knowledge sharing, training and attends/speaks at global conferences<br>
-# <br>
-# How to apply?<br>
-# <br>
-# If you are interested, follow the link below and please send us your CV / Resume.<br>
-# We will read all the information on it and we will contact the most suitable candidates.<br>
-# Your personal data is protected by Bulgarian law and European General Data Protection Regulation.<br>
-# """,
-# 					   available=True, duration=6, hours_per_day="До 4ч.",
-# 					   age_required='Поне 16 г.', tag=Tags_db[3], location="Някъде", date='{}'.format(DT.datetime.now()))
-# 	db.session.add(example2)
-# 	db.session.commit()
+    BilyanaDakova = User(name='Биляна Дакова', company=CodixBG, verification=None, email='hr@codix.eu', password_hash='5dfee24b630b6ab628038df378866b16b459b71d1a4e386a13605b21173ef36f')
+    db.session.add(BilyanaDakova)
+    db.session.commit()

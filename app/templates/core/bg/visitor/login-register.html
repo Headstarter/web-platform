@@ -132,5 +132,15 @@
       $('#customcompany').hide();
     }
   });
+  $(document).ready(function () {
+      $($('option')[0]).attr('selected', 'selected');
+      let selected = $('option:selected').val();
+      if (selected == 'Not listed') {
+        $('#customcompany').show();
+      }
+      else {
+        $('#customcompany').hide();
+      }
+  });
 </script>   
   {% endblock %}

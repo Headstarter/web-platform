@@ -22,6 +22,7 @@ class Companies:
 	@staticmethod
 	def upload_logo():
 		from flask import jsonify
+		import sys
 		if request.method == 'POST':
 			# check if the post request has the file part
 			if 'logo' not in request.files:
@@ -35,15 +36,19 @@ class Companies:
 
 			if file and allowed_image(file.filename):
 				saved = False
-				while saved:
+				while not saved:
 					try:
-						file.save(os.ath.join(os.environ['basedir'], 'static/wt_prod-20039' + Company.query.filter(Company.id == session['company_id']).one().logo))
+						file.save(os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + Company.query.filter(Company.id == session['company_id']).one().logo))
 						saved = True
+						print('Saved', file=sys.stderr)
 					except FileNotFoundError:
+						print('FileNotFound', file=sys.stderr)
 						import shutil
 						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'), os.path.join(
 						    os.environ['basedir'], 'static/wt_prod-20039/images/company/' + str(uid) + '.png'))
 					except TypeError:
+						import sys
+						print('TypeError', file=sys.stderr)
 						uid = Company.query.filter(Company.id == session['company_id']).one().uid
 						Company.query.filter(Company.id == session['company_id']).update({'logo':'/images/company/' + str(uid) + '.png'});
 						db.session.commit()
