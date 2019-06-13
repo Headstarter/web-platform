@@ -7,7 +7,7 @@ import json
 
 class Mapper(db.Model):
     __tablename__ = 'Mapper'
-    __table_args__ = {'extend_existing': True}
+   
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(128))
     company_id = db.Column(
@@ -17,7 +17,7 @@ class Mapper(db.Model):
 
 class Tag(db.Model):
     __tablename__ = 'Tag'
-    __table_args__ = {'extend_existing': True}
+   
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     positions = db.relationship("Position", back_populates="tag")
@@ -28,7 +28,7 @@ class Tag(db.Model):
 
 class Company(db.Model):
     __tablename__ = 'Company'
-    __table_args__ = {'extend_existing': True}
+   
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
 
@@ -48,7 +48,7 @@ class Company(db.Model):
 
 class User(db.Model):
     __tablename__ = 'User'
-    __table_args__ = {'extend_existing': True}
+   
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
@@ -77,7 +77,7 @@ class User(db.Model):
 
 class Company(db.Model):
     __tablename__ = 'Company'
-    __table_args__ = {'extend_existing': True}
+   
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
 
@@ -97,7 +97,7 @@ class Company(db.Model):
 
 class User(db.Model):
     __tablename__ = 'User'
-    __table_args__ = {'extend_existing': True}
+   
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
@@ -134,7 +134,7 @@ class User(db.Model):
 
 class Verify(db.Model):
     __tablename__ = 'Verify'
-    __table_args__ = {'extend_existing': True}
+   
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -144,7 +144,7 @@ class Verify(db.Model):
 
 class CV(db.Model):
     __tablename__ = 'CV'
-    __table_args__ = {'extend_existing': True}
+   
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -186,7 +186,7 @@ class CV(db.Model):
 
 class Position(db.Model):
     __tablename__ = 'Position'
-    __table_args__ = {'extend_existing': True}
+   
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
@@ -229,7 +229,7 @@ class Position(db.Model):
 
 class Application (db.Model):
     __tablename__ = 'Application'
-    __table_args__ = {'extend_existing': True}
+   
     id = db.Column(db.String(2048), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
     user = db.relationship('User', back_populates='applications')
@@ -347,8 +347,13 @@ def insert_company(name):
         name=name,
         website='',
         description='',
-        logo='/static/img/company/' + str(uid) + '.png'
+        logo='/images/company/' + str(uid) + '.png'
     )
+    
+    import os
+    import shutil
+    shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'),os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/' + str(uid) + '.png'))
+    
     db.session.add(company)
     db.session.commit()
     db.session.add(Mapper(company_name=name, company_id=Company.query.filter(
@@ -356,7 +361,7 @@ def insert_company(name):
     db.session.commit()
     import sys
     print('returned Company', Company.query.filter(
-        Company.name == name).one(), file=sys.stderr)
+        Company.name == name).one())
     return Company.query.filter(Company.name == name).one()
 
 
@@ -374,9 +379,9 @@ def update_cv(student_id, name, email, telephone, location,
               birthday, languages, education, projects, description, skills, hobbies):
     import sys
     print(student_id, name, email, telephone, location,
-          birthday, languages, education, projects, description, file=sys.stderr)
+          birthday, languages, education, projects, description)
     print('All User with id', student_id, 'are', User.query.filter(
-        User.id == student_id).all(), file=sys.stderr)
+        User.id == student_id).all())
     cv_id = User.query.filter(User.id == student_id).one().cv_id
     print(cv_id)
     CV.query.filter(CV.id == cv_id).update({

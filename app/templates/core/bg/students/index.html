@@ -65,7 +65,7 @@
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-group"></div>
-                      <h5 class="box-line-title">Повече от 100 посетителя всеки ден</h5>
+                      <h5 class="box-line-title">Повече от 100 посетител всеки ден</h5>
                     </div>
                   </article>
                 </div>
@@ -83,7 +83,7 @@
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-chat"></div>
-                      <h5 class="box-line-title">#todo</h5>
+                      <h5 class="box-line-title">Статии, които да те напътсват през цялото време</h5>
                     </div>
                   </article>
                 </div>
@@ -106,33 +106,24 @@
         <div class="container">
           <h3 class="text-center">Последни публикации</h3>
           <div class="row row-30 row-xl-70">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-6">
               <!-- Post Minimal-->
-              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/></a>
+              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/></a>
                 <div class="post-minimal-main">
-                  <h5 class="post-minimal-title"><a href="blog-post.html">8 Surprising Predictions About the Future of Work</a></h5>
-                  <p>There’s no denying that the landscape of work is changing. More and more companies are adopting flexible work policies</p>
-                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
+                  <h5 class="post-minimal-title"><a href="/post/1">Как да си направим CV?</a></h5>
+                  <p>Изпращането на CV е първата крачка в процеса на кандидатстване за стажантска програма</p>
+                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
                 </div>
               </article>
             </div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-6">
               <!-- Post Minimal-->
-              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/></a>
+              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/></a>
                 <div class="post-minimal-main">
-                  <h5 class="post-minimal-title"><a href="blog-post.html">Job Search Success: Finding a Business Development Job</a></h5>
-                  <p>Business development professionals are at the heart of all sorts of organizations, from startups to multinational corporations.</p>
-                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
-                </div>
-              </article>
-            </div>
-            <div class="col-12 col-lg-4">
-              <!-- Post Minimal-->
-              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-3-369x253.jpg" alt=""/></a>
-                <div class="post-minimal-main">
-                  <h5 class="post-minimal-title"><a href="blog-post.html">How to Impress Your Future Employer</a></h5>
-                  <p>You’re committed to your job search, and you use every ounce of your free time you have to comb through listings, write cover</p>
-                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
+                  <h5 class="post-minimal-title"><a href="/post/2">Как да си наемем стажант?
+</a></h5>
+                  <p>Наемането на млади стажанти предоставя множество предимства, едно от които е постигането на по-висока икономическа активност.</p>
+                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
                 </div>
               </article>
             </div>
@@ -145,12 +136,12 @@
           <h3>Popular Categories</h3>
           <!-- Owl Carousel-->
           <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="3" data-xl-items="5" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
-              {% for tag in tags %}
+              {% for tag in open %}
               <a class="box-creative" href="#todo">
               <div class="box-creative-inner">
                 <div class="icon box-creative-icon mercury-icon-calc"></div>
-                <p class="box-creative-title">{{ tag.name | replace("&nbsp;", "") | safe }}</p>
-                <p>{{ open[loop.index - 1] }} отворени позиции</p>
+                <p class="box-creative-title">{{ tag.label | safe }}</p>
+                <p>{{ tag.count }} отворени позиции</p>
               </div>
               <div class="box-creative-dummy"></div></a>
               {% endfor %}
@@ -166,31 +157,25 @@
             </div>
             <div class="col-12">
               <div class="table-job-offers-outer">
-                <table class="table-job-offers table-responsive">
+              <table class="table-job-listing table-responsive">
                   {% for offer in positions %}
-                  <tr>
-                    <td class="table-job-offers-date"><span>{{ offer.get_date () }}</span></td>
-                    <td class="table-job-offers-main">
-                      <!-- Company Light-->
-                      <article class="company-light">
-                        <figure class="company-light-figure"><img class="company-light-image" src="{{ offer.company.logo }}" alt=""/>
-                        </figure>
-                        <div class="company-light-main">
-                          <h5 class="company-light-title"><a href="job-details.html">{{ offer.name }}</a></h5>
-                          <p class="text-color-default">{{ offer.company.name }}</p>
-                        </div>
-                      </article>
-                    </td>
-                    <!--<td class="table-job-offers-meta">
-                      <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-cash"></span><span>TODO SALARY</span></div>
-                    </td>-->
-                    <td class="table-job-offers-meta">
-                      <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></div>
-                    </td>
-                    <td class="table-job-offers-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
-                  </tr>
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
+                      </div>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
                   {% endfor %}
-                </table>
+              </table>
               </div>
             </div>
             <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="#todo">Show More Jobs</a></div>
