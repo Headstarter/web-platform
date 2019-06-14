@@ -104,10 +104,6 @@ def list_my_candidates():
 def offer_view(position_id):
 	return mapped_routes[session['type']].offer_details(position_id)
 
-# @routes.route('/cv/<user_id>')
-# def profile_view(user_id):
-#     return mapped_routes['Visitor'].profile_view(user_id)
-
 
 @routes.route('/profile')
 def profile():
@@ -181,60 +177,3 @@ def upload_cv_picture():
 		flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
 		session['redirect'] = url_for('v1pre_routes.upload_logo')
 		return render_template('template.html')
-
-#
-# @routes.route('/apply/<position>')
-# def apply_students(position):
-#     return mapped_routes['Visitor'].apply_student(position)
-#
-#
-# @routes.route('/profile')
-# def profile():
-#     try:
-#         return mapped_routes[session['type']].profile()
-#     except:
-#         try:
-#             return mapped_routes['Visitor'].profile()
-#         except:
-#             flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
-#             flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-#             session['redirect'] = url_for('v1pre_routes.profile')
-#             return render_template('template.html')
-#
-#
-# @routes.route('/cv/confirm')
-# def cv_confirm():
-#     try:
-#         return mapped_routes[session['type']].cv_confirm()
-#     except:
-#         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
-#         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-#         session['redirect'] = url_for('v1pre_routes.profile')
-#         return render_template('template.html')
-#
-#
-# @routes.route('/profile/<studentId>/view')
-# def profileView(studentId):
-#     try:
-#         return mapped_routes['Visitor'].profile_view(studentId)
-#     except:
-#         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
-#         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-#         session['redirect'] = url_for('core.profile')
-#         return render_template('template.html')
-#
-#
-# @routes.route('/company/<int:companyId>', methods=['GET', 'POST'])
-# def company_view(companyId):
-# 	return mapped_routes['Visitor'].company_view(companyId)
-#
-#
-# @routes.route('/application/<applicationId>', methods=['GET', 'POST'])
-# def application_view(applicationId):
-#     try:
-#         return mapped_routes[session['type']].application_view(applicationId)
-#     except:
-#         flash('В момента нямате достъп до тази страница. Моля, опитайте да влезете в системата.', 'warning')
-#         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
-#         session['redirect'] = url_for('v1pre_routes.application_view', applicationId=applicationId)
-#         return render_template('template.html')

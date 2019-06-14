@@ -82,7 +82,7 @@ class Companies:
 		return render_template('core/' + str(session['language'] or get_locale()) + '/company/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(Position.available == True).count(),
-								open=Target_Group.groupTags(),
+								open=Target_Group.groupTags(session['company_id']),
 								positions=Position.query.filter(Position.available == True)
 														.order_by(Position.id.desc())
 														.limit(5))

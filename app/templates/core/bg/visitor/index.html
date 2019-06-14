@@ -133,13 +133,13 @@
       <!-- Popular Categories-->
       <section class="section section-md bg-default text-center">
         <div class="container container-fullwidth">
-          <h3>Popular Categories</h3>
+          <h3>Популярни категории</h3>
           <!-- Owl Carousel-->
-          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="3" data-xl-items="5" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
+          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
               {% for tag in open %}
               <a class="box-creative" href="#todo">
               <div class="box-creative-inner">
-                <div class="icon box-creative-icon mercury-icon-calc"></div>
+                <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
                 <p class="box-creative-title">{{ tag.label | safe }}</p>
                 <p>{{ tag.count }} отворени позиции</p>
               </div>
@@ -178,7 +178,7 @@
               </table>
               </div>
             </div>
-            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="#todo">Show More Jobs</a></div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.browse') }}">Виж още обяви</a></div>
           </div>
         </div>
       </section>
@@ -265,7 +265,7 @@
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title"><a href="#todo">Разгледай позициите</a></h5>
+                <h5 class="ll-item-title"><a href="{{ url_for ('core.browse') }}">Разгледай позициите</a></h5>
                 <p>Лесно търсене по различни категории</p>
               </div>
             </li>
@@ -297,7 +297,7 @@
                   <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                 </svg>
               </div>
-              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="#todo">Започни сега</a></div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for ('core.browse') }}">Започни сега</a></div>
             </li>
           </ul>
         </div>
