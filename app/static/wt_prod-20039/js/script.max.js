@@ -1166,7 +1166,7 @@ var _hs_response;
             for (i = 0; i < plugins.rdMailForm.length; i++) {
                 var $form = $(plugins.rdMailForm[i]),
                     formHasCaptcha = false;
-                    console.log($form.attr('novalidate', 'novalidate').ajaxForm);
+                    //console.log($form.attr('novalidate', 'novalidate').ajaxForm);
                 $form.attr('novalidate', 'novalidate').ajaxForm({
                     data: {
 
@@ -1239,11 +1239,22 @@ var _hs_response;
                         }
                     },
                     success: function(result, status, xhr) {
-                        console.log (result, status, xhr.responseText, xhr.responseXML, xhr.status, xhr.responseURL);
-                        console.log (xhr);
+                        //console.log('-----------------------------------------------');
+                        //console.log(result);
+                        //console.log(result.indexOf(window.location.pathname + window.location.search));
+                        //console.log('-----------------------------------------------');
+                        //console.log(status, xhr.responseText, xhr.responseXML, xhr.status, xhr.responseURL);
+                        //console.log (xhr);
                         _hs_response = xhr;
-                        if (_hs_response.getResponseHeader("X-Response-URL"))
-                            window.location.href = _hs_response.getResponseHeader("X-Response-URL");
+                        if (_hs_response.getResponseHeader("X-Response-URL")) {
+                            console.log(window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL"));
+                            if (window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL")) {    
+                                location.reload(); 
+                            }
+                            else {
+                                window.location.href = _hs_response.getResponseHeader("X-Response-URL");
+                            }
+                        }
                         return;
                         if (isNoviBuilder)
                             return;
