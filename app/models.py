@@ -91,6 +91,13 @@ class Verify(db.Model):
 
     user = db.relationship("User", back_populates="verification")
     code = db.Column(db.String(6))
+    
+    
+    @staticmethod
+    def gen_code():
+        import random
+        alphabet = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+        return ''.join(random.choice(alphabet) for i in range(16)) # 10 ^ 28.678267031972062 variants
 
 
 class CV(db.Model):

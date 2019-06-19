@@ -178,6 +178,13 @@ def register():
             return my_redirect(url_for('login_register', type="Company", action='register'))
 
 
+@app.route('/try_sending')
+def send():
+    user = User.query.filter(User.email == session['email']).one()
+    from app.v1.helpers.mailer import Mailer
+    return Mailer.sendConfirmation(user)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
