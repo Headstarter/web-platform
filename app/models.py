@@ -4,8 +4,11 @@ import datetime as DT
 from app import db
 import json
 
+from sqlalchemy.ext.declarative import declarative_base
 
-class Mapper(db.Model):
+Base = declarative_base()
+
+class Mapper(Base, db.Model):
     __tablename__ = 'Mapper'
    
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +18,7 @@ class Mapper(db.Model):
     company = db.relationship('Company', back_populates='mapper')
 
 
-class Tag(db.Model):
+class Tag(Base, db.Model):
     __tablename__ = 'Tag'
    
     id = db.Column(db.Integer, primary_key=True)
@@ -26,11 +29,11 @@ class Tag(db.Model):
         return '<Tag ' + str(self.id) + ' - ' + str(self.name) + '>'
 
 
-class Company(db.Model):
+class Company(Base, db.Model):
     __tablename__ = 'Company'
    
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
+    uid = db.Column(db.String(256))
 
     mapper = db.relationship("Mapper", back_populates="company")
     employees = db.relationship("User", back_populates="company")
@@ -46,7 +49,7 @@ class Company(db.Model):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
 
 
-class User(db.Model):
+class User(Base, db.Model):
     __tablename__ = 'User'
    
 
@@ -83,7 +86,7 @@ class User(db.Model):
         return '<User {}>'.format(self.name)
 
 
-class Verify(db.Model):
+class Verify(Base, db.Model):
     __tablename__ = 'Verify'
    
 
@@ -100,7 +103,7 @@ class Verify(db.Model):
         return ''.join(random.choice(alphabet) for i in range(16)) # 10 ^ 28.678267031972062 variants
 
 
-class CV(db.Model):
+class CV(Base, db.Model):
     __tablename__ = 'CV'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -141,7 +144,7 @@ class CV(db.Model):
         return '<CV {}>'.format(self.name)
 
 
-class Position(db.Model):
+class Position(Base, db.Model):
     __tablename__ = 'Position'
    
 
@@ -184,7 +187,7 @@ class Position(db.Model):
             return "{} days ago".format(int((today - posted).total_seconds() / 60.0 / 60.0 / 24.0))
 
 
-class Application (db.Model):
+class Application (Base, db.Model):
     __tablename__ = 'Application'
    
     id = db.Column(db.String(2048), nullable=False, unique=True)
@@ -194,6 +197,11 @@ class Application (db.Model):
         'Position.id'), primary_key=True)
     position = db.relationship('Position', back_populates='applications')
     company_id = db.Column(db.Integer, primary_key=True)
+
+
+def factory(classname):
+    cls = globals()[classname]
+    return cls
 
 
 def gen_uid():
