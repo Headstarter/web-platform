@@ -399,7 +399,7 @@ def filter_applications(position=None, company=None):
     return applications
 
 
-def filter_offers_by_tag(position=None, company=None):
+def filter_offers_by_tag(position=None, company=None, group=None):
     if position is None:
         positions = Position.query.filter(Position.available == True)
 
@@ -426,11 +426,21 @@ def filter_offers_by_tag(position=None, company=None):
         positions = Position.query.filter(Position.available == True) \
             .filter(Position.tag_id > 28) \
             .filter(Position.tag_id <= 32)
-    else:
+    elif position == None:
         positions = Position.query.filter(Position.available == True)
+    else:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id == position)
 
     if company is not None:
         positions = positions.filter(Position.company_id == company)
+        
+    if group is not None:
+        from app.v1.target import groups, Target_Group
+        print('in', groups[int(group)]['tags'])
+        from sqlalchemy import or_
+        positions = positions.filter(or_(*[Position.tag_id.like(x) for x in groups[int(group)]['tags']]))
+        print(positions.all())
 
     return positions.order_by(Position.id.desc())
 
@@ -448,19 +458,3 @@ def init():
         print(Tag.query.get(len(Tags_db) + 1), end=' ')
         Tags_db.append(Tag.query.get(len(Tags_db) + 1))
     print()
-
-    """ Companies """
-    CodixBG = Company(name='Codix Bulgaria', website='https://www.codix.eu/en',
-                        contacts='', logo=None,
-                        description='<blockquote class="blockquote"><p class="codix-container-title"> Software solution for Commercial Finance, Supply chain Finance, Consumer Finance & Debt collection</p></blockquote>\n          \n          CODIX is the software company, which has developed iMX – a \nunique software solution, providing businesses with an event-driven \nsystem for the management of their activities, such as Factoring, \nCommercial Finance, Supply Chain Finance (SCF), Trade and Corporate \nFinance, Debt Collection and Legal, Accounts Receivable, Consumer \nFinance, Leasing, Credit Insurance, etc. Given the achievements and \ncapabilities of iMX, it is one of the best commercial finance softwares \non the market.\n            <br><br>\n          iMX is an innovative software solution, which enables our \nclients to manage all business processes within a single technical \nstructure, which can be easily customised to meet their specific needs. \nTo see how iMX software handles commercial finance system and it\'s full \ncapabilities, check out our Line of Business pages.\n            ',
-                        uid="3d2f8616-f3be-45c4-8a0c-fda9702e1ff6")
-    db.session.add(CodixBG)
-    db.session.commit()
-    """ Mappers """
-    CodixBGMapper = Mapper(company_name='Codix Bulgaria', company=CodixBG)
-    db.session.add(CodixBGMapper)
-    db.session.commit()
-    """ CEOs """
-    BilyanaDakova = User(name='Биляна Дакова', company=CodixBG, verification=None, email='hr@codix.eu', password_hash='5dfee24b630b6ab628038df378866b16b459b71d1a4e386a13605b21173ef36f')
-    db.session.add(BilyanaDakova)
-    db.session.commit()

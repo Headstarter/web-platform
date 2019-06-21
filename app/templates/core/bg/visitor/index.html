@@ -9,27 +9,23 @@
             <div class="jumbotron-creative-main">
               <h2 class="jumbotron-creative-title">Get your headstart on the road to business.</h2>
               <div class="form-layout-search-outer">
-                <form class="form-layout-search form-lg">
+                <form action="{{ url_for('core.browse') }}" class="form-layout-search form-lg">
                   <div class="form-wrap form-wrap-icon">
-                    <input class="form-input form-control-has-validation" id="form-keywords" type="text" name="keywords" data-constraints="@Required"><span class="form-validation"></span>
-                    <label class="form-label rd-input-label" for="form-keywords">Ключови думи</label><span class="icon fl-bigmug-line-circular224"></span>
-                  </div>
-                  <div class="form-wrap form-wrap-icon form-wrap-select">
                     <!-- Select 2-->
-                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="region" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
                       <option value="0">Всички позиции</option>
                       {% for tag in tags %}
                       <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                       {% endfor %}
                     </select>
-                    <span class="icon fl-bigmug-line-big104"></span>
+                    <i class="icon fa fa-filter" aria-hidden="true"></i>
                   </div>
                   <div class="form-wrap form-wrap-button form-wrap-button-icon-only">
                     <button class="button button-lg button-primary button-icon-only" type="submit" aria-label="search"><span class="icon icon-4 fl-bigmug-line-search74"></span></button>
                   </div>
                 </form>
               </div>
-              <p class="big text-gray-800">Предлагаме&nbsp;<a href="#">{{ number_offers }} позиции за теб</a> в момента!</p>
+              <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse') }}">{{ number_offers }} позиции за теб</a> в момента!</p>
             </div>
           </div>
           <div class="jc-decoration">
@@ -137,7 +133,7 @@
           <!-- Owl Carousel-->
           <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
               {% for tag in open %}
-              <a class="box-creative" href="#todo">
+              <a class="box-creative" href="{{ url_for('core.browse') }}?group={{ tag.id }}">
               <div class="box-creative-inner">
                 <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
                 <p class="box-creative-title">{{ tag.label | safe }}</p>
