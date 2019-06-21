@@ -40,18 +40,25 @@ class Visitors:
 		import sys
 		print(request.args.get('tag'))
 		print(request.args.get('company'))
-		if request.args.get('company') is None and \
-				request.args.get('tag') is None:
-			positions = filter_offers_by_tag()
-		elif request.args.get('company') is None and request.args['tag'] != '0':
-			positions = filter_offers_by_tag(int(request.args['tag']))
-		elif request.args.get('tag') is None and request.args['company'] != '0':
-			positions = filter_offers_by_tag(company=int(request.args['company']))
+		company = request.args.get('company') or '0'
+		tag = request.args.get('tag') or '0'
+		group = request.args.get('group') or '-1'
+		if group == '-1':
+			if company == '0' and tag == '0':
+				positions = filter_offers_by_tag()
+			elif company == '0' and tag != '0':
+				positions = filter_offers_by_tag(int(tag))
+			elif tag == '0' and company != '0':
+				positions = filter_offers_by_tag(company=int(company))
+		else:
+			positions = filter_offers_by_tag(group=int(group))
 		
 		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/browse.html',
 							   tags=Tag.query.all(),
 							   companies=Company.query.all(),
-							   positions=positions.all()
+							   positions=positions,
+							   company_selected=int(company),
+							   tag_selected=int(tag),
 							   )
 
 	@staticmethod
