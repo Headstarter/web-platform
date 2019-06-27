@@ -22,7 +22,7 @@ def get_locale():
 
 @app.after_request
 def set_response_headers(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Cache-Control'] = 'public, max-age=300, must-revalidate, no-store'
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
@@ -97,7 +97,6 @@ def login_register():
     except KeyError:
         pass
 
-    import sys
     print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n')
 
     return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user, companies=Company.query.all())
@@ -105,7 +104,7 @@ def login_register():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    import sys
+
     print(request.form)
     member = 'off'
     try:
