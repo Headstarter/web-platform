@@ -185,8 +185,10 @@ class Position(Base, db.Model):
             return "{} hours ago".format(int((today - posted).total_seconds() / 60.0 / 60.0))
         elif today - DT.timedelta(days=7) < posted:
             return "{} days ago".format(int((today - posted).total_seconds() / 60.0 / 60.0 / 24.0))
-        elif today - DT.timedelta(weeks=1) > posted:
+        if today - DT.timedelta(weeks=2) > posted:
             return "{} weeks ago".format(int((today - posted).total_seconds() / 7.0 / 60.0 / 60.0 / 24.0))
+        if today - DT.timedelta(weeks=1) > posted:
+            return "{} week ago".format(int((today - posted).total_seconds() / 7.0 / 60.0 / 60.0 / 24.0))
 
 
 class Application (Base, db.Model):
