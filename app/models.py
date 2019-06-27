@@ -181,10 +181,12 @@ class Position(Base, db.Model):
         posted = DT.datetime.strptime(self.date, '%Y-%m-%d %H:%M:%S.%f')
         if today - DT.timedelta(hours=1) < posted:
             return "{} minutes ago".format(int((today - posted).total_seconds() / 60.0))
-        if today - DT.timedelta(hours=24) < posted:
+        elif today - DT.timedelta(hours=24) < posted:
             return "{} hours ago".format(int((today - posted).total_seconds() / 60.0 / 60.0))
-        if today - DT.timedelta(days=7) < posted:
+        elif today - DT.timedelta(days=7) < posted:
             return "{} days ago".format(int((today - posted).total_seconds() / 60.0 / 60.0 / 24.0))
+        elif today - DT.timedelta(weeks=1) > posted:
+            return "{} weeks ago".format(int((today - posted).total_seconds() / 7.0 / 60.0 / 60.0 / 24.0))
 
 
 class Application (Base, db.Model):
