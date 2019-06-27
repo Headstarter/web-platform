@@ -171,6 +171,9 @@ class Companies:
 			positions = filter_offers_by_tag(int(request.args['tag']), session['company_id'])
 		else:
 			positions = filter_offers_by_tag(company=session['company_id'])
+   
+		if positions.count() == 0:
+			flash('Нямате публикувани обяви все още.');
 		
 		return render_template('core/' + str(session['language'] or get_locale()) + '/company/list_offers.html',
 							   tags=Tag.query.all(),

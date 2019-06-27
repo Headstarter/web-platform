@@ -126,18 +126,23 @@ class CV(Base, db.Model):
     hobbies = db.Column(db.String(512))
 
     def get_skills(self):
+        self.skills = self.skills or '[]'
         return json.loads(self.skills)
 
     def get_projects(self):
+        self.projects = self.projects or '[]'
         return json.loads(self.projects)
 
     def get_education(self):
+        self.education = self.education or '[]'
         return json.loads(self.education)
 
     def get_languages(self):
+        self.languages = self.languages or '[]'
         return json.loads(self.languages)
 
     def get_hobbies(self):
+        self.hobbies = self.hobbies or '[]'
         return json.loads(self.hobbies)
 
     def __repr__(self):

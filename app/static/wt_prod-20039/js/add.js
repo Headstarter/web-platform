@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#blank_lang, #blank_edu, #blank_project, #blank_skill, #blank_hobby').append(`
-    <button type="button" onclick="$(this).parent().remove();" class="remove button button-sm button-primary"><span class="icon mdi mdi-minus"></span>Премахни</button>
+    <a href="#todo" onclick="$(this).parent().remove();" class="remove">− Премахни</button>
     `);
     let elements = ['lang', 'edu', 'project', 'skill', 'hobby'];
     for (let i = 0 ; i < elements.length ; i += 1) {

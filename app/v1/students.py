@@ -43,10 +43,27 @@ class Students:
 				flash('No selected file')
 				return jsonify({'value': 'No file selected.'}), 400
 			if file and allowed_image(file.filename):
+				saved = False
+				while not saved:
+					try:
+						file.save(os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:]))
+						saved = True
+						print('Saved', file=sys.stderr)
+					except FileNotFoundError:
+						print('FileNotFound', file=sys.stderr)
+						import shutil
+						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'), \
+                  			os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:]))
+					except TypeError:
+						import sys
+						print('TypeError', file=sys.stderr)
+
+				"""
 				destination = os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:])
 				with open(destination, "a+") as f:
 					# filename = secure_filename(file.filename)
 					file.save(destination)
+				"""
 				return jsonify({'value': 'Uploaded'}), 200
 	
 	@staticmethod

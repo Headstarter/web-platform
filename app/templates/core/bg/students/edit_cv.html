@@ -7,6 +7,13 @@
     .hidden, #blank_edu, #blank_project, #blank_lang, #blank_skill, #blank_hobby {
         display: none;
     }
+    .rd-form.rd-mailform.form-lg.form-corporate {
+      margin-top: 0px !important;
+    }
+    a.remove {
+      display: flex;
+      justify-content: flex-end;
+    }
 </style>
 <script src="/js/add.js"></script>
 <script src="/js/summernote-bs4.js"></script>
@@ -101,11 +108,11 @@ $(document).ready( function() {
               <div class="row row-40">
                   <article class="col-md-12 company-light">
                     <div class="form-wrap">
-                        <label class="form-label-outside">Твоя снимка: (До 16 МБ)</label>
+                        <label class="form-label-outside">Твоя снимка<br><span style="color: grey;">до 16 MB</span></label>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-default btn-file">
-                                    Browse… <input type="file" name="logo" id="imgInp">
+                                    <input type="file" class="button button-primary" name="logo" id="imgInp">
                                 </span>
                             </span>
                         </div>
@@ -166,32 +173,6 @@ $(document).ready( function() {
                 </div>
               </div>
             </div>
-            <div id="language_list" class="block-form">
-                <h4>Изучавани езици</h4>
-                <hr>
-                <div id="blank_lang" class="rd-form rd-mailform form-lg form-corporate">
-                  <div class="form-wrap">
-                    <label class="form-label-outside">Език</label>
-                    <div class="form-wrap-inner">
-                      <input class="form-input" type="text" name="language"
-                             required placeholder="напр. „Английски език“" >
-                    </div>
-                  </div>
-                </div>
-                {% for lang in student.cv.get_languages() %}
-                <div class="rd-form rd-mailform form-lg form-corporate">
-                  <div class="form-wrap">
-                    <label class="form-label-outside">Език</label>
-                    <div class="form-wrap-inner">
-                      <input class="form-input" type="text" name="language"
-                             required placeholder="напр. „Английски език“" value="{{ lang.language }}">
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-                <input form="submit-resume-form" type="hidden" name="languages">
-            </div>
-            <button type="button" class="add_lang button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави език</button>
             <div id="education_list" class="block-form">
                 <h4>Образование</h4>
                 <hr>
@@ -245,7 +226,7 @@ $(document).ready( function() {
                 {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="education">
             </div>
-            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави образование</button>
+            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
             <div id="project_list" class="block-form">
                 <h4>Проекти</h4>
                 <hr>
@@ -301,8 +282,45 @@ $(document).ready( function() {
                 {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="projects">
             </div>
-            <button type="button" class="add_project button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави проект</button>
+            <button type="button" class="add_project button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
 
+            <div id="language_list" class="block-form">
+              <h4>Изучавани езици</h4>
+              <hr>
+              <div id="blank_lang" class="rd-form rd-mailform form-lg form-corporate">
+                <div class="form-wrap">
+                  <label class="form-label-outside">Език</label>
+                  <div class="form-wrap-inner">
+                    <input class="form-input" type="text" name="language"
+                           required placeholder="напр. „Английски език“" >
+                  </div><br><br>
+                  <label class="form-label-outside">Ниво</label>
+                  <div class="form-wrap-inner">
+                    <input class="form-input" type="text" name="level"
+                          required placeholder="напр. „A1“" >
+                  </div>
+                </div>
+              </div>
+              {% for lang in student.cv.get_languages() %}
+              <div class="rd-form rd-mailform form-lg form-corporate">
+                <div class="form-wrap">
+                  <label class="form-label-outside">Език</label>
+                  <div class="form-wrap-inner">
+                    <input class="form-input" type="text" name="language"
+                           required placeholder="напр. „Английски език“" value="{{ lang.language }}">
+                  </div><br><br>
+                  <label class="form-label-outside">Ниво</label>
+                  <div class="form-wrap-inner">
+                    <input class="form-input" type="text" name="level"
+                           required placeholder="напр. „А1“" value="{{ lang.level }}">
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <input form="submit-resume-form" type="hidden" name="languages">
+          </div>
+          <button type="button" class="add_lang button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+          
               <div id="skill_list" class="block-form">
                 <h4>Личностни унения</h4>
                 <hr>
@@ -328,7 +346,7 @@ $(document).ready( function() {
                   {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="skills">
             </div>
-            <button type="button" class="add_skill button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави умение</button>
+            <button type="button" class="add_skill button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
               <div id="hobby_list" class="block-form">
                 <h4>Твой хобита</h4>
                 <hr>
@@ -354,7 +372,7 @@ $(document).ready( function() {
                   {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="hobbies">
             </div>
-            <button type="button" class="add_hobby button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави хоби</button>
+            <button type="button" class="add_hobby button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
             <div class="block-form">
                 <div class="col-12">
                   <div class="form-wrap">

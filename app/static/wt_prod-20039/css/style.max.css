@@ -16654,3 +16654,6 @@ cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .
 .icon.box-creative-icon.hovered {
     color: #fc4a1a !important;
 }
+.breadcrumbs-custom-title {
+    text-align: center;
+}
