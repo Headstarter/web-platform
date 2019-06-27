@@ -301,6 +301,50 @@ on the road to business</h2>
               <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for ('core.browse') }}">Започни сега</a></div>
             </li>
           </ul>
+          <h3>или</h3>
+          <ul class="list-linked">
+            <li class="ll-item">
+              <div class="icon ll-item-icon thin-icon-email-search">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title"><a href="{{ url_for('core.post_offer') }}">Публикувай обява</a></h5>
+                <p>Бързо и лесно</p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon mercury-icon-target-2">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title"><a href="{{ url_for('core.list_my_candidates') }}">Прегледай кандидатите си</a></h5>
+                <p>Избери кандидата, който ще пасне най-добре на фирмата ти.</p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-e-mail-o">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title">Свържи се с перфектния кандидат</h5>
+                <p></p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon mercury-icon-touch">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.post_offer') }}">Започни сега</a></div>
+            </li>
+          </ul>
         </div>
       </section>
 {% endblock %}
