@@ -392,8 +392,8 @@ a[href*=mailto] {
     white-space: nowrap
 }
 
-a:hover {
-    color: #4abdac
+p a:hover {
+    color: #fc4a1a
 }
 
 p a {
@@ -906,7 +906,7 @@ p .link-press {
     bottom: 0;
     left: 0;
     z-index: 1;
-    border: 1px solid #4abdac;
+    border: 1px solid #fc4a1a;
     transition: .25s ease-out;
     will-change: transform;
     contain: paint
@@ -2511,8 +2511,8 @@ hr {
 
 .button-primary,
 .button-primary:focus {
-    color: #fff;
-    background-color: #f7b733;
+    color: #f7b733;
+    background-color: transparent;
     border-color: #f7b733
 }
 
@@ -2553,16 +2553,16 @@ hr {
 
 .button-secondary,
 .button-secondary:focus {
-    color: #fff;
-    background-color: #fc4a1a;
-    border-color: #fc4a1a
+    color: #f7b733;
+    background-color: transparent;
+    border-color: #f7b733
 }
 
 .button-secondary:hover,
 .button-secondary:active {
     color: #fff;
-    background-color: #4abdac;
-    border-color: #4abdac
+    background-color: #fc4a1a;
+    border-color: #fc4a1a
 }
 
 .button-blue-9,
@@ -6354,7 +6354,7 @@ p.footer-creative-title {
     text-transform: uppercase;
     letter-spacing: .1em;
     color: #fff;
-    background: #4abdac;
+    background: #fc4a1a;
     border-radius: 0
 }
 
@@ -16648,8 +16648,9 @@ width: 100%;
     z-index: -1;
 }
 cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .tibrr-cookie-consent-button > button {
-
     background-color: #4abdac;
     color: #ffffff;
-
+}
+.icon.box-creative-icon.hovered {
+    color: #fc4a1a !important;
 }
