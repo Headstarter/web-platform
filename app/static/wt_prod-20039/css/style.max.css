@@ -1690,7 +1690,7 @@ html .list-inline-md>* {
     width: calc(100% - 14px);
     height: calc(100% - 14px);
     pointer-events: none;
-    stroke: #35a1ff;
+    stroke: #4abdac;
     stroke-width: 2px;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
@@ -16646,4 +16646,10 @@ width: 100%;
 }
 .jc-decoration, .jc-decoration * {
     z-index: -1;
+}
+cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .tibrr-cookie-consent-button > button {
+
+    background-color: #4abdac;
+    color: #ffffff;
+
 }
