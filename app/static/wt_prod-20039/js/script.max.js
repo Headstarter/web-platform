@@ -1446,3 +1446,10 @@ $('a[target^="_blank"]').click(function(e) {
     e.preventDefault();
     window.open($(this).attr('data-href'), '_blank');
 });
+$('.box-creative').hover(function(e) {
+    console.log('hovered');
+    $(this).find('.icon.box-creative-icon').addClass('hovered');
+},function(e) {
+    console.log('unhovered');
+    $(this).find('.icon.box-creative-icon').removeClass('hovered');
+});
