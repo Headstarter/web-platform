@@ -1,6 +1,18 @@
 "use strict";
 var _hs_response;
 (function() {
+    var resizeOwl = (function() {
+        $('.owl-carousel').each(function(i,e){
+            let minheight = 0;
+            $(e).find('.owl-item .quote-mary-main').each(function(i,e){
+                //console.log(jQuery(e), jQuery(e).height());
+                minheight = ($(e).height() > minheight) ? $(e).height() : minheight;    
+            });
+            $(e).find('.owl-item .quote-mary-main').css("min-height", minheight + "px");
+            console.log(minheight);
+        });
+    });
+
     var userAgent = navigator.userAgent.toLowerCase(),
         initialDate = new Date(),
         $document = $(document),
@@ -86,6 +98,18 @@ var _hs_response;
                 onReady: function() {
                     plugins.preloader.addClass('loaded');
                     windowReady = true;
+                    
+                    (function(minheight = 0) {
+                        jQuery('.owl-carousel').each(function(i,e){
+                            var oldminheight = minheight;
+                            jQuery(e).find('.owl-item').each(function(i,e){
+                                minheight = jQuery(e).height() > minheight ? jQuery(e).height() : minheight;    
+                            });
+                            jQuery(e).find('.owl-item').css("min-height",minheight + "px");
+                            minheight = oldminheight;
+                            console.log(minheight);
+                        });
+                    })();
                 }
             });
         }
@@ -284,6 +308,7 @@ var _hs_response;
             }
             c.on("initialized.owl.carousel", function() {
                 initLightGalleryItem(c.find('[data-lightgallery="item"]'), 'lightGallery-in-carousel');
+                resizeOwl();
             });
             c.owlCarousel({
                 autoplay: isNoviBuilder ? false : c.attr("data-autoplay") === "true",
@@ -970,6 +995,7 @@ var _hs_response;
                 plugins.owl[i].owl = c;
                 initOwlCarousel(c);
             }
+            resizeOwl();
         }
         if (plugins.isotope.length) {
             var isogroup = [];
@@ -1434,6 +1460,8 @@ var _hs_response;
             }
         }
     });
+    
+    resizeOwl();
 }());
 $('[name=member]').change(function() {
     $('[name=company]').parent().toggle(this.checked);
