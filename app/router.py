@@ -113,68 +113,76 @@ def register():
         member = 'off'
     
     if member == 'on':
-    	company = request.form['company']
+        company = request.form['company']
 
-    if member != 'on':
-        
-        if len(User.query.filter(User.email == request.form['email']).all()) == 0 and (request.form['password'] == request.form['password-confirm']):
-            insert_user(request.form['name'], request.form['email'], request.form['password'])
+    if len(request.form['email']) >= 6 and len(request.form['password']) >= 8 and len(request.form['name']) >= 3:
+        if member != 'on':
 
-            session['email'] = request.form['email']
-            session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
-            session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
-            session['company_id'] = None
-            session['type'] = 'Student'
+            if len(User.query.filter(User.email == request.form['email']).all()) == 0 and (request.form['password'] == request.form['password-confirm']):
+                insert_user(request.form['name'], request.form['email'], request.form['password'])
 
-            try:
-                if session['redirect']:
-                    return my_redirect(session['redirect'])
-                else:
+                session['email'] = request.form['email']
+                session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
+                session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
+                session['company_id'] = None
+                session['type'] = 'Student'
+
+                try:
+                    if session['redirect']:
+                        return my_redirect(session['redirect'])
+                    else:
+                        return my_redirect('/')
+                except:
                     return my_redirect('/')
-            except:
-                return my_redirect('/')
-        else:
-            if len(User.query.filter(User.email == request.form['email']).all()) != 0:
-                flash('User is already registered or passwords does not match.', 'danger')
-            elif request.form['password'] != request.form['password-confirm']:
-                flash('Please, just log in.', 'info')
-            return my_redirect(url_for('login_register', type="Student", action='register'))
-    else:
-        if (request.form['password'] == request.form['password-confirm'])\
-                and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
-
-            my_company = {}
-
-            if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
-                print('\t\t\tMapper found')
-                my_company = Company.query.filter(Company.id == Mapper.query.filter(
-                    Mapper.company_name == request.form['company']).one().company_id).one()
             else:
-                print('\t\t\tMapper NOT found')
-                my_company = insert_company(request.form['company'])
-            print('', my_company.name, my_company.id, my_company.uid)
-            insert_user(request.form['name'], request.form['email'],
-                        request.form['password'], my_company)
-
-            session['email'] = request.form['email']
-            session['company_id'] = my_company.id
-            session['name'] = request.form['name']
-            session['company'] = my_company.name
-            session['type'] = 'Company'
-
-            try:
-                if session['redirect']:
-                    return my_redirect(session['redirect'])
-                else:
-                    return my_redirect('/')
-            except:
-                return my_redirect('/')
+                if len(User.query.filter(User.email == request.form['email']).all()) != 0:
+                    flash('User is already registered or passwords does not match.', 'danger')
+                elif request.form['password'] != request.form['password-confirm']:
+                    flash('Please, just log in.', 'info')
+                return my_redirect(url_for('login_register', type="Student", action='register'))
         else:
-            if len(User.query.filter(User.email == request.form['email']).all()) != 0:
-                flash('User is already registered or passwords does not match.', 'danger')
-            elif request.form['password'] != request.form['password-confirm']:
-                flash('Please, just log in.', 'info')
-            return my_redirect(url_for('login_register', type="Company", action='register'))
+            if (request.form['password'] == request.form['password-confirm'])\
+                    and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
+
+                my_company = {}
+
+                if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
+                    print('\t\t\tMapper found')
+                    my_company = Company.query.filter(Company.id == Mapper.query.filter(
+                        Mapper.company_name == request.form['company']).one().company_id).one()
+                else:
+                    print('\t\t\tMapper NOT found')
+                    my_company = insert_company(request.form['company'])
+                print('', my_company.name, my_company.id, my_company.uid)
+                insert_user(request.form['name'], request.form['email'],
+                            request.form['password'], my_company)
+
+                session['email'] = request.form['email']
+                session['company_id'] = my_company.id
+                session['name'] = request.form['name']
+                session['company'] = my_company.name
+                session['type'] = 'Company'
+
+                try:
+                    if session['redirect']:
+                        return my_redirect(session['redirect'])
+                    else:
+                        return my_redirect('/')
+                except:
+                    return my_redirect('/')
+            else:
+                if len(User.query.filter(User.email == request.form['email']).all()) != 0:
+                    flash('User is already registered or passwords does not match.', 'danger')
+                elif request.form['password'] != request.form['password-confirm']:
+                    flash('Please, just log in.', 'info')
+                return my_redirect(url_for('login_register', type="Company", action='register'))
+    else:
+        if len(request.form['email']) < 6:
+            flash('Please enter valid Email addres.', 'danger')
+        if len(request.form['password']) < 8:
+            flash('Please a longer password', 'info')
+        if len(request.form['name']) < 3:
+            flash('Please enter a longer name.', 'info')
 
 
 @app.route('/try_sending')
