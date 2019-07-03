@@ -178,11 +178,12 @@ def register():
                 return my_redirect(url_for('login_register', type="Company", action='register'))
     else:
         if len(request.form['email']) < 6:
-            flash('Please enter valid Email addres.', 'danger')
+            flash('Please enter valid email addres.', 'danger')
         if len(request.form['password']) < 8:
             flash('Please a longer password', 'info')
         if len(request.form['name']) < 3:
             flash('Please enter a longer name.', 'info')
+        return my_redirect(url_for('login_register', type="Company", action='register'))
 
 
 @app.route('/try_sending')
