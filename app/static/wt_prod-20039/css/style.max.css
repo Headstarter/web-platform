@@ -16657,3 +16657,8 @@ cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .
 .breadcrumbs-custom-title {
     text-align: center;
 }
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
