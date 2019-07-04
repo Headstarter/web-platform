@@ -86,7 +86,7 @@ def internal_server_error(e):
 import os
 def get_sitekey():
     try:
-        if os.environ['DEBUG']:
+        if os.environ['DEBUG'] == 'yes':
             return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
         else:
             return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
@@ -95,7 +95,7 @@ def get_sitekey():
 
 def get_secretkey():
     try:
-        if os.environ['DEBUG']:
+        if os.environ['DEBUG'] == 'yes':
             return '6LcFN3kUAAAAAAP1dYevtJcXYqKPWgcBL6YdWbtl'
         else:
             return '6LczBawUAAAAAIM-ca8Z8nKu-CIRnr5F1H03YOIV'
