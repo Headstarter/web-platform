@@ -85,15 +85,21 @@ def internal_server_error(e):
 
 import os
 def get_sitekey():
-    if os.environ['DEBUG']:
-        return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
-    else:
+    try:
+        if os.environ['DEBUG']:
+            return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
+        else:
+            return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
+    except:
         return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
 
 def get_secretkey():
-    if os.environ['DEBUG']:
-        return '6LcFN3kUAAAAAAP1dYevtJcXYqKPWgcBL6YdWbtl'
-    else:
+    try:
+        if os.environ['DEBUG']:
+            return '6LcFN3kUAAAAAAP1dYevtJcXYqKPWgcBL6YdWbtl'
+        else:
+            return '6LczBawUAAAAAIM-ca8Z8nKu-CIRnr5F1H03YOIV'
+    except:
         return '6LczBawUAAAAAIM-ca8Z8nKu-CIRnr5F1H03YOIV'
 
 @app.route('/join', methods=['GET', 'POST'])
