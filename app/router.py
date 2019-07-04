@@ -83,15 +83,15 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('503.html'), 503
 
-
+import os
 def get_sitekey():
-    if DEBUG:
+    if os.environ['DEBUG']:
         return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
     else:
         return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
 
 def get_secretkey():
-    if DEBUG:
+    if os.environ['DEBUG']:
         return '6LcFN3kUAAAAAAP1dYevtJcXYqKPWgcBL6YdWbtl'
     else:
         return '6LczBawUAAAAAIM-ca8Z8nKu-CIRnr5F1H03YOIV'

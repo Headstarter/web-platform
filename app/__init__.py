@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 import os
 
 os.environ['CONFIG'] = os.environ['CONFIG'] or 'config.cfg'
+os.environ['DEBUG'] = os.environ['DEBUG'] or False
 
 app = Flask(__name__)
 app.config.from_pyfile(os.environ['CONFIG'])

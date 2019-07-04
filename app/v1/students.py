@@ -1,7 +1,7 @@
 from app import render_template, flash, app
 from app.router import my_redirect
 from flask import session, request, url_for, redirect
-from app.models import User, Tag, Company, Position, create_cv, update_cv
+from app.models import User, Tag, Company, Position, create_cv, update_cv, CV
 import os
 from werkzeug.utils import secure_filename
 
@@ -45,25 +45,24 @@ class Students:
 			if file and allowed_image(file.filename):
 				saved = False
 				while not saved:
+					import sys
 					try:
-						file.save(os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:]))
+						file.save(os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo))
 						saved = True
 						print('Saved', file=sys.stderr)
 					except FileNotFoundError:
 						print('FileNotFound', file=sys.stderr)
 						import shutil
-						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'), \
-                  			os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:]))
+						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/students/150.png'), 
+                  					os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo))
 					except TypeError:
 						import sys
 						print('TypeError', file=sys.stderr)
+						cv_id = User.query.filter(User.id == session['id']).one().cv_id
+						print('cv_id', cv_id, file=sys.stderr)
+						CV.query.filter(CV.id == cv_id).update({'photo':'/images/students/' + str(cv_id) + '.png'});
+						db.session.commit()
 
-				"""
-				destination = os.path.join(app.config['APP_ROOT'], User.query.filter(User.id == session['id']).one().cv.photo[1:])
-				with open(destination, "a+") as f:
-					# filename = secure_filename(file.filename)
-					file.save(destination)
-				"""
 				return jsonify({'value': 'Uploaded'}), 200
 	
 	@staticmethod
