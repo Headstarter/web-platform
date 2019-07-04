@@ -16677,3 +16677,10 @@ cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
+.g-recaptcha {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#company {
+    margin-top: 5px;
+}
