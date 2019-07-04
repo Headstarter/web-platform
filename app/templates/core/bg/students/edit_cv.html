@@ -166,7 +166,7 @@ $(document).ready( function() {
                     <label class="form-label-outside" for="general-information-birthday">Дата на раждане</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-birthday" form="submit-resume-form"
-                             type="text" name="birthday" data-constraints="@Required" value="{{ student.cv.email }}">
+                             type="text" name="birthday" data-constraints="@Required" value="{{ student.cv.birthday }}">
                       <label class="form-label" for="general-information-birthday">напр. “29/02/2021”</label>
                     </div>
                   </div>
@@ -235,7 +235,7 @@ $(document).ready( function() {
               <div class="form-wrap">
                 <label class="form-label-outside">Име на проекта/извънкласната дейност</label>
                 <div class="form-wrap-inner">
-                  <input class="form-input" type="text" name="project_name"required placeholder="Име">
+                  <input class="form-input" type="text" name="project_name" required placeholder="Име">
                 </div>
               </div>
               <div class="form-wrap">
