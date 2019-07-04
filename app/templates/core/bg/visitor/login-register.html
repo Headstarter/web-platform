@@ -86,6 +86,8 @@
                                     <input name="member" type="hidden" value="off" class="checkbox-custom" />
                                 {% endif %}
                             {% endif %}
+                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
                             <div class="form-wrap">
                               <button class="button button-block button-primary" type="submit">Създай профил</button>
                             </div>

@@ -112,7 +112,7 @@ def profile():
 
 @routes.route('/cv/<int:id>')
 def profileView(id):
-	return mapped_routes[session['type']].profile()
+	return mapped_routes['Visitor'].random_cv(id)
 
 
 @routes.route('/company/<int:id>')

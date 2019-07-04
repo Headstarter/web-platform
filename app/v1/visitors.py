@@ -66,3 +66,10 @@ class Visitors:
 		session['redirect'] = request.full_path
 		session.modified = True
 		return redirect(url_for('login_register', type="Student"))
+
+	@staticmethod
+	def random_cv(id):
+		import sys
+		student = User.query.filter(User.id == id)[0]
+				
+		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/profileView.html', student=student)

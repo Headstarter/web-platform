@@ -84,6 +84,18 @@ def internal_server_error(e):
     return render_template('503.html'), 503
 
 
+def get_sitekey():
+    if DEBUG:
+        return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
+    else:
+        return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
+
+def get_secretkey():
+    if DEBUG:
+        return '6LcFN3kUAAAAAAP1dYevtJcXYqKPWgcBL6YdWbtl'
+    else:
+        return '6LczBawUAAAAAIM-ca8Z8nKu-CIRnr5F1H03YOIV'
+
 @app.route('/join', methods=['GET', 'POST'])
 def login_register():
     type_user = 'Both'
@@ -99,7 +111,7 @@ def login_register():
 
     print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n')
 
-    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', action=action, type=type_user, companies=Company.query.all())
+    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', sitekey=get_sitekey(), action=action, type=type_user, companies=Company.query.all())
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -117,7 +129,9 @@ def register():
 
     if len(request.form['email']) >= 6 and len(request.form['password']) >= 8 and len(request.form['name']) >= 3:
         if member != 'on':
+            import requests
 
+            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data={'secret': get_secretkey(), 'response': request.form['g-recaptcha-response'], 'remoteip': request.remote_addr})
             if len(User.query.filter(User.email == request.form['email']).all()) == 0 and (request.form['password'] == request.form['password-confirm']):
                 insert_user(request.form['name'], request.form['email'], request.form['password'])
 
