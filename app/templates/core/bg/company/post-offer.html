@@ -147,6 +147,26 @@
                     </div>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-available">Активна</label>
+                    <div class="form-wrap-inner">
+                      <!-- Select 2-->
+                      <select class="form-input select" id="general-information-job-available"
+                              form="post-a-job-form" data-placeholder="Избери категория"
+                              name="job-available" data-minimum-results-for-search="Infinity"
+                              data-constraints="@Selected">
+                            {% if positionId == -1 or position.available == True %}
+                                <option selected="selected" value="True">Активна</option>
+                                <option value="False">Изтекла</option>
+                            {% else %}
+                                <option value="True">Активна</option>
+                                <option selected="selected" value="False">Изтекла</option>
+                            {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
                   <!--
                 <div class="col-md-6">
                   <div class="form-wrap">

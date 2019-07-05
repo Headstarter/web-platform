@@ -312,7 +312,8 @@ def update_position(position_id, email, location, name, company_id, description,
         'duration': duration,
         'hours_per_day': hours_per_day,
         'age_required': age_required,
-        'tag_id': tag_id
+        'tag_id': tag_id,
+        'available': available
     })
     db.session.commit()
     return position_id
@@ -389,7 +390,7 @@ def activate_position(position_id):
 
 def deactivate_position(position_id):
     Position.query.filter(Position.id == position_id).update({
-        'available': True
+        'available': False
     })
     db.session.commit()
     return position_id
@@ -439,6 +440,51 @@ def filter_offers_by_tag(position=None, company=None, group=None):
         positions = Position.query.filter(Position.available == True)
     else:
         positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id == position)
+
+    if company is not None:
+        positions = positions.filter(Position.company_id == company)
+        
+    if group is not None:
+        from app.v1.target import groups, Target_Group
+        print('in', groups[int(group)]['tags'])
+        from sqlalchemy import or_
+        positions = positions.filter(or_(*[Position.tag_id.like(x) for x in groups[int(group)]['tags']]))
+        print(positions.all())
+
+    return positions.order_by(Position.id.desc())
+
+def filter_all_offers_by_tag(position=None, company=None, group=None):
+    if position is None:
+        positions = Position.query.filter(True)
+
+    elif position == 1:
+        positions = Position.query.filter(True) \
+            .filter(Position.tag_id <= 9)
+
+    elif position == 10:
+        positions = Position.query.filter(True) \
+            .filter(Position.tag_id > 9) \
+            .filter(Position.tag_id <= 14)
+
+    elif position == 15:
+        positions = Position.query.filter(True) \
+            .filter(Position.tag_id > 14) \
+            .filter(Position.tag_id <= 21)
+
+    elif position == 22:
+        positions = Position.query.filter(True) \
+            .filter(Position.tag_id > 21) \
+            .filter(Position.tag_id <= 28)
+
+    elif position == 29:
+        positions = Position.query.filter(True) \
+            .filter(Position.tag_id > 28) \
+            .filter(Position.tag_id <= 32)
+    elif position == None:
+        positions = Position.query.filter(True)
+    else:
+        positions = Position.query.filter(True) \
             .filter(Position.tag_id == position)
 
     if company is not None:
