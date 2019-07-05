@@ -1,5 +1,5 @@
 from app import app, babel, db, migrate, render_template
-from app.models import insert_user, User, Tag, Company, Position, crypto, Mapper, insert_company
+from app.models import Verify, insert_user, User, Tag, Company, Position, crypto, Mapper, insert_company
 from flask import request, session, flash, redirect, url_for, send_file, Response
 import sys
 
@@ -206,13 +206,6 @@ def register():
         return my_redirect(url_for('login_register', type="Company", action='register'))
 
 
-@app.route('/try_sending')
-def send():
-    user = User.query.filter(User.email == session['email']).one()
-    from app.v1.helpers.mailer import Mailer
-    return Mailer.sendConfirmation(user)
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -246,6 +239,43 @@ def login():
     else:
         flash('User is not registered.', 'danger')
         return my_redirect(url_for('login_register', action="login"))
+
+
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'GET':
+        return render_template('')
+    elif request.method == 'POST':
+        user = User.query.filter(User.email == request.form['email']).one()
+        from app.v1.helpers.mailer import Mailer
+        return Mailer.sendPasswordReset(user)
+
+
+@app.route('/reset/<verification>', methods=['GET', 'POST'])
+def reset(verification):
+    verify = Verify.query.filter(Verify.code == verification).one()
+    user = verify.user
+    if request.method =='GET':
+        return render_template('user/reset.html', user=user)
+    elif request.method =='POST':
+        User.query.filter(User.id == user.id).update({'password_hash': crypto(request.form['password'])})
+        db.session.commit()
+        return redirect(url_for('login_register'))
+
+
+@app.route('/verify/<verification>')
+def verify(verification):
+    verify = Verify.query.filter(Verify.code == verification).one()
+    user = verify.user
+    session['email'] = user.email
+    session['id'] = user.id
+    session['company_id'] = user.company_id if user.company_id is not None else None
+    session['type'] = 'Company' if user.company_id is not None else 'Student'
+    session['name'] = user.name
+    session['company'] = user.company.name if user.company_id is not None else None
+    session['redirect'] = None
+    session['language'] = get_locale()
+    return redirect('/')
 
 
 @app.route('/logout')

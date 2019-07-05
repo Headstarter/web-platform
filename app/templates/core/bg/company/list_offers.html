@@ -35,7 +35,11 @@
             <div class="col-lg-12 col-xl-12">
               <table class="table-job-listing table-responsive">
                   {% for offer in positions %}
-                <tr>
+                        {% if offer.available == False %}
+                <tr class="text-danger">
+                        {% else %}
+                        <tr>
+                        {% endif %}
                   <td class="table-job-listing-main">
                     <!-- Company Minimal-->
                     <article class="company-minimal">
@@ -44,6 +48,10 @@
                       <div class="company-minimal-main">
                         <h5 class="company-minimal-title"><a href="{{ url_for ('core.edit_offer', positionId=offer.id) }}">{{ offer.name }}</a></h5>
                         <p>{{ offer.company.name }}</p>
+                        {% if offer.available == False %}
+                        <p>Не е активна в момента</p>
+                        {% else %}
+                        {% endif %}
                       </div>
                     </article>
                   </td>
