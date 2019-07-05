@@ -1,7 +1,7 @@
 from app import render_template, flash, app
 from app.router import my_redirect
 from app.models import User, Tag, Company, Position, Application, insert_position, \
-	update_position, db, filter_offers_by_tag, filter_applications, update_company
+	update_position, db, filter_offers_by_tag, filter_applications, filter_all_offers_by_tag, update_company
 from flask import session, request, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
@@ -101,7 +101,7 @@ class Companies:
 								request.form['location'],
 								session['company_id'],
 								request.form['description'],
-								True,
+								True if request.form['job-available'] == 'True' else False,
 								request.form['duration'],
 								request.form['job-type'],
 								request.form['job-age'],
@@ -115,7 +115,7 @@ class Companies:
 								request.form['job-title'],
 								session['company_id'],
 								request.form['description'],
-								True,
+								True if request.form['job-available'] == 'True' else False,
 								request.form['duration'],
 								request.form['job-type'],
 								request.form['job-age'],
@@ -123,6 +123,7 @@ class Companies:
 			else:
 				return render_template('404.html'), 404
 
+			print('BOOLEAN:', True if request.form['job-available'] == 'True' else False, file=sys.stderr)
 			return my_redirect(url_for('core.list_my_offers'))
 	
 	@staticmethod
@@ -153,11 +154,12 @@ class Companies:
 							request.form['job-title'],
 							session['company_id'],
 							request.form['description'],
-							True,
+							True if request.form['job-available'] == 'True' else False,
 							request.form['duration'],
 							request.form['job-type'],
 							request.form['job-age'],
 							request.form['job-category'])
+			print('BOOLEAN:', True if request.form['job-available'] == 'True' else False, file=sys.stderr)
 
 			return my_redirect(url_for('core.list_my_offers'))
 	
@@ -168,9 +170,9 @@ class Companies:
 		print(request.form.get('tag'))
 		print(request.args.get('tag'))
 		if request.args.get('tag') and request.args['tag'] != '0':
-			positions = filter_offers_by_tag(int(request.args['tag']), session['company_id'])
+			positions = filter_all_offers_by_tag(int(request.args['tag']), session['company_id'])
 		else:
-			positions = filter_offers_by_tag(company=session['company_id'])
+			positions = filter_all_offers_by_tag(company=session['company_id'])
    
 		if positions.count() == 0:
 			flash('Нямате публикувани обяви все още.');

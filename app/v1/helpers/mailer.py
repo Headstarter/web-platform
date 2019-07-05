@@ -15,19 +15,30 @@ mail = Mail(app)
 
 class Mailer:
     @staticmethod
-    def sendConfirmation(new_user):
+    def get_verification (user):
         verify = {}
-        if new_user.verification_id is None:
-            verify = Verify(user=[new_user], code=Verify.gen_code())
+        if user.verification_id is None:
+            verify = Verify(user=[user], code=Verify.gen_code())
             db.session.add(verify)
             db.session.commit()
-            # User.query.filter(User.id==new_user.id).update({'verification': verify})
-            # db.session.commit()
         else:
-            verify = new_user.verification
-        msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <admin@headstarter.eu', recipients=[new_user.email, 
-                                                                                                                                         'alex_tsvetanov_2002@abv.bg', 'ivipaneva2002@gmail.com', 'lilly225@abv.bg', 'Rangelplachkov1@gmail.com', 'nadezhda.tsacheva2003@gmail.com', 'lazarina.popova4@gmail.com', 'radostinabogo@gmail.com', 'bvladimirov04@gmail.com'])
+            verify = user.verification
+        return verify
+        
+    @staticmethod
+    def sendConfirmation(new_user):
+        verify = get_verification(new_user)
+        msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[new_user.email, 'headstarter@headstarter.eu'])
         msg.html = render_template('reg_confirm.html', link='https://headstarter.eu/verify/' + verify.code)
         mail.send(msg)
         return msg.html
+    
+    @staticmethod
+    def sendResetPassword(user):
+        verify = get_verification(user)
+        msg = Message('Reset your password in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[user.email, 'headstarter@headstarter.eu'])
+        msg.html = render_template('reset_password.html', link='https://headstarter.eu/reset/' + verify.code)
+        mail.send(msg)
+        return msg.html
+        
 
