@@ -1,12 +1,13 @@
 #!/usr/bin/env python
+import os
+os.environ['DEBUG'] = 'on'
+
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Shell
 from app.models import *
 from app.router import app
 
-import os
 os.environ['CONFIG'] = 'testing.cfg'
-os.environ['DEBUG'] = 'on'
 
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
