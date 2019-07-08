@@ -6,6 +6,7 @@ from app.router import app
 
 import os
 os.environ['CONFIG'] = 'testing.cfg'
+os.environ['DEBUG'] = 'on'
 
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
