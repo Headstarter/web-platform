@@ -1,18 +1,11 @@
-{% extends 'core/en/template.html' %}
-{% block title %} CV {% endblock %}
+{% extends 'core/en/students/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block js %}
 <link href="/css/summernote-bs4.css" rel="stylesheet">
 <style>
     .hidden, #blank_edu, #blank_project, #blank_lang, #blank_skill, #blank_hobby {
         display: none;
-    }
-    .rd-form.rd-mailform.form-lg.form-corporate {
-      margin-top: 0px !important;
-    }
-    a.remove {
-      display: flex;
-      justify-content: flex-end;
     }
 </style>
 <script src="/js/add.js"></script>
@@ -26,31 +19,24 @@ $(document).ready( function() {
 			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
 		input.trigger('fileselect', [label]);
 		});
-
 		$('.btn-file :file').on('fileselect', function(event, label) {
-
 		    var input = $(this).parents('.input-group').find(':text'),
 		        log = label;
-
 		    if( input.length ) {
 		        input.val(log);
 		    } else {
 		        //if( log ) alert(log);
 		    }
-
 		});
 		function readURL(input) {
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
-
 		        reader.onload = function (e) {
 		            $('#img-upload').attr('src', e.target.result);
 		        }
-
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
-
 		$("#imgInp").change(function(){
 		    readURL(this);
 		});
@@ -68,7 +54,6 @@ $(document).ready( function() {
         $('input#imgInp').each (function (_) {
             var fd = new FormData();
             fd.append("logo", $("#imgInp")[0].files[0]);
-
             $.ajax({
                 url: "{{ url_for('core.upload_cv_picture') }}",
                 method: 'POST',
@@ -90,7 +75,7 @@ $(document).ready( function() {
 <section class="section breadcrumbs-custom">
     <div class="breadcrumbs-custom-main bg-image bg-primary">
       <div class="container">
-        <h3 class="breadcrumbs-custom-title">Създай своето CV</h3>
+        <h3 class="breadcrumbs-custom-title">Create your CV</h3>
       </div>
     </div>
 </section>
@@ -101,18 +86,18 @@ $(document).ready( function() {
           <div class="block-form">
             <form class="rd-mailform" id="submit-resume-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_student_profile') }}">
             </form>
-            <h4>Обща информация за вас</h4>
+            <h4>Short information about you</h4>
             <hr>
             <!-- RD Mailform-->
             <div class="rd-form rd-mailform form-lg">
               <div class="row row-40">
                   <article class="col-md-12 company-light">
                     <div class="form-wrap">
-                        <label class="form-label-outside">Твоя снимка<br><span style="color: grey;">до 16 MB</span></label>
+                        <label class="form-label-outside">Your picture: (max 16 MB)</label>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-default btn-file">
-                                    <input type="file" class="button button-primary" name="logo" id="imgInp">
+                                    Browse… <input type="file" name="logo" id="imgInp">
                                 </span>
                             </span>
                         </div>
@@ -123,62 +108,88 @@ $(document).ready( function() {
                   </article>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-name">Име и фамилия</label>
+                    <label class="form-label-outside" for="general-information-name">Full name</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-name" form="submit-resume-form"
                              type="text" name="name" data-constraints="@Required" value="{{ student.cv.name }}">
-                      <label class="form-label" for="general-information-name">Въведете Вашите име и фамилия</label>
+                      <label class="form-label" for="general-information-name">type your first name and last name</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-email">E-mail за връзка с Вас</label>
+                    <label class="form-label-outside" for="general-information-email">E-mail to contact whit you</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-email" form="submit-resume-form"
                              type="email" name="email" data-constraints="@Email @Required" value="{{ student.cv.email }}">
-                      <label class="form-label" for="general-information-email">Въведете е-mail за връзка</label>
+                      <label class="form-label" for="general-information-email">type the email</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-telephone">Телефон за връзка с Вас</label>
+                    <label class="form-label-outside" for="general-information-telephone">telephone number</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-telephone" form="submit-resume-form"
                              type="text" name="telephone" data-constraints="@Required"  value="{{ student.cv.telephone }}">
-                      <label class="form-label" for="general-information-telephone">Въведете телефон за връзка</label>
+                      <label class="form-label" for="general-information-telephone">telephone number</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-location">Местоживеене</label>
+                    <label class="form-label-outside" for="general-information-location">Residence</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-location" form="submit-resume-form"
                              type="text" name="location" data-constraints="@Required"  value="{{ student.cv.location }}">
-                      <label class="form-label" for="general-information-location">напр. “София, България”</label>
+                      <label class="form-label" for="general-information-location">example. “Sofia ,Bulgaria”</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-birthday">Дата на раждане</label>
+                    <label class="form-label-outside" for="general-information-birthday">Birth Day</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-birthday" form="submit-resume-form"
-                             type="text" name="birthday" data-constraints="@Required" value="{{ student.cv.birthday }}">
-                      <label class="form-label" for="general-information-birthday">напр. “29/02/2021”</label>
+                             type="text" name="birthday" data-constraints="@Required" value="{{ student.cv.email }}">
+                      <label class="form-label" for="general-information-birthday">example. “29/02/2021”</label>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div id="language_list" class="block-form">
+                <h4>learned languages</h4>
+                <hr>
+                <div id="blank_lang" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">leanguage</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="language"
+                             required placeholder="напр. „Английски език“" >
+                    </div>
+                  </div>
+                </div>
+                {% for lang in student.cv.get_languages() %}
+                <div class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">leanguage</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="language"
+                             required placeholder="напр. „Английски език“" value="{{ lang.language }}">
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="languages">
+            </div>
+            <button type="button" class="add_lang button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Add leanguage</button>
             <div id="education_list" class="block-form">
-                <h4>Образование</h4>
+                <h4>Graduate</h4>
                 <hr>
                 <div id="blank_edu" class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Къде си учил?</label>
+                    <label class="form-label-outside">Shcool?</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="school-name" required placeholder="напр. „СМГ“, „НПМГ“ или дори „Telerik Kids Academy“">
                     </div>
@@ -190,7 +201,7 @@ $(document).ready( function() {
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label-outside" >Кога си се учил там?</label>
+                    <label class="form-label-outside" >When did you learn there?</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="period" required placeholder="напр. 2000-2019 г.">
                     </div>
@@ -199,7 +210,7 @@ $(document).ready( function() {
                 {% for edu in student.cv.get_education() %}
                 <div class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Къде си учил?</label>
+                    <label class="form-label-outside">Where have you learned?</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="school-name"
                              required placeholder="напр. „СМГ“, „НПМГ“ или дори „Telerik Kids Academy“"
@@ -207,7 +218,7 @@ $(document).ready( function() {
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label-outside">Какво си учил/Какъв ти е бил профила</label>
+                    <label class="form-label-outside">What was your profile</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="qualification"
                              required placeholder="напр. „Математика и информатика“"
@@ -215,7 +226,7 @@ $(document).ready( function() {
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label-outside" >Кога си се учил там?</label>
+                    <label class="form-label-outside" >When did you learned there?</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="period"
                              required placeholder="напр. 2000-2019 г."
@@ -226,26 +237,26 @@ $(document).ready( function() {
                 {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="education">
             </div>
-            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Add</button>
             <div id="project_list" class="block-form">
-                <h4>Проекти</h4>
+                <h4>Projects</h4>
                 <hr>
                 <!-- RD Mailform-->
                 <div id="blank_project" class="rd-form rd-mailform form-lg form-corporate">
               <div class="form-wrap">
-                <label class="form-label-outside">Име на проекта/извънкласната дейност</label>
+                <label class="form-label-outside">Name of the project</label>
                 <div class="form-wrap-inner">
-                  <input class="form-input" type="text" name="project_name" required placeholder="Име">
+                  <input class="form-input" type="text" name="project_name"required placeholder="Име">
                 </div>
               </div>
               <div class="form-wrap">
-                <label class="form-label-outside">Период на разработка/участие в проекта</label>
+                <label class="form-label-outside">Period</label>
                 <div class="form-wrap-inner">
                   <input class="form-input" type="text" name="project_period"  required placeholder="напр. 2007-2009">
                 </div>
               </div>
               <div class="form-wrap">
-                <label class="form-label-outside">Описание на проекта</label>
+                <label class="form-label-outside">Describe the project</label>
                 <div class="form-wrap-inner">
                   <textarea class="form-input" name="project_notes" required placeholder="Кратко описание на проекта"></textarea>
                 </div>
@@ -254,7 +265,7 @@ $(document).ready( function() {
                 {% for proj in student.cv.get_projects() %}
                 <div class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Име на проекта/извънкласната дейност</label>
+                    <label class="form-label-outside">Name of the project</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="project_name"
                              required placeholder="Име"
@@ -262,7 +273,7 @@ $(document).ready( function() {
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label-outside">Период на разработка/участие в проекта</label>
+                    <label class="form-label-outside">Period</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="project_period"
                              required placeholder="напр. 2007-2009"
@@ -270,7 +281,7 @@ $(document).ready( function() {
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label-outside">Описание на проекта</label>
+                    <label class="form-label-outside">Describe the project</label>
                     <div class="form-wrap-inner">
                       <textarea class="form-input" name="project_notes"
                                 required placeholder="Кратко описание на проекта">
@@ -282,51 +293,14 @@ $(document).ready( function() {
                 {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="projects">
             </div>
-            <button type="button" class="add_project button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+            <button type="button" class="add_project button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Add project</button>
 
-            <div id="language_list" class="block-form">
-              <h4>Изучавани езици</h4>
-              <hr>
-              <div id="blank_lang" class="rd-form rd-mailform form-lg form-corporate">
-                <div class="form-wrap">
-                  <label class="form-label-outside">Език</label>
-                  <div class="form-wrap-inner">
-                    <input class="form-input" type="text" name="language"
-                           required placeholder="напр. „Английски език“" >
-                  </div><br><br>
-                  <label class="form-label-outside">Ниво</label>
-                  <div class="form-wrap-inner">
-                    <input class="form-input" type="text" name="level"
-                          required placeholder="напр. „A1“" >
-                  </div>
-                </div>
-              </div>
-              {% for lang in student.cv.get_languages() %}
-              <div class="rd-form rd-mailform form-lg form-corporate">
-                <div class="form-wrap">
-                  <label class="form-label-outside">Език</label>
-                  <div class="form-wrap-inner">
-                    <input class="form-input" type="text" name="language"
-                           required placeholder="напр. „Английски език“" value="{{ lang.language }}">
-                  </div><br><br>
-                  <label class="form-label-outside">Ниво</label>
-                  <div class="form-wrap-inner">
-                    <input class="form-input" type="text" name="level"
-                           required placeholder="напр. „А1“" value="{{ lang.level }}">
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-              <input form="submit-resume-form" type="hidden" name="languages">
-          </div>
-          <button type="button" class="add_lang button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
-          
               <div id="skill_list" class="block-form">
-                <h4>Личностни унения</h4>
+                <h4>Personal skills</h4>
                 <hr>
                 <div id="blank_skill" class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Умение</label>
+                    <label class="form-label-outside">Skill</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="skill" required placeholder="напр. „Работа в екип“, „Креативност“ и др.">
                     </div>
@@ -335,7 +309,7 @@ $(document).ready( function() {
                   {% for skill in student.cv.get_skills() %}
                   <div class="rd-form rd-mailform form-lg form-corporate">
                       <div class="form-wrap">
-                        <label class="form-label-outside">Умение</label>
+                        <label class="form-label-outside">Skill</label>
                         <div class="form-wrap-inner">
                           <input class="form-input" type="text" name="skill"
                                  required placeholder="напр. „Работа в екип“, „Креативност“ и др."
@@ -346,13 +320,13 @@ $(document).ready( function() {
                   {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="skills">
             </div>
-            <button type="button" class="add_skill button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+            <button type="button" class="add_skill button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Add</button>
               <div id="hobby_list" class="block-form">
-                <h4>Твой хобита</h4>
+                <h4>Your Hobbyes</h4>
                 <hr>
                 <div id="blank_hobby" class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Хоби</label>
+                    <label class="form-label-outside">Hobby</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="hobby" required placeholder="напр. „Футбол“, „Рисуване“ и др.">
                     </div>
@@ -361,7 +335,7 @@ $(document).ready( function() {
                   {% for hobby in student.cv.get_hobbies() %}
                 <div class="rd-form rd-mailform form-lg form-corporate">
                   <div class="form-wrap">
-                    <label class="form-label-outside">Хоби</label>
+                    <label class="form-label-outside">Hobby</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" type="text" name="hobby"
                              required placeholder="напр. „Футбол“, „Рисуване“ и др."
@@ -372,21 +346,21 @@ $(document).ready( function() {
                   {% endfor %}
                 <input form="submit-resume-form" type="hidden" name="hobbies">
             </div>
-            <button type="button" class="add_hobby button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+            <button type="button" class="add_hobby button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Add</button>
             <div class="block-form">
                 <div class="col-12">
                   <div class="form-wrap">
-                      <label class="form-label-outside" for="general-information-resume-content"><h4>Нещо повече за теб</h4></label>
+                      <label class="form-label-outside" for="general-information-resume-content"><h4>More about you</h4></label>
                       <hr>
                     <div class="form-wrap-inner">
-                      <label class="form-label" for="general-information-resume-content">Информация за теб, която не си описал по-горе</label>
+                      <label class="form-label" for="general-information-resume-content">information about you that you have not writen</label>
                       <textarea class="form-input hidden" id="general-information-resume-content" form="submit-resume-form" name="resume-content" data-constraints="@Required">{{ student.cv.about | safe }}</textarea>
                       <span class="summernote">{{ student.cv.about | safe }}</span>
                     </div>
                   </div>
                 </div>
             </div>
-              <br><br><button class="button button-lg button-secondary" type="submit" form="submit-resume-form">Запази</button>
+              <br><br><button class="button button-lg button-secondary" type="submit" form="submit-resume-form">Save</button>
 
           </div>
         </div>

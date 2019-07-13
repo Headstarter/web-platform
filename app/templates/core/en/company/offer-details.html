@@ -111,13 +111,13 @@
                 <div class="col-md-6 col-lg-12 text-center rd-mailform form-corporate form-spacing-small form-corporate_sm">
                     <h4>Стани част от<br>{{ offer.company.name }}</h4>
                     <div class="form-wrap">
-                      <a class="button button-block button-primary" target="_blank" href="{{ url_for ('core.profile') }}">Създай своето CV</a>
+                      <button class="button button-block button-primary" type="submit">Създай своето CV</button>
                     </div>
                     <div class="form-wrap">
                         <h4>и</h4>
                     </div>
                     <div class="form-wrap">
-                      <a class="button button-block button-primary"  target="_blank" href="{{ url_for ('core.candidate', positionId=offer.id) }}">Кандидатствай</a>
+                      <button class="button button-block button-primary" type="submit">Кандидатствай</button>
                     </div>
                 </div>
               </div>
