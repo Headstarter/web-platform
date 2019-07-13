@@ -1,11 +1,11 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Моите Обяви {% endblock %}
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">Моите обяви</h3>
+            <h3 class="breadcrumbs-custom-title">My posts</h3>
           </div>
         </div>
 </section>
@@ -21,7 +21,7 @@
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
               <select class="form-input select" id="form-region" data-placeholder="Всички категории" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички категории">Всички категории</option>
+                <option value="0" label="Всички категории">All categories</option>
                 {% for tag in tags %}
                   <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                 {% endfor %}
@@ -35,11 +35,7 @@
             <div class="col-lg-12 col-xl-12">
               <table class="table-job-listing table-responsive">
                   {% for offer in positions %}
-                        {% if offer.available == False %}
-                <tr class="text-danger">
-                        {% else %}
-                        <tr>
-                        {% endif %}
+                <tr>
                   <td class="table-job-listing-main">
                     <!-- Company Minimal-->
                     <article class="company-minimal">
@@ -48,10 +44,6 @@
                       <div class="company-minimal-main">
                         <h5 class="company-minimal-title"><a href="{{ url_for ('core.edit_offer', positionId=offer.id) }}">{{ offer.name }}</a></h5>
                         <p>{{ offer.company.name }}</p>
-                        {% if offer.available == False %}
-                        <p>Не е активна в момента</p>
-                        {% else %}
-                        {% endif %}
                       </div>
                     </article>
                   </td>

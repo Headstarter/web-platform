@@ -1,5 +1,5 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Редактирай Профила на Компанията{% endblock %}
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block js %}
 <link href="/css/summernote-bs4.css" rel="stylesheet">
@@ -13,40 +13,33 @@
 <script src="/js/summernote-bg-BG.js"></script>
 <script>
 $(document).ready( function() {
-    	$(document).on('change', '.btn-file :file', function() {
-		var input = $(this),
-			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-		input.trigger('fileselect', [label]);
-		});
-
-		$('.btn-file :file').on('fileselect', function(event, label) {
-
-		    var input = $(this).parents('.input-group').find(':text'),
-		        log = label;
-
-		    if( input.length ) {
-		        input.val(log);
-		    } else {
-		        //if( log ) alert(log);
-		    }
-
-		});
-		function readURL(input) {
-		    if (input.files && input.files[0]) {
-		        var reader = new FileReader();
-
-		        reader.onload = function (e) {
-		            $('#img-upload').attr('src', e.target.result);
-		        }
-
-		        reader.readAsDataURL(input.files[0]);
-		    }
-		}
-
-		$("#imgInp").change(function(){
-		    readURL(this);
-		});
-	});
+      $(document).on('change', '.btn-file :file', function() {
+    var input = $(this),
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [label]);
+    });
+    $('.btn-file :file').on('fileselect', function(event, label) {
+        var input = $(this).parents('.input-group').find(':text'),
+            log = label;
+        if( input.length ) {
+            input.val(log);
+        } else {
+            //if( log ) alert(log);
+        }
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img-upload').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+  });
   $(document).ready(function() {
       $('.summernote').summernote({
         lang: 'bg-BG' // default: 'en-US'
@@ -60,7 +53,6 @@ $(document).ready( function() {
         $('input#imgInp').each (function (_) {
             var fd = new FormData();
             fd.append("logo", $("#imgInp")[0].files[0]);
-
             $.ajax({
                 url: '/upload/logo',
                 method: 'POST',
@@ -82,7 +74,7 @@ $(document).ready( function() {
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">Профил на {{ session['company'] }}</h3>
+            <h3 class="breadcrumbs-custom-title">Profile of {{ session['company'] }}</h3>
           </div>
         </div>
 </section>
@@ -92,10 +84,10 @@ $(document).ready( function() {
         <div class="container">
           <div class="block-form">
             <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_company_profile') }}">
-            <h4>Обща информация за фирмата</h4>
+            <h4>Short information about the company</h4>
             <hr>
                 <article class="company-light">
-                    <label class="form-label-outside">Фирмено лого: (До 16 МБ)</label>
+                    <label class="form-label-outside">Logo: (max 16 MB)</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
@@ -113,27 +105,27 @@ $(document).ready( function() {
               <div class="row row-40">
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-job-title">Име на фирмата</label>
+                    <label class="form-label-outside" for="general-information-job-title">Name of the company</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text" name="company-name" value="{{ company.name }}" data-constraints="@Required">
-                      <label class="form-label" for="general-information-job-title">Въведете име на фирмата</label>
+                      <label class="form-label" for="general-information-job-title">Type the name of the company</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-email">Уеб сайт на фирмата</label>
+                    <label class="form-label-outside" for="general-information-email">Company website</label>
                     <div class="form-wrap-inner">
                       <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="website" value="{{ company.website }}" data-constraints="@Required">
-                      <label class="form-label" for="general-information-email">Въведете уеб сайт на фирмата</label>
+                      <label class="form-label" for="general-information-email">Type the website</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-wrap">
-                    <label class="form-label-outside" for="general-information-description">Описание на фирмата</label>
+                    <label class="form-label-outside" for="general-information-description">Describe the company</label>
                     <div class="form-wrap-inner">
-                      <label class="form-label" for="general-information-description">Предоставете пълно описание на фирмата</label>
+                      <label class="form-label" for="general-information-description">All details</label>
                       <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required">{{ company.description | safe }}</textarea>
                       <span class="summernote">{{ company.description | safe }}</span>
                     </div>
@@ -142,7 +134,7 @@ $(document).ready( function() {
               </div>
               <div class="block-form">
                 <hr>
-                <button class="button button-secondary" type="submit" form="post-a-job-form">Запази</button>
+                <button class="button button-secondary" type="submit" form="post-a-job-form">Save</button>
               </div>
               </form>
             </div>

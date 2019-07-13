@@ -1,11 +1,11 @@
-{% extends 'core/en/company/template.html' %}
-{% block title %} Home {% endblock %}
+{% extends 'core/en/template.html' %}
+{% block title %} Моите Кандидати {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">My posts</h3>
+            <h3 class="breadcrumbs-custom-title">Моите кандидати</h3>
           </div>
         </div>
 </section>
@@ -21,7 +21,7 @@
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
               <select class="form-input select" id="form-region" data-placeholder="Всички обяви" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички обяви">All posts</option>
+                <option value="0" label="Всички обяви">Всички обяви</option>
                 {% for tag in tags %}
                   <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                 {% endfor %}
