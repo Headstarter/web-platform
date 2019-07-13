@@ -1,5 +1,5 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Начало {% endblock %}
+{% extends 'core/en/students/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% set homepage = True %}
 
@@ -10,23 +10,27 @@
               <h2 class="jumbotron-creative-title">Get your head start<br>
 on the road to business</h2>
               <div class="form-layout-search-outer">
-                <form action="{{ url_for('core.browse') }}" class="form-layout-search form-lg">
+                <form class="form-layout-search form-lg">
                   <div class="form-wrap form-wrap-icon">
+                    <input class="form-input form-control-has-validation" id="form-keywords" type="text" name="keywords" data-constraints="@Required"><span class="form-validation"></span>
+                    <label class="form-label rd-input-label" for="form-keywords">Key words</label><span class="icon fl-bigmug-line-circular224"></span>
+                  </div>
+                  <div class="form-wrap form-wrap-icon form-wrap-select">
                     <!-- Select 2-->
-                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                      <option value="0">Всички позиции</option>
+                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="region" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                      <option value="0">All positions</option>
                       {% for tag in tags %}
                       <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                       {% endfor %}
                     </select>
-                    <i class="icon fa fa-filter" aria-hidden="true"></i>
+                    <span class="icon fl-bigmug-line-big104"></span>
                   </div>
                   <div class="form-wrap form-wrap-button form-wrap-button-icon-only">
                     <button class="button button-lg button-primary button-icon-only" type="submit" aria-label="search"><span class="icon icon-4 fl-bigmug-line-search74"></span></button>
                   </div>
                 </form>
               </div>
-              <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse') }}">{{ number_offers }} позиции за теб</a> в момента!</p>
+              <p class="big text-gray-800">We have&nbsp;<a href="job-listing.html">{{ number_offers }} positions for you</a> at the moment!</p>
             </div>
           </div>
           <div class="jc-decoration">
@@ -48,8 +52,8 @@ on the road to business</h2>
       <!-- Welcome to Headstarter.eu -->
       <section class="section section-md bg-default text-center">
         <div class="container">
-          <h3>Добре дошли в <span class="text-primary">Headstarter</span></h3>
-          <p class="text-spacing-05">Мястото, където работодателите търсят твоя талант и опит.</p>
+          <h3>Welcome <span class="text-primary">Headstarter</span></h3>
+          <p class="text-spacing-05">The place where employers look for your talent.</p>
           <div class="row row-50 justify-content-center align-items-center text-left">
             <div class="col-md-10 col-lg-6">
               <figure class="figure-responsive block-5"><img src="/images/bg-image-6-1.JPG" alt=""/>
@@ -62,7 +66,7 @@ on the road to business</h2>
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-group"></div>
-                      <h5 class="box-line-title">Повече от 100 посетители всеки ден</h5>
+                      <h5 class="box-line-title">More than 100 visitors every day</h5>
                     </div>
                   </article>
                 </div>
@@ -71,7 +75,7 @@ on the road to business</h2>
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-partners"></div>
-                      <h5 class="box-line-title">Направено от ученици за ученици</h5>
+                      <h5 class="box-line-title">Made by students for students</h5>
                     </div>
                   </article>
                 </div>
@@ -80,7 +84,7 @@ on the road to business</h2>
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-chat"></div>
-                      <h5 class="box-line-title">Статии, които да те напътстват през цялото време</h5>
+                      <h5 class="box-line-title">#todo</h5>
                     </div>
                   </article>
                 </div>
@@ -89,7 +93,7 @@ on the road to business</h2>
                   <article class="box-line box-line_sm">
                     <div class="box-line-inner">
                       <div class="box-line-icon icon mercury-icon-target"></div>
-                      <h5 class="box-line-title">Само актуална и достоверна информация</h5>
+                      <h5 class="box-line-title">Only trusted information</h5>
                     </div>
                   </article>
                 </div>
@@ -101,26 +105,35 @@ on the road to business</h2>
       <!-- Latest Posts-->
       <section class="section section-md bg-gray-100">
         <div class="container">
-          <h3 class="text-center">Последни публикации</h3>
+          <h3 class="text-center">Latest news</h3>
           <div class="row row-30 row-xl-70">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4">
               <!-- Post Minimal-->
-              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/></a>
+              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/></a>
                 <div class="post-minimal-main">
-                  <h5 class="post-minimal-title"><a href="/post/1">Как да си направим CV?</a></h5>
-                  <p>Изпращането на CV е първата крачка в процеса на кандидатстване за стажантска програма</p>
-                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
+                  <h5 class="post-minimal-title"><a href="blog-post.html">8 Surprising Predictions About the Future of Work</a></h5>
+                  <p>There’s no denying that the landscape of work is changing. More and more companies are adopting flexible work policies</p>
+                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
                 </div>
               </article>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4">
               <!-- Post Minimal-->
-              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/></a>
+              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/></a>
                 <div class="post-minimal-main">
-                  <h5 class="post-minimal-title"><a href="/post/2">Как да си наемем стажант?
-</a></h5>
-                  <p>Наемането на млади стажанти предоставя множество предимства, едно от които е постигането на по-висока икономическа активност.</p>
-                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
+                  <h5 class="post-minimal-title"><a href="blog-post.html">Job Search Success: Finding a Business Development Job</a></h5>
+                  <p>Business development professionals are at the heart of all sorts of organizations, from startups to multinational corporations.</p>
+                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
+                </div>
+              </article>
+            </div>
+            <div class="col-12 col-lg-4">
+              <!-- Post Minimal-->
+              <article class="post-minimal"><a class="post-minimal-media" href="blog-post.html"><img class="post-minimal-image" src="/images/blog-3-369x253.jpg" alt=""/></a>
+                <div class="post-minimal-main">
+                  <h5 class="post-minimal-title"><a href="blog-post.html">How to Impress Your Future Employer</a></h5>
+                  <p>You’re committed to your job search, and you use every ounce of your free time you have to comb through listings, write cover</p>
+                  <time class="post-minimal-time" datetime="2018">November 23, 2018</time>
                 </div>
               </article>
             </div>
@@ -130,15 +143,15 @@ on the road to business</h2>
       <!-- Popular Categories-->
       <section class="section section-md bg-default text-center">
         <div class="container container-fullwidth">
-          <h3>Популярни категории</h3>
+          <h3>Popular Categories</h3>
           <!-- Owl Carousel-->
-          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
-              {% for tag in open %}
-              <a class="box-creative" href="{{ url_for('core.browse') }}?group={{ tag.id }}">
+          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="3" data-xl-items="5" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
+              {% for tag in tags %}
+              <a class="box-creative" href="#todo">
               <div class="box-creative-inner">
-                <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
-                <p class="box-creative-title">{{ tag.label | safe }}</p>
-                <p>{{ tag.count }} отворени позиции</p>
+                <div class="icon box-creative-icon mercury-icon-calc"></div>
+                <p class="box-creative-title">{{ tag.name | replace("&nbsp;", "") | safe }}</p>
+                <p>{{ open[loop.index - 1] }} open positions</p>
               </div>
               <div class="box-creative-dummy"></div></a>
               {% endfor %}
@@ -150,32 +163,38 @@ on the road to business</h2>
         <div class="container">
           <div class="row row-40">
             <div class="col-12 text-center">
-              <h3>Последни обяви</h3>
+              <h3>Latest announcements</h3>
             </div>
             <div class="col-12">
               <div class="table-job-offers-outer">
-              <table class="table-job-listing table-responsive">
+                <table class="table-job-offers table-responsive">
                   {% for offer in positions %}
-                <tr>
-                  <td class="table-job-listing-main">
-                    <!-- Company Minimal-->
-                    <article class="company-minimal">
-                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
-                      </figure>
-                      <div class="company-minimal-main">
-                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
-                        <p>{{ offer.company.name }}</p>
-                      </div>
-                    </article>
-                  </td>
-                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
-                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
-                </tr>
+                  <tr>
+                    <td class="table-job-offers-date"><span>{{ offer.get_date () }}</span></td>
+                    <td class="table-job-offers-main">
+                      <!-- Company Light-->
+                      <article class="company-light">
+                        <figure class="company-light-figure"><img class="company-light-image" src="{{ offer.company.logo }}" alt=""/>
+                        </figure>
+                        <div class="company-light-main">
+                          <h5 class="company-light-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                          <p class="text-color-default">{{ offer.company.name }}</p>
+                        </div>
+                      </article>
+                    </td>
+                    <!--<td class="table-job-offers-meta">
+                      <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-cash"></span><span>TODO SALARY</span></div>
+                    </td>-->
+                    <td class="table-job-offers-meta">
+                      <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></div>
+                    </td>
+                    <td class="table-job-offers-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                  </tr>
                   {% endfor %}
-              </table>
+                </table>
               </div>
             </div>
-            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.browse') }}">Виж още обяви</a></div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for ('core.browse') }}">Show More Jobs</a></div>
           </div>
         </div>
       </section>
@@ -183,7 +202,7 @@ on the road to business</h2>
       <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" data-parallax-img="images/bg-image-7.jpg">
         <div class="parallax-content">
           <div class="container">
-            <h3>Кои сме ние?</h3>
+            <h3>Who we are?</h3>
             <!-- Owl Carousel-->
             <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="false" data-margin="30" data-autoplay="true" data-mouse-drag="false">
               <blockquote class="quote-mary">
@@ -192,51 +211,16 @@ on the road to business</h2>
                     <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
                   </svg>
                   <div class="quote-mary-text">
-                    <p>Десетокласник с афинитет към информатиката, жив пример за определението за програмист: "Органична машина, която превръща кофеина в код"; автор на много проекти, създател на обещаващи идеи, включително и тази.</p>
+                    <p>tenth grader whit big ambitions in programing: "Organic machine that turns coffe in code"; creator of many promising projects,  including this.</p>
                   </div>
                 </div>
                 <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/we/alex.jpg" alt=""/>
                   <div class="quote-mary-info">
-                    <cite class="quote-mary-cite heading-5">Алекс Цветанов</cite>
-                    <p class="quote-mary-subtitle">Съосновател на Headstarter</p>
+                    <cite class="quote-mary-cite heading-5">Alex Tsvetanov</cite>
+                    <p class="quote-mary-subtitle">Co-owner of Headstarter</p>
                   </div>
                 </div>
               </blockquote>
-              <blockquote class="quote-mary">
-                <div class="quote-mary-main">
-                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
-                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
-                  </svg>
-                  <div class="quote-mary-text">
-                    <p>Здравей! Аз съм Рангел,този,който свързва веригата на хорските проблеми с тежестта на техническите решения като крайната ми цел е котвата, която ще стопира кораба на човешката деградация деградация, защото всички ние заслужаваме един по-добър свят!
-                    </p>
-                  </div>
-                </div>
-                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/Rangel.jpg" alt=""/>
-                  <div class="quote-mary-info">
-                    <cite class="quote-mary-cite heading-5">Рангел Плачков</cite>
-                    <p class="quote-mary-subtitle">Съосновател на Headstarter</p>
-                  </div>
-                </div>
-              </blockquote>
-
-              <blockquote class="quote-mary">
-                <div class="quote-mary-main">
-                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
-                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
-                  </svg>
-                  <div class="quote-mary-text">
-                    <p>Здравей! Аз съм БОРИС,Борис и БоРиС. Моята суперсила е да ритам мързеливи задници и да чупя всякакви ледове , които са замразили способността на днешните хора да комуникират помежду си ! Трябва да има спокойна атмосфера, прямост и ЯСНОТА във взаимоотношенията! Това е моят подход към маркетинга!</p>
-                  </div>
-                </div>
-                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/Bobi.jpg" alt=""/>
-                  <div class="quote-mary-info">
-                    <cite class="quote-mary-cite heading-5">Борис</cite>
-                    
-                  </div>
-                </div>
-              </blockquote>
-              
             </div>
           </div>
         </div>
@@ -245,10 +229,9 @@ on the road to business</h2>
       <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" data-parallax-img="images/parallax-2.jpg">
         <div class="parallax-content">
           <div class="container container-fullwidth">
-            <h3>Нашите партньори</h3>
+            <h3>Our partners</h3>
             <!-- Owl Carousel-->
             <div class="owl-carousel owl-carousel-stretch" data-autoplay="true" data-autoplay-timeout="4000" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="3" data-xl-items="5" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="2" data-loop="false" data-margin="30" data-mouse-drag="false">
-              <!--
               <a class="link-corporate" href="#todo">
                 <img src="/images/partners/paraflow.png" alt=""/>
               </a>
@@ -276,15 +259,12 @@ on the road to business</h2>
               <a class="link-corporate" href="#todo">
                 <img src="/images/partners/dzi.png" alt=""/>
               </a>
-            -->
               <a class="link-corporate" href="#todo">
                 <img src="/images/partners/teenovator.png" alt=""/>
               </a>
-              <!--
               <a class="link-corporate" href="#todo">
                 <img src="/images/partners/biodit.png" alt=""/>
               </a>
-            -->
             </div>
           </div>
         </div>
@@ -292,7 +272,7 @@ on the road to business</h2>
       <!-- Steps-->
       <section class="section section-md bg-default text-center">
         <div class="container">
-          <h3>3 стъпки - много възможности</h3>
+          <h3>3 steps - many possibility</h3>
           <ul class="list-linked">
             <li class="ll-item">
               <div class="icon ll-item-icon thin-icon-email-search">
@@ -301,8 +281,8 @@ on the road to business</h2>
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title"><a href="{{ url_for ('core.browse') }}">Разгледай позициите</a></h5>
-                <p>Лесно търсене по различни категории</p>
+                <h5 class="ll-item-title"><a href="#todo">look for positions</a></h5>
+                <p>Easy way to check different positions</p>
               </div>
             </li>
             <li class="ll-item">
@@ -312,8 +292,8 @@ on the road to business</h2>
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title">Намери твоята позиция</h5>
-                <p>Избери позицията, която те влече и с която би могъл да се справиш успешно.</p>
+                <h5 class="ll-item-title">Find your position</h5>
+                <p>Chose position that ypu are interested and motivated.</p>
               </div>
             </li>
             <li class="ll-item">
@@ -323,8 +303,8 @@ on the road to business</h2>
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title">Изпрати кандидатурата си</h5>
-                <p>И получи персонална оферта за стаж или работа.</p>
+                <h5 class="ll-item-title">Send your application</h5>
+                <p>And recive personal offer for job.</p>
               </div>
             </li>
             <li class="ll-item">
@@ -333,7 +313,7 @@ on the road to business</h2>
                   <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                 </svg>
               </div>
-              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for ('core.browse') }}">Започни сега</a></div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="#todo">Start now</a></div>
             </li>
           </ul>
         </div>
