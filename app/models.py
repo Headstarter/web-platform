@@ -252,8 +252,9 @@ def create_cv(student):
 
 
 def insert_user(name, email, password, company=None):
+    new_user = {}
     if company is None:
-        db.session.add(User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
+        new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
                                              name='',
                                              email='',
                                              birthday='',
@@ -265,11 +266,15 @@ def insert_user(name, email, password, company=None):
                                              skills='[]',
                                              languages='[]',
                                              hobbies='[]'
-                                             ), company=company, email=email, password_hash=crypto(password)))
+                                             ), company=company, email=email, password_hash=crypto(password))
     else:
-        db.session.add(User(name=name, cv=None, company=company,
-                            email=email, password_hash=crypto(password)))
+        new_user = User(name=name, cv=None, company=company,
+                            email=email, password_hash=crypto(password))
+    db.session.add(new_user)
     db.session.commit()
+    
+    from app.v1.helpers.mailer import Mailer
+    Mailer.sendConfirmation(new_user)
 
 
 def insert_application(user_id, position_id):
