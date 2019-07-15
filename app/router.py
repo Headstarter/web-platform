@@ -163,6 +163,10 @@ def register():
             if (request.form['password'] == request.form['password-confirm'])\
                     and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
 
+                if request.form['company'] == 'Not listed':
+                    flash('Invalid comapny.', 'danger')
+                    return my_redirect(url_for('login_register', type="Company", action='register'))
+                
                 my_company = {}
 
                 if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
