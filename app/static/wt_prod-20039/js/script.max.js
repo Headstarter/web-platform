@@ -1197,6 +1197,7 @@ var _hs_response;
                     data: {
 
                     },
+                    async: false,
                     beforeSubmit: function(arr, $form, options) {
                         if (isNoviBuilder)
                             return;
@@ -1481,3 +1482,11 @@ $('.box-creative').hover(function(e) {
     console.log('unhovered');
     $(this).find('.icon.box-creative-icon').removeClass('hovered');
 });
+
+$('[type=submit]').click(function(){
+    console.log('submitted');
+    $(this).parent().parent().submit();
+    $(this).attr('type', 'button');
+});
+
+// <button class="button button-block button-primary" type="submit">Създай профил</button>

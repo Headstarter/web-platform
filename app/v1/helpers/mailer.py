@@ -27,7 +27,7 @@ class Mailer:
         
     @staticmethod
     def sendConfirmation(new_user):
-        verify = get_verification(new_user)
+        verify = Mailer.get_verification(new_user)
         msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[new_user.email, 'headstarter@headstarter.eu'])
         msg.html = render_template('reg_confirm.html', link='https://headstarter.eu/verify/' + verify.code)
         mail.send(msg)
@@ -35,7 +35,7 @@ class Mailer:
     
     @staticmethod
     def sendResetPassword(user):
-        verify = get_verification(user)
+        verify = Mailer.get_verification(user)
         msg = Message('Reset your password in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[user.email, 'headstarter@headstarter.eu'])
         msg.html = render_template('reset_password.html', link='https://headstarter.eu/reset/' + verify.code)
         mail.send(msg)

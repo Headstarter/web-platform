@@ -122,7 +122,6 @@ def login_register():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-
     print(request.form)
     member = 'off'
     try:
@@ -197,6 +196,8 @@ def register():
                     flash('Please, just log in.', 'info')
                 return my_redirect(url_for('login_register', type="Company", action='register'))
     else:
+        if session['email'] is not None:
+            return my_redirect('/')
         if len(request.form['email']) < 6:
             flash('Please, enter valid email address.', 'danger')
         if len(request.form['password']) < 8:
@@ -266,7 +267,10 @@ def reset(verification):
 @app.route('/verify/<verification>')
 def verify(verification):
     verify = Verify.query.filter(Verify.code == verification).one()
-    user = verify.user
+    user = User.query.filter(User.verification == verify).one()
+    # import sys
+    # print(user.__dict__, file=sys.stderr)
+    # print(verify.__dict__, file=sys.stderr)
     session['email'] = user.email
     session['id'] = user.id
     session['company_id'] = user.company_id if user.company_id is not None else None

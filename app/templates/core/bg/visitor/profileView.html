@@ -322,6 +322,11 @@
                     </div>
                 </div>
             </div>
+            {% if student.id == session['id'] %}
+            <br><br>
+            <a style="margin-bottom: 30px;" class="button button-lg button-secondary" href="{{ url_for ('core.profile') }}">Промени</a>
+            <br><br><br>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
