@@ -215,6 +215,10 @@ def register():
 def zoho():
     return render_template('verifyforzoho.html')
 
+@app.route('/google8a89e589e3c95635.html')
+def google():
+    return render_template('google8a89e589e3c95635.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
