@@ -219,6 +219,15 @@ def zoho():
 def google():
     return render_template('google8a89e589e3c95635.html')
 
+@app.route('/yandex_5d718a3bdfc70e97.html')
+def yandex():
+    return """<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>Verification: 5d718a3bdfc70e97</body>
+</html>"""
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
