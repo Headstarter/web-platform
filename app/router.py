@@ -211,6 +211,10 @@ def register():
         return my_redirect(url_for('login_register', type="Company", action='register'))
 
 
+@app.route('/zohoverify/verifyforzoho.html')
+def zoho():
+    return render_template('verifyforzoho.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
