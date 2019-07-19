@@ -4192,7 +4192,7 @@ textarea.form-input {
 }
 
 .post-minimal-title {
-    max-width: 300px
+    /*max-width: 300px*/
 }
 
 .post-minimal-title a {
@@ -16688,4 +16688,57 @@ cloudflare-app[app="tibrr-cookie-consent"] > .tibrr-cookie-consent-container > .
 }
 #company {
     margin-top: 5px;
+}
+div.box-creative-inner p:last-of-type {
+    color: #4abdac;
+}
+.owl-item:hover div.box-creative-inner p:last-of-type {
+    color: #fc4a1a !important;
+}
+a.post-minimal-media:hover {
+    color: rgb(154, 154, 154) !important;
+}
+.comapny .ll-item-icon {
+    color: #4abdac !important;
+}
+.company .ll-item-icon-inner {
+    stroke: #4abdac;
+}
+.company .ll-item-icon::after {
+    border: 1px solid rgba(74, 189, 172, .43);
+}
+.student .ll-item-icon {
+    color: #fc4a1a !important;
+}
+.student .ll-item-icon-inner {
+    stroke: #fc4a1a;
+}
+.student .ll-item-icon::after {
+    border: 1px solid rgba(252, 74, 26, .43);
+}
+.company .icon.ll-item-icon {
+    color: #4abdac;
+}
+tr .badge {
+    display: inline-block;
+    padding: 4px 6px 3px;
+    font: 600 12px/12px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #f7b733;
+    background-color: transparent;
+    border: 2px solid #f7b733;
+    border-radius: 0;
+}
+tr:hover .badge {
+    display: inline-block;
+    padding: 4px 6px 3px;
+    font: 600 12px/12px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #fff;
+    background: #fc4a1a;
+    border: 0px solid #f7b733;
+    margin: 4px 4px;
+    border-radius: 0;
 }
