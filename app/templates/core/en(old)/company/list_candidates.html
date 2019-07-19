@@ -1,11 +1,11 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Моите Обяви {% endblock %}
+{% extends 'core/en/company/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">Моите обяви</h3>
+            <h3 class="breadcrumbs-custom-title">My posts</h3>
           </div>
         </div>
 </section>
@@ -20,8 +20,8 @@
             </div>-->
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
-              <select class="form-input select" id="form-region" data-placeholder="Всички категории" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички категории">Всички категории</option>
+              <select class="form-input select" id="form-region" data-placeholder="Всички обяви" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+                <option value="0" label="Всички обяви">All posts</option>
                 {% for tag in tags %}
                   <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
                 {% endfor %}
@@ -33,33 +33,22 @@
           </form>
           <div class="row row-50 flex-lg-row-reverse">
             <div class="col-lg-12 col-xl-12">
-              <table class="table-job-listing table-responsive">
-                  {% for offer in positions %}
-                        {% if offer.available == False %}
-                <tr class="text-danger">
-                        {% else %}
-                        <tr>
-                        {% endif %}
-                  <td class="table-job-listing-main">
-                    <!-- Company Minimal-->
-                    <article class="company-minimal">
-                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
-                      </figure>
-                      <div class="company-minimal-main">
-                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.edit_offer', positionId=offer.id) }}">{{ offer.name }}</a></h5>
-                        <p>{{ offer.company.name }}</p>
-                        {% if offer.available == False %}
-                        <p>Не е активна в момента</p>
-                        {% else %}
-                        {% endif %}
+                  {% for person in candidates %}
+                <article class="profile-minimal">
+                <div class="profile-minimal-inner">
+                  <div class="profile-minimal-main-outer">
+                    <div class="profile-minimal-main"><img class="profile-minimal-image" src="{{ person.user.cv.photo }}" alt="">
+                      <div class="profile-minimal-main-info">
+                        <h5 class="profile-minimal-name"><a href="{{ url_for ('core.profileView', id=person.user.id) }}">{{ person.user.cv.name }}</a></h5>
+                        <p><a href="{{ url_for ('core.offer_view', position_id=person.position.id) }}">{{ person.position.name }}</a></p>
+                        <p class="profile-minimal-position"><a href="mailto:{{ person.user.cv.email }}">{{ person.user.cv.email }}</a>, <a href="tel:{{ person.user.cv.telephone }}">{{ person.user.cv.telephone }}</a></p>
                       </div>
-                    </article>
-                  </td>
-                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
-                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
-                </tr>
+                    </div>
+                  </div>
+                  <div class="profile-minimal-meta"> <span class="icon mdi mdi-map-marker"></span><span>{{ person.user.cv.location }}</span></div>
+                </div>
+              </article>
                   {% endfor %}
-              </table>
               <!-- Bootstrap Pagination
               <nav class="pagination-outer text-center" aria-label="Page navigation">
                 <div class="pagination">

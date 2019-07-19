@@ -1,5 +1,5 @@
-{% extends 'core/en/students/template.html' %}
-{% block title %} Home {% endblock %}
+{% extends 'core/en/template.html' %}
+{% block title %} Детайли за Обявата {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
@@ -85,7 +85,7 @@
               </div>
               -->
               <div class="block offset-top-2">
-                <h4>Latest posts</h4>
+                <h4>Последни обяви</h4>
                 <table class="table-job-listing table-responsive">
                     {% for recent in recents %}
                   <tr>
@@ -109,15 +109,15 @@
             <div class="col-lg-4">
               <div class="row row-30 row-lg-50">
                 <div class="col-md-6 col-lg-12 text-center rd-mailform form-corporate form-spacing-small form-corporate_sm">
-                    <h4>Become part of<br>{{ offer.company.name }}</h4>
+                    <h4>Стани част от<br>{{ offer.company.name }}</h4>
                     <div class="form-wrap">
-                      <button class="button button-block button-primary" type="submit">Create your CV</button>
+                      <button class="button button-block button-primary" type="submit">Създай своето CV</button>
                     </div>
                     <div class="form-wrap">
                         <h4>и</h4>
                     </div>
                     <div class="form-wrap">
-                      <button class="button button-block button-primary" type="submit">Apply</button>
+                      <button class="button button-block button-primary" type="submit">Кандидатствай</button>
                     </div>
                 </div>
               </div>

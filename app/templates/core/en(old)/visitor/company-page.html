@@ -1,5 +1,5 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Профил на Фирмата {% endblock %}
+{% extends 'core/en/visitor/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block content %}
      <section class="section parallax-container section-lg bg-overlay-3" data-parallax-img="/images/bg-image-13.jpg">
@@ -29,9 +29,9 @@
                   <div class="layout-info-aside-item"><a class="link" href="{{ company.website }}" target="_blank">{{ company.website }}</a></div>
                 </div>
               </div>
-              <h4 class="heading-decorated_1">За компанията</h4>
+              <h4 class="heading-decorated_1">About</h4>
               {{ company.description | safe }}
-              <h4 class="heading-decorated_1">Отворени позиции</h4>
+              <h4 class="heading-decorated_1">Open positions</h4>
               <table class="table-job-listing table-job-listing_lg table-responsive">
                   {% for offer in positions %}
                 <tr>
