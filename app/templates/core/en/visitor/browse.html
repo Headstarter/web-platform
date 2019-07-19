@@ -1,11 +1,11 @@
-{% extends 'core/en/visitor/template.html' %}
-{% block title %} Home {% endblock %}
+{% extends 'core/en/template.html' %}
+{% block title %} Обяви {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
         <div class="breadcrumbs-custom-main bg-image bg-primary">
           <div class="container">
-            <h3 class="breadcrumbs-custom-title">All posts</h3>
+            <h3 class="breadcrumbs-custom-title">Всички обяви</h3>
           </div>
         </div>
 </section>
@@ -21,20 +21,30 @@
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
               <select class="form-input select" id="form-company" data-placeholder="Всички фирми" name="company" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички фирми">All companies</option>
+                <option value="0" label="Всички фирми">Всички фирми</option>
                 {% for tag in companies %}
+                  {% if company_selected == tag.id %}
+                  <option selected value="{{ tag.id }}">{{ tag.name }}</option>
+                  {% else %}
                   <option value="{{ tag.id }}">{{ tag.name }}</option>
+                  {% endif %}
                 {% endfor %}
-              </select><span class="icon fl-bigmug-line-big104"></span>
+              </select>
+                    <i class="icon fa fa-filter" aria-hidden="true"></i>
             </div>
             <div class="form-wrap form-wrap-icon">
               <!-- Select 2-->
               <select class="form-input select" id="form-region" data-placeholder="Всички категории" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
-                <option value="0" label="Всички категории">All categories</option>
+                <option value="0" label="Всички категории">Всички категории</option>
                 {% for tag in tags %}
+                  {% if tag_selected == tag.id %}
+                  <option selected value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                  {% else %}
                   <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                  {% endif %}
                 {% endfor %}
-              </select><span class="icon fl-bigmug-line-big104"></span>
+              </select>
+                    <i class="icon fa fa-filter" aria-hidden="true"></i>
             </div>
             <div class="form-wrap form-wrap-button">
               <button class="button button-lg button-primary" type="submit">Search</button>

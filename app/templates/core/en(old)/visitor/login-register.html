@@ -1,5 +1,5 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Регистрация Вход {% endblock %}
+{% extends 'core/en/visitor/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block banner %}
 
@@ -11,20 +11,20 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-xl-10">
-              <h4>Преди да продължиш, моля, влез със своя профил или си направи нов</h4>
+              <h4>Before you continue please enter ypur profile or create new one</h4>
               <!-- Bootstrap tabs -->
               <div class="tabs-custom tabs-horizontal tabs-minimal" id="tabs-1">
                 <!-- Nav tabs-->
                 <ul class="nav nav-tabs">
                     {% if action == 'register' %}
-                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-1" data-toggle="tab">Регистрация</a></li>
+                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-1" data-toggle="tab">Registration</a></li>
                       {% else %}
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-1" data-toggle="tab">Регистрация</a></li>
+                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-1" data-toggle="tab">Registration</a></li>
                     {% endif %}
                     {% if action == 'login' %}
-                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-2" data-toggle="tab">Вход</a></li>
+                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-2" data-toggle="tab">Enter</a></li>
                       {% else %}
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Вход</a></li>
+                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Enter</a></li>
                     {% endif %}
                 </ul>
                 <!-- Tab panes-->
@@ -41,7 +41,7 @@
                                  -->
                             <div class="form-wrap">
                               <input class="form-input" id="rd-navbar-register-name1" type="text" name="name" data-constraints="@Required"/>
-                              <label class="form-label" for="rd-navbar-register-name1">Име</label>
+                              <label class="form-label" for="rd-navbar-register-name1">Name</label>
                             </div>
                             <div class="form-wrap">
                               <input class="form-input" id="rd-navbar-register-email1" type="email" name="email" data-constraints="@Email @Required"/>
@@ -49,47 +49,32 @@
                             </div>
                             <div class="form-wrap">
                               <input class="form-input" id="rd-navbar-register-password1" type="password" name="password" data-constraints="@Required"/>
-                              <label class="form-label" for="rd-navbar-register-password1">Парола</label>
+                              <label class="form-label" for="rd-navbar-register-password1">Password</label>
                             </div>
                             <div class="form-wrap">
                               <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="password-confirm" data-constraints="@Required"/>
-                              <label class="form-label" for="rd-navbar-register-password-confirm1">Повтори паролата</label>
+                              <label class="form-label" for="rd-navbar-register-password-confirm1">Repeat password</label>
                             </div>
                             {% if type == 'Both' %}
                                 <div class="form-wrap">
                                   <label class="checkbox-inline">
-                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Служител на фирма съм
+                                    <input name="member" value="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> I am employer of 
                                   </label>
                                 </div>
                                 <div class="form-wrap" id="company" style="display:none;">
-                                  <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                    {% for company in companies %}
-                                    <option value="{{company.name}}">{{company.name}}</option> 
-                                    {% endfor %}
-                                    <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                  </select>
-                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                                  <input class="form-input" id="rd-navbar-register-company1" type="text" name="company" />
+                                  <label class="form-label" for="rd-navbar-register-company1">company code</label>
                                 </div>
                             {% else %}
                                 {% if type == 'Company' %}
                                     <div class="form-wrap" id="company">
-                                      <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
-                                        <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                        {% for company in companies %}
-                                        <option value="{{company.name}}">{{company.name}}</option> 
-                                        {% endfor %}
-                                      </select>
-                                    <input name="member" type="hidden" value="on" class="checkbox-custom" />
-                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                                      <input class="form-input" id="rd-navbar-register-company1" type="text" name="company" />
+                                      <label class="form-label" for="rd-navbar-register-company1">company code</label>
                                     </div>
-                                {% else %}
-                                    <input name="member" type="hidden" value="off" class="checkbox-custom" />
                                 {% endif %}
                             {% endif %}
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                            <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
                             <div class="form-wrap">
-                              <button class="button button-block button-primary" type="submit">Създай профил</button>
+                              <button class="button button-block button-primary" type="submit">Create profile</button>
                             </div>
                           </form>
                      </div>
@@ -108,10 +93,10 @@
                             </div>
                             <div class="form-wrap">
                               <input class="form-input" id="rd-navbar-login-password1" type="password" name="password" data-constraints="@Required"/>
-                              <label class="form-label" for="rd-navbar-login-password1">Парола</label>
+                              <label class="form-label" for="rd-navbar-login-password1">Password</label>
                             </div>
                             <div class="form-wrap">
-                              <button class="button button-block button-primary" type="submit">Влез</button>
+                              <button class="button button-block button-primary" type="submit">Enter</button>
                             </div>
                           </form>
                       </div>
@@ -123,26 +108,3 @@
         </div>
       </section>
 {% endblock %}
-{% block js %}
-<script>
-  $('#notlisted').parent().change(function() {
-    let selected = $('option:selected').val();
-    if (selected == 'Not listed') {
-      $('#customcompany').show();
-    }
-    else {
-      $('#customcompany').hide();
-    }
-  });
-  $(document).ready(function () {
-      $($('option')[0]).attr('selected', 'selected');
-      let selected = $('option:selected').val();
-      if (selected == 'Not listed') {
-        $('#customcompany').show();
-      }
-      else {
-        $('#customcompany').hide();
-      }
-  });
-</script>   
-  {% endblock %}

@@ -1,5 +1,5 @@
-{% extends 'core/en/template.html' %}
-{% block title %} Детайли за Стажа {% endblock %}
+{% extends 'core/en/visitor/template.html' %}
+{% block title %} Home {% endblock %}
 
 {% block banner %}
 <section class="section breadcrumbs-custom">
@@ -29,14 +29,14 @@
                               <p class="object-inline object-inline_sm"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></p>
                             </li>
                             <li>
-                              <p class="object-inline object-inline_sm"><span class="icon icon-default text-primary mdi mdi-clock"></span><span>Публикувано на {{ offer.get_full_date() }}</span></p>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-default text-primary mdi mdi-clock"></span><span>Published on {{ offer.get_full_date() }}</span></p>
                             </li>
                           </ul>
                         </div>
                         <div class="col-sm-6">
                           <ul class="list list-xs">
                             <li>
-                              <p class="object-inline object-inline_sm"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>За {{ offer.age_required }} г.</span></p>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>For {{ offer.age_required }} г.</span></p>
                             </li>
                             <li>
                               <p class="object-inline object-inline_sm"><span class="icon icon-default text-primary mdi mdi-web"></span><a href="{{ offer.company.website }}">{{ offer.company.website }}</a></p>
@@ -85,7 +85,7 @@
               </div>
               -->
               <div class="block offset-top-2">
-                <h4>Последни обяви</h4>
+                <h4>Latest posts</h4>
                 <table class="table-job-listing table-responsive">
                     {% for recent in recents %}
                   <tr>
@@ -109,15 +109,15 @@
             <div class="col-lg-4">
               <div class="row row-30 row-lg-50">
                 <div class="col-md-6 col-lg-12 text-center rd-mailform form-corporate form-spacing-small form-corporate_sm">
-                    <h4>Стани част от<br>{{ offer.company.name }}</h4>
+                    <h4>Become part of<br>{{ offer.company.name }}</h4>
                     <div class="form-wrap">
-                      <a class="button button-block button-primary" target="_blank" href="{{ url_for ('core.profile') }}">Създай своето CV</a>
+                      <a class="button button-block button-primary" target="_blank" href="{{ url_for ('core.profile') }}">Create your CV</a>
                     </div>
                     <div class="form-wrap">
-                        <h4>и</h4>
+                        <h4>and</h4>
                     </div>
                     <div class="form-wrap">
-                      <a class="button button-block button-primary"  target="_blank" href="{{ url_for ('core.candidate', positionId=offer.id) }}">Кандидатствай</a>
+                      <a class="button button-block button-primary"  target="_blank" href="{{ url_for ('core.candidate', positionId=offer.id) }}">Apply</a>
                     </div>
                 </div>
               </div>
