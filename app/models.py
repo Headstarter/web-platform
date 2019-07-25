@@ -251,10 +251,11 @@ def create_cv(student):
     db.session.commit()
 
 
-def insert_user(name, email, password, company=None):
+def insert_user(name, email, password, company=None ,director=None):
     new_user = {}
     if company is None:
-        new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
+        if director is None:
+            new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
                                              name='',
                                              email='',
                                              birthday='',
@@ -265,8 +266,15 @@ def insert_user(name, email, password, company=None):
                                              projects='[]',
                                              skills='[]',
                                              languages='[]',
-                                             hobbies='[]'
+                                             hobbies='[]',
+                                             school=' '
                                              ), company=company, email=email, password_hash=crypto(password))
+        else:
+            new_user = User(name=name, 
+                            school=school, 
+                            cv=None, 
+                            email=email, 
+                            password_hash=crypto(password))
     else:
         new_user = User(name=name, cv=None, company=company,
                             email=email, password_hash=crypto(password))
