@@ -55,6 +55,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
+    op.create_table('School',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('admin', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
+    )
     op.create_table('Mapper',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('company_name', sa.String(length=128), nullable=True),
@@ -75,6 +82,7 @@ def upgrade():
     sa.Column('hours_per_day', sa.String(length=128), nullable=True),
     sa.Column('age_required', sa.String(length=128), nullable=True),
     sa.Column('tag_id', sa.Integer(), nullable=True),
+    sa.Column('views', sa.Integer(), default=0),
     sa.ForeignKeyConstraint(['company_id'], ['Company.id'], ),
     sa.ForeignKeyConstraint(['tag_id'], ['Tag.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -92,7 +100,9 @@ def upgrade():
     sa.Column('cv_id', sa.Integer(), nullable=True),
     sa.Column('verification_id', sa.Integer(), nullable=True),
     sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.Column('school_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['Company.id'], ),
+    sa.ForeignKeyConstraint(['school_id'], ['School.id'], ),
     sa.ForeignKeyConstraint(['cv_id'], ['CV.id'], ),
     sa.ForeignKeyConstraint(['verification_id'], ['Verify.id'], ),
     sa.PrimaryKeyConstraint('id')

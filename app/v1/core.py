@@ -102,6 +102,8 @@ def list_my_candidates():
 
 @routes.route('/internship/<position_id>')
 def offer_view(position_id):
+	views = Position.query.filter(Position.id == position_id).one().views 
+	Position.query.filter(Position.id == position_id).update({"views": views + 1})
 	return mapped_routes[session['type']].offer_details(position_id)
 
 
