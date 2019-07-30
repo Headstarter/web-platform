@@ -1483,7 +1483,7 @@ $('.box-creative').hover(function(e) {
     $(this).find('.icon.box-creative-icon').removeClass('hovered');
 });
 
-$('[type=submit]').click(function(){
+$('.rd-form.rd-mailform [type=submit]').click(function(){
     console.log('submitted');
     $(this).parent().parent().submit();
     $(this).attr('type', 'button');

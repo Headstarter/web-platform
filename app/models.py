@@ -49,14 +49,25 @@ class Company(Base, db.Model):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
 
 
+class School(Base, db.Model):
+    __tablename__ = 'School'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    admin = db.Column(db.Integer) # id of a user that is admin of the school account
+    teachers = db.relationship("User", back_populates="school")
+
+
 class User(Base, db.Model):
     __tablename__ = 'User'
-   
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+
+    school_id = db.Column(db.Integer, db.ForeignKey('School.id'), nullable=True)
+    school = db.relationship('School', back_populates='teachers')
 
     cv_id = db.Column(db.Integer, db.ForeignKey('CV.id'), nullable=True)
     cv = db.relationship('CV', back_populates='user', uselist=False)
@@ -168,6 +179,8 @@ class Position(Base, db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey('Tag.id'))
     tag = db.relationship('Tag', back_populates='positions')
     applications = db.relationship("Application", back_populates="position")
+    
+    views = db.Column(db.Integer, default=0)
 
     def get_type(self):
         if self.hours_per_day == 'До 4ч.':
@@ -251,10 +264,10 @@ def create_cv(student):
     db.session.commit()
 
 
-def insert_user(name, email, password, company=None ,director=None):
+def insert_user(name, email, password, company=None, school=None):
     new_user = {}
     if company is None:
-        if director is None:
+        if school is None:
             new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
                                              name='',
                                              email='',
@@ -266,9 +279,11 @@ def insert_user(name, email, password, company=None ,director=None):
                                              projects='[]',
                                              skills='[]',
                                              languages='[]',
-                                             hobbies='[]',
-                                             school=' '
-                                             ), company=company, email=email, password_hash=crypto(password))
+                                             hobbies='[]'), 
+                            company=company, 
+                            email=email, 
+                            password_hash=crypto(password),
+                            school=school)
         else:
             new_user = User(name=name, 
                             school=school, 
