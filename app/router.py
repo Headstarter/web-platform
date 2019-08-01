@@ -266,7 +266,7 @@ def login():
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'GET':
-        return render_template('')
+        return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/Forgoten-password.html')
     elif request.method == 'POST':
         user = User.query.filter(User.email == request.form['email']).one()
         from app.v1.helpers.mailer import Mailer
