@@ -16,9 +16,10 @@ class Mapper(Base, db.Model):
     company_id = db.Column(
         db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='mapper')
-   def __init__(self, id, company_name, company_id):
-        super(Mapper, self).
-        __init__(id=id, company_name=company_name, company_id=company_id) 
+    def __init__(self, id, company_name, company_id):
+    	super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
+
+
 
 
 class Tag(Base, db.Model):
