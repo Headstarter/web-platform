@@ -263,11 +263,15 @@ def login():
         return my_redirect(url_for('login_register', action="login"))
 
 
-@app.route('/forgot_password', methods=['GET', 'POST'])
+@app.route('/forgot_password', methods=['PUT', 'GET', 'POST'])
 def forgot_password():
     if request.method == 'GET':
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/Forgoten-password.html')
     elif request.method == 'POST':
+        user = User.query.filter(User.email == request.form['email']).one()
+        from app.v1.helpers.mailer import Mailer
+        return Mailer.sendPasswordReset(user)
+    elif request.method == 'PUT':
         user = User.query.filter(User.email == request.form['email']).one()
         from app.v1.helpers.mailer import Mailer
         return Mailer.sendPasswordReset(user)
