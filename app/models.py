@@ -16,6 +16,10 @@ class Mapper(Base, db.Model):
     company_id = db.Column(
         db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='mapper')
+    def __init__(self, id, company_name, company_id):
+    	super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
+
+
 
 
 class Tag(Base, db.Model):
@@ -28,6 +32,8 @@ class Tag(Base, db.Model):
     def __repr__(self):
         return '<Tag ' + str(self.id) + ' - ' + str(self.name) + '>'
 
+    def __init__(self, id, name):
+        super(Mapper, self).__init__(id=id, name=name)
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
@@ -44,9 +50,13 @@ class Company(Base, db.Model):
     logo = db.Column(db.String(256))
     website = db.Column(db.String(256))
     contacts = db.Column(db.String(32768))
+    def __init__(self, id, uid, name, description, logo, website, contacts):
+        super(Mapper, self).__init__(id=id, uid=uid, name=name, description=description, logo=logo, website=website, contacts=contacts)
 
     def __repr__(self):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
+
+
 
 
 class School(Base, db.Model):
@@ -56,6 +66,8 @@ class School(Base, db.Model):
     name = db.Column(db.String(64))
     admin = db.Column(db.Integer) # id of a user that is admin of the school account
     teachers = db.relationship("User", back_populates="school")
+    def __init__(self, id, name, admin):
+        super(Mapper, self).__init__(id=id, name=name, admin=admin)
 
 
 class User(Base, db.Model):
@@ -83,12 +95,16 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
+    def __init__(self, id, name, email, password, school_id, cv_id, verification_id, company_id):
+        super(Mapper, self).__init__(id=id, name=name, email=email, password=password, school_id=school_id, cv_id=cv_id, verification_id=verification_id, company_id=company_id)
+
     def to_dict(self):
         return {"id": self.id,
                 "name": self.name,
                 "email": self.email,
                 "company": self.company
                 }
+
 
     def is_verified():
         return verification_id is None
@@ -105,7 +121,9 @@ class Verify(Base, db.Model):
 
     user = db.relationship("User", back_populates="verification")
     code = db.Column(db.String(6))
-    
+
+    def __init__(self, id, code):
+        super(Mapper, self).__init__(id=id, code=code)
     
     @staticmethod
     def gen_code():
@@ -135,6 +153,9 @@ class CV(Base, db.Model):
     skills = db.Column(db.String(512))
     languages = db.Column(db.String(512))
     hobbies = db.Column(db.String(512))
+
+    def __init__(self, id, photo, name, email, telephone, birthday, location, about, education, projects, skills, languages, hobbies):
+        super(Mapper, self).__init__(id=id, photo=photo, name=name, email=email, telephone=telephone, birthday=birthday, location=location, about=about, education=education, projects=projects, skills=skills, languages=languages, hobbies=hobbies)
 
     def get_skills(self):
         self.skills = self.skills or '[]'
@@ -182,6 +203,9 @@ class Position(Base, db.Model):
     
     views = db.Column(db.Integer, default=0)
 
+    def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
+        super(Mapper, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
+
     def get_type(self):
         if self.hours_per_day == 'До 4ч.':
             return "Part Time<br><small>До 4 ч./ден</small>"
@@ -219,6 +243,8 @@ class Application (Base, db.Model):
         'Position.id'), primary_key=True)
     position = db.relationship('Position', back_populates='applications')
     company_id = db.Column(db.Integer, primary_key=True)
+    def __init__(self, id, user_id, position_id, company_id):
+        super(Mapper, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
 
 
 def factory(classname):
