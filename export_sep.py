@@ -99,5 +99,5 @@ def exportOut(name):
     #outfile.close()
 
 
-recover()
-exportOut('app_new.db')
+# recover()
+# exportOut('app_new.db')

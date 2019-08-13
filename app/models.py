@@ -8,6 +8,14 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+def clear_data():
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print ('Clear table', table)
+        db.session.execute(table.delete())
+    db.session.commit()
+
+
 class Mapper(Base, db.Model):
     __tablename__ = 'Mapper'
    
@@ -17,7 +25,7 @@ class Mapper(Base, db.Model):
         db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='mapper')
     def __init__(self, id, company_name, company_id):
-    	super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
+        super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
 
 
 
@@ -33,7 +41,7 @@ class Tag(Base, db.Model):
         return '<Tag ' + str(self.id) + ' - ' + str(self.name) + '>'
 
     def __init__(self, id, name):
-        super(Mapper, self).__init__(id=id, name=name)
+        super(Tag, self).__init__(id=id, name=name)
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
@@ -51,7 +59,7 @@ class Company(Base, db.Model):
     website = db.Column(db.String(256))
     contacts = db.Column(db.String(32768))
     def __init__(self, id, uid, name, description, logo, website, contacts):
-        super(Mapper, self).__init__(id=id, uid=uid, name=name, description=description, logo=logo, website=website, contacts=contacts)
+        super(Company, self).__init__(id=id, uid=uid, name=name, description=description, logo=logo, website=website, contacts=contacts)
 
     def __repr__(self):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
@@ -95,8 +103,8 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
-    def __init__(self, id, name, email, password, school_id, cv_id, verification_id, company_id):
-        super(Mapper, self).__init__(id=id, name=name, email=email, password=password, school_id=school_id, cv_id=cv_id, verification_id=verification_id, company_id=company_id)
+    def __init__(self, id, name, email, password, school_id, cv_id, company_id):
+        super(User, self).__init__(id=id, name=name, email=email, password_hash=password, school_id=school_id, cv_id=cv_id, verification_id=None, company_id=company_id)
 
     def to_dict(self):
         return {"id": self.id,
@@ -123,7 +131,7 @@ class Verify(Base, db.Model):
     code = db.Column(db.String(6))
 
     def __init__(self, id, code):
-        super(Mapper, self).__init__(id=id, code=code)
+        super(Verify, self).__init__(id=id, code=code)
     
     @staticmethod
     def gen_code():
@@ -155,7 +163,7 @@ class CV(Base, db.Model):
     hobbies = db.Column(db.String(512))
 
     def __init__(self, id, photo, name, email, telephone, birthday, location, about, education, projects, skills, languages, hobbies):
-        super(Mapper, self).__init__(id=id, photo=photo, name=name, email=email, telephone=telephone, birthday=birthday, location=location, about=about, education=education, projects=projects, skills=skills, languages=languages, hobbies=hobbies)
+        super(CV, self).__init__(id=id, photo=photo, name=name, email=email, telephone=telephone, birthday=birthday, location=location, about=about, education=education, projects=projects, skills=skills, languages=languages, hobbies=hobbies)
 
     def get_skills(self):
         self.skills = self.skills or '[]'
@@ -203,8 +211,8 @@ class Position(Base, db.Model):
     
     views = db.Column(db.Integer, default=0)
 
-    def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
-        super(Mapper, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
+    def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id):
+        super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=0)
 
     def get_type(self):
         if self.hours_per_day == 'До 4ч.':
@@ -244,7 +252,7 @@ class Application (Base, db.Model):
     position = db.relationship('Position', back_populates='applications')
     company_id = db.Column(db.Integer, primary_key=True)
     def __init__(self, id, user_id, position_id, company_id):
-        super(Mapper, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
+        super(Application, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
 
 
 def factory(classname):
@@ -554,16 +562,12 @@ def filter_all_offers_by_tag(position=None, company=None, group=None):
     return positions.order_by(Position.id.desc())
 
 
-def init():
-    """ Tag """
-    tags = [
-        'Software Engineer', '&nbsp;&nbsp;&nbsp; Mobile Developer', '&nbsp;&nbsp;&nbsp; Frontend Developer', '&nbsp;&nbsp;&nbsp; Backend Developer', '&nbsp;&nbsp;&nbsp; Full-Stack Developer', '&nbsp;&nbsp;&nbsp; Engineering Manager', '&nbsp;&nbsp;&nbsp; QA Engineer', '&nbsp;&nbsp;&nbsp; DevOps', '&nbsp;&nbsp;&nbsp; Software Architect', 'Designer', '&nbsp;&nbsp;&nbsp; UI/UX Designer', '&nbsp;&nbsp;&nbsp; User Researcher', '&nbsp;&nbsp;&nbsp; Visual Designer', '&nbsp;&nbsp;&nbsp; Creative Director', 'Operations', '&nbsp;&nbsp;&nbsp; Finance/Accounting', '&nbsp;&nbsp;&nbsp; H.R.', '&nbsp;&nbsp;&nbsp; Office Manager', '&nbsp;&nbsp;&nbsp; Recruiter', '&nbsp;&nbsp;&nbsp; Customer Service', '&nbsp;&nbsp;&nbsp; Operations Manager', 'Sales', '&nbsp;&nbsp;&nbsp; Business Development', '&nbsp;&nbsp;&nbsp; Sales Development', '&nbsp;&nbsp;&nbsp; Account Executive', '&nbsp;&nbsp;&nbsp; BD Manager', '&nbsp;&nbsp;&nbsp; Account Manager', '&nbsp;&nbsp;&nbsp; Sales Manager', 'Marketing', '&nbsp;&nbsp;&nbsp; Growth Hacker', '&nbsp;&nbsp;&nbsp; Marketing Manager', '&nbsp;&nbsp;&nbsp; Content Creator', 'Hardware Engineer', 'Mechanical Engineer', 'Systems Engineer', 'Business Analyst', 'Data Scientist', 'Product Manager', 'Project Manager'  # , 'Attorney', '&nbsp;&nbsp;&nbsp; CEO', '&nbsp;&nbsp;&nbsp; CFO', '&nbsp;&nbsp;&nbsp; CMO', '&nbsp;&nbsp;&nbsp; COO', '&nbsp;&nbsp;&nbsp; CTO'
-    ]
-    Tags_db = []
-    for x in tags:
-        tag = Tag(name=x)
-        db.session.add(tag)
-        db.session.commit()
-        print(Tag.query.get(len(Tags_db) + 1), end=' ')
-        Tags_db.append(Tag.query.get(len(Tags_db) + 1))
-    print()
+def clear():
+    Verify.query.delete()
+    User.query.delete()
+    Tag.query.delete()
+    Position.query.delete()
+    Mapper.query.delete()
+    Company.query.delete()
+    CV.query.delete()
+    Application.query.delete()
