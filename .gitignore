@@ -1,8 +1,8 @@
-# flask_session
-/flask_session
-/__pycache__
-/app/__pycache__
-/.idea
+**/flask_session
+**/__pycache__
+**/.idea
+vscode.config
+**/*.pyc
 
 
 # http://www.gnu.org/software/automake
@@ -47,4 +47,3 @@ m4/ltsugar.m4
 m4/ltversion.m4
 m4/lt~obsolete.m4
 autom4te.cache
-*.pyc
