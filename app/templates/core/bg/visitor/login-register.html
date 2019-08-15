@@ -55,12 +55,13 @@
                               <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="password-confirm" data-constraints="@Required"/>
                               <label class="form-label" for="rd-navbar-register-password-confirm1">Повтори паролата</label>
                             </div>
-                            {% if type == 'Student' or 'Both' %}
+                            {% if type == 'Student' or type == 'Both' or type == 'Unidentified'%}
                                 <div class="form-wrap">
                                   <label class="checkbox-inline">
                                     <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Служител на фирма съм
                                   </label>
                                 </div>
+
                                 <div class="form-wrap" id="company" style="display:none;">
                                   <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
                                     {% for company in companies %}
@@ -79,6 +80,12 @@
                                 <div class="form-wrap" id="school" style="display:none;">
                                   
                                       <input id="school" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Училище" type="text"></input>
+                                </div>
+
+                                <div class="form-wrap">
+                                  <label class="checkbox-inline">
+                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Ученик съм
+                                  </label>
                                 </div>
                             {% else %}
                                 {% if type == 'Company' %}
