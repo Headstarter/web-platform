@@ -3105,8 +3105,11 @@ hr {
 .button-lg {
     letter-spacing: .05em;
     padding: 17px 40px;
-    font-size: 30px;
+    font-size: 14px;
     line-height: 1.5
+}
+.button-lg>span.icon {
+    font-size: 40px;
 }
 
 .button-xl {
