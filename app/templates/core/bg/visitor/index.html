@@ -45,6 +45,7 @@ on the road to business</h2>
 {% endblock %}
 
 {% block content %}
+
 <!-- Welcome to Headstarter.eu -->
       <section class="section section-md bg-default text-center">
         <div class="container">
@@ -98,6 +99,11 @@ on the road to business</h2>
           </div>
         </div>
       </section>
+
+
+      
+
+
       <!-- 3 easy steps-->
       <section class="section section-md bg-default text-center">
         <div class="container">
@@ -234,7 +240,9 @@ on the road to business</h2>
                       </div>
                     </article>
                   </td>
-                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <!-- THis is showing the VIEWS not the DATE there is no class for the views -->
+                  <td class="table-job-listing-date"><span>{{ offer.get_views () }}</span></td>
+
                   <td class="table-job-listing-badge"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}"><span class="badge">{{ offer.get_type() | safe }}</span></a></td>
                 </tr>
                   {% endfor %}
@@ -298,6 +306,7 @@ on the road to business</h2>
         </div>
       </section>
       <!-- Success Stories-->
+      
       <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" > <!--data-parallax-img="images/bg-image-7.jpg"-->
         <div class="parallax-content">
           <div class="container">
