@@ -140,7 +140,7 @@ def register():
         company = request.form['company']
 
     if len(request.form['email']) >= 6 and len(request.form['password']) >= 8 and len(request.form['name']) >= 3:
-        if member != 'on':
+        if member == 'student':
             import requests
 
             r = requests.post('https://www.google.com/recaptcha/api/siteverify', data={'secret': get_secretkey(), 'response': request.form['g-recaptcha-response'], 'remoteip': request.remote_addr})
