@@ -310,8 +310,8 @@ def create_cv(student):
 
 def insert_user(name, email, password, company=None, school=None):
     new_user = {}
-    if company is None:
-        if school is None:
+    if company is not None: # student or teacher
+        if school is not None: # student
             new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
                                              name='',
                                              email='',
@@ -328,13 +328,13 @@ def insert_user(name, email, password, company=None, school=None):
                             email=email, 
                             password_hash=crypto(password),
                             school=school)
-        else:
+        else: # teacher
             new_user = User(name=name, 
                             school=school, 
-                            cv=None, 
+                            cv=None,
                             email=email, 
                             password_hash=crypto(password))
-    else:
+    else: # company
         new_user = User(name=name, cv=None, company=company,
                             email=email, password_hash=crypto(password))
     db.session.add(new_user)

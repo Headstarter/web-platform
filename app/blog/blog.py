@@ -8,5 +8,4 @@ routes = Blueprint('blog_routes', __name__, template_folder=template_f, static_f
 
 @routes.route('/')
 def homepage():
-    
-
+    return ''

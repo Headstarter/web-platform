@@ -37,7 +37,14 @@ def init_session():
     if '_flashes' not in session:
         session['_flashes'] = []
     if 'type' not in session:
+        session['email'] = None
+        session['id'] = None
+        session['company_id'] = None
         session['type'] = 'Visitor'
+        session['name'] = None
+        session['company'] = None
+        session['redirect'] = None
+        
 
     print(request.full_path + ': ' + str(session) + ': ' + str(session))
 
@@ -155,9 +162,9 @@ def register():
                     return my_redirect('/')
             else:
                 if len(User.query.filter(User.email == request.form['email']).all()) != 0:
-                    flash('User is already registered or passwords does not match.', 'danger')
+                    flash('User is already registered. Please, just log in.', 'danger')
                 elif request.form['password'] != request.form['password-confirm']:
-                    flash('Please, just log in.', 'info')
+                    flash('Passwords does not match.', 'info')
                 return my_redirect(url_for('login_register', type="Student", action='register'))
         else:
             if (request.form['password'] == request.form['password-confirm'])\
@@ -200,7 +207,7 @@ def register():
                     flash('Please, just log in.', 'info')
                 return my_redirect(url_for('login_register', type="Company", action='register'))
     else:
-        if session['email'] is not None:
+        if 'email' in session and session['email'] is not None:
             return my_redirect('/')
         if len(request.form['email']) < 6:
             flash('Please, enter valid email address.', 'danger')
