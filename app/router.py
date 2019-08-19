@@ -1,5 +1,5 @@
 from app import app, babel, db, migrate, render_template
-from app.models import Verify, insert_user, User, Tag, Company, Position, crypto, Mapper, insert_company
+from app.models import Verify, insert_user, User, Tag, Company, Position, crypto, Mapper, insert_company, School
 from flask import request, session, flash, redirect, url_for, send_file, Response
 import sys
 
@@ -86,7 +86,7 @@ def internal_server_error(e):
 import os
 def get_sitekey():
     try:
-        if os.environ['DEBUG'] == 'yes':
+        if os.environ['DEBUG'] == 'on':
             return '6LcFN3kUAAAAAEceLTlBxXFKoCXAIUpmKbKuqPHF'
         else:
             return '6LczBawUAAAAACE80VhK_L7NYXKvFaaecgBPlHXi'
@@ -104,7 +104,7 @@ def get_secretkey():
 
 @app.route('/join', methods=['GET', 'POST'])
 def login_register():
-    type_user = 'Both'
+    type_user = 'Undefined'
     action = 'register'
     try:
         type_user = request.args['type']
@@ -117,7 +117,7 @@ def login_register():
 
     print('\n\n\n\n', Company.query.all(), '\n\n\n\n\n\n')
 
-    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', sitekey=get_sitekey(), action=action, type=type_user, companies=Company.query.all())
+    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', sitekey=get_sitekey(), action=action, type=type_user, companies=Company.query.all(), schools=School.query.all())
 
 
 @app.route('/register', methods=['GET', 'POST'])

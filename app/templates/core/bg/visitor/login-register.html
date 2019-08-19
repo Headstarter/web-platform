@@ -55,64 +55,76 @@
                               <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="password-confirm" data-constraints="@Required"/>
                               <label class="form-label" for="rd-navbar-register-password-confirm1">Повтори паролата</label>
                             </div>
-                            {% if type == 'Student' or type == 'Both' or type == 'Unidentified'%}
-                                <div class="form-wrap">
-                                  <label class="checkbox-inline">
-                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Служител на фирма съм
-                                  </label>
-                                </div>
-
-                                <div class="form-wrap" id="company" style="display:none;">
-                                  <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                    {% for company in companies %}
+                            {% if type == 'Student' %}
+                              <div class="form-wrap">
+                                <label class="checkbox-inline">
+                                  <input name="member" type="hidden" value="student" class="checkbox-custom"></input>
+                                </label>
+                              </div>
+                            {% endif %}
+                            {% if type == 'Company' %}
+                              <div class="form-wrap" id="company">
+                                <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                                  <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
+                                  {% for company in companies %}
                                     <option value="{{company.name}}">{{company.name}}</option> 
-                                    {% endfor %}
-                                    <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                  </select>
-                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
-                                </div>
+                                  {% endfor %}
+                                </select>
+                                <input name="member" type="hidden" value="company" class="checkbox-custom" />
+                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                              </div>
+                            {% endif %}
+                            {% if type == 'Teacher' %}
+                              <div class="form-wrap" id="teacher">
+                                <select name="school" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your school" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                                  {% for school in schools %}
+                                    <option value="{{school.name}}">{{school.name}}</option> 
+                                  {% endfor %}
+                                </select>
+                                <input name="member" type="hidden" value="school" class="checkbox-custom" />
+                              </div>
+                            {% endif %}
+                            {% if type == 'Undefined' or type == 'Both' %}
+                              <div class="form-check-inline w-25">
+                                <label class="form-check-label">
+                                  <h5>Аз съм:</h5>
+                                </label>
+                              </div>
+                              <div class="form-check-inline w-25">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="member" value="student"> Ученик
+                                </label>
+                              </div>
+                              <div class="form-check-inline w-25">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="member" value="company"> Служител на фирма
+                                </label>
+                              </div>
+                              <div class="form-check-inline w-25">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="member" value="school"> Представител на училище
+                                </label>
+                              </div>
 
-                                <div class="form-wrap">
-                                  <label class="checkbox-inline">
-                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Представител на училище
-                                  </label>
-                                </div>
-                                <div class="form-wrap" id="school" style="display:none;">
-                                  
-                                      <input id="school" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Училище" type="text"></input>
-                                </div>
-
-                                <div class="form-wrap">
-                                  <label class="checkbox-inline">
-                                    <input name="member" type="checkbox" class="checkbox-custom"><span class="checkbox-custom-dummy"></span> Ученик съм
-                                  </label>
-                                </div>
-                            {% else %}
-                                {% if type == 'Company' %}
-                                    <div class="form-wrap" id="company">
-                                      <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
-                                        <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                        {% for company in companies %}
-                                        <option value="{{company.name}}">{{company.name}}</option> 
-                                        {% endfor %}
-                                      </select>
-                                    <input name="member" type="hidden" value="on" class="checkbox-custom" />
-                                      <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
-                                    </div>
-                                {% else %}
-                                    {% if type == 'School' %}
-                                      <div class="form-wrap" id="school">
-                                        <select name="school" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your school" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
-                                        <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
-                                        
-                                      </select>
-                                      <input name="member" type="hidden" value="on" class="checkbox-custom" />
-                                        <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Училище" type="text"></input>
-                                    </div>
-                                    {% else %}
-                                      <input name="member" type="hidden" value="off" class="checkbox-custom" />
-                                    {% endif %}
-                                {% endif %}
+                              <div class="form-wrap" id="company">
+                                <h5>Коя е Вашата фирма?</h5>
+                                <select name="company" class="form-input-inline select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                                  {% for company in companies %}
+                                    <option value="{{company.name}}">{{company.name}}</option> 
+                                  {% endfor %}
+                                  <option id="notlisted" onselect="" value="Not listed">Няма я Вашата фирма?</option>
+                                </select>
+                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                              </div>
+                              <div class="form-wrap" id="school">
+                                <h5>Кое е Вашето училище?</h5>
+                                <select name="school" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your school" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
+                                  <option id="notlisted" onselect="" value="Not listed">Няма го Вашето училище?</option>
+                                  {% for school in schools %}
+                                    <option value="{{school.name}}">{{school.name}}</option> 
+                                  {% endfor %}
+                                </select>
+                              </div>
                             {% endif %}
                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                             <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
@@ -141,13 +153,12 @@
                             <div class="form-wrap">
                               <button class="button button-block button-primary" type="submit">Влез</button>
                             </div>
-                            
-                          </form>
-                      </div>
-                      <div class="form-wrap">
-                              <a 
+                            <div class="form-wrap">
+                              <a class="button k button-primary" 
                                   href="/forgot_password">Забравена парола</a>
                               
+                            </div>
+                          </form>
                       </div>
                   </div>
                 </div>
