@@ -2,11 +2,11 @@
 var _hs_response;
 (function() {
     var resizeOwl = (function() {
-        $('.owl-carousel').each(function(i,e){
+        $('.owl-carousel').each(function(i, e) {
             let minheight = 0;
-            $(e).find('.owl-item .quote-mary-main').each(function(i,e){
+            $(e).find('.owl-item .quote-mary-main').each(function(i, e) {
                 //console.log(jQuery(e), jQuery(e).height());
-                minheight = ($(e).height() > minheight) ? $(e).height() : minheight;    
+                minheight = ($(e).height() > minheight) ? $(e).height() : minheight;
             });
             $(e).find('.owl-item .quote-mary-main').css("min-height", minheight + "px");
             console.log(minheight);
@@ -98,14 +98,14 @@ var _hs_response;
                 onReady: function() {
                     plugins.preloader.addClass('loaded');
                     windowReady = true;
-                    
+
                     (function(minheight = 0) {
-                        jQuery('.owl-carousel').each(function(i,e){
+                        jQuery('.owl-carousel').each(function(i, e) {
                             var oldminheight = minheight;
-                            jQuery(e).find('.owl-item').each(function(i,e){
-                                minheight = jQuery(e).height() > minheight ? jQuery(e).height() : minheight;    
+                            jQuery(e).find('.owl-item').each(function(i, e) {
+                                minheight = jQuery(e).height() > minheight ? jQuery(e).height() : minheight;
                             });
-                            jQuery(e).find('.owl-item').css("min-height",minheight + "px");
+                            jQuery(e).find('.owl-item').css("min-height", minheight + "px");
                             minheight = oldminheight;
                             console.log(minheight);
                         });
@@ -1192,7 +1192,7 @@ var _hs_response;
             for (i = 0; i < plugins.rdMailForm.length; i++) {
                 var $form = $(plugins.rdMailForm[i]),
                     formHasCaptcha = false;
-                    //console.log($form.attr('novalidate', 'novalidate').ajaxForm);
+                //console.log($form.attr('novalidate', 'novalidate').ajaxForm);
                 $form.attr('novalidate', 'novalidate').ajaxForm({
                     data: {
 
@@ -1275,10 +1275,9 @@ var _hs_response;
                         _hs_response = xhr;
                         if (_hs_response.getResponseHeader("X-Response-URL")) {
                             console.log(window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL"));
-                            if (window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL")) {    
-                                location.reload(); 
-                            }
-                            else {
+                            if (window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL")) {
+                                location.reload();
+                            } else {
                                 window.location.href = _hs_response.getResponseHeader("X-Response-URL");
                             }
                         }
@@ -1461,7 +1460,7 @@ var _hs_response;
             }
         }
     });
-    
+
     resizeOwl();
 }());
 $('[name=member]').change(function() {
@@ -1478,15 +1477,28 @@ $('a[target^="_blank"]').click(function(e) {
 $('.box-creative').hover(function(e) {
     console.log('hovered');
     $(this).find('.icon.box-creative-icon').addClass('hovered');
-},function(e) {
+}, function(e) {
     console.log('unhovered');
     $(this).find('.icon.box-creative-icon').removeClass('hovered');
 });
 
-$('.rd-form.rd-mailform [type=submit]').click(function(){
+$('.rd-form.rd-mailform [type=submit]').click(function() {
     console.log('submitted');
     $(this).parent().parent().submit();
     $(this).attr('type', 'button');
+});
+
+$('input[type=radio][name=member]').change(function() {
+    if (this.value == 'student') {
+        $("#company").hide();
+        $("#school").hide();
+    } else if (this.value == 'company') {
+        $("#school").hide();
+        $('#company').show();
+    } else if (this.value == 'school') {
+        $("#company").hide();
+        $('#school').show();
+    }
 });
 
 // <button class="button button-block button-primary" type="submit">Създай профил</button>

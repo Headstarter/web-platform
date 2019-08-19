@@ -226,6 +226,16 @@ class Position(Base, db.Model):
         posted = DT.datetime.strptime(self.date, '%Y-%m-%d %H:%M:%S.%f')
         return DT.datetime.strftime(posted, '%H:%M:%S %d-%m-%Y')
 
+    def get_views(self):
+        viewsDisplay = self.views
+        if viewsDisplay <= 0:
+            return ""
+        return "{} преглеждания".format(int(viewsDisplay))
+
+        
+        
+
+
     def get_date(self):
         today = DT.datetime.today()
         posted = DT.datetime.strptime(self.date, '%Y-%m-%d %H:%M:%S.%f')

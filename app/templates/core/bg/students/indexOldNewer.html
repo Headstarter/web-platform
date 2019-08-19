@@ -216,7 +216,7 @@ on the road to business</h2>
                       </div>
                     </article>
                   </td>
-                  <td class="table-job-listing-date"><span>{{ offer.get_date () }}</span></td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_views () }}</span></td>
                   <td class="table-job-listing-badge"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}"><span class="badge">{{ offer.get_type() | safe }}</span></a></td>
                 </tr>
                   {% endfor %}
