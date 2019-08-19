@@ -229,8 +229,8 @@ class Position(Base, db.Model):
     def get_views(self):
         viewsDisplay = self.views
         if viewsDisplay <= 0:
-            return " "
-        return "views {}".format(int(viewsDisplay))
+            return ""
+        return "{} преглеждания".format(int(viewsDisplay))
 
         
         
