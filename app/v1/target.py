@@ -7,13 +7,13 @@ import sys
 from abc import ABC, abstractmethod
 
 groups = [
-    {'icon': 'fl-great-icon-set-code42', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
-    {'icon': 'mercury-icon-touch', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
-    {'icon': 'mercury-icon-chart-up-2', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
-    {'icon': 'mercury-icon-partners', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
-    {'icon': 'mercury-icon-calc', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
+    {'icon': '<img src="https://img.icons8.com/ios/50/000000/airport.png">', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
+    {'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
+    {'icon': 'linearicons-store', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
+    {'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
+    {'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
     {'icon': 'mercury-icon-gear', 'label': 'Service Industry', 'tags': [32, 33, 34, 5, 6]},
-    {'icon': 'mercury-icon-gear', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
+    {'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
     {'icon': 'mercury-icon-gear', 'label': 'Technology', 'tags': [32, 33, 34, 5, 6]},     
 ]
 
@@ -22,13 +22,13 @@ class Target_Group (ABC):
     @staticmethod
     def groupTags(company = None):
         groups1 = [
-            {'id':0, 'icon': 'fl-great-icon-set-code42', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
-            {'id':1, 'icon': 'mercury-icon-touch', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
-            {'id':2, 'icon': 'mercury-icon-chart-up-2', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
-            {'id':3, 'icon': 'mercury-icon-partners', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
-            {'id':4, 'icon': 'mercury-icon-calc', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
+            {'id':0, 'icon': 'https://img.icons8.com/ios/50/000000/airport.png', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
+            {'id':1, 'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
+            {'id':2, 'icon': 'linearicons-store', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
+            {'id':3, 'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
+            {'id':4, 'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
             {'id':5, 'icon': 'mercury-icon-gear', 'label': 'Service Industry', 'tags': [32, 33, 34, 5, 6]},
-            {'id':6, 'icon': 'mercury-icon-gear', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
+            {'id':6, 'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
             {'id':7, 'icon': 'mercury-icon-gear', 'label': 'Technology', 'tags': [32, 33, 34, 5, 6]},    
         ]
         
