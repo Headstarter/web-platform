@@ -1,6 +1,6 @@
 from app import app, babel, db, migrate, render_template
 from app.router import session, get_locale
-from app.models import User, Tag, Company, Position, CV, insert_application
+from app.models import User, Tag, Company, Position, CV, insert_application, School
 from flask import g, request, Blueprint, flash, url_for, redirect
 
 from app.v1.visitors import Visitors
@@ -205,3 +205,45 @@ def upload_cv_picture():
         flash('<a class="nav-link" href="#" data-toggle="modal" data-target="#student_company">Вход</a>', 'info')
         session['redirect'] = url_for('v1pre_routes.upload_logo')
         return render_template('template.html')
+
+@routes.route('/init/school', methods=['GET', 'POST'])
+def init_school(): # init director
+    if (not ('_method' in request.form)) and request.method == 'GET':
+        return render_template('core/bg/visitor/school_director_reg.html', step=1)
+    elif request.form['_method'] == 'PUT':
+        if User.query.filter(User.email == request.form['email']).count() != 0:
+            flash('This email is already registered.', 'danger')
+            return render_template('core/bg/visitor/school_director_reg.html', step=1) # GET version
+        elif request.form['password'] == request.form['confirm_password']:
+            from app.models import crypto
+            return render_template('core/bg/visitor/school_director_reg.html', step=2, 
+                                    name=request.form['name'],
+                                    email=request.form['email'],
+                                    password=crypto(request.form['password']))
+        else:
+            flash('Passwords do not match.', 'danger')
+            return render_template('core/bg/visitor/school_director_reg.html', step=1) # GET version
+    elif request.form['_method'] == 'POST':
+        try:
+            director = User(name=request.form['name'],
+                            email=request.form['email'],
+                            password_hash=request.form['password'],
+                            school=School(name=request.form['school_name'], admin = -1)
+                            )
+            db.session.add(director)
+            db.session.commit()
+            director = User.query.filter(User.email == request.form['email']).one()
+            try:
+                school = director.school
+                try:
+                    flash(director.id, 'info')
+                    flash(school.id, 'info')
+                    School.query.filter(School.id == school.id).update({'admin': director.id})
+                    db.session.commit()
+                except Exception as e:
+                    flash('Setting director as a part from the school failed.\n' + str(e), 'danger')
+            except Exception as e:
+                flash('School creation failed.\n' + str(e), 'danger')
+        except Exception as e:
+            flash('User creation failed.\n' + str(e), 'danger')
+        return redirect('/')
