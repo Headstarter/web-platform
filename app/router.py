@@ -126,6 +126,9 @@ def login_register():
 
     return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/login-register.html', sitekey=get_sitekey(), action=action, type=type_user, companies=Company.query.all(), schools=School.query.all())
 
+@app.route('/asdf')
+def shit():
+    return render_template('core/bg/visitor/Direktor_registration.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
