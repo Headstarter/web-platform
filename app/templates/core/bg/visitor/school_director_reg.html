@@ -2,130 +2,28 @@
 {% block title %} Регистрация Вход {% endblock %}
 
 {% block banner %}
-
 {% endblock %}
 
 {% block content %}
-      <!-- Actions -->
-      <section class="section section-md text-center">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-xl-10">
-              <h4>Преди да продължиш, моля, влез със своя профил или си направи нов</h4>
-              <!-- Bootstrap tabs -->
-              <div class="tabs-custom tabs-horizontal tabs-minimal" id="tabs-1">
-                <!-- Nav tabs-->
-                <ul class="nav nav-tabs">
-                    {% if action == 'register' %}
-                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-1" data-toggle="tab">Регистрация</a></li>
-                      {% else %}
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-1" data-toggle="tab">Регистрация</a></li>
-                    {% endif %}
-                    {% if action == 'login' %}
-                  <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-2" data-toggle="tab">Вход</a></li>
-                      {% else %}
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Вход</a></li>
-                    {% endif %}
-                </ul>
-                <!-- Tab panes-->
-                <div class="tab-content" style="letter-spacing: .05em;">
-                    {% if action == 'register' %}
-                  <div class="tab-pane fade active show" id="tabs-1-1">
-                      {% else %}
-                  <div class="tab-pane fade" id="tabs-1-1">
-                    {% endif %}
-                      <div id="rd-navbar-register">
-                          <form class="rd-form rd-mailform" data-form-output="form-output-global"
-                                method="post" action="/register">
-                            <!-- Director information -->
-                            {% if step == 1 %}
-                                <div class="form-wrap">
-                                    <input class="form-input" id="rd-navbar-register-name1" type="text" name="name" data-constraints="@Required"/>
-                                    <label class="form-label" for="rd-navbar-register-name1">Име</label>
-                                </div>
-                                <div class="form-wrap">
-                                    <input class="form-input" id="rd-navbar-register-email1" type="email" name="email" data-constraints="@Email @Required"/>
-                                    <label class="form-label" for="rd-navbar-register-email1">E-mail</label>
-                                </div>
-                                <div class="form-wrap">
-                                    <input class="form-input" id="rd-navbar-register-password1" type="password" name="password" data-constraints="@Required"/>
-                                    <label class="form-label" for="rd-navbar-register-password1">Парола</label>
-                                </div>
-                                <div class="form-wrap">
-                                    <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="password-confirm" data-constraints="@Required"/>
-                                    <label class="form-label" for="rd-navbar-register-password-confirm1">Повтори паролата</label>
-                                </div>
-                            {% endif %}
-                            <!-- School information -->
-                            {% if step == 2 %}
-                            {% endif %}
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                            <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
-                            <div class="form-wrap">
-                              {% if step == 1 %}
-                                <button class="button button-block button-primary" type="submit">Продължи</button>
-                              {% endif %}
-                              {% if step == 2 %}
-                                <button class="button button-block button-primary" type="submit">Запази</button>
-                              {% endif %}
-                            </div>
-                          </form>
-                     </div>
-                  </div>
-                    {% if action == 'login' %}
-                  <div class="tab-pane fade active show" id="tabs-1-2">
-                      {% else %}
-                  <div class="tab-pane fade" id="tabs-1-2">
-                    {% endif %}
-                      <div id="rd-navbar-login">
-                          <form class="rd-form rd-mailform" data-form-output="form-output-global"
-                                method="post" action="/login">
-                            <div class="form-wrap">
-                              <input class="form-input" id="rd-navbar-login-email1" type="email" name="email" data-constraints="@Email @Required"/>
-                              <label class="form-label" for="rd-navbar-login-email1">E-mail</label>
-                            </div>
-                            <div class="form-wrap">
-                              <input class="form-input" id="rd-navbar-login-password1" type="password" name="password" data-constraints="@Required"/>
-                              <label class="form-label" for="rd-navbar-login-password1">Парола</label>
-                            </div>
-                            <div class="form-wrap">
-                              <button class="button button-block button-primary" type="submit">Влез</button>
-                            </div>
-                            <div class="form-wrap">
-                              <a class="button k button-primary" 
-                                  href="/forgot_password">Забравена парола</a>
-                              
-                            </div>
-                          </form>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  {% if step == 1 %}
+    <form method='POST'>
+      Email: <input type="text" name="email"><br>
+      Name: <input type="text" name="name"><br>
+      password: <input type="text" name="password"><br>
+      re-password: <input type="text" name="confirm_password">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="submit" value="Submit">
+    </form>
+  {% else %}
+    <form method='POST'>
+      school_name: <input type="text" name="school_name"><br>
+      Email: <input type="text" name="email" value="{{email}}" readonly><br>
+      Name: <input type="text" name="name" value="{{name}}" readonly><br>
+      password: <input type="text" name="password" value="{{password}}" readonly>
+      <input type="hidden" name="_method" value="POST">
+      <input type="submit" value="Submit">
+    </form>
+  {% endif %}
 {% endblock %}
 {% block js %}
-<script>
-  $('#notlisted').parent().change(function() {
-    let selected = $('option:selected').val();
-    if (selected == 'Not listed') {
-      $('#customcompany').show();
-    }
-    else {
-      $('#customcompany').hide();
-    }
-  });
-  $(document).ready(function () {
-      $($('option')[0]).attr('selected', 'selected');
-      let selected = $('option:selected').val();
-      if (selected == 'Not listed') {
-        $('#customcompany').show();
-      }
-      else {
-        $('#customcompany').hide();
-      }
-  });
-</script>   
   {% endblock %}
