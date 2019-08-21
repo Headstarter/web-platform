@@ -100,6 +100,8 @@ class Students:
 	def profile():
 		import sys
 		student = User.query.filter(User.id == session['id'])[0]
+		if student.cv is None:
+			create_cv(student)
 		print(student.cv.get_education())
 		return render_template('core/' + str(session['language'] or get_locale()) + '/students/edit_cv.html', student=student)
 
