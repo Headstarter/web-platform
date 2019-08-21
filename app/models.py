@@ -308,6 +308,7 @@ def create_cv(student):
             hobbies='[]'
             )
     db.session.add(cv)
+    cv = CV.query.filter(CV.photo=='/static/img/cv/' + str(student.id) + '.jpg').one()
     User.query.filter(User.id == student.id).update({'cv_id': cv.id})
     db.session.commit()
 

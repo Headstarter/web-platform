@@ -99,10 +99,12 @@ class Students:
 	@staticmethod
 	def profile():
 		import sys
-		student = User.query.filter(User.id == session['id'])[0]
-		if student.cv is None:
+		student = User.query.filter(User.id == session['id']).one()
+		try:
+			print(student.cv.get_education())
+		except:
 			create_cv(student)
-		print(student.cv.get_education())
+		student = User.query.filter(User.id == session['id']).one()
 		return render_template('core/' + str(session['language'] or get_locale()) + '/students/edit_cv.html', student=student)
 
 	@staticmethod
