@@ -1276,7 +1276,13 @@ var _hs_response;
                         if (_hs_response.getResponseHeader("X-Response-URL")) {
                             console.log(window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL"));
                             if (window.location.pathname + window.location.search == _hs_response.getResponseHeader("X-Response-URL")) {
-                                location.reload();
+                                if (_hs_response.getResponseHeader("X-Redirect-Same-Page") == 'reload')
+                                    location.reload();
+                                else {
+                                    document.open();
+                                    document.write(xhr.responseText);
+                                    document.close();
+                                }
                             } else {
                                 window.location.href = _hs_response.getResponseHeader("X-Response-URL");
                             }

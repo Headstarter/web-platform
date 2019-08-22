@@ -7,10 +7,14 @@ app.config['STATIC_FOLDER'] = '/static/wt_prod-20039'
 app.secret_key = 'b94079a3717eda429c4580496be97bc9675d3ea4eb0ae50d'
 
 
-def my_redirect(path):
+def my_redirect(path, redirect_action='reload', html=''):
     import flask
-    response = flask.Response(response=redirect(path).data, status=200)
+    if redirect_action == 'reload':
+        response = flask.Response(response=redirect(path).data, status=200)
+    else:
+        response = flask.Response(response=html, status=200)
     response.headers['X-Response-URL'] = path
+    response.headers['X-Redirect-Same-Page'] = redirect_action
     return response
 
 
