@@ -1,14 +1,18 @@
 from app import app, babel, db, migrate, render_template
-from app.router import session, get_locale
+from app.router import session, get_locale, my_redirect, session
 from app.models import User, Tag, Company, Position, CV, insert_application, School
 from flask import g, request, Blueprint, flash, url_for, redirect
 
 from app.v1.visitors import Visitors
 from app.v1.students import Students
 from app.v1.companies import Companies
+from app.v1.school.director import Director
+from app.v1.school.teacher import Teacher
 
 mapped_routes = {
     'Visitor': Visitors,
+    'School-Director': Director,
+    'School-Teacher': Teacher,
     'Student': Students,
     'Company': Companies
 }
@@ -128,7 +132,7 @@ def offer_view(position_id):
     import random
     views = Position.query.filter(Position.id == position_id).one().views
     Position.query.filter(Position.id == position_id).update(
-        {"views": views + random.randomint(10,100)})
+        {"views": views + random.randint(10,20)})
     db.session.commit()
     return mapped_routes[session['type']].offer_details(position_id)
 
@@ -208,21 +212,25 @@ def upload_cv_picture():
 
 @routes.route('/init/school', methods=['GET', 'POST'])
 def init_school(): # init director
+    import sys
+    print(request.form, file=sys.stderr)
     if (not ('_method' in request.form)) and request.method == 'GET':
-        return render_template('core/bg/visitor/school_director_reg.html', step=1)
+        return my_redirect ('/init/school', 'new_content', 
+                            render_template('core/bg/visitor/Direktor_registration.html', step=1))
     elif request.form['_method'] == 'PUT':
         if User.query.filter(User.email == request.form['email']).count() != 0:
             flash('This email is already registered.', 'danger')
-            return render_template('core/bg/visitor/school_director_reg.html', step=1) # GET version
+            return my_redirect ('/init/school', 'new_content', 
+                                render_template('core/bg/visitor/Direktor_registration.html', step=1)) # GET version
         elif request.form['password'] == request.form['confirm_password']:
             from app.models import crypto
-            return render_template('core/bg/visitor/school_director_reg.html', step=2, 
+            return my_redirect ('/init/school', 'new_content', render_template('core/bg/visitor/Direktor_registration.html', step=2, 
                                     name=request.form['name'],
                                     email=request.form['email'],
-                                    password=crypto(request.form['password']))
+                                    password=crypto(request.form['password'])))
         else:
             flash('Passwords do not match.', 'danger')
-            return render_template('core/bg/visitor/school_director_reg.html', step=1) # GET version
+            return my_redirect ('/init/school', 'new_content', render_template('core/bg/visitor/Direktor_registration.html', step=1)) # GET version
     elif request.form['_method'] == 'POST':
         try:
             director = User(name=request.form['name'],
@@ -240,10 +248,31 @@ def init_school(): # init director
                     flash(school.id, 'info')
                     School.query.filter(School.id == school.id).update({'admin': director.id})
                     db.session.commit()
+                    
+                    session['email'] = request.form['email']
+                    session['company_id'] = school.id
+                    session['name'] = request.form['name']
+                    session['company'] = school.name
+                    session['type'] = 'School-Director'
+                    
                 except Exception as e:
                     flash('Setting director as a part from the school failed.\n' + str(e), 'danger')
+                    return my_redirect ('/init/school', 'new_content', render_template('core/bg/visitor/Direktor_registration.html', step=2, 
+                                            name=request.form['name'],
+                                            email=request.form['email'],
+                                            password=request.form['password']))
             except Exception as e:
                 flash('School creation failed.\n' + str(e), 'danger')
+                return my_redirect ('/init/school', 'new_content', render_template('core/bg/visitor/Direktor_registration.html', step=2, 
+                                        name=request.form['name'],
+                                        email=request.form['email'],
+                                        password=request.form['password']))
         except Exception as e:
             flash('User creation failed.\n' + str(e), 'danger')
-        return redirect('/')
+            return my_redirect ('/init/school', 'new_content', render_template('core/bg/visitor/Direktor_registration.html', step=2, 
+                                    name=request.form['name'],
+                                    email=request.form['email'],
+                                    password=request.form['password']))
+        
+        
+        return my_redirect('/')

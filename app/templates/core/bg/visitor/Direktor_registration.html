@@ -24,8 +24,9 @@
                   <div class="tab-pane fade active show" id="tabs-1-1">
                   
                       <div id="rd-navbar-register">
+                      {% if step == 1 %}
                           <form class="rd-form rd-mailform" data-form-output="form-output-global"
-                                method="post" action="/register">
+                                method="post">
                             <!-- data-form-type="contact"
                                  -->
                             <div class="form-wrap">
@@ -41,22 +42,37 @@
                               <label class="form-label" for="rd-navbar-register-password1">Парола</label>
                             </div>
                             <div class="form-wrap">
-                              <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="password-confirm" data-constraints="@Required"/>
+                              <input class="form-input" id="rd-navbar-register-password-confirm1" type="password" name="confirm_password" data-constraints="@Required"/>
                               <label class="form-label" for="rd-navbar-register-password-confirm1">Повтори паролата</label>
                             </div>
-                            {% if type == 'Direktor' %}
-                              <div class="form-wrap">
-                                <label class="checkbox-inline">
-                                  <input name="member" type="hidden" value="direktor" class="checkbox-custom"></input>
-                                </label>
-                              </div>
-                            {% endif %}
+                            <input type="hidden" name="_method" value="PUT">
                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                             <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
                             <div class="form-wrap">
                               <button class="button button-block button-primary" type="submit">Създай профил</button>
                             </div>
                           </form>
+                    {% else %}
+                      <form class="rd-form rd-mailform" data-form-output="form-output-global"
+                            method="post">
+                        <!-- data-form-type="contact"
+                              -->
+                        <div class="form-wrap">
+                          <input class="form-input" id="rd-navbar-register-name1" type="text" name="school_name" data-constraints="@Required"/>
+                          <label class="form-label" for="rd-navbar-register-name1">Име на училището</label>
+                        </div>
+                        
+                        <input type="hidden" name="email" value="{{email}}" readonly><br>
+                        <input type="hidden" name="name" value="{{name}}" readonly><br>
+                        <input type="hidden" name="password" value="{{password}}" readonly>
+                        <input type="hidden" name="_method" value="POST">
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                        <div class="g-recaptcha" data-sitekey="{{sitekey}}"></div>
+                        <div class="form-wrap">
+                          <button class="button button-block button-primary" type="submit">Създай профил</button>
+                        </div>
+                      </form>
+                    {% endif %}
                      </div>
                   </div>
                     
