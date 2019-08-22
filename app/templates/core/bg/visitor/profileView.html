@@ -22,7 +22,7 @@
     }
 
     .picture {
-        width: 100%;
+        width: 50%;
     }
 
     .section-title {
@@ -253,10 +253,10 @@
                             {% for course in student.cv.get_education() %}
                             <li class="edu w-100">
                                 <div class="header-info w-100">
-                                <div class="school">{{ course['school-name'] }}</div>
+                                <div class="profile w-100">{{ course.qualification }}</div>
                                     <div class="period">{{ course.period }}</div>
                                 </div>
-                                    <div class="profile w-100">{{ course.qualification }}</div>
+                                <div class="school">{{ course['school-name'] }}</div>
                             </li>
                             {% endfor %}
                         </ul>
@@ -264,7 +264,7 @@
                     <div class="skills w-100">
                         <span class="section-title">Личностни умения</span>
                         <hr>
-                        <ul class="w-100">
+                        <ul class="w-100 default-styles">
                             {% for skill in student.cv.get_skills() %}
                             <li class="skill w-100">
                                 {{ skill.skill }}
@@ -284,7 +284,7 @@
                                     <div class="name">{{ project.project_name }}</div>
                                     <div class="period">{{ project.project_period }}</div>
                                 </div>
-                                <div class="description w-100">{{ project.description }}</div>
+                                <div class="description default-styles w-100">{{ project.project_notes }}</div>
                             </li>
                             {% endfor %}
                         </ul>
@@ -292,7 +292,7 @@
                     <div class="hobbies w-100">
                         <span class="section-title">Хобита</span>
                         <hr>
-                        <ul class="w-100">
+                        <ul class="w-100 default-styles">
                             {% for hobby in student.cv.get_hobbies() %}
                             <li class="hobby w-100">
                                 {{ hobby.hobby }}
@@ -303,7 +303,7 @@
                     <div class="languages w-100">
                         <span class="section-title">Езици</span>
                         <hr>
-                        <table class="w-100">
+                        <table class="w-100 default-styles">
                             {% for lang in student.cv.get_languages() %}
                             <tr class="lang w-100">
                                 <td>{{ lang.language }}</td><td>{{ lang.level }}</td>
@@ -318,7 +318,7 @@
                     <div class="about w-100">
                         <span class="section-title">Още за мен</span>
                         <hr>
-                        <pre>{{ student.cv.about | safe }}</pre>
+                        <pre class="default-styles">{{ student.cv.about | safe }}</pre>
                     </div>
                 </div>
             </div>
