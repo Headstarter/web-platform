@@ -253,10 +253,10 @@
                             {% for course in student.cv.get_education() %}
                             <li class="edu w-100">
                                 <div class="header-info w-100">
-                                <div class="profile w-100">{{ course.qualification }}</div>
+                                    <div class="school w-100">{{ course.qualification }}</div>
                                     <div class="period">{{ course.period }}</div>
                                 </div>
-                                <div class="school">{{ course['school-name'] }}</div>
+                                <div class="">{{ course['school-name'] }}</div>
                             </li>
                             {% endfor %}
                         </ul>
