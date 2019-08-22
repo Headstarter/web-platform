@@ -64,24 +64,26 @@ $(document).ready( function() {
         $('[name=resume-content]').html($(this).html());
       });
       $('button.submit[type="button"]').on('click', function () {
-      if ($('input#imgInp').length > 0)
-        $('input#imgInp').each (function (_) {
-            var fd = new FormData();
-            fd.append("logo", $("#imgInp")[0].files[0]);
+        if ($('input#imgInp').length > 0) {
+          $('input#imgInp').each (function (_) {
+              var fd = new FormData();
+              fd.append("logo", $("#imgInp")[0].files[0]);
 
-            $.ajax({
-                url: "{{ url_for('core.upload_cv_picture') }}",
-                method: 'POST',
-                cache: false,
-                data: fd,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                },
-                error: function(response) {
-                }
-            });
-        });
+              $.ajax({
+                  async: false,
+                  url: "{{ url_for('core.upload_cv_picture') }}",
+                  method: 'POST',
+                  cache: false,
+                  data: fd,
+                  processData: false,
+                  contentType: false,
+                  success: function (response) {
+                  },
+                  error: function(response) {
+                  }
+              });
+          });
+        }
         let sections = ['language', 'education', 'project', 'skill', 'hobby'];
         let json_out = ['languages', 'education', 'projects', 'skills', 'hobbies'];
         for (let i = 0 ; i < sections.length ; i += 1) {
@@ -91,9 +93,28 @@ $(document).ready( function() {
             for (let i = 1 ; i < e.length ; i += 1) {
                 arr[i-1] = $(e[i]).find('.form-input').serializeArray().reduce((data, x) => { data[x.name]=x.value; return data; }, {});
             }
-            //console.log(arr);
+            console.log(arr);
             $('[name=' + json_out [i] + ']').val(JSON.stringify(arr));
         }
+        var data = new FormData();
+        let data_export = ['name', 'email', 'telephone', 'location', 'birthday', 'languages', 'education', 'projects', 'resume-content', 'skills', 'hobbies'];
+        for (let i = 0 ; i < data_export.length ; i += 1) {
+          data.append(data_export[i], $('[name=' + data_export[i] + ']').val());
+        }
+        console.log(data);
+        $.ajax({
+                async: false,
+                url: "{{ url_for('core.edit_student_profile') }}",
+                method: 'POST',
+                cache: false,
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                },
+                error: function(response) {
+                }
+        });
       });
   });
 </script>
