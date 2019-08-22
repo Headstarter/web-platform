@@ -21309,6 +21309,12 @@ tr:hover .badge {
     width: 31.333%;
 }
 
-.w-25 {
-    width: 23% !important;
+.w-23 {
+    width: 100% !important;
+}
+
+@media(min-width: 793px) {
+    .w-23 {
+        width: 23% !important;
+    }
 }

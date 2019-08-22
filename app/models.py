@@ -28,9 +28,6 @@ class Mapper(Base, db.Model):
     #    super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
 
 
-
-
-
 class Tag(Base, db.Model):
     __tablename__ = 'Tag'
    
@@ -43,6 +40,7 @@ class Tag(Base, db.Model):
 
     #def __init__(self, id, name):
     #    super(Tag, self).__init__(id=id, name=name)
+
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
