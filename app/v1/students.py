@@ -45,8 +45,8 @@ class Students:
 			if file and allowed_image(file.filename):
 				import os
 				saved = False
-				where = 'static/wt_prod-20039/images/students/' + User.query.filter(User.id == session['id']).one().id + '.png'
-				where_db = '/images/students/' + User.query.filter(User.id == session['id']).one().id + '.png'
+				where = 'static/wt_prod-20039/images/students/' + str(User.query.filter(User.id == session['id']).one().id) + '.png'
+				where_db = '/images/students/' + str(User.query.filter(User.id == session['id']).one().id) + '.png'
 				where = os.path.join(os.environ['basedir'], where)
 				os.system('echo > ' + where)
 				with open(where, 'a'):
