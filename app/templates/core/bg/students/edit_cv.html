@@ -63,7 +63,7 @@ $(document).ready( function() {
       $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
         $('[name=resume-content]').html($(this).html());
       });
-      $('button[type="submit"]').on('click', function () {
+      $('button.submit[type="button"]').on('click', function () {
       if ($('input#imgInp').length > 0)
         $('input#imgInp').each (function (_) {
             var fd = new FormData();
@@ -82,6 +82,18 @@ $(document).ready( function() {
                 }
             });
         });
+        let sections = ['language', 'education', 'project', 'skill', 'hobby'];
+        let json_out = ['languages', 'education', 'projects', 'skills', 'hobbies'];
+        for (let i = 0 ; i < sections.length ; i += 1) {
+            //console.log($('#' + sections [i] + '_list'));
+            let e = $('#' + sections [i] + '_list').find("div.rd-form.rd-mailform.form-lg.form-corporate");
+            let arr = [];
+            for (let i = 1 ; i < e.length ; i += 1) {
+                arr[i-1] = $(e[i]).find('.form-input').serializeArray().reduce((data, x) => { data[x.name]=x.value; return data; }, {});
+            }
+            //console.log(arr);
+            $('[name=' + json_out [i] + ']').val(JSON.stringify(arr));
+        }
       });
   });
 </script>
@@ -386,7 +398,7 @@ $(document).ready( function() {
                   </div>
                 </div>
             </div>
-              <br><br><button class="button button-lg button-secondary" type="submit" form="submit-resume-form">Запази</button>
+              <br><br><button class="button button-lg button-secondary submit" type="button" form="submit-resume-form">Запази</button>
 
           </div>
         </div>
