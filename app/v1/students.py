@@ -43,18 +43,24 @@ class Students:
 				flash('No selected file')
 				return jsonify({'value': 'No file selected.'}), 400
 			if file and allowed_image(file.filename):
+				import os
 				saved = False
+				where = 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo
+				where = os.path.join(os.environ['basedir'], where)
+				os.system('echo > ' + where)
+				with open(where, 'a'):
+					os.utime(where, None)
 				while not saved:
 					import sys
 					try:
-						file.save(os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo))
+						file.save(where)
 						saved = True
 						print('Saved', file=sys.stderr)
 					except FileNotFoundError:
 						print('FileNotFound', file=sys.stderr)
 						import shutil
 						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/students/150.png'), 
-                  					os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo))
+                  					where)
 					except TypeError:
 						import sys
 						print('TypeError', file=sys.stderr)

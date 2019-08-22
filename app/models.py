@@ -14,7 +14,12 @@ def clear_data():
         print ('Clear table', table)
         db.session.execute(table.delete())
     db.session.commit()
-
+    
+    
+class Approval(Base, db.Model):
+    __tablename__ = 'Approval'
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False, unique=True, primary_key=True)
+    school_id = db.Column(db.Integer, nullable = False)
 
 class Mapper(Base, db.Model):
     __tablename__ = 'Mapper'
