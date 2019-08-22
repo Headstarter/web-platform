@@ -122,7 +122,7 @@
 
 
     @media print {
-        .button.button-lg.button-secondary, footer, header {
+        .print-hide, footer, header {
             display: none !important;
         }
 
@@ -324,7 +324,7 @@
             </div>
             {% if student.id == session['id'] %}
             <br><br>
-            <a style="margin-bottom: 30px;" class="button button-lg button-secondary" href="{{ url_for ('core.profile') }}">Промени</a>
+            <a style="margin-bottom: 30px;" class="print-hide button button-lg button-secondary" href="{{ url_for ('core.profile') }}">Промени</a>
             <br><br><br>
             {% endif %}
         </div>
