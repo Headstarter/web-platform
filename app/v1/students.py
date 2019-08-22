@@ -45,7 +45,8 @@ class Students:
 			if file and allowed_image(file.filename):
 				import os
 				saved = False
-				where = 'static/wt_prod-20039' + User.query.filter(User.id == session['id']).one().cv.photo
+				where = 'static/wt_prod-20039/images/students/' + User.query.filter(User.id == session['id']).one().id + '.png'
+				where_db = '/images/students/' + User.query.filter(User.id == session['id']).one().id + '.png'
 				where = os.path.join(os.environ['basedir'], where)
 				os.system('echo > ' + where)
 				with open(where, 'a'):
@@ -66,7 +67,7 @@ class Students:
 						print('TypeError', file=sys.stderr)
 						cv_id = User.query.filter(User.id == session['id']).one().cv_id
 						print('cv_id', cv_id, file=sys.stderr)
-						CV.query.filter(CV.id == cv_id).update({'photo':'/images/students/' + str(cv_id) + '.png'});
+						CV.query.filter(CV.id == cv_id).update({'photo': where_db});
 						db.session.commit()
 
 				return jsonify({'value': 'Uploaded'}), 200
