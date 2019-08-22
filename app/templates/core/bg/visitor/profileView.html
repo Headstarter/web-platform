@@ -21,8 +21,13 @@
         ;
     }
 
+    .cv {
+        color:black;
+    }
+
     .picture {
-        width: 50%;
+        height: 105px;
+        width: auto;
     }
 
     .section-title {
@@ -115,7 +120,10 @@
     }
 
     .cv .row {
-        margin-bottom: 10px;
+        margin-bottom: 4px;
+    }
+    .cv .row + .row {
+        margin-top: 4px;
     }
 
 
@@ -134,6 +142,11 @@
         * {
             page-break-after: avoid;
             page-break-before: avoid;
+            color: black;
+        }
+
+        .period {
+            font-size: 6.5pt;
         }
 
         hr {
