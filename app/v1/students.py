@@ -86,6 +86,8 @@ class Students:
 		print('\n\n', curr_user, '\n\n')
 		import sys
 		print('\n\n' + str(dict(request.form)) + '\n\n')
+		import json
+		print('\n\n' + str(request.__dict__) + '\n\n')
 		
 		x = update_cv(session['id'],
 				request.form['name'],
