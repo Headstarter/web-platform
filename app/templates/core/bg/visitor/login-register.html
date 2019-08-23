@@ -75,7 +75,7 @@
                               </div>
                             {% endif %}
                             {% if type == 'Teacher' %}
-                              <div class="form-wrap" id="teacher">
+                              <div class="form-wrap" style="display: block !important;" id="teacher">
                                 <select name="school" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your school" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
                                   {% for school in schools %}
                                     <option value="{{school.name}}">{{school.name}}</option> 
