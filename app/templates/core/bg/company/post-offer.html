@@ -20,7 +20,54 @@
       $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
         $('[name=description]').html($(this).html());
       });
-  });
+      $(document).ready(function() {
+        $('.summernote').summernote({
+          lang: 'bg-BG' // default: 'en-US'
+        });
+        $(".note-editable.card-block[role=textbox]").addClass ('default-styles');
+        $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
+          $('[name=description]').html($(this).html());
+        });
+        $('button.submit[type="button"]').on('click', function () {
+              let dataFD = new FormData();
+              let data_export = $('.rd-form.rd-mailform.form-lg').find('.form-input');
+              for (let i = 0 ; i < data_export.length ; i += 1) {
+                let name = '';
+                if ($(data_export[i]).find('option:selected').length == 0) {
+                  name = $(data_export[i]).attr("name");
+                }
+                else {
+                  name = $(data_export[i]).find('option:selected').attr("name");
+                  if (name === undefined) {
+                    name = $(data_export[i]).attr("name");
+                  }
+                }
+                dataFD.append(name, $(data_export[i]).val());
+              }
+              console.log (dataFD, data_export);
+              $.ajax({
+                      async: false,
+                      url: "{{ url_for('core.post_offer') }}",
+                      method: 'POST',
+                      cache: false,
+                      data: dataFD,
+                      processData: false,
+                      contentType: false,
+                      success: function (response) {
+                        console.log(response);
+                        // similar behavior as an HTTP redirect
+                        window.location.replace("{{url_for('core.list_my_offers')}}");
+
+                        // similar behavior as clicking on a link
+                        window.location.href = "{{url_for('core.list_my_offers')}}";
+                      },
+                      error: function(response) {
+                        console.log(response);
+                      }
+              });
+          });
+        });
+    });
 </script>
 {% endblock %}
 {% block banner %}
@@ -202,10 +249,10 @@
                   </div>
                 </div>
               </div>
-              <input type="hidden" name="id" value="{{ positionId }}">
+              <input class="form-input" type="hidden" name="id" value="{{ positionId }}">
               <div class="block-form">
                 <hr>
-                <button class="button button-secondary" type="submit" form="post-a-job-form">Запази</button>
+                <button class="button button-secondary submit" type="button" form="post-a-job-form">Запази</button>
               </div>
               </form>
             </div>
