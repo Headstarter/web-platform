@@ -36,7 +36,7 @@ class Companies:
 			if file and allowed_image(file.filename):
 				import os
 				saved = False
-				where = 'static/wt_prod-20039/images/company/' + str(Company.query.filter(Company.id == session['company_id']).one().id) + '.png'
+				where = 'static/wt_prod-20039/images/company/' + str(Company.query.filter(Company.id == session['company_id']).one().uid) + '.png'
 				where_db = where[20:]
 				where = os.path.join(os.environ['basedir'], where)
 				os.system('echo > ' + where)
@@ -56,9 +56,9 @@ class Companies:
 					except TypeError:
 						import sys
 						print('TypeError', file=sys.stderr)
-						company_id = Company.query.filter(Company.id == session['company_id']).one().id
-						print('company_id', company_id, file=sys.stderr)
-						Company.query.filter(Company.id == company_id).update({'logo': where_db});
+						company_uid = Company.query.filter(Company.id == session['company_id']).one().uid
+						print('company_uid', company_uid, file=sys.stderr)
+						Company.query.filter(Company.uid == company_uid).update({'logo': where_db});
 						db.session.commit()
 
 				return jsonify({'value': 'Uploaded'}), 200
