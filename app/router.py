@@ -137,13 +137,10 @@ def shit():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     print(request.form)
-    member = 'off'
-    try:
-        member = request.form['member'] or 'off'
-    except:
-        member = 'off'
     
-    if member == 'on':
+    member = request.form['member']
+    
+    if member == 'company':
         company = request.form['company']
 
     if len(request.form['email']) >= 6 and len(request.form['password']) >= 8 and len(request.form['name']) >= 3:
