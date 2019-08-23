@@ -29,6 +29,15 @@ def browse():
         session.modified = True
         return redirect(url_for('login_register', type="Student"))
 
+@routes.route('/login-register', methods=['GET', 'POST'])
+def register():
+    if session['type'] == 'Visitor':
+        return redirect(url_for('login_register', type="Student"))
+    else:
+        if session['type'] == 'Studen':
+            return mapped_routes['Visitor'].browse()
+        
+
 
 @routes.route('/school/register')
 @routes.route('/school/register/')
