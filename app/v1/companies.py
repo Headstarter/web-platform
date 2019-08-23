@@ -23,7 +23,6 @@ class Companies:
 	@staticmethod
 	def upload_logo():
 		from flask import jsonify
-		import sys
 		if request.method == 'POST':
 			# check if the post request has the file part
 			if 'logo' not in request.files:
@@ -34,28 +33,36 @@ class Companies:
 			if file.filename == '':
 				flash('No selected file')
 				return jsonify({'value': 'No file selected.'}), 400
-
 			if file and allowed_image(file.filename):
+				import os
 				saved = False
+				where = 'static/wt_prod-20039/images/company/' + str(Company.query.filter(Company.id == session['company_id']).one().id) + '.png'
+				where_db = where[20:]
+				where = os.path.join(os.environ['basedir'], where)
+				os.system('echo > ' + where)
+				with open(where, 'a'):
+					os.utime(where, None)
 				while not saved:
+					import sys
 					try:
-						file.save(os.path.join(os.environ['basedir'], 'static/wt_prod-20039' + Company.query.filter(Company.id == session['company_id']).one().logo))
+						file.save(where)
 						saved = True
 						print('Saved', file=sys.stderr)
 					except FileNotFoundError:
 						print('FileNotFound', file=sys.stderr)
 						import shutil
-						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'), os.path.join(
-						    os.environ['basedir'], 'static/wt_prod-20039/images/company/' + str(uid) + '.png'))
+						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/students/150.png'), 
+                  					where)
 					except TypeError:
 						import sys
 						print('TypeError', file=sys.stderr)
-						uid = Company.query.filter(Company.id == session['company_id']).one().uid
-						Company.query.filter(Company.id == session['company_id']).update({'logo':'/images/company/' + str(uid) + '.png'});
+						company_id = Company.query.filter(Company.id == session['company_id']).one().id
+						print('company_id', company_id, file=sys.stderr)
+						Company.query.filter(Company.id == company_id).update({'logo': where_db});
 						db.session.commit()
 
 				return jsonify({'value': 'Uploaded'}), 200
-
+	
 	@staticmethod
 	def edit_company_profile():
 		curr_company = Company.query.filter(Company.id == int(session['company_id'])).all()
