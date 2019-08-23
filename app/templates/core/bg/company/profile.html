@@ -55,7 +55,7 @@ $(document).ready( function() {
       $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
         $('[name=description]').html($(this).html());
       });
-      $('button[type="submit"]').on('click', function () {
+      $('button.submit[type="button"]').on('click', function () {
       if ($('input#imgInp').length > 0)
         $('input#imgInp').each (function (_) {
             var fd = new FormData();
@@ -72,6 +72,29 @@ $(document).ready( function() {
                 },
                 error: function(response) {
                 }
+            });
+            let dataFD = new FormData();
+            let data_export = $('.rd-form.rd-mailform.form-lg').find('.form-input').serializeArray().reduce((data, x) => { dataFD.append(x.name, x.value); data[x.name]=x.value; return data; }, {});
+            console.log (dataFD, data_export);
+            $.ajax({
+                    async: false,
+                    url: "{{ url_for('core.edit_company_profile') }}",
+                    method: 'POST',
+                    cache: false,
+                    data: dataFD,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                      console.log(response);
+                      // similar behavior as an HTTP redirect
+                      window.location.replace("{{url_for('core.list_my_offers')}}");
+
+                      // similar behavior as clicking on a link
+                      window.location.href = "{{url_for('core.list_my_offers')}}";
+                    },
+                    error: function(response) {
+                      console.log(response);
+                    }
             });
         });
       });
@@ -142,7 +165,7 @@ $(document).ready( function() {
               </div>
               <div class="block-form">
                 <hr>
-                <button class="button button-secondary" type="submit" form="post-a-job-form">Запази</button>
+                <button class="button button-secondary submit" type="button" form="post-a-job-form">Запази</button>
               </div>
               </form>
             </div>
