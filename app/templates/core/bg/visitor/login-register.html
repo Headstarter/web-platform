@@ -63,7 +63,7 @@
                               </div>
                             {% endif %}
                             {% if type == 'Company' %}
-                              <div class="form-wrap" id="company">
+                              <div class="form-wrap" style="display: block !important;" id="company">
                                 <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
                                   <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
                                   {% for company in companies %}
