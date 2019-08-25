@@ -1,0 +1,259 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Редактирай Профила на Училището{% endblock %}
+
+{% block js %}
+<link href="/css/summernote-bs4.css" rel="stylesheet">
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<script src="/js/summernote-bs4.js"></script>
+<!-- include summernote-bg-BG -->
+<script src="/js/summernote-bg-BG.js"></script>
+<script>
+$(document).ready( function() {
+      $(document).on('change', '.btn-file :file', function() {
+    var input = $(this),
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [label]);
+    });
+
+    $('.btn-file :file').on('fileselect', function(event, label) {
+
+        var input = $(this).parents('.input-group').find(':text'),
+            log = label;
+
+        if( input.length ) {
+            input.val(log);
+        } else {
+            //if( log ) alert(log);
+        }
+
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img-upload').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+  });
+  $(document).ready(function() {
+      $('.summernote').summernote({
+        lang: 'bg-BG' // default: 'en-US'
+      });
+      $(".note-editable.card-block[role=textbox]").addClass ('default-styles');
+      $(".note-editable.card-block[role=textbox]")[0].addEventListener('DOMSubtreeModified', function(){
+        $('[name=description]').html($(this).html());
+      });
+      $('button.submit[type="button"]').on('click', function () {
+      if ($('input#imgInp').length > 0)
+        $('input#imgInp').each (function (_) {
+            var fd = new FormData();
+            fd.append("logo", $("#imgInp")[0].files[0]);
+
+            $.ajax({
+                url: '/upload/logo',
+                method: 'POST',
+                cache: false,
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                },
+                error: function(response) {
+                }
+            });
+            let dataFD = new FormData();
+            let data_export = $('.rd-form.rd-mailform.form-lg').find('.form-input').serializeArray().reduce((data, x) => { dataFD.append(x.name, x.value); data[x.name]=x.value; return data; }, {});
+            console.log (dataFD, data_export);
+            $.ajax({
+                    async: false,
+                    url: "{{ url_for('core.edit_company_profile') }}",
+                    method: 'POST',
+                    cache: false,
+                    data: dataFD,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                      console.log(response);
+                      // similar behavior as an HTTP redirect
+                      window.location.replace("{{url_for('core.list_my_offers')}}");
+
+                      // similar behavior as clicking on a link
+                      window.location.href = "{{url_for('core.list_my_offers')}}";
+                    },
+                    error: function(response) {
+                      console.log(response);
+                    }
+            });
+        });
+      });
+  });
+</script>
+{% endblock %}
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Профил на {{ session['school'] }}</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+      <section class="section section-md">
+        <div class="container">
+          <div class="block-form">
+            <form class="rd-mailform" id="post-a-job-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ url_for ('core.edit_school_profile') }}">
+              
+            <h4>Обща информация за училището</h4>
+            <hr>
+                <article class="company-light">
+                    <label class="form-label-outside">Лого на училището: (До 16 МБ)</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse… <input type="file" name="logo" id="imgInp">
+                            </span>
+                        </span>
+                    </div>
+                    <figure class="company-light-logo">
+                        <img class="company-light-logo-image" id='img-upload' src="{{ company.logo }}" alt="">
+                    </figure>
+                  </article>
+</div>
+            <!-- RD Mailform-->
+            <div class="rd-form rd-mailform form-lg">
+              <div class="row row-40">
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" for="general-information-job-title">Име на училището</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text" name="school-name" value="{{ school.name }}" data-constraints="@Required">
+                      <label class="form-label" for="general-information-job-title">Въведете име на училището</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" 
+                    for="general-information-email">Телефон за контакт с училището</label>
+
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="telephone" value="{{ school.telephone }}" data-constraints="@Required">
+                      <label class="form-label" 
+                      for="general-information-email">Въведете телефон на училището</label>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" 
+                    for="general-information-email">Уеб сайт на училището</label>
+
+                    <div class="form-wrap-inner">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="website" value="{{ school.website }}" data-constraints="@Required">
+                      <label class="form-label" 
+                      for="general-information-email">Въведете уеб сайт на училището</label>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-wrap">
+                    <label class="form-label-outside" 
+                    for="general-information-description">Описание на училището</label>
+                    <div class="form-wrap-inner">
+                      <label class="form-label" 
+                      for="general-information-description">Предоставете описание на училището </label>
+                      <textarea class="form-input hidden" id="general-information-description" form="post-a-job-form" name="description" data-constraints="@Required">{{ school.description | safe }}</textarea>
+                      <span class="summernote">{{ school.description | safe }}</span>
+                    </div>
+                  </div>
+
+
+                  <div id="education_list" class="block-form">
+                <h4>Профили</h4>
+                <hr>
+                <div id="blank_edu" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Какъв е профила?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="school-profiles" required placeholder="напр. Математика ,Физика...“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Брой Ученици</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="amountStudent" required placeholder="Броя на учениците“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Нужни часове практика?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="neededExpirience" required placeholder=" ">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Възраст на учениците?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="years" required placeholder=" ">
+                    </div>
+                  </div>
+                </div>
+                {% for edu in student.cv.get_education() %}
+                <div id="blank_edu" class="rd-form rd-mailform form-lg form-corporate">
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Какъв е профила?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="school-profiles" required placeholder="напр. Математика ,Физика...“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside">Брой Ученици</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="amountStudent" required placeholder="Броя на учениците“">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Нужни часове практика?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="neededExpirience" required placeholder=" ">
+                    </div>
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label-outside" >Възраст на учениците?</label>
+                    <div class="form-wrap-inner">
+                      <input class="form-input" type="text" name="years" required placeholder=" ">
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <input form="submit-resume-form" type="hidden" name="education">
+            </div>
+            <button type="button" class="add_edu button button-sm button-primary"><span class="icon mdi mdi-plus"></span>Добави</button>
+
+
+                </div>
+              </div>
+              <div class="block-form">
+                <hr>
+                <button class="button button-secondary submit" type="button" form="post-a-job-form">Запази</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
