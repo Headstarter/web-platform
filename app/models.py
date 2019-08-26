@@ -14,12 +14,12 @@ def clear_data():
         print ('Clear table', table)
         db.session.execute(table.delete())
     db.session.commit()
-    
-    
+   
 class Approval(Base, db.Model):
     __tablename__ = 'Approval'
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False, unique=True, primary_key=True)
     school_id = db.Column(db.Integer, nullable = False)
+    position = db.Column(db.String(128))
 
 class Mapper(Base, db.Model):
     __tablename__ = 'Mapper'
@@ -31,7 +31,6 @@ class Mapper(Base, db.Model):
     company = db.relationship('Company', back_populates='mapper')
     #def __init__(self, id, company_name, company_id):
     #    super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
-
 
 class Tag(Base, db.Model):
     __tablename__ = 'Tag'
@@ -45,7 +44,6 @@ class Tag(Base, db.Model):
 
     #def __init__(self, id, name):
     #    super(Tag, self).__init__(id=id, name=name)
-
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
@@ -68,19 +66,25 @@ class Company(Base, db.Model):
     def __repr__(self):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
 
-
-
-
 class School(Base, db.Model):
     __tablename__ = 'School'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
+    email = db.Column(db.String(64))
+    tel = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    website = db.Column(db.String(64))
+    profiles = db.Column(db.String(8192))
+    description = db.Column(db.String(32768))
+    awards = db.Column(db.String(32768))
+    picture = db.Column(db.String(256))
+    
     admin = db.Column(db.Integer) # id of a user that is admin of the school account
+    
     teachers = db.relationship("User", back_populates="school")
     #def __init__(self, id, name, admin):
     #    super(Mapper, self).__init__(id=id, name=name, admin=admin)
-
 
 class User(Base, db.Model):
     __tablename__ = 'User'
@@ -124,7 +128,6 @@ class User(Base, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
-
 class Verify(Base, db.Model):
     __tablename__ = 'Verify'
    
@@ -142,7 +145,6 @@ class Verify(Base, db.Model):
         import random
         alphabet = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
         return ''.join(random.choice(alphabet) for i in range(16)) # 10 ^ 28.678267031972062 variants
-
 
 class CV(Base, db.Model):
     __tablename__ = 'CV'
@@ -192,7 +194,6 @@ class CV(Base, db.Model):
 
     def __repr__(self):
         return '<CV {}>'.format(self.name)
-
 
 class Position(Base, db.Model):
     __tablename__ = 'Position'
@@ -257,7 +258,6 @@ class Position(Base, db.Model):
         if today - DT.timedelta(weeks=1) > posted:
             return "{} week ago".format(int((today - posted).total_seconds() / 7.0 / 60.0 / 60.0 / 24.0))
 
-
 class Application (Base, db.Model):
     __tablename__ = 'Application'
    
@@ -270,20 +270,16 @@ class Application (Base, db.Model):
     company_id = db.Column(db.Integer, primary_key=True)
     #def __init__(self, id, user_id, position_id, company_id):
     #    super(Application, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
-    
 
 def factory(classname):
     cls = globals()[classname]
     return cls
 
-
 def gen_uid():
     return str(uuid.uuid4())
 
-
 def crypto(password):
     return hashlib.sha256(bytes(password, 'utf-8')).hexdigest()
-
 
 def clear():
     User.query.filter(True).delete()
@@ -294,7 +290,6 @@ def clear():
     CV.query.filter(True).delete()
     Application.query.filter(True).delete()
     Verify.query.filter(True).delete()
-
 
 def create_cv(student):
     cv = CV(photo='/static/img/cv/' + str(student.id) + '.jpg',
@@ -314,7 +309,6 @@ def create_cv(student):
     cv = CV.query.filter(CV.photo=='/static/img/cv/' + str(student.id) + '.jpg').one()
     User.query.filter(User.id == student.id).update({'cv_id': cv.id})
     db.session.commit()
-
 
 def insert_user(name, email, password, company=None, school=None):
     new_user = {}
@@ -351,7 +345,6 @@ def insert_user(name, email, password, company=None, school=None):
     from app.v1.helpers.mailer import Mailer
     Mailer.sendConfirmation(new_user)
 
-
 def insert_application(user_id, position_id):
     try:
         company_id = Position.query.filter(
@@ -361,7 +354,6 @@ def insert_application(user_id, position_id):
         db.session.commit()
     except:
         return False
-
 
 def insert_position(name, email, location, company_id, description, available, duration, hours_per_day, age_required, tag_id):
     p = Position(
@@ -381,7 +373,6 @@ def insert_position(name, email, location, company_id, description, available, d
     db.session.commit()
     return p.id
 
-
 def update_position(position_id, email, location, name, company_id, description, available, duration, hours_per_day, age_required, tag_id):
     Position.query.filter(Position.id == position_id).update({
         'name': name,
@@ -397,7 +388,6 @@ def update_position(position_id, email, location, name, company_id, description,
     })
     db.session.commit()
     return position_id
-
 
 def insert_company(name):
     uid = gen_uid()
@@ -423,7 +413,6 @@ def insert_company(name):
         Company.name == name).one())
     return Company.query.filter(Company.name == name).one()
 
-
 def update_company(company_id, name, website, description):
     Company.query.filter(Company.id == company_id).update({
         'name': name,
@@ -432,7 +421,6 @@ def update_company(company_id, name, website, description):
     })
     db.session.commit()
     return company_id
-
 
 def update_cv(student_id, name, email, telephone, location,
               birthday, languages, education, projects, description, skills, hobbies):
@@ -459,7 +447,6 @@ def update_cv(student_id, name, email, telephone, location,
     db.session.commit()
     return cv_id
 
-
 def activate_position(position_id):
     Position.query.filter(Position.id == position_id).update({
         'available': True
@@ -467,14 +454,12 @@ def activate_position(position_id):
     db.session.commit()
     return position_id
 
-
 def deactivate_position(position_id):
     Position.query.filter(Position.id == position_id).update({
         'available': False
     })
     db.session.commit()
     return position_id
-
 
 def filter_applications(position=None, company=None):
     if position is None:
@@ -487,7 +472,6 @@ def filter_applications(position=None, company=None):
     else:
         applications = applications.filter(Application.company_id == company)
     return applications
-
 
 def filter_offers_by_tag(position=None, company=None, group=None):
     if position is None:
@@ -578,7 +562,6 @@ def filter_all_offers_by_tag(position=None, company=None, group=None):
         print(positions.all())
 
     return positions.order_by(Position.id.desc())
-
 
 def clear():
     Verify.query.delete()

@@ -1,6 +1,6 @@
 from app import app, babel, db, migrate, render_template
 from app.router import session, get_locale, my_redirect, session
-from app.models import User, Tag, Company, Position, CV, insert_application, School
+from app.models import *
 from flask import g, request, Blueprint, flash, url_for, redirect
 
 from app.v1.visitors import Visitors
@@ -28,37 +28,6 @@ def browse():
         session['redirect'] = request.full_path
         session.modified = True
         return redirect(url_for('login_register', type="Student"))
-
-@routes.route('/login-register', methods=['GET', 'POST'])
-def register():
-    if session['type'] == 'Visitor':
-        return redirect(url_for('login_register', type="Student"))
-    else:
-        if session['type'] == 'Studen':
-            return mapped_routes['Visitor'].browse()
-        
-
-
-@routes.route('/school/register')
-@routes.route('/school/register/')
-@routes.route('/school/register/<step>')
-def school_register(step="1"):
-	import sys
-	print("step: ", step, "!", file=sys.stderr)
-	if step == '1':  # registration/login
-		session['redirect'] = '/school/register/2'
-		from app import login_register
-		return login_register(type='School-Director')
-	elif step == '2': # school registration form
-		try:
-			assert session['type'] != 'School-Director'
-		except:
-			session['redirect'] = '/school/register/2'
-			from app import login_register
-			return login_register(type='School-Director')
-		return "" # school registration form
-	else:
-		return "" # unknown step
 
 
 @routes.route('/')
@@ -116,6 +85,8 @@ def videos(id):
         return redirect("http://news.bnt.bg/bg/a/mladezhi-spechelikha-sstezanie-s-platforma-za-namirane-na-stazh#")
     elif str(id) == "1":
         return redirect("https://www.bloombergtv.bg/update/2019-06-02/kakvi-vazmozhnosti-pred-uchenitsite-i-biznesa-dava-programata-teenovator")
+    elif str(id) == "2":
+        return redirect("http://bnr.bg/horizont/post/101157715/onlain-platforma-tarsi-stajove-za-uchenici")
 
 
 @routes.route('/post/<id>')
@@ -141,7 +112,7 @@ def offer_view(position_id):
     import random
     views = Position.query.filter(Position.id == position_id).one().views
     Position.query.filter(Position.id == position_id).update(
-        {"views": views + random.randint(5,10)})
+        {"views": views + random.randint(1,5)})
     db.session.commit()
     return mapped_routes[session['type']].offer_details(position_id)
 
@@ -285,3 +256,18 @@ def init_school(): # init director
         
         
         return my_redirect('/')
+
+@routes.route('/school/students')
+@routes.route('/school/<school_id>/students')
+def school_students(school_id=None):
+    if school_id is None:
+        school_id = session['school_id']
+        school = School.query.filter(School.id == school_id).one()
+        return render_template('', 
+                               school=School.query.filter(School.id == school_id).one(),
+                               users=[{'user': x, 'status': ('Pending' if Approval.query.filter(Approval.user_id == x.id).count() == 0 else Approval.query.filter(Approval.user_id == x.id).one().position)} for x in school.teachers]
+                               )
+    else:
+        return render_template('', 
+                               school=School.query.filter(School.id == school_id).one(),
+                               )

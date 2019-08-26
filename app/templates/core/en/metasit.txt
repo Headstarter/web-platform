@@ -1,7 +1,0 @@
-<meta charset="utf-8">
-<meta name="title" content="Meta Tags - How Google Meta Tags Impact SEO">
-<meta name="description" content="Meta tags, little snippets of code that help describe the content on your site to search engines, can have a larger impact on SEO and your website than you may think: Find out more about the importance of meta tags.">
-<meta name="Generator" content="Drupal 8 (https://www.drupal.org)">
-<meta name="MobileOptimized" content="width">
-<meta name="HandheldFriendly" content="true">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
