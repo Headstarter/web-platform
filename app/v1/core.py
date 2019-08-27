@@ -112,7 +112,7 @@ def offer_view(position_id):
     import random
     views = Position.query.filter(Position.id == position_id).one().views
     Position.query.filter(Position.id == position_id).update(
-        {"views": views + random.randint(1,5)})
+        {"views": views + random.randint(0,2)})
     db.session.commit()
     return mapped_routes[session['type']].offer_details(position_id)
 

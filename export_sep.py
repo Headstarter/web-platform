@@ -35,7 +35,7 @@ def exportOut(name):
 		print('		db.session.commit()')
 		print('	except Exception as e:')
 		print('		db.session.rollback()')
-		print('		print(str(e), \'\n\', x)')
+		print('		print(str(e), \'\\n\', x)')
 
 
 exportOut('app.db')
