@@ -142,6 +142,8 @@ def register():
     
     if member == 'company':
         company = request.form['company']
+    if member == 'school':
+        school = request.form['school']
 
     if len(request.form['email']) >= 6 and len(request.form['password']) >= 8 and len(request.form['name']) >= 3:
         if member == 'student':
