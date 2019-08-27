@@ -35,170 +35,218 @@
 			</div>
 		</div>
 		<div class="page">
-			<!-- Page Header -->
-			{% if homepage %}
-			<header class="section page-header jumbotron-creative">
-			{% else %}
-			<header class="section page-header">
-				{% endif %}
-				<!-- RD Navbar-->
-				{% if session['type'] == 'Visitor' %}
-				<div class="rd-navbar-wrap">
-					<nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static"
-						data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-						<div class="rd-navbar-main-outer">
-							<div class="rd-navbar-main">
-								<!-- RD Navbar Panel-->
-								<div class="rd-navbar-panel">
-									<!-- RD Navbar Toggle-->
-									<button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-									<!-- RD Navbar Brand-->
-									<div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
-									</div>
-								</div>
-								<div class="rd-navbar-main-element">
-									<div class="rd-navbar-nav-wrap">
-										<ul class="rd-navbar-nav">
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#">За учениците</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
-													<!--<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="companies.html">Компании</a></li>-->
-												</ul>
-											</li>
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#">За фирми</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.post_offer') }}">Нова обява</a></li>
-													<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a></li>
-													<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
-												</ul>
-											</li>
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#">Още</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/blog">Блог</a></li>
-												</ul>
-											</li>
-											
-											<!--
-												<label class="switch">
-  													<input type="checkbox">
-  													<span class="slider round"></span>
-												</label>
-											-->
+	      <!-- Page Header -->
+		  {% if homepage %}
+		  <header class="section page-header jumbotron-creative">
+		  {% else %}
+		  <header class="section page-header">
+			  {% endif %}
+			  <!-- RD Navbar-->
+			  {% if session['type'] == 'Visitor' %}
+				  <div class="rd-navbar-wrap">
+					  <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static"
+						  data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+						  <div class="rd-navbar-main-outer">
+							  <div class="rd-navbar-main">
+								  <!-- RD Navbar Panel-->
+								  <div class="rd-navbar-panel">
+									  <!-- RD Navbar Toggle-->
+									  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+									  <!-- RD Navbar Brand-->
+									  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-main-element">
+									  <div class="rd-navbar-nav-wrap">
+										  <ul class="rd-navbar-nav">
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">За учениците</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+													  <!--<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="companies.html">Компании</a></li>-->
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">За фирми</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.post_offer') }}">Нова обява</a></li>
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a></li>
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Още</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
+												  </ul>
+											  </li>
+											  
+											  <!--
+												  <label class="switch">
+													  <input type="checkbox">
+													  <span class="slider round"></span>
+												  </label>
+											  -->
 
-										</ul>
-									</div>
-								</div>
-								<div class="rd-navbar-aside">
-									<div class="rd-navbar-aside-item">
-										<a href="{{ url_for('login_register', action='register') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-account"></span>Регистрация</a>
-									</div>
-									<div class="rd-navbar-aside-item">
-										<a href="{{ url_for('login_register', action='login') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-import"></span>Вход</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</nav>
-				</div>
-				{% endif %}
-				{% if session['type'] == 'Student' %}
-				<div class="rd-navbar-wrap">
-					<nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-						<div class="rd-navbar-main-outer">
-							<div class="rd-navbar-main">
-								<!-- RD Navbar Panel-->
-								<div class="rd-navbar-panel">
-									<!-- RD Navbar Toggle-->
-									<button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-									<!-- RD Navbar Brand-->
-									<div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
-									</div>
-								</div>
-								<div class="rd-navbar-main-element">
-									<div class="rd-navbar-nav-wrap">
-										<ul class="rd-navbar-nav">
-											<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
-											<!--<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Компании</a></li>
-												<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>-->
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#">Още</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/blog">Блог</a></li>
-												</ul>
-											</li>
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">CV</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</nav>
-				</div>
-				{% endif %}
-				{% if session['type'] == 'Company' %}
-				<div class="rd-navbar-wrap">
-					<nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-						<div class="rd-navbar-main-outer">
-							<div class="rd-navbar-main">
-								<!-- RD Navbar Panel-->
-								<div class="rd-navbar-panel">
-									<!-- RD Navbar Toggle-->
-									<button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-									<!-- RD Navbar Brand-->
-									<div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
-									</div>
-								</div>
-								<div class="rd-navbar-main-element">
-									<div class="rd-navbar-nav-wrap">
-										<ul class="rd-navbar-nav">
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.post_offer') }} ">Нова обява</a></li>
-												</ul>
-											</li>
-											<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#">Още</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/blog">Блог</a></li>
-												</ul>
-											</li>
-											<li class="rd-nav-item">
-												<a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
-												<ul class="rd-menu rd-navbar-dropdown">
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">{{ session ['company'] }}</a></li>
-													<li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</nav>
-				</div>
-				{% endif %}
-				{% block banner %} {% endblock %}
-			</header>
+										  </ul>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-aside">
+									  <div class="rd-navbar-aside-item">
+										  <a href="{{ url_for('login_register', action='register') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-account"></span>Регистрация</a>
+									  </div>
+									  <div class="rd-navbar-aside-item">
+										  <a href="{{ url_for('login_register', action='login') }}" class="button button-xs button-primary-outline button-icon button-icon-left"><span class="icon mdi mdi-import"></span>Вход</a>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </nav>
+				  </div>
+			  {% endif %}
+			  {% if session['type'] == 'Student' %}
+				  <div class="rd-navbar-wrap">
+					  <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+						  <div class="rd-navbar-main-outer">
+							  <div class="rd-navbar-main">
+								  <!-- RD Navbar Panel-->
+								  <div class="rd-navbar-panel">
+									  <!-- RD Navbar Toggle-->
+									  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+									  <!-- RD Navbar Brand-->
+									  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-main-element">
+									  <div class="rd-navbar-nav-wrap">
+										  <ul class="rd-navbar-nav">
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+											  <!--<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Компании</a></li>
+												  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>-->
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Още</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">CV</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
+												  </ul>
+											  </li>
+										  </ul>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </nav>
+				  </div>
+			  {% endif %}
+			  {% if session['type'] == 'Director' %}
+				  <div class="rd-navbar-wrap">
+					  <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+						  <div class="rd-navbar-main-outer">
+							  <div class="rd-navbar-main">
+								  <!-- RD Navbar Panel-->
+								  <div class="rd-navbar-panel">
+									  <!-- RD Navbar Toggle-->
+									  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+									  <!-- RD Navbar Brand-->
+									  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-main-element">
+									  <div class="rd-navbar-nav-wrap">
+										  <ul class="rd-navbar-nav">
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Моето училище</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_students') }}">Моити ученици</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_teachers') }}">Моите учители</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Още</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">Моят профил</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
+												  </ul>
+											  </li>
+										  </ul>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </nav>
+				  </div>
+			  {% endif %}
+			  {% if session['type'] == 'Company' %}
+				  <div class="rd-navbar-wrap">
+					  <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+						  <div class="rd-navbar-main-outer">
+							  <div class="rd-navbar-main">
+								  <!-- RD Navbar Panel-->
+								  <div class="rd-navbar-panel">
+									  <!-- RD Navbar Toggle-->
+									  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+									  <!-- RD Navbar Brand-->
+									  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-main-element">
+									  <div class="rd-navbar-nav-wrap">
+										  <ul class="rd-navbar-nav">
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.post_offer') }} ">Нова обява</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Още</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">{{ session ['company'] }}</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
+												  </ul>
+											  </li>
+										  </ul>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </nav>
+				  </div>
+			  {% endif %}
+			  {% block banner %} {% endblock %}
+		  </header>
 			<!-- Alerts -->
 			{% if get_flashed_messages(with_categories=true) %}
 			<section class="section section-md bg-default text-center">

@@ -128,7 +128,7 @@ $(document).ready( function() {
                         </span>
                     </div>
                     <figure class="company-light-logo">
-                        <img class="company-light-logo-image" id='img-upload' src="{{ company.logo }}" alt="">
+                        <img class="company-light-logo-image" id='img-upload' src="{{ school.logo }}" alt="">
                     </figure>
                   </article>
 </div>
@@ -150,7 +150,7 @@ $(document).ready( function() {
                     for="general-information-email">Телефон за контакт с училището</label>
 
                     <div class="form-wrap-inner">
-                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="telephone" value="{{ school.telephone }}" data-constraints="@Required">
+                      <input class="form-input" id="general-information-email" form="post-a-job-form" type="text" name="telephone" value="{{ school.tel }}" data-constraints="@Required">
                       <label class="form-label" 
                       for="general-information-email">Въведете телефон на училището</label>
 

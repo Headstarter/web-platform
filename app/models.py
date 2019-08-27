@@ -9,17 +9,18 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 def clear_data():
-    meta = db.metadata
-    for table in reversed(meta.sorted_tables):
+    meta = ['User', 'Mapper', 'Tag', 'Company',
+          'Verify', 'CV', 'Position', 'Application', 'School', 'Approval']
+    for table in (meta):
         print ('Clear table', table)
-        db.session.execute(table.delete())
-    db.session.commit()
-    
-    
+        factory(table).query.delete()
+        db.session.commit()
+   
 class Approval(Base, db.Model):
     __tablename__ = 'Approval'
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False, unique=True, primary_key=True)
     school_id = db.Column(db.Integer, nullable = False)
+    position = db.Column(db.String(128))
 
 class Mapper(Base, db.Model):
     __tablename__ = 'Mapper'
@@ -31,7 +32,6 @@ class Mapper(Base, db.Model):
     company = db.relationship('Company', back_populates='mapper')
     #def __init__(self, id, company_name, company_id):
     #    super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
-
 
 class Tag(Base, db.Model):
     __tablename__ = 'Tag'
@@ -45,7 +45,6 @@ class Tag(Base, db.Model):
 
     #def __init__(self, id, name):
     #    super(Tag, self).__init__(id=id, name=name)
-
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
@@ -68,19 +67,25 @@ class Company(Base, db.Model):
     def __repr__(self):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
 
-
-
-
 class School(Base, db.Model):
     __tablename__ = 'School'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
+    email = db.Column(db.String(64))
+    tel = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    website = db.Column(db.String(64))
+    profiles = db.Column(db.String(8192))
+    description = db.Column(db.String(32768))
+    awards = db.Column(db.String(32768))
+    picture = db.Column(db.String(256))
+    
     admin = db.Column(db.Integer) # id of a user that is admin of the school account
+    
     teachers = db.relationship("User", back_populates="school")
-    #def __init__(self, id, name, admin):
-    #    super(Mapper, self).__init__(id=id, name=name, admin=admin)
-
+    #def __init__(self, id, admin, name):
+    #    super(School, self).__init__(id=id, name=name, admin=admin)
 
 class User(Base, db.Model):
     __tablename__ = 'User'
@@ -107,8 +112,8 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
-    #def __init__(self, id, name, email, password, school_id, cv_id, company_id):
-    #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, school_id=school_id, cv_id=cv_id, verification_id=None, company_id=company_id)
+    #def __init__(self, id, name, email, password, school_id, cv_id, verification_id, company_id):
+    #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, verification_id=verification_id, school_id=school_id, cv_id=cv_id, company_id=company_id)
 
     def to_dict(self):
         return {"id": self.id,
@@ -124,7 +129,6 @@ class User(Base, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
-
 class Verify(Base, db.Model):
     __tablename__ = 'Verify'
    
@@ -134,15 +138,14 @@ class Verify(Base, db.Model):
     user = db.relationship("User", back_populates="verification")
     code = db.Column(db.String(6))
 
-    #def __init__(self, id, code):
-    #    super(Verify, self).__init__(id=id, code=code)
+    #def __init__(self, id, user, code):
+    #    super(Verify, self).__init__(id=id, user=[], code=code)
     
     @staticmethod
     def gen_code():
         import random
         alphabet = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
         return ''.join(random.choice(alphabet) for i in range(16)) # 10 ^ 28.678267031972062 variants
-
 
 class CV(Base, db.Model):
     __tablename__ = 'CV'
@@ -193,7 +196,6 @@ class CV(Base, db.Model):
     def __repr__(self):
         return '<CV {}>'.format(self.name)
 
-
 class Position(Base, db.Model):
     __tablename__ = 'Position'
    
@@ -216,8 +218,8 @@ class Position(Base, db.Model):
     
     views = db.Column(db.Integer, default=0)
 
-    #def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id):
-    #    super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=0)
+    #def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
+    #    super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
 
     
 
@@ -257,7 +259,6 @@ class Position(Base, db.Model):
         if today - DT.timedelta(weeks=1) > posted:
             return "{} week ago".format(int((today - posted).total_seconds() / 7.0 / 60.0 / 60.0 / 24.0))
 
-
 class Application (Base, db.Model):
     __tablename__ = 'Application'
    
@@ -270,20 +271,16 @@ class Application (Base, db.Model):
     company_id = db.Column(db.Integer, primary_key=True)
     #def __init__(self, id, user_id, position_id, company_id):
     #    super(Application, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
-    
 
 def factory(classname):
     cls = globals()[classname]
     return cls
 
-
 def gen_uid():
     return str(uuid.uuid4())
 
-
 def crypto(password):
     return hashlib.sha256(bytes(password, 'utf-8')).hexdigest()
-
 
 def clear():
     User.query.filter(True).delete()
@@ -294,7 +291,6 @@ def clear():
     CV.query.filter(True).delete()
     Application.query.filter(True).delete()
     Verify.query.filter(True).delete()
-
 
 def create_cv(student):
     cv = CV(photo='/static/img/cv/' + str(student.id) + '.jpg',
@@ -314,7 +310,6 @@ def create_cv(student):
     cv = CV.query.filter(CV.photo=='/static/img/cv/' + str(student.id) + '.jpg').one()
     User.query.filter(User.id == student.id).update({'cv_id': cv.id})
     db.session.commit()
-
 
 def insert_user(name, email, password, company=None, school=None):
     new_user = {}
@@ -351,7 +346,6 @@ def insert_user(name, email, password, company=None, school=None):
     from app.v1.helpers.mailer import Mailer
     Mailer.sendConfirmation(new_user)
 
-
 def insert_application(user_id, position_id):
     try:
         company_id = Position.query.filter(
@@ -361,7 +355,6 @@ def insert_application(user_id, position_id):
         db.session.commit()
     except:
         return False
-
 
 def insert_position(name, email, location, company_id, description, available, duration, hours_per_day, age_required, tag_id):
     p = Position(
@@ -381,7 +374,6 @@ def insert_position(name, email, location, company_id, description, available, d
     db.session.commit()
     return p.id
 
-
 def update_position(position_id, email, location, name, company_id, description, available, duration, hours_per_day, age_required, tag_id):
     Position.query.filter(Position.id == position_id).update({
         'name': name,
@@ -397,7 +389,6 @@ def update_position(position_id, email, location, name, company_id, description,
     })
     db.session.commit()
     return position_id
-
 
 def insert_company(name):
     uid = gen_uid()
@@ -423,7 +414,6 @@ def insert_company(name):
         Company.name == name).one())
     return Company.query.filter(Company.name == name).one()
 
-
 def update_company(company_id, name, website, description):
     Company.query.filter(Company.id == company_id).update({
         'name': name,
@@ -432,7 +422,6 @@ def update_company(company_id, name, website, description):
     })
     db.session.commit()
     return company_id
-
 
 def update_cv(student_id, name, email, telephone, location,
               birthday, languages, education, projects, description, skills, hobbies):
@@ -459,7 +448,6 @@ def update_cv(student_id, name, email, telephone, location,
     db.session.commit()
     return cv_id
 
-
 def activate_position(position_id):
     Position.query.filter(Position.id == position_id).update({
         'available': True
@@ -467,14 +455,12 @@ def activate_position(position_id):
     db.session.commit()
     return position_id
 
-
 def deactivate_position(position_id):
     Position.query.filter(Position.id == position_id).update({
         'available': False
     })
     db.session.commit()
     return position_id
-
 
 def filter_applications(position=None, company=None):
     if position is None:
@@ -488,34 +474,40 @@ def filter_applications(position=None, company=None):
         applications = applications.filter(Application.company_id == company)
     return applications
 
-
 def filter_offers_by_tag(position=None, company=None, group=None):
     if position is None:
         positions = Position.query.filter(Position.available == True)
-
     elif position == 1:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id <= 9)
-
-    elif position == 10:
+            .filter(Position.tag_id <= 6)
+    elif position == 7:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 9) \
-            .filter(Position.tag_id <= 14)
-
-    elif position == 15:
+            .filter(Position.tag_id > 6) \
+            .filter(Position.tag_id <= 13)
+    elif position == 14:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 14) \
-            .filter(Position.tag_id <= 21)
-
-    elif position == 22:
+            .filter(Position.tag_id > 13) \
+            .filter(Position.tag_id <= 25)
+    elif position == 26:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 21) \
-            .filter(Position.tag_id <= 28)
-
-    elif position == 29:
-        positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 28) \
+            .filter(Position.tag_id > 25) \
             .filter(Position.tag_id <= 32)
+    elif position == 33:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 32) \
+            .filter(Position.tag_id <= 41)
+    elif position == 42:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 41) \
+            .filter(Position.tag_id <= 51)
+    elif position == 52:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 51) \
+            .filter(Position.tag_id <= 57)
+    elif position == 58:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 57) \
+            .filter(Position.tag_id <= 67)
     elif position == None:
         positions = Position.query.filter(Position.available == True)
     else:
@@ -526,11 +518,12 @@ def filter_offers_by_tag(position=None, company=None, group=None):
         positions = positions.filter(Position.company_id == company)
         
     if group is not None:
+        import sys
         from app.v1.target import groups, Target_Group
-        print('in', groups[int(group)]['tags'])
+        print('in', groups[int(group)]['tags'], file=sys.stderr)
         from sqlalchemy import or_
-        positions = positions.filter(or_(*[Position.tag_id.like(x) for x in groups[int(group)]['tags']]))
-        print(positions.all())
+        positions = positions.filter(or_(*[Position.tag_id == x for x in groups[int(group)]['tags']]))
+        print(positions.all(), file=sys.stderr)
 
     return positions.order_by(Position.id.desc())
 
@@ -578,7 +571,6 @@ def filter_all_offers_by_tag(position=None, company=None, group=None):
         print(positions.all())
 
     return positions.order_by(Position.id.desc())
-
 
 def clear():
     Verify.query.delete()
