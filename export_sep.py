@@ -12,10 +12,10 @@ import csv
 import pandas as pd
 from sqlalchemy import Column, Integer, String, Boolean
 
-tables = ['User', 'Mapper', 'Tag', 'Company', 'Approval',
+tables = ['User', 'Mapper', 'Tag', 'Company',
           'Verify', 'CV', 'Position', 'Application', 'School']
-variables = ['_users', '_mappers', '_tags', '_companies', '_approvals', 
-             '_verifies', '_cvs', '_offers', '_applications', 'schools']
+variables = ['_users', '_mappers', '_tags', '_companies', 
+             '_verifies', '_cvs', '_offers', '_applications', 'schools', '_approvals']
 
 
 def exportOut(name):
@@ -27,7 +27,7 @@ def exportOut(name):
 		table = tables[x]
 		var = variables[x]
 		cursor = con.execute('select * from ' + table)
-		print(variables, '=', cursor.fetchall())
+		print(variables[x], '=', cursor.fetchall())
         
 		print('for x in', var + ':')
 		print('	try:')
