@@ -7,14 +7,14 @@ import sys
 from abc import ABC, abstractmethod
 
 groups = [
-    {'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
-    {'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
-    {'icon': 'linearicons-store', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
-    {'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
-    {'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
-    {'icon': 'linearicons-store', 'label': 'Service Industry', 'tags': [32, 33, 34, 5, 6]},
-    {'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
-    {'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [32, 33, 34, 5, 6]},     
+    {'id':0, 'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [1,2,3,4,5,6]},
+    {'id':1, 'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [7,8,9,10,11,12,13]},
+    {'id':2, 'icon': 'linearicons-store', 'label': '​Business', 'tags': [14,15,16,17,18,19,20,21,21,22,23,24,25]},
+    {'id':3, 'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [26,27,28,29,30,31,32]},
+    {'id':4, 'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [33,34,35,36,37,38,39,40,41]},
+    {'id':5, 'icon': 'linearicons-store', 'label': 'Service Industry', 'tags': [42,43,44,45,46,47,48,49,50,51]},
+    {'id':6, 'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [52,53,54,55,56,57]}, 
+    {'id':7, 'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [58,59,60,61,62,63,64,65,66,67]},    
 ]
 
 class Target_Group (ABC):
@@ -22,14 +22,14 @@ class Target_Group (ABC):
     @staticmethod
     def groupTags(company = None):
         groups1 = [
-            {'id':0, 'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [0, 1, 2, 3, 4, 6, 7]},
-            {'id':1, 'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [9, 10, 12, 13]},
-            {'id':2, 'icon': 'linearicons-store', 'label': '​Business', 'tags': [21, 22, 23, 24, 25, 26, 27, 35, 36]},
-            {'id':3, 'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [28, 29, 30, 31, 11, 37, 38]},
-            {'id':4, 'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [14, 15, 16, 17, 18, 19, 20]},
-            {'id':5, 'icon': 'linearicons-store', 'label': 'Service Industry', 'tags': [32, 33, 34, 5, 6]},
-            {'id':6, 'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [32, 33, 34, 5, 6]}, 
-            {'id':7, 'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [32, 33, 34, 5, 6]},    
+            {'id':0, 'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [1,2,3,4,5,6]},
+            {'id':1, 'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [7,8,9,10,11,12,13]},
+            {'id':2, 'icon': 'linearicons-store', 'label': '​Business', 'tags': [14,15,16,17,18,19,20,21,21,22,23,24,25]},
+            {'id':3, 'icon': 'linearicons-bullhorn', 'label': 'Media', 'tags': [26,27,28,29,30,31,32]},
+            {'id':4, 'icon': 'linearicons-heart-pulse', 'label': '​Medical', 'tags': [33,34,35,36,37,38,39,40,41]},
+            {'id':5, 'icon': 'linearicons-store', 'label': 'Service Industry', 'tags': [42,43,44,45,46,47,48,49,50,51]},
+            {'id':6, 'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [52,53,54,55,56,57]}, 
+            {'id':7, 'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [58,59,60,61,62,63,64,65,66,67]},    
         ]
         
         if company == None:
