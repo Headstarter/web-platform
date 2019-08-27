@@ -9,11 +9,12 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 def clear_data():
-    meta = db.metadata
-    for table in reversed(meta.sorted_tables):
+    meta = ['User', 'Mapper', 'Tag', 'Company',
+          'Verify', 'CV', 'Position', 'Application', 'School', 'Approval']
+    for table in (meta):
         print ('Clear table', table)
-        db.session.execute(table.delete())
-    db.session.commit()
+        factory(table).query.delete()
+        db.session.commit()
    
 class Approval(Base, db.Model):
     __tablename__ = 'Approval'
@@ -83,8 +84,8 @@ class School(Base, db.Model):
     admin = db.Column(db.Integer) # id of a user that is admin of the school account
     
     teachers = db.relationship("User", back_populates="school")
-    #def __init__(self, id, name, admin):
-    #    super(Mapper, self).__init__(id=id, name=name, admin=admin)
+    #def __init__(self, id, admin, name):
+    #    super(School, self).__init__(id=id, name=name, admin=admin)
 
 class User(Base, db.Model):
     __tablename__ = 'User'
@@ -111,8 +112,8 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
-    #def __init__(self, id, name, email, password, school_id, cv_id, company_id):
-    #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, school_id=school_id, cv_id=cv_id, verification_id=None, company_id=company_id)
+    #def __init__(self, id, name, email, password, school_id, cv_id, verification_id, company_id):
+    #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, verification_id=verification_id, school_id=school_id, cv_id=cv_id, company_id=company_id)
 
     def to_dict(self):
         return {"id": self.id,
@@ -137,8 +138,8 @@ class Verify(Base, db.Model):
     user = db.relationship("User", back_populates="verification")
     code = db.Column(db.String(6))
 
-    #def __init__(self, id, code):
-    #    super(Verify, self).__init__(id=id, code=code)
+    #def __init__(self, id, user, code):
+    #    super(Verify, self).__init__(id=id, user=[], code=code)
     
     @staticmethod
     def gen_code():
@@ -217,8 +218,8 @@ class Position(Base, db.Model):
     
     views = db.Column(db.Integer, default=0)
 
-    #def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id):
-    #    super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=0)
+    #def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
+    #    super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
 
     
 
@@ -476,30 +477,37 @@ def filter_applications(position=None, company=None):
 def filter_offers_by_tag(position=None, company=None, group=None):
     if position is None:
         positions = Position.query.filter(Position.available == True)
-
     elif position == 1:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id <= 9)
-
-    elif position == 10:
+            .filter(Position.tag_id <= 6)
+    elif position == 7:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 9) \
-            .filter(Position.tag_id <= 14)
-
-    elif position == 15:
+            .filter(Position.tag_id > 6) \
+            .filter(Position.tag_id <= 13)
+    elif position == 14:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 14) \
-            .filter(Position.tag_id <= 21)
-
-    elif position == 22:
+            .filter(Position.tag_id > 13) \
+            .filter(Position.tag_id <= 25)
+    elif position == 26:
         positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 21) \
-            .filter(Position.tag_id <= 28)
-
-    elif position == 29:
-        positions = Position.query.filter(Position.available == True) \
-            .filter(Position.tag_id > 28) \
+            .filter(Position.tag_id > 25) \
             .filter(Position.tag_id <= 32)
+    elif position == 33:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 32) \
+            .filter(Position.tag_id <= 41)
+    elif position == 42:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 41) \
+            .filter(Position.tag_id <= 51)
+    elif position == 52:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 51) \
+            .filter(Position.tag_id <= 57)
+    elif position == 58:
+        positions = Position.query.filter(Position.available == True) \
+            .filter(Position.tag_id > 57) \
+            .filter(Position.tag_id <= 67)
     elif position == None:
         positions = Position.query.filter(Position.available == True)
     else:
@@ -510,11 +518,12 @@ def filter_offers_by_tag(position=None, company=None, group=None):
         positions = positions.filter(Position.company_id == company)
         
     if group is not None:
+        import sys
         from app.v1.target import groups, Target_Group
-        print('in', groups[int(group)]['tags'])
+        print('in', groups[int(group)]['tags'], file=sys.stderr)
         from sqlalchemy import or_
-        positions = positions.filter(or_(*[Position.tag_id.like(x) for x in groups[int(group)]['tags']]))
-        print(positions.all())
+        positions = positions.filter(or_(*[Position.tag_id == x for x in groups[int(group)]['tags']]))
+        print(positions.all(), file=sys.stderr)
 
     return positions.order_by(Position.id.desc())
 
