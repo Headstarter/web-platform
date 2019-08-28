@@ -12,7 +12,7 @@ from app.v1.school.teacher import Teacher
 mapped_routes = {
     'Visitor': Visitors,
     'School-Director': Director,
-    'School-Teacher': Teacher,
+    'Teacher': Teacher,
     'Student': Students,
     'Company': Companies
 }
@@ -260,6 +260,21 @@ def init_school(): # init director
 @routes.route('/school/students')
 @routes.route('/school/<school_id>/students')
 def school_students(school_id=None):
+    if school_id is None:
+        school_id = session['school_id']
+        school = School.query.filter(School.id == school_id).one()
+        return render_template('', 
+                               school=School.query.filter(School.id == school_id).one(),
+                               users=[{'user': x, 'status': ('Pending' if Approval.query.filter(Approval.user_id == x.id).count() == 0 else Approval.query.filter(Approval.user_id == x.id).one().position)} for x in school.teachers]
+                               )
+    else:
+        return render_template('', 
+                               school=School.query.filter(School.id == school_id).one(),
+                               )
+
+@routes.route('/school/teachers')
+@routes.route('/school/<school_id>/teachers')
+def school_teachers(school_id=None):
     if school_id is None:
         school_id = session['school_id']
         school = School.query.filter(School.id == school_id).one()

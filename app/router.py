@@ -172,6 +172,37 @@ def register():
                 elif request.form['password'] != request.form['password-confirm']:
                     flash('Passwords does not match.', 'info')
                 return my_redirect(url_for('login_register', type="Student", action='register'))
+        elif member == 'school':
+            if (request.form['password'] == request.form['password-confirm'])\
+                    and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
+                
+                if request.form['school'] == 'Not listed':
+                    flash('Свържете се с Вашия директор, за да регистрира училището Ви или се свържете с нас по телефона - <a href="tel:+359 988 329 931">+359 988 329 931</a>.', 'danger')
+                    return my_redirect(url_for('login_register', type="School", action='register'))
+                
+                my_school = School.query.filter(School.name == school).one()
+                
+                insert_user(request.form['name'], request.form['email'], request.form['password'], school=my_school)
+                
+                session['email'] = request.form['email']
+                session['company_id'] = my_school.id
+                session['name'] = request.form['name']
+                session['company'] = my_school.name
+                session['type'] = 'Teacher'
+
+                try:
+                    if session['redirect']:
+                        return my_redirect(session['redirect'])
+                    else:
+                        return my_redirect('/')
+                except:
+                    return my_redirect('/')
+            else:
+                if len(User.query.filter(User.email == request.form['email']).all()) != 0:
+                    flash('User is already registered or passwords does not match.', 'danger')
+                elif request.form['password'] != request.form['password-confirm']:
+                    flash('Please, just log in.', 'info')
+                return my_redirect(url_for('login_register', type="Company", action='register'))
         else:
             if (request.form['password'] == request.form['password-confirm'])\
                     and (len(User.query.filter(User.email == request.form['email']).all()) == 0):
@@ -191,7 +222,7 @@ def register():
                     my_company = insert_company(request.form['company'])
                 print('', my_company.name, my_company.id, my_company.uid)
                 insert_user(request.form['name'], request.form['email'],
-                            request.form['password'], my_company)
+                            request.form['password'], company = my_company)
 
                 session['email'] = request.form['email']
                 session['company_id'] = my_company.id
@@ -224,23 +255,6 @@ def register():
         return my_redirect(url_for('login_register', type="Company", action='register'))
 
 
-@app.route('/zohoverify/verifyforzoho.html')
-def zoho():
-    return render_template('verifyforzoho.html')
-
-@app.route('/google8a89e589e3c95635.html')
-def google():
-    return render_template('google8a89e589e3c95635.html')
-
-@app.route('/yandex_5d718a3bdfc70e97.html')
-def yandex():
-    return """<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>Verification: 5d718a3bdfc70e97</body>
-</html>"""
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -251,13 +265,22 @@ def login():
             flash('Incorrect password.', 'danger')
             return my_redirect(url_for('login_register', action="login"))
 
-        if user.company_id is None:
+        if user.company_id is None and user.school_id is None:
             session['email'] = request.form['email']
             session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
             session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
             session['company_id'] = None
             session['type'] = 'Student'
-        else:
+        elif user.company_id is None:
+            session['email'] = request.form['email']
+            session['school_id'] = user.school_id
+            session['name'] = user.name
+            session['school'] = user.school.name
+            if user.id == user.school.admin:
+                session['type'] = 'Director'
+            else:
+                session['type'] = 'Teacher'
+        elif user.schhol_id is None:
             session['email'] = request.form['email']
             session['company_id'] = user.company_id
             session['name'] = user.name

@@ -313,38 +313,37 @@ def create_cv(student):
 
 def insert_user(name, email, password, company=None, school=None):
     new_user = {}
-    if company is not None: # student or teacher
-        if school is not None: # student
-            new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
-                                             name='',
-                                             email='',
-                                             birthday='',
-                                             telephone='',
-                                             location='',
-                                             about='',
-                                             education='[]',
-                                             projects='[]',
-                                             skills='[]',
-                                             languages='[]',
-                                             hobbies='[]'), 
-                            company=company, 
-                            email=email, 
-                            password_hash=crypto(password),
-                            school=school)
-        else: # teacher
-            new_user = User(name=name, 
-                            school=school, 
-                            cv=None,
-                            email=email, 
-                            password_hash=crypto(password))
-    else: # company
+    if school is None and company is None: # student
+        new_user = User(name=name, cv=CV(photo='/static/img/cv/' + str(email) + '.jpg',
+                                            name='',
+                                            email='',
+                                            birthday='',
+                                            telephone='',
+                                            location='',
+                                            about='',
+                                            education='[]',
+                                            projects='[]',
+                                            skills='[]',
+                                            languages='[]',
+                                            hobbies='[]'), 
+                        company=company, 
+                        email=email, 
+                        password_hash=crypto(password),
+                        school=school)
+    elif school is not None: # teacher
+        new_user = User(name=name, 
+                        school=school, 
+                        cv=None,
+                        email=email, 
+                        password_hash=crypto(password))
+    elif company is not None: # company
         new_user = User(name=name, cv=None, company=company,
                             email=email, password_hash=crypto(password))
     db.session.add(new_user)
     db.session.commit()
     
     from app.v1.helpers.mailer import Mailer
-    Mailer.sendConfirmation(new_user)
+    return Mailer.sendConfirmation(new_user)
 
 def insert_application(user_id, position_id):
     try:
