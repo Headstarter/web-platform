@@ -17,6 +17,7 @@ mail = Mail(app)
 class Mailer:
     @staticmethod
     def get_verification (user):
+        return ''
         verify = {}
         if user.verification_id is None:
             verify = Verify(user=[user], code=Verify.gen_code())
@@ -43,7 +44,8 @@ class Mailer:
         
     @staticmethod
     def sendConfirmation(new_user):
-        if os.environ['DEBUG'] == 'off' or True:
+        return ''
+        if os.environ['DEBUG'] == 'off':
             if new_user.school is not None:
                 import datetime
                 verify = Mailer.get_verification(new_user).code
@@ -60,6 +62,7 @@ class Mailer:
         
     @staticmethod
     def sendApproval(new_user):
+        return ''
         if os.environ['DEBUG'] == 'off':
             verify = Mailer.get_verification(new_user)
             msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[new_user.email, 'headstarter@headstarter.eu'])
