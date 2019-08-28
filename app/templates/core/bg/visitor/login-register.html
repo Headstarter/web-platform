@@ -65,13 +65,13 @@
                             {% if type == 'Company' %}
                               <div class="form-wrap" style="display: block !important;" id="company">
                                 <select name="company" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your company" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
-                                  <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма?</option>
+                                  <option id="notlisted" onselect="" value="Not listed">Няма я твоята фирма? Попълнете я.</option>
                                   {% for company in companies %}
                                     <option value="{{company.name}}">{{company.name}}</option> 
                                   {% endfor %}
                                 </select>
                                 <input name="member" type="hidden" value="company" class="checkbox-custom" />
-                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="" type="text"></input>
                               </div>
                             {% endif %}
                             {% if type == 'Teacher' %}
@@ -112,17 +112,17 @@
                                   {% for company in companies %}
                                     <option value="{{company.name}}">{{company.name}}</option> 
                                   {% endfor %}
-                                  <option id="notlisted" onselect="" value="Not listed">Няма я Вашата фирма?</option>
+                                  <option id="notlisted" onselect="" value="Not listed">Няма я Вашата фирма? Попълнете я.</option>
                                 </select>
-                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="Попълни я" type="text"></input>
+                                <input id="customcompany" style="display:none;" class="form-input" onchange="$('#notlisted').val($(this).val());" placeholder="" type="text"></input>
                               </div>
                               <div class="form-wrap" id="school">
                                 <h5>Кое е Вашето училище?</h5>
                                 <select name="school" class="form-input select form-control-has-validation select2-hidden-accessible" data-placeholder="Choose your school" data-minimum-results-for-search="Infinity" tabindex="-1" aria-hidden="true">
-                                  <option id="notlisted" onselect="" value="Not listed">Няма го Вашето училище?</option>
                                   {% for school in schools %}
                                     <option value="{{school.name}}">{{school.name}}</option> 
                                   {% endfor %}
+                                  <option id="notlisted" onselect="" value="Not listed">Няма го Вашето училище? Обадете са на (+359) 988 329 931.</option>
                                 </select>
                               </div>
                             {% endif %}
