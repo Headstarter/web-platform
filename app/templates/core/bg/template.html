@@ -79,7 +79,7 @@
 												  <ul class="rd-menu rd-navbar-dropdown">
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">Често задавани въпроси</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
 												  </ul>
 											  </li>
@@ -131,7 +131,7 @@
 												  <ul class="rd-menu rd-navbar-dropdown">
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">Често задавани въпроси</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
 												  </ul>
 											  </li>
@@ -179,7 +179,55 @@
 												  <ul class="rd-menu rd-navbar-dropdown">
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">Често задавани въпроси</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#"><span class="fas fa-user"></span> {{ session ['name'] }}</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for ('core.profile') }}">Моят профил</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/logout">Изход</a></li>
+												  </ul>
+											  </li>
+										  </ul>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </nav>
+				  </div>
+			  {% endif %}
+			  {% if session['type'] == 'Teacher' %}
+				  <div class="rd-navbar-wrap">
+					  <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+						  <div class="rd-navbar-main-outer">
+							  <div class="rd-navbar-main">
+								  <!-- RD Navbar Panel-->
+								  <div class="rd-navbar-panel">
+									  <!-- RD Navbar Toggle-->
+									  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+									  <!-- RD Navbar Brand-->
+									  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/><img class="brand-logo-light" src="/images/logo-default-52x52.png" alt="" srcset="/images/logo-default-52x52.png 2x"/></a>
+									  </div>
+								  </div>
+								  <div class="rd-navbar-main-element">
+									  <div class="rd-navbar-nav-wrap">
+										  <ul class="rd-navbar-nav">
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Моето училище</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_students') }}">Моити ученици</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_teachers') }}">Моите учители</a></li>
+												  </ul>
+											  </li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+											  <li class="rd-nav-item">
+												  <a class="rd-nav-link" href="#">Още</a>
+												  <ul class="rd-menu rd-navbar-dropdown">
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">Често задавани въпроси</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
 												  </ul>
 											  </li>
@@ -226,7 +274,7 @@
 												  <ul class="rd-menu rd-navbar-dropdown">
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/about">За нас</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="#contacts">Контакти</a></li>
-													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">FAQ</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/faq">Често задавани въпроси</a></li>
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/news">Новини</a></li>
 												  </ul>
 											  </li>
@@ -270,7 +318,7 @@
                               <div class="col-12">
                                 <ul class="list-marked-1">
                                   <li><a href="/about">Headstarter</a></li>
-                                  <li><a href="/faq">FAQ</a></li>
+                                  <li><a href="/faq">Често задавани въпроси</a></li>
                                 </ul>
                               </div>
                             </div>

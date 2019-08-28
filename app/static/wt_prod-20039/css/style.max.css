@@ -21246,27 +21246,18 @@ a.post-minimal-media:hover {
     color: rgb(154, 154, 154) !important;
 }
 
-.comapny .ll-item-icon {
-    color: #4abdac !important;
-}
-
-.company .ll-item-icon-inner {
-    stroke: #4abdac;
-}
-
-.company .ll-item-icon::after {
-    border: 1px solid rgba(74, 189, 172, .43);
-}
-
-.student .ll-item-icon {
+.student .ll-item-icon,
+.company .ll-item-icon {
     color: #fc4a1a !important;
 }
 
-.student .ll-item-icon-inner {
-    stroke: #fc4a1a;
+.student .ll-item-icon-inner,
+.company .ll-item-icon-inner {
+    stroke: rgba(74, 189, 172, 1);
 }
 
-.student .ll-item-icon::after {
+.student .ll-item-icon::after,
+.company .ll-item-icon::after {
     border: 1px solid rgba(252, 74, 26, .43);
 }
 
@@ -21317,4 +21308,24 @@ tr:hover .badge {
     .w-23 {
         width: 23% !important;
     }
+}
+
+html .text-primary {
+    color: #fc4a1a;
+}
+
+.box-line-icon.icon {
+    color: #4abdac;
+}
+
+.icon.fa.fa-filter {
+    display: none !important;
+}
+
+.form-wrap-icon .select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 27px !important;
+}
+
+[aria-selected="true"].select2-results__option:not(.select2-results__option--highlighted) {
+    background-color: rgba(252, 74, 26, .8) !important;
 }
