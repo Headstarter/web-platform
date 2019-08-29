@@ -31,15 +31,14 @@ class Target_Group (ABC):
             {'id':6, 'icon': 'linearicons-graduation-hat', 'label': 'Teaching', 'tags': [52,53,54,55,56,57]}, 
             {'id':7, 'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [58,59,60,61,62,63,64,65,66,67]},    
         ]
-        
         if company == None:
-            return [{'icon': x['icon'], 'id': x['id'], 'label': x['label'], 'count': sum([Position.query.filter(Position.available == True)
+            return sorted([{'icon': x['icon'], 'id': x['id'], 'label': x['label'], 'count': sum([Position.query.filter(Position.available == True)
                                                         .filter(Position.tag_id == y)
                                                         .count() for y in x['tags']])}
-                for x in groups1]
+                for x in groups1], key=lambda k: k['count'], reverse=True)
         else:
-            return [{'icon': x['icon'], 'id': x['id'], 'label': x['label'], 'count': sum([Position.query.filter(Position.available == True)
+            return sorted([{'icon': x['icon'], 'id': x['id'], 'label': x['label'], 'count': sum([Position.query.filter(Position.available == True)
                                                         .filter(Position.tag_id == y and Position.company_id == company)
                                                         .count() for y in x['tags']])}
-                for x in groups1]
+                for x in groups1], key=lambda k: k['count'], reverse=True)
             
