@@ -21318,7 +21318,8 @@ html .text-primary {
     color: #4abdac;
 }
 
-.icon.fa.fa-filter {
+.icon.fa.fa-filter,
+.icon.fl-bigmug-line-big104 {
     display: none !important;
 }
 
