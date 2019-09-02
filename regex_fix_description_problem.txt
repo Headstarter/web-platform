@@ -1,1 +1,1 @@
-':a;N;$! ba;s/description:(.*)\n(.*)\'/description: \'/g'
+':a;N;$! ba;s/description:(.*)\n(.*)'"'"'/description: '"'"'/g'
