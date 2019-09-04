@@ -112,7 +112,7 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
-    #def __init__(self, id, name, email, password, school_id, cv_id, verification_id, company_id):
+    #def __init__(self, id, name, email, password, cv_id, company_id, verification_id, school_id):
     #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, verification_id=verification_id, school_id=school_id, cv_id=cv_id, company_id=company_id)
 
     def to_dict(self):
