@@ -17,12 +17,15 @@ mail = Mail(app)
 class Mailer:
     @staticmethod
     def get_verification (user):
-        return ''
         verify = {}
         if user.verification_id is None:
             verify = Verify(user=[user], code=Verify.gen_code())
             db.session.add(verify)
             db.session.commit()
+        elif user.verification.code is None:
+            Verify.query.filter(Verify.id == user.verification.id).update({'code': Verify.gen_code()})
+            db.session.commit()
+            verify = user.verification
         else:
             verify = user.verification
         return verify
@@ -44,7 +47,6 @@ class Mailer:
         
     @staticmethod
     def sendConfirmation(new_user):
-        return ''
         if os.environ['DEBUG'] == 'off':
             if new_user.school is not None:
                 import datetime
@@ -62,7 +64,6 @@ class Mailer:
         
     @staticmethod
     def sendApproval(new_user):
-        return ''
         if os.environ['DEBUG'] == 'off':
             verify = Mailer.get_verification(new_user)
             msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[new_user.email, 'headstarter@headstarter.eu'])
@@ -74,6 +75,8 @@ class Mailer:
     def sendPasswordReset(user):
         if os.environ['DEBUG'] == 'off':
             verify = Mailer.get_verification(user)
+            import sys
+            print(verify, verify.id, verify.code, user.verification_id, file=sys.stderr, flush=True)
             msg = Message('Reset your password in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[user.email, 'headstarter@headstarter.eu'])
             msg.html = render_template('reset_password.html', link='https://headstarter.eu/reset/' + verify.code)
             mail.send(msg)
