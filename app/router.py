@@ -265,13 +265,13 @@ def login():
             flash('Incorrect password.', 'danger')
             return my_redirect(url_for('login_register', action="login"))
 
-        if user.company_id is None and user.school_id is None:
+        if (user.company_id is None or user.company_id == 'None') and (user.school_id is None or user.school_id == 'None'):
             session['email'] = request.form['email']
             session['name'] = User.query.filter(User.email == request.form['email']).all()[0].name
             session['id'] = User.query.filter(User.email == request.form['email']).all()[0].id
             session['company_id'] = None
             session['type'] = 'Student'
-        elif user.company_id is None:
+        elif user.company_id is None or user.company_id == 'None':
             session['email'] = request.form['email']
             session['school_id'] = user.school_id
             session['name'] = user.name
@@ -280,7 +280,7 @@ def login():
                 session['type'] = 'Director'
             else:
                 session['type'] = 'Teacher'
-        elif user.school_id is None:
+        elif user.school_id is None or user.school_id == 'None':
             session['email'] = request.form['email']
             session['company_id'] = user.company_id
             session['name'] = user.name
@@ -321,9 +321,13 @@ def reset(verification):
         import sys
         print(request.form['password'], request.form['password-confirm'], file=sys.stderr, flush=True)
         print(User.query.filter(User.verification_id == verify.id).all(), file=sys.stderr, flush=True)
-        User.query.filter(User.verification_id == verify.id).update({'password_hash': crypto(request.form['password'])})
-        db.session.commit()
-        return my_redirect(url_for('login_register'))
+        if request.form['password'] == request.form['password-confirm']:
+            User.query.filter(User.verification_id == verify.id).update({'password_hash': crypto(request.form['password'])})
+            db.session.commit()
+            return my_redirect(url_for('login_register'))
+        else:
+            flash('New password does not match.')
+            return my_redirect('/reset/' + verification)
 
 
 @app.route('/verify/<verification>')

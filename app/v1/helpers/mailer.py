@@ -18,11 +18,11 @@ class Mailer:
     @staticmethod
     def get_verification (user):
         verify = {}
-        if user.verification_id is None:
+        if user.verification_id is None or user.verification_id == 'None':
             verify = Verify(user=[user], code=Verify.gen_code())
             db.session.add(verify)
             db.session.commit()
-        elif user.verification.code is None:
+        elif user.verification.code is None or user.verification.code == 'None':
             Verify.query.filter(Verify.id == user.verification.id).update({'code': Verify.gen_code()})
             db.session.commit()
             verify = user.verification
