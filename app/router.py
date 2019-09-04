@@ -280,7 +280,7 @@ def login():
                 session['type'] = 'Director'
             else:
                 session['type'] = 'Teacher'
-        elif user.schhol_id is None:
+        elif user.school_id is None:
             session['email'] = request.form['email']
             session['company_id'] = user.company_id
             session['name'] = user.name
@@ -299,30 +299,31 @@ def login():
         return my_redirect(url_for('login_register', action="login"))
 
 
-@app.route('/forgot_password', methods=['PUT', 'GET', 'POST'])
+@app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'GET':
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/Forgoten-password.html')
     elif request.method == 'POST':
         user = User.query.filter(User.email == request.form['email']).one()
         from app.v1.helpers.mailer import Mailer
-        return Mailer.sendPasswordReset(user)
-    elif request.method == 'PUT':
-        user = User.query.filter(User.email == request.form['email']).one()
-        from app.v1.helpers.mailer import Mailer
-        return Mailer.sendPasswordReset(user)
+        Mailer.sendPasswordReset(user)
+        flash('Check your inbox to reset your password.')
+        return my_redirect('/')
 
 
 @app.route('/reset/<verification>', methods=['GET', 'POST'])
 def reset(verification):
     verify = Verify.query.filter(Verify.code == verification).one()
-    user = verify.user
-    if request.method =='GET':
+    user = verify.user[0]
+    if request.method == 'GET':
         return render_template('user/reset.html', user=user)
     elif request.method =='POST':
-        User.query.filter(User.id == user.id).update({'password_hash': crypto(request.form['password'])})
+        import sys
+        print(request.form['password'], request.form['password-confirm'], file=sys.stderr, flush=True)
+        print(User.query.filter(User.verification_id == verify.id).all(), file=sys.stderr, flush=True)
+        User.query.filter(User.verification_id == verify.id).update({'password_hash': crypto(request.form['password'])})
         db.session.commit()
-        return redirect(url_for('login_register'))
+        return my_redirect(url_for('login_register'))
 
 
 @app.route('/verify/<verification>')
