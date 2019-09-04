@@ -71,7 +71,7 @@ class Mailer:
             return msg.html
     
     @staticmethod
-    def sendResetPassword(user):
+    def sendPasswordReset(user):
         if os.environ['DEBUG'] == 'off':
             verify = Mailer.get_verification(user)
             msg = Message('Reset your password in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[user.email, 'headstarter@headstarter.eu'])
