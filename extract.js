@@ -6,9 +6,30 @@ var fs = require('fs');
 
 let companies = new Set();
 let regexes = {
-    'companyLink': /href="(.*)"/g,
-    'companyId': /https:\/\/www\.jobs\.bg\/company\/([0-9]+)/g,
-    'companyLogo': /url\('(.*)'\)/g,
+    'companyLink': /(https:\/\/www\.jobs\.bg\/company\/[0-9]+)/g,
+    'companyId': {
+        exec: function(str) {
+            return str.substring(28);
+        }
+    },
+    'companyLogo': {
+        exec: function(str) {
+            let answer = '';
+            for (let i = str.indexOf('https://assets.jobs.bg/assets/logo/') ; str [i] != '"' ; i += 1)
+                answer += str [i];
+            return answer;
+        }
+    },
+    'contacts': {
+        'exec': function(str) {
+            let answer = '';
+            let i = 0;
+            for ( ; str.substring(i, i + 'Контакти'.length) != 'Контакти' ; i += 1){}
+            for ( ; str.substring(i, i + 4) != '</td>' ; i += 1)
+                answer += str[i];
+            return answer;
+        }
+    }
 };
 
 function gen_code() {
@@ -28,17 +49,21 @@ function company_deparse(companyLink) {
         companies.add(companyLink);
     }
     let html = request('GET', companyLink).getBody('utf-8');
-    console.log('Company', companyLink + ':');
+    console.log('TRYING: Company', companyLink);
     const dom = parser.parseFromString(html);
 
-    let id = regexes.companyId.exec(companyLink)[1];
+    let id = regexes.companyId.exec(companyLink);
+    // console.log('id =', id);
     let uid = gen_code();
+    // console.log('uid =', uid);
 
     let name = dom.getElementsByTagName('h1')[0].innerHTML;
+    // console.log('name =', name);
     let description = dom.getElementsByClassName('htmlTemplate')[0].innerHTML;
-    let logo = regexes.companyLogo.exec(dom.getElementsByClassName('profileCoverImg')[0].outerHTML)[1];
-    let website = '(Няма въведена интернет страница)';
-    let contacts = dom.getElementsByTagName('table')[3].children[0].children[0].children[0].children[4].innerHTML.replace(/\s+/g, '');
+    // console.log('logo regex =', regexes.companyLogo.exec(html));
+    let logo = regexes.companyLogo.exec(html);
+    let website = '(Няма въведена интернет страница на фирмата)';
+    let contacts = '(Няма въведена информация за фирмата';
 
     return {
         'id': id,
@@ -53,37 +78,41 @@ function company_deparse(companyLink) {
 function job_deparse(job) {
     try {
         let html = request('GET', 'http://www.jobs.bg/job/' + job).getBody('utf-8');
-        console.log('Job', job + ':');
+        console.log('TRYING: Job    ', job);
         const dom = parser.parseFromString(html);
-        for (let i = 0; i < dom.getElementsByClassName("company_link").length; i += 1) {
-            console.log(i, dom.getElementsByClassName("company_link")[i].outerHTML.substring(0, 150))
-        }
         try {
             let jobTitle = dom.getElementsByTagName("b")[2].innerHTML;
 
-            let companyLink = regexes.companyLink.exec(jobAuthor)[1];
+            let companyLink = regexes.companyLink.exec(html)[1];
             let companyId = regexes.companyId.exec(companyLink)[1];
             try {
                 let company = company_deparse(companyLink);
-                fs.writeFile('companies.txt', JSON.stringify(company) + '\n', function(err) {
+                console.log("RESULT|COMPANY:", JSON.stringify(company));
+                fs.open('companies.txt', 'a', (err, fd) => {
                     if (err) throw err;
+                    fs.appendFile(fd, JSON.stringify(company) + '\n', 'utf8', (err) => {
+                        fs.close(fd, (err) => {
+                            if (err) throw err;
+                        });
+                        if (err) throw err;
+                    });
                 });
             } catch (e) {
-                console.log(companyLink, e);
+                console.log('ERROR: Company', companyLink, 'creation failed.');
             }
 
             let jobLocation = dom.getElementsByTagName("td")[10].innerHTML.split(';')[0].substring(12);
 
             let jobAddedTags = dom.getElementsByTagName("td")[10].innerHTML.split(';').map((x) => '&lt;' + x + '&gt;').join(' ');
 
-            let jobDescription = dom.getElementsByTagName("td")[12].innerHTML + '<br><br>' + jobAddedTags + '<br><br>Author: ' + jobAuthor;
+            let jobDescription = dom.getElementsByTagName("td")[12].innerHTML + '<br><br>' + jobAddedTags;
 
-            let job = {
-                'id': '-1',
+            let job_obj = {
+                'id': job,
                 'job-title': jobTitle,
                 'email': 'contact_us@headstarter.eu',
                 'location': jobLocation,
-                'company_id': 2,
+                'company_id': companyId,
                 'description': jobDescription,
                 'job-available': false,
                 'duration': 12,
@@ -92,8 +121,16 @@ function job_deparse(job) {
                 'job-category': '58'
             };
 
-            fs.writeFile('companies.txt', JSON.stringify(company) + '\n', function(err) {
+            console.log("RESULT|JOB:", JSON.stringify(job_obj));
+
+            fs.open('jobs.txt', 'a', (err, fd) => {
                 if (err) throw err;
+                fs.appendFile(fd, JSON.stringify(job_obj) + '\n', 'utf8', (err) => {
+                    fs.close(fd, (err) => {
+                        if (err) throw err;
+                    });
+                    if (err) throw err;
+                });
             });
 
             /*let options = {
@@ -119,12 +156,12 @@ function job_deparse(job) {
             else
                 console.log('job', job + ': Can\'t puting failed');
             */
-            console.log('job', job + ': Generated');
+            console.log('SUCCESS: job', job, 'is generated');
         } catch (e) {
-            console.log('job', job + ': Can\'t get the offer', e);
+            console.log('ERROR: job', job, 'can\'t be gathered', e);
         }
     } catch (e) {
-        console.log('job', job + ': Can\'t get the offer', e);
+        console.log('ERROR: job', job, 'can\'t be gathered', e);
     }
 }
 
