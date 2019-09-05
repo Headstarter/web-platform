@@ -26,8 +26,8 @@ class JobsBGAPI:
         available = True
         duration = 'по договорка'
         email = 'contact_us@headstarter.eu'
-        hours_per_day = '' # 'До 4ч.' || '4-7ч.' || '8ч.'
-        age_required = '' # '16-18' || '18+' || '16+'
+        hours_per_day = '4-7ч.' # 'До 4ч.' || '4-7ч.' || '8ч.'
+        age_required = '16+' # '16-18' || '18+' || '16+'
         tag_id = -1
         views = 0
         return {
@@ -89,6 +89,22 @@ class JobsBGAPI:
             for x in company['offers']:
                 print(json.dumps(JobsBGAPI.get_offer_info(x, company['id'])), file=log.jobs)
             print('RESOLVED')
+    
+    @staticmethod
+    def get_companies(log, companies):
+        for i in range(len(companies)):
+            print('#'+str(i + 1)+' ... resolving ...')
+            id = companies[i]
+            
+            company = JobsBGAPI.get_company_info(id, ['offers', 'name', 'logo', 'description', 'website', 'contacts'])
+            company['index'] = str(i + 1)
+            
+            print(json.dumps(company), file=log.companies)
+            print('RESOLVED')
+            print('#'+str(i + 1)+'\'s offers ... resolving ...')
+            for x in company['offers']:
+                print(json.dumps(JobsBGAPI.get_offer_info(x, company['id'])), file=log.jobs)
+            print('RESOLVED')
 
 class Resources:
     def __init__(self):
@@ -100,6 +116,7 @@ class Resources:
 
 log = Resources()
 
-JobsBGAPI.get_top50_companies(log)
+# JobsBGAPI.get_top50_companies(log)
+JobsBGAPI.get_companies(log, ['244034','1144','270078','63925','263385','146840','207843','263019','257109','202604','28867','40265','280795','281062','172391','266033','250434','40143','152006','251608','7422','12357','227307', '177237', '114037', '267383', '225686'])
 
 del log
