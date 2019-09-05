@@ -213,12 +213,9 @@ def register():
                 
                 my_company = {}
 
-                if Mapper.query.filter(Mapper.company_name == request.form['company']).count() == 1:
-                    print('\t\t\tMapper found')
-                    my_company = Company.query.filter(Company.id == Mapper.query.filter(
-                        Mapper.company_name == request.form['company']).one().company_id).one()
+                if Company.query.filter(Company.name == request.form['company']).count() == 1:
+                    my_company = Company.query.filter(Company.name == request.form['company']).one()
                 else:
-                    print('\t\t\tMapper NOT found')
                     my_company = insert_company(request.form['company'])
                 print('', my_company.name, my_company.id, my_company.uid)
                 insert_user(request.form['name'], request.form['email'],
