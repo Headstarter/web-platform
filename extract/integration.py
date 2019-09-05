@@ -16,7 +16,7 @@ try:
         company = json.loads(line)
         company.pop('index', None)
         company.pop('offers', None)
-        company['name'] = company['name'][:-8]
+        company['name'] = company['name']
         try:
             db.session.add(Company(**company))
             db.session.commit()
