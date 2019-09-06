@@ -1,0 +1,65 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} За {{ company.name }} {% endblock %}
+
+{% block content %}<!--
+     <section class="section parallax-container section-lg bg-overlay-3" data-parallax-img="/images/bg-image-13.jpg">
+        <div class="parallax-content">
+          <div class="container">
+                  <article class="company-light">
+                    <figure class="company-light-logo"><img class="company-light-logo-image" src="{{ company.logo }}" alt=""/>
+                    </figure>
+                    <div class="company-light-main">
+                      <h5 class="company-light-title">{{ company.name }}</h5>
+                      <p class="object-inline object-inline_sm"><span class="icon icon-1 mdi mdi-file-document text-primary"></span><span>{{ open }} обяв{{'и' if open != 1 else 'а'}}</span></p>
+                    </div>
+                  </article>
+          </div>
+        </div>
+      </section>-->
+      <section style="padding: 5px 0 95px;" class="section section-md">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-12">
+              <div class="layout-info">
+                <div class="layout-info-main">
+                  <article class="company-light">
+                    <figure class="company-light-logo"><img class="company-light-logo-image" src="{{ company.logo }}" alt=""/>
+                    </figure>
+                    <div class="company-light-main">
+                      <h5 class="company-light-title">{{ company.name }}</h5>
+                      <p class="object-inline object-inline_sm"><span class="icon icon-1 mdi mdi-file-document text-primary"></span><span>{{ open }} обяв{{'и' if open != 1 else 'а'}}</span></p>
+                    </div>
+                  </article>
+                </div>
+                <div class="layout-info-aside">
+                  <div class="layout-info-aside-item"><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></div>
+                </div>
+              </div>
+              <h4 class="heading-decorated_1">За компанията</h4>
+              {{ company.description | safe }}
+              <h4 class="heading-decorated_1">Отворени позиции</h4>
+              <table class="table-job-listing table-job-listing_lg table-responsive">
+                  {% for offer in positions %}
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
+                      </div>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_views () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
+                  {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+{% endblock %}
