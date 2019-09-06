@@ -1,0 +1,29 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Регистрация Вход {% endblock %}
+
+{% block banner %}
+{% endblock %}
+
+{% block content %}
+  {% if step == 1 %}
+    <form method='POST'>
+      Email: <input type="text" name="email"><br>
+      Name: <input type="text" name="name"><br>
+      password: <input type="text" name="password"><br>
+      re-password: <input type="text" name="confirm_password">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="submit" value="Submit">
+    </form>
+  {% else %}
+    <form method='POST'>
+      school_name: <input type="text" name="school_name"><br>
+      Email: <input type="text" name="email" value="{{email}}" readonly><br>
+      Name: <input type="text" name="name" value="{{name}}" readonly><br>
+      password: <input type="text" name="password" value="{{password}}" readonly>
+      <input type="hidden" name="_method" value="POST">
+      <input type="submit" value="Submit">
+    </form>
+  {% endif %}
+{% endblock %}
+{% block js %}
+  {% endblock %}
