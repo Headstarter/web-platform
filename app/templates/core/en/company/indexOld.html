@@ -1,0 +1,341 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Начало {% endblock %}
+
+{% set homepage = True %}
+
+{% block banner %}
+        <div class="jumbotron-creative-inner">
+          <div class="container">
+            <div class="jumbotron-creative-main">
+              <h2 class="jumbotron-creative-title">Headstarter.<br>Намери своя талант.</h2>
+              <div class="form-layout-search-outer">
+                <form class="form-layout-search form-lg">
+                  <div class="form-wrap form-wrap-icon">
+                    <input class="form-input form-control-has-validation" id="form-keywords" type="text" name="keywords" data-constraints="@Required"><span class="form-validation"></span>
+                    <label class="form-label rd-input-label" for="form-keywords">Ключови думи</label><span class="icon fl-bigmug-line-circular224"></span>
+                  </div>
+                  <div class="form-wrap form-wrap-icon form-wrap-select">
+                    <!-- Select 2-->
+                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="region" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                      <option value="0">Всички позиции</option>
+                      {% for tag in tags %}
+                      <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="icon fl-bigmug-line-big104"></span>
+                  </div>
+                  <div class="form-wrap form-wrap-button form-wrap-button-icon-only">
+                    <button class="button button-lg button-primary button-icon-only" type="submit" aria-label="search"><span class="icon icon-4 fl-bigmug-line-search74"></span></button>
+                  </div>
+                </form>
+              </div>
+              <p class="big text-gray-800">Предлагаме&nbsp;<a href="#">{{ number_offers }} позиции за теб</a> в момента!</p>
+            </div>
+          </div>
+          <div class="jc-decoration">
+            <div class="jc-decoration-item jc-decoration-item-1">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+                <path d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z"></path>
+              </svg>
+            </div>
+            <div class="jc-decoration-item jc-decoration-item-2">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+                <path d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z"></path>
+              </svg>
+            </div><img class="jc-decoration-image" src="/images/home-1-748x528.png" alt="">
+          </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+      <!-- Welcome to Headstarter.eu -->
+      <section class="section section-md bg-default text-center">
+        <div class="container">
+          <h3>Добре дошли в <span class="text-primary">Headstarter</span></h3>
+          <p class="text-spacing-05">Мястото, където работодателите търсят твоя талант и опит.</p>
+          <div class="row row-50 justify-content-center align-items-center text-left">
+            <div class="col-md-10 col-lg-6">
+              <figure class="figure-responsive block-5"><img src="/images/bg-image-6-1.JPG" alt=""/>
+              </figure>
+            </div>
+            <div class="col-md-10 col-lg-6">
+              <div class="row row-50 row-xl-70">
+                <div class="col-sm-6">
+                  <!-- Box Line-->
+                  <article class="box-line box-line_sm">
+                    <div class="box-line-inner">
+                      <div class="box-line-icon icon mercury-icon-group"></div>
+                      <h5 class="box-line-title">Повече от 100 посетител всеки ден</h5>
+                    </div>
+                  </article>
+                </div>
+                <div class="col-sm-6">
+                  <!-- Box Line-->
+                  <article class="box-line box-line_sm">
+                    <div class="box-line-inner">
+                      <div class="box-line-icon icon mercury-icon-partners"></div>
+                      <h5 class="box-line-title">Направено от ученици за ученици</h5>
+                    </div>
+                  </article>
+                </div>
+                <div class="col-sm-6">
+                  <!-- Box Line  -->
+                  <article class="box-line box-line_sm">
+                    <div class="box-line-inner">
+                      <div class="box-line-icon icon mercury-icon-chat"></div>
+                      <h5 class="box-line-title">Статии, които да те напътстват през цялото време</h5>
+                    </div>
+                  </article>
+                </div>
+                <div class="col-sm-6">
+                  <!-- Box Line-->
+                  <article class="box-line box-line_sm">
+                    <div class="box-line-inner">
+                      <div class="box-line-icon icon mercury-icon-target"></div>
+                      <h5 class="box-line-title">Само актуална и достоверна информация</h5>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Latest Posts-->
+      <section class="section section-md bg-gray-100">
+        <div class="container">
+          <h3 class="text-center">Последни публикации</h3>
+          <div class="row row-30 row-xl-70">
+            <div class="col-12 col-lg-6">
+              <!-- Post Minimal-->
+              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/></a>
+                <div class="post-minimal-main">
+                  <h5 class="post-minimal-title"><a href="/post/1">Как да си направим CV?</a></h5>
+                  <p>Изпращането на CV е първата крачка в процеса на кандидатстване за стажантска програма</p>
+                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
+                </div>
+              </article>
+            </div>
+            <div class="col-12 col-lg-6">
+              <!-- Post Minimal-->
+              <article class="post-minimal"><a class="post-minimal-media" href="/post/2"><img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/></a>
+                <div class="post-minimal-main">
+                  <h5 class="post-minimal-title"><a href="/post/2">Как да си наемем стажант?
+</a></h5>
+                  <p>Наемането на млади стажанти предоставя множество предимства, едно от които е постигането на по-висока икономическа активност.</p>
+                  <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Popular Categories-->
+      <section class="section section-md bg-default text-center">
+        <div class="container container-fullwidth">
+          <h3>Популярни категории</h3>
+          <!-- Owl Carousel-->
+          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
+              {% for tag in open %}
+              <a class="box-creative" href="{{ url_for('core.browse') }}?group={{ tag.id }}">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
+                <p class="box-creative-title">{{ tag.label | safe }}</p>
+                <p>{{ tag.count }} отворени позиции</p>
+              </div>
+              <div class="box-creative-dummy"></div></a>
+              {% endfor %}
+          </div>
+        </div>
+      </section>
+      <!-- Recent Jobs-->
+      <section class="section section-md bg-gray-100">
+        <div class="container">
+          <div class="row row-40">
+            <div class="col-12 text-center">
+              <h3>Последни обяви</h3>
+            </div>
+            <div class="col-12">
+              <div class="table-job-offers-outer">
+              <table class="table-job-listing table-responsive">
+                  {% for offer in positions %}
+                <tr>
+                  <td class="table-job-listing-main">
+                    <!-- Company Minimal-->
+                    <article class="company-minimal">
+                      <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ offer.company.logo }}" alt=""/>
+                      </figure>
+                      <div class="company-minimal-main">
+                        <h5 class="company-minimal-title"><a href="{{ url_for ('core.offer_view', position_id=offer.id) }}">{{ offer.name }}</a></h5>
+                        <p>{{ offer.company.name }}</p>
+                      </div>
+                    </article>
+                  </td>
+                  <td class="table-job-listing-date"><span>{{ offer.get_views () }}</span></td>
+                  <td class="table-job-listing-badge"><span class="badge">{{ offer.get_type() | safe }}</span></td>
+                </tr>
+                  {% endfor %}
+              </table>
+              </div>
+            </div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.list_my_offers') }}">Show More Jobs</a></div>
+          </div>
+        </div>
+      </section>
+      <!-- Success Stories-->
+      <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" > <!--data-parallax-img="images/bg-image-7.jpg"-->
+        <div class="parallax-content">
+          <div class="container">
+            <h3>Кои сме ние?</h3>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="false" data-margin="30" data-autoplay="true" data-mouse-drag="false">
+              <blockquote class="quote-mary">
+                <div class="quote-mary-main">
+                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
+                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                  </svg>
+                  <div class="quote-mary-text">
+                    <p>Десетокласник с афинитет към информатиката, жив пример за определението за програмист: "Органична машина, която превръща кофеина в код"; автор на много проекти, създател на обещаващи идеи, включително и тази.</p>
+                  </div>
+                </div>
+                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/we/alex.jpg" alt=""/>
+                  <div class="quote-mary-info">
+                    <cite class="quote-mary-cite heading-5">Алекс Цветанов</cite>
+                    <p class="quote-mary-subtitle">Съосновател на Headstarter</p>
+                  </div>
+                </div>
+              </blockquote>
+              <blockquote class="quote-mary">
+                <div class="quote-mary-main">
+                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
+                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                  </svg>
+                  <div class="quote-mary-text">
+                    <p>Здравей! Аз съм Рангел,този,който свързва веригата на хорските проблеми с тежестта на техническите решения като крайната ми цел е котвата, която ще стопира кораба на човешката деградация деградация, защото всички ние заслужаваме един по-добър свят!
+                    </p>
+                  </div>
+                </div>
+                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/Rangel.jpg" alt=""/>
+                  <div class="quote-mary-info">
+                    <cite class="quote-mary-cite heading-5">Рангел Плачков</cite>
+                    <p class="quote-mary-subtitle">Съосновател на Headstarter</p>
+                  </div>
+                </div>
+              </blockquote>
+
+              <blockquote class="quote-mary">
+                <div class="quote-mary-main">
+                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
+                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                  </svg>
+                  <div class="quote-mary-text">
+                    <p>Здравей! Аз съм БОРИС,Борис и БоРиС. Моята суперсила е да ритам мързеливи задници и да чупя всякакви ледове , които са замразили способността на днешните хора да комуникират помежду си ! Трябва да има спокойна атмосфера, прямост и ЯСНОТА във взаимоотношенията! Това е моят подход към маркетинга!</p>
+                  </div>
+                </div>
+                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/Bobi.jpg" alt=""/>
+                  <div class="quote-mary-info">
+                    <cite class="quote-mary-cite heading-5">Борис</cite>
+                    
+                  </div>
+                </div>
+              </blockquote>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Partners -->
+      <!--
+      <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" data-parallax-img="images/parallax-2.jpg">
+        <div class="parallax-content">
+          <div class="container container-fullwidth">
+            <h3>Нашите партньори</h3>
+            <div class="owl-carousel owl-carousel-stretch" data-autoplay="true" data-autoplay-timeout="4000" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="3" data-xl-items="5" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="2" data-loop="false" data-margin="30" data-mouse-drag="false">
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/paraflow.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/nestle.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/ithubkaufland.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/hp.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/doitwise.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/codix.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/axway.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/ubb.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/dzi.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/biodit.png" alt=""/>
+              </a>
+              <a class="link-corporate" href="#todo">
+                <img src="/images/partners/teenovator.png" alt=""/>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      -->
+      <!-- Steps-->
+      <section class="section section-md bg-default text-center">
+        <div class="container">
+          <h3>3 стъпки - много възможности</h3>
+          <ul class="list-linked">
+            <li class="ll-item">
+              <div class="icon ll-item-icon thin-icon-email-search">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title"><a href="{{ url_for('core.post_offer') }}">Публикувай обява</a></h5>
+                <p>Бързо и лесно</p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon mercury-icon-target-2">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title"><a href="{{ url_for('core.list_my_candidates') }}">Прегледай кандидатите си</a></h5>
+                <p>Избери кандидата, който ще пасне най-добре на фирмата ти.</p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-e-mail-o">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main">
+                <h5 class="ll-item-title">Свържи се с перфектния кандидат</h5>
+                <p></p>
+              </div>
+            </li>
+            <li class="ll-item">
+              <div class="icon ll-item-icon mercury-icon-touch">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+              </div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.post_offer') }}">Започни сега</a></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+{% endblock %}
