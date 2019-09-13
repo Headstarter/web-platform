@@ -3,7 +3,7 @@
 **/.idea
 vscode.config
 **/*.pyc
-
+.vscode/
 
 # http://www.gnu.org/software/automake
 
