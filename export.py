@@ -2,10 +2,10 @@ import sqlite3
 import csv
 
 con = sqlite3.connect('app/app.db')
-outfile = open('mydump.csv', 'w')
-outcsv = csv.writer(outfile)
 
-for table in ['User', 'Mapper', 'Tag', 'Company', 'Verify','CV','Position']:
+for table in ['User', 'Mapper', 'Tag', 'Company', 'Verify', 'CV', 'Position', 'School', 'Approval']:
+    outfile = open('csv/' + table + '.csv', 'w')
+    outcsv = csv.writer(outfile)
     cursor = con.execute('select * from ' + table)
 
     # dump column titles (optional)
