@@ -1,0 +1,79 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Новини {% endblock %}
+
+{% block banner %}
+      <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+      <section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">News</h3>
+          </div>
+        </div>
+      </section>
+      <style>
+          /*.figure-img {
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+          }*/
+      </style>
+{% endblock %}
+{% block content %}
+      <!-- Privacy Policy-->
+      <section class="section section-sm">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 col-xl-8">
+              <!-- Terms list-->
+              <dl class="list-terms">
+                <dt class="heading-3">Състезания</dt>
+                <dd class="heading-6">
+                    На <date>10 май 2019 г.</date> в <location>София</location> се проведе националното състезание за ученически стартъпи на Тийноватор, в което взехме участие и ние, като представихме своят проект Headstarter пред жури, съставено от инвеститори.
+                </dd>
+                <figure class="figure">
+                    <img src="/images/news/FB_IMG_1559245526541.jpg" class="figure-img img-fluid rounded">
+                    <figcaption class="figure-caption text-center">Това сме ние на презентацията. Мале, какви сладури <i class="em em-star-struck"></i></figcaption>
+                </figure>
+                <dt class="heading-3">Награди</dt>
+                <dd class="heading-6">
+                    След представяне на висота, заслужено завоювахме първо място в надпреварата.
+                    <figure class="figure">
+                        <img src="/images/news/FB_IMG_1559245541397.jpg" class="figure-img img-fluid rounded">
+                        <img src="/images/news/FB_IMG_1559245555011.jpg" class="figure-img img-fluid rounded">
+                        <figcaption class="figure-caption text-center">Специална награда от ВУЗФ за отлично представяне и 1-во място на Националното състезание, абе отидохме и убихме рибата😅</figcaption>
+                    </figure>
+                </dd>
+                <dt class="heading-3">Какво следва?</dt>
+                <dd class="heading-6">
+                    <p>Проектът ни ще участва в международно състезание и ще гордо ще представим България в президентството на Словения на 9 септември, като преди това между 24-30 юни, ще присъстваме и ще станем част от акселераторска програма  организирана от Тийноватор (и техните словенски колеги <i class="em em-slightly_smiling_face"></i>).</p>
+                    <p>С тази наша победа се прочухме, може да гледате интервютата ни с БНТ и BloombergTV още сега: </p>
+                    <p><a class="normal" target="_blank" href="{{ url_for ('core.videos', id=0) }}">Репортаж на БНТ</a></p>
+                    <p><a class="normal" target="_blank" href="{{ url_for ('core.videos', id=1) }}">Интервю с BloombergTV</a></p>
+                    <figure class="figure">
+                        <div class="row">
+                          <div class="col">
+                            <img src="/images/news/20190516_154602.jpg" class="figure-img img-fluid">
+                          </div>
+                          <div class="col">
+                            <img src="/images/news/20190516_154322.jpg" class="figure-img img-fluid">
+                          </div>
+                          <div class="col">
+                            <img src="/images/news/20190516_153858(0).jpg" class="figure-img img-fluid">
+                          </div>
+                          <!--
+                          <div class="col">
+                            <img src="/images/news/received_2523140201029510.jpeg" class="figure-img img-fluid">
+                          </div>-->
+                        </div>
+                        <figcaption class="figure-caption text-center">Ето и няколко кадъра взети от тайният ни резерв по време на интервюто ни с БНТ <i class="em em-zany_face"></i></figcaption>
+                    </figure>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

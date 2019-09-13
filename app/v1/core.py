@@ -177,7 +177,7 @@ def candidate(positionId):
 
 @routes.route('/about')
 def about():
-    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/about.html')
+    return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/about.html', students = 567, companies = Company.query.count(), offers = Position.query.count())
 
 
 @routes.route('/upload/cv/picture', methods=['POST'])

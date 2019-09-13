@@ -1,0 +1,128 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} Детайли за Стажа {% endblock %}
+
+{% block banner %}
+<section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">{{ offer.name }}</h3>
+          </div>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+    <section class="section section-md">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-8">
+              <div class="layout-details">
+                <article class="company-light company-light_1">
+                  <figure class="company-light-logo"><img class="company-light-logo-image" src="{{ offer.company.logo }}" alt=""/>
+                  </figure>
+                  <div class="company-light-main">
+                    <h5 class="company-light-title">{{ offer.company.name }}</h5>
+                    <div class="company-light-info">
+                      <div class="row row-15 row-bordered">
+                        <div class="col-sm-6">
+                          <ul class="list list-xs">
+                            <li>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>{{ offer.location }}</span></p>
+                            </li>
+                            <li>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-default text-primary mdi mdi-clock"></span><span>Публикувано на {{ offer.get_full_date() }}</span></p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-sm-6">
+                          <ul class="list list-xs">
+                            <li>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-1 text-primary mdi mdi-map-marker"></span><span>За {{ offer.age_required }} г.</span></p>
+                            </li>
+                            <li>
+                              <p class="object-inline object-inline_sm"><span class="icon icon-default text-primary linearicons-link2"></span><a href="{{ offer.company.website }}">{{ offer.company.website }}</a></p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="text-style-1 default-styles">{{ offer.description | safe }}</div>
+              <!--
+              <div class="row row-30">
+                <div class="col-md-6">
+                  <h4>Job Responsibilities</h4>
+                  <ul class="list-marked-3">
+                    <li>Increasing our social media following to 1M+ within the next 18 months</li>
+                    <li>Coming up with new, impactful SMM ideas</li>
+                    <li>Snapping beautiful photos for Instagram, Facebook and Snapchat</li>
+                    <li>Travelling to events, running demos and stands</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h4>Why Work With us</h4>
+                  <ul class="list-marked-3">
+                    <li>Growth opportunity in one of the USA’s and Europe's fastest growing marketing agencies</li>
+                    <li>Being a part of a friendly and qualified team</li>
+                    <li>You’ll have a chance to work with industry leaders and renowned advertising experts</li>
+                    <li>Free healthcare and entertainment options</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="layout-1">
+                <div class="layout-1-inner">
+                  <p>Share this vacancy</p>
+                  <div>
+                    <ul class="list-inline list-inline-xs">
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="job-details.html#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus" href="job-details.html#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="job-details.html#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="job-details.html#"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              -->
+              <div class="block offset-top-2">
+                <h4>Последни обяви</h4>
+                <table class="table-job-listing table-responsive">
+                    {% for recent in recents %}
+                  <tr>
+                    <td class="table-job-listing-main">
+                      <!-- Company Minimal-->
+                      <article class="company-minimal">
+                        <figure class="company-minimal-figure"><img class="company-minimal-image" src="{{ recent.company.logo }}" alt=""/>
+                        </figure>
+                        <div class="company-minimal-main">
+                          <h5 class="company-minimal-name"><a href="{{ url_for ('core.offer_view', position_id=recent.id) }}">{{ recent.name }}</a></h5>
+                          <p>{{ recent.location }}</p>
+                        </div>
+                      </article>
+                    </td>
+                    <td class="table-job-listing-badge"><span class="badge badge-secondary">{{ recent.get_type() | safe }}</span></td>
+                  </tr>
+                    {% endfor %}
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row row-30 row-lg-50">
+                <div class="col-md-6 col-lg-12 text-center rd-mailform form-corporate form-spacing-small form-corporate_sm">
+                    <h4>Стани част от<br>{{ offer.company.name }}</h4>
+                    <div class="form-wrap">
+                      <button class="button button-block button-primary" type="submit">Създай своето CV</button>
+                    </div>
+                    <div class="form-wrap">
+                        <h4>и</h4>
+                    </div>
+                    <div class="form-wrap">
+                      <button class="button button-block button-primary" type="submit">Кандидатствай</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
