@@ -9,7 +9,7 @@ chardet==3.0.4
 Click==7.0
 colorama==0.4.1
 coverage==4.5.3
-Flask==1.0.3
+Flask==1.1.1
 Flask-Babel==0.12.2
 Flask-Mail==0.9.1
 Flask-Migrate==2.5.2
