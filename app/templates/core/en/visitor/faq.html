@@ -1,0 +1,129 @@
+{% extends 'core/bg/template.html' %}
+{% block title %} faq {% endblock %}
+
+{% block banner %}
+    <section class="section breadcrumbs-custom">
+        <div class="breadcrumbs-custom-main bg-image bg-primary">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">FAQ</h3>
+          </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+      <!-- Welcome to Headstarter.eu -->
+      <section class="section section-md">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-7">
+              <!-- Bootstrap collapse-->
+              <div class="card-group-custom card-group-corporate" id="accordion1" role="tablist" aria-multiselectable="false">
+                <!-- Bootstrap card-->
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-1" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-1" aria-controls="accordion1-collapse-1" aria-expanded="true">
+                            Problem logging in, what to do?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse show" id="accordion1-collapse-1" role="tabpanel" aria-labelledby="accordion1-heading-1" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>Make sure you spell your email and password correctly and try again! If the problem persists, write to us at: <a class="normal" href="mailto: contact_us@headstarter.eu">contact_us@headstarter.eu</a></p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-2" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-2" aria-controls="accordion1-collapse-2" aria-expanded="true">
+                            How to registrate?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-2" role="tabpanel" aria-labelledby="accordion1-heading-2" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                        <li><a class="normal" href="/join?type=student&action=register">If you are a student click here.</a></li>
+                        <li><a class="normal" href="/join?type=company&action=register">If you are a company click here.</a></li>
+                      </ul>
+                      <p>If you have a problem registering, feel free to email us at <a class="normal" href="mailto: contact_us@headstarter.eu">contact_us@headstarter.eu</a>.We will always help.</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-3" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-3" aria-controls="accordion1-collapse-3" aria-expanded="true">
+                            How do I know that my application has been accepted?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-3" role="tabpanel" aria-labelledby="accordion1-heading-3" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                        <li>From us - you will receive a message that your application has been successfully sent to your employer.</li>
+                        <li> From the employer - from the respective company, they will consider your application and contact you.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-4" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-4" aria-controls="accordion1-collapse-4" aria-expanded="true">
+                            How will the company contact me?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-4" role="tabpanel" aria-labelledby="accordion1-heading-4" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>The company will contact you through the contacts you have left in your account. Check if they are correct! 😄</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-5" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-5" aria-controls="accordion1-collapse-5" aria-expanded="true">
+                            Where will I get feedback?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-5" role="tabpanel" aria-labelledby="accordion1-heading-5" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <ul>
+                          <li>Via e-mail</li>
+                          <li>Via Phone</li>
+                      </ul>
+                      <p>The company will send you feedback on one of the contacts you gave (most often via email).</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="card card-custom card-corporate">
+                  <div class="card-header" id="accordion1-heading-6" role="tab">
+                    <div class="card-title">
+                        <a class="card-link" role="button" data-toggle="collapse" href="#accordion1-collapse-6" aria-controls="accordion1-collapse-6" aria-expanded="true">
+                            How can I contact my employer?
+                            <div class="card-arrow"></div>
+                        </a>
+                    </div>
+                  </div>
+                  <div class="collapse" id="accordion1-collapse-6" role="tabpanel" aria-labelledby="accordion1-heading-6" data-parent="#accordion1">
+                    <div class="default-styles card-body">
+                      <p>You can contact the employer through the contacts provided by the company in its profile on the site.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
