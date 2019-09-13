@@ -21330,3 +21330,7 @@ html .text-primary {
 [aria-selected="true"].select2-results__option:not(.select2-results__option--highlighted) {
     background-color: rgba(252, 74, 26, .8) !important;
 }
+
+.call-to-action {
+    background: url('/images/calltoaction.jpg');
+}
