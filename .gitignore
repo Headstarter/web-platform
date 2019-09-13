@@ -4,6 +4,7 @@
 vscode.config
 **/*.pyc
 .vscode/
+node_modules/
 
 # http://www.gnu.org/software/automake
 
