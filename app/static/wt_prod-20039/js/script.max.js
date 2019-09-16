@@ -312,7 +312,7 @@ var _hs_response;
             });
             c.owlCarousel({
                 autoplay: isNoviBuilder ? false : c.attr("data-autoplay") === "true",
-                autoplayTimeout: c.attr("data-autoplay-timeout") ? c.attr("data-autoplay-timeout") : 5000,
+                autoplayTimeout: c.attr("data-autoplay-timeout") ? c.attr("data-autoplay-timeout") : 15000,
                 loop: isNoviBuilder ? false : c.attr("data-loop") !== "false",
                 items: 1,
                 center: c.attr("data-center") === "true",
