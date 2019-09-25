@@ -1,1 +1,3 @@
-master: [![CircleCI](https://circleci.com/gh/Headstarter/web-platform/tree/master.svg?style=svg)](https://circleci.com/gh/Headstarter/web-platform/tree/master)  prerelease: [![CircleCI](https://circleci.com/gh/Headstarter/web-platform/tree/prerelease.svg?style=svg)](https://circleci.com/gh/Headstarter/web-platform/tree/prerelease)
+master: [![CircleCI](https://circleci.com/gh/Headstarter/web-platform/tree/master.svg?style=svg)](https://circleci.com/gh/Headstarter/web-platform/tree/master)<br>
+prerelease: [![CircleCI](https://circleci.com/gh/Headstarter/web-platform/tree/prerelease.svg?style=svg)](https://circleci.com/gh/Headstarter/web-platform/tree/prerelease)<br>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/960b05d28ba1403484785245528667ee)](https://www.codacy.com/manual/Headstarter/web-platform?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Headstarter/web-platform&amp;utm_campaign=Badge_Grade)
