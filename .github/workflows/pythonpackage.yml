@@ -1,17 +1,1 @@
-name: facebook message
-on: [push]
-jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: send custom message
-      uses: appleboy/facebook-action@master
-      env:
-        FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
-        FB_VERIFY_TOKEN: ${{ secrets.FB_VERIFY_TOKEN }}
-        FB_TO: ${{ secrets.FB_TO }}
-      with:
-        args: The ${{ github.event_name }} event triggered this step.
