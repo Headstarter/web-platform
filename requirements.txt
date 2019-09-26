@@ -30,7 +30,7 @@ oauth2==1.9.0.post1
 oauthlib==3.1.0
 pandas==0.25.1
 pycodestyle==2.5.0
-pylint==2.3.1
+pylint==2.4.1
 python-dateutil==2.8.0
 python-editor==1.0.4
 python-linkedin-v2==0.9.4
