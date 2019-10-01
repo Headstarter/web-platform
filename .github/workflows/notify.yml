@@ -9,9 +9,5 @@ jobs:
     - name: Sent notification
       uses: techulus/push-github-action@0.0.1
       env:
-        GITHUB_EVENT_NAME: ${{ toJson(github.event_name) }}
-        GITHUB_REPOSITORY: ${{ toJson(github.repository) }}
-        GITHUB_ACTOR: ${{ toJson(github.actor) }}
-        GITHUB_ACTION: ${{ toJson(github.event) }}
         API_KEY: 'bbcf1444-9d53-4cf4-8303-67cd8be38065'
         MESSAGE: "New ${GITHUB_EVENT_NAME} happened in ${GITHUB_REPOSITORY} by ${GITHUB_ACTOR} (${GITHUB_ACTION})"
