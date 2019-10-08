@@ -1189,16 +1189,6 @@ input[type="file"]:focus::-webkit-file-upload-button {
     outline-offset: 0;
 }
 
-a:any-link {
-    color: -webkit-link;
-    text-decoration: underline;
-    cursor: auto;
-}
-
-a:any-link:active {
-    color: -webkit-activelink;
-}
-
 /* HTML5 ruby elements */
 
 ruby, rt {
