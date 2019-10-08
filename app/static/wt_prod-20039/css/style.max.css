@@ -21064,6 +21064,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     -moz-text-size-adjust: none;
 }
 
+strong, b {
+    font-weight: bold !important;
+}
+
 .default-styles ul>li::before {
     /* version 3 */
     content: '';
