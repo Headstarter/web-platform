@@ -21068,7 +21068,7 @@ strong, b {
     font-weight: bold !important;
 }
 
-.default-styles u {
+.default-styles u > h4 {
     margin-top: 20px;
     padding-top: 20px;
     margin-bottom: 3px;
