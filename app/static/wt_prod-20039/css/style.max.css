@@ -21068,6 +21068,11 @@ strong, b {
     font-weight: bold !important;
 }
 
+.default-styles u {
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
 .default-styles ul>li::before {
     /* version 3 */
     content: '';
