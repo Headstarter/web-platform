@@ -21068,6 +21068,10 @@ strong, b {
     font-weight: 600 !important;
 }
 
+em {
+    text-decoration: none !important;
+}
+
 .default-styles u > h4 {
     margin-top: 20px;
     padding-top: 20px;
