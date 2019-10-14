@@ -95,6 +95,8 @@ def posts(id):
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/how_to_cv.html')
     elif str(id) == "2":
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/how_to_hire.html')
+    elif str(id) == "3":
+        return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/how_to_choose_job.html')
 
 
 @routes.route('/candidates/my')

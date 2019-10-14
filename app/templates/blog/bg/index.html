@@ -103,100 +103,47 @@
           <h3>3 стъпки - много възможности</h3>
           <ul class="list-linked student">
             <li class="ll-item">
-              <a href="{{ url_for ('core.browse') }}">
-                <div class="icon ll-item-icon thin-icon-email-search">	
+              <a href="{{ url_for ('login_register') }}">
+                <div class="icon ll-item-icon mercury-icon-note-2">	
                   <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
                     <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke">
                     </circle>
                   </svg>
                 </div>
                 <div class="ll-item-main">
-                  <h5 class="ll-item-title">Разгледай позициите</h5>
-                  <p>Лесно търсене по различни категории</p>
+                  <h5 class="ll-item-title">Попълни</h5>
+                  <p>Направи своето CV. Качи обяви за стаж. Попълни профила на твоето училище.</p>
                 </div>
               </a>
             </li>
             <li class="ll-item">
             	<a href="{{ url_for ('core.browse') }}">
-                <div class="icon ll-item-icon mercury-icon-target-2">
-                  <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
-                    <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
-                  </svg>
-                </div>
-                <div class="ll-item-main">
-                  <h5 class="ll-item-title">Намери твоята позиция</h5>
-                  <p>Избери позицията, която те влече и с която би могъл да се справиш успешно.</p>
-                </div>
-              </a>
-            </li>
-            <li class="ll-item">
-            	<a href="/post/1">
-                <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-e-mail-o">
-                  <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
-                    <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
-                  </svg>
-                </div>
-                <div class="ll-item-main">
-                  <h5 class="ll-item-title">Изпрати кандидатурата си</h5>
-                  <p>И получи персонална оферта за стаж или работа.</p>
-                </div>
-              </a>
-            </li>
-            <li class="ll-item last">
-              <a href="{{ url_for ('core.browse') }}">
-                <div class="icon ll-item-icon mercury-icon-touch">
-                  <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
-                    <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
-                  </svg>
-                </div>
-                <div class="ll-item-main"><span class="button button-sm button-primary-outline">Започни сега</span></div>
-              </a>
-            </li>
-          </ul>
-          <br>
-          <h3>или</h3>
-          <ul class="list-linked company">
-            <li class="ll-item">
-            	<a href="{{ url_for('core.post_offer') }}">
-                <div class="icon ll-item-icon linearicons-upload2">
-                  <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
-                    <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
-                  </svg>
-                </div>
-                <div class="ll-item-main">
-                  <h5 class="ll-item-title">Публикувай обява</h5>
-                  <p>Бързо и лесно</p>
-                </div>
-              </a>
-            </li>
-            <li class="ll-item">
-            	<a href="{{ url_for('core.post_offer') }}">
                 <div class="icon ll-item-icon thin-icon-email-search">
                   <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
                     <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                   </svg>
                 </div>
                 <div class="ll-item-main">
-                  <h5 class="ll-item-title">Прегледай кандидатите си</h5>
-                  <p>Избери кандидата, който ще пасне най-добре на фирмата ти.</p>
+                  <h5 class="ll-item-title">Разгледай</h5>
+                  <p>Потърси из обявите за стаж. Разгледай кандидатите. Прегледай практиките.</p>
                 </div>
               </a>
             </li>
             <li class="ll-item">
-            	<a href="/post/2">
-                <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-e-mail-o">
+            	<a href="{{ url_for ('core.browse') }}">
+                <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-target-2">
                   <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
                     <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                   </svg>
                 </div>
                 <div class="ll-item-main">
-                  <h5 class="ll-item-title">Свържи се с перфектния кандидат</h5>
-                  <p></p>
+                  <h5 class="ll-item-title">Избери</h5>
+                  <p>Кандидатствай за стаж. Открий перфектния кандидат. Намери правилната практика.</p>
                 </div>
               </a>
             </li>
             <li class="ll-item last">
-            	<a href="{{ url_for('core.post_offer') }}">
+              <a href="{{ url_for ('core.browse') }}">
                 <div class="icon ll-item-icon mercury-icon-touch">
                   <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
                     <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
@@ -207,9 +154,7 @@
             </li>
           </ul>
         </div>
-      </section>
-      
-     
+      </section>     
        <!--Latest Offers-->
       <section class="section section-md bg-grey-100">
         <div class="container">
@@ -267,7 +212,7 @@
         <div class="container">
           <!--<h3 class="text-center">Последни публикации</h3>-->
           <div class="row row-30 row-xl-70">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4">
               <!-- Post Minimal-->
               <article class="post-minimal">
                 <a class="post-minimal-media" href="/post/1">
@@ -280,7 +225,7 @@
                 </a>
               </article>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-4">
               <!-- Post Minimal-->
               <article class="post-minimal">
                 <a class="post-minimal-media" href="/post/2">
@@ -289,6 +234,19 @@
                     <h4 class="post-minimal-title">Как да си наемем стажант?</h4>
                     <p>Наемането на млади стажанти предоставя множество предимства, едно от които е постигането на по-висока икономическа активност.</p>
                     <time class="post-minimal-time" datetime="2019">10 юни 2019 г.</time>
+                  </div>
+                </a>
+              </article>
+            </div>
+            <div class="col-12 col-lg-4">
+              <!-- Post Minimal-->
+              <article class="post-minimal">
+                <a class="post-minimal-media" href="/post/3">
+                  <img class="post-minimal-image" src="/images/blog-post-3-768x475.jpg" alt=""/>
+                  <div class="post-minimal-main">
+                    <h4 class="post-minimal-title">Как да си избереш професия?</h4>
+                    <p>За някои хора отговорът на въпроса „А ти какъв искаш да станеш, като пораснеш?“ изобщо не се е променил в последните 10-15 години.</p>
+                    <time class="post-minimal-time" datetime="2019">08 октомври 2019 г.</time>
                   </div>
                 </a>
               </article>
@@ -302,7 +260,7 @@
           <div class="container">
             <h3>Кои сме ние?</h3>
             <!-- Owl Carousel-->
-            <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="false" data-margin="30" data-autoplay="true" data-mouse-drag="false">
+            <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="true" data-margin="30" data-autoplay="true" data-mouse-drag="true">
               <blockquote class="quote-mary">
                 <div class="quote-mary-main">
                   <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
