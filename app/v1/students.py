@@ -21,7 +21,7 @@ def allowed_image(filename):
 class Students:
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language'] or get_locale()) + '/' + Visitors.folder() + '/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/students/index.html',
 								tags=Tag.query.all(),
 								number_offers=Position.query.filter(
 									Position.available == True).count(),
