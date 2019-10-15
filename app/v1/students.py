@@ -4,6 +4,8 @@ from flask import session, request, url_for, redirect
 from app.models import User, Tag, Company, Position, create_cv, update_cv, CV
 import os
 from werkzeug.utils import secure_filename
+from app.v1.target import Target_Group, abstractmethod
+
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -18,16 +20,17 @@ def allowed_image(filename):
 
 class Students:
 	@staticmethod
-	def homepage():
-		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/index.html',
-								tags=Tag.query.all(),
-								number_offers=Position.query.filter(Position.available == True).count(),
-								open=[Position.query.filter(Position.available == True)
-													.filter(Position.tag_id == x.id)
-													.count() for x in Tag.query.all()],
-								positions=Position.query.filter(Position.available == True)
-														.order_by(Position.id.desc())
-														.limit(5))
+    def homepage():
+        return render_template('core/' + str(session['language'] or get_locale()) + '/' + Visitors.folder() + '/index.html',
+                               tags=Tag.query.all(),
+                               number_offers=Position.query.filter(
+                                   Position.available == True).count(),
+                               open=Target_Group.groupTags(),
+                               positions=Position.query.filter(
+                                   Position.available == True)
+                               .order_by(Position.id.desc())
+                               .limit(5))
+
 
 	@staticmethod
 	def upload_cv_picture():
