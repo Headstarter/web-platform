@@ -11,6 +11,11 @@ def gen_uid():
 
 class JobsBGAPI:
     @staticmethod
+    def is_internship(id):
+        job = requests.get('https://www.jobs.bg/job/'+ str(id)).text
+        return 'Стаж' in job
+
+    @staticmethod
     def get_offer_info(id, company):
         job = requests.get('https://www.jobs.bg/job/'+ str(id)).text
         document = BeautifulSoup(job, 'html.parser')
@@ -103,7 +108,8 @@ class JobsBGAPI:
             print('RESOLVED')
             print('#'+str(i + 1)+'\'s offers ... resolving ...')
             for x in company['offers']:
-                print(json.dumps(JobsBGAPI.get_offer_info(x, company['id'])), file=log.jobs)
+                if JobsBGAPI.is_internship(x):
+                    print(json.dumps(JobsBGAPI.get_offer_info(x, company['id'])), file=log.jobs)
             print('RESOLVED')
 
 class Resources:
@@ -117,6 +123,6 @@ class Resources:
 log = Resources()
 
 # JobsBGAPI.get_top50_companies(log)
-JobsBGAPI.get_companies(log, ['244034','1144','270078','63925','263385','146840','207843','263019','257109','202604','28867','40265','280795','281062','172391','266033','250434','40143','152006','251608','7422','12357','227307', '177237', '114037', '267383', '225686'])
+JobsBGAPI.get_companies(log, ["10362","111592","129619","17851","189033","210809","22149","224541","225123","22705","244499","249870","259177","265977","266581","34630","38730","40143","41944","92073"])
 
 del log
