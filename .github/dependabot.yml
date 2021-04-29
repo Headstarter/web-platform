@@ -1,0 +1,58 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "03:00"
+  open-pull-requests-limit: 10
+  target-branch: prerelease
+  reviewers:
+  - alex-tsvetanov
+  assignees:
+  - alex-tsvetanov
+  labels:
+  - documentation
+  allow:
+  - dependency-type: direct
+  - dependency-type: indirect
+  ignore:
+  - dependency-name: astroid
+    versions:
+    - 2.4.2
+    - "2.5"
+    - 2.5.1
+    - 2.5.2
+    - 2.5.3
+    - 2.5.4
+    - 2.5.5
+  - dependency-name: alembic
+    versions:
+    - 1.5.2
+    - 1.5.3
+    - 1.5.4
+    - 1.5.6
+    - 1.5.7
+  - dependency-name: pandas
+    versions:
+    - 1.2.1
+    - 1.2.2
+    - 1.2.3
+  - dependency-name: soupsieve
+    versions:
+    - "2.1"
+    - "2.2"
+  - dependency-name: numpy
+    versions:
+    - 1.19.5
+    - 1.20.0
+    - 1.20.1
+  - dependency-name: urllib3
+    versions:
+    - 1.26.3
+  - dependency-name: lazy-object-proxy
+    versions:
+    - 1.5.2
+  - dependency-name: httplib2
+    versions:
+    - 0.18.0
