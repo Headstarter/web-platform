@@ -342,7 +342,7 @@ def insert_user(name, email, password, company=None, school=None):
     db.session.add(new_user)
     db.session.commit()
     
-    from app.v1.helpers.mailer import Mailer
+    from app.v1.mail_tools.mailer import Mailer
     return Mailer.sendConfirmation(new_user)
 
 def insert_application(user_id, position_id):
@@ -401,7 +401,7 @@ def insert_company(name):
     
     import os
     import shutil
-    shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/150.png'),os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/company/' + str(uid) + '.png'))
+    shutil.copy(os.path.join(os.environ['basedir'], 'static/headstarter/images/company/150.png'),os.path.join(os.environ['basedir'], 'static/headstarter/images/company/' + str(uid) + '.png'))
     
     db.session.add(company)
     db.session.commit()

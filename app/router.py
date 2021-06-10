@@ -3,7 +3,7 @@ from app.models import Verify, insert_user, User, Tag, Company, Position, crypto
 from flask import request, session, flash, redirect, url_for, send_file, Response
 import sys
 
-app.config['STATIC_FOLDER'] = '/static/wt_prod-20039'
+app.config['STATIC_FOLDER'] = '/static/headstarter'
 app.secret_key = 'b94079a3717eda429c4580496be97bc9675d3ea4eb0ae50d'
 
 
@@ -55,34 +55,34 @@ def init_session():
 
 @app.route('/css/<path:filename>')
 def css(filename):
-    return send_file('static/wt_prod-20039/css/' + filename, mimetype='text/css')
+    return send_file('static/headstarter/css/' + filename, mimetype='text/css')
 
 
 @app.route('/js/<path:filename>')
 def js(filename):
-    return send_file('static/wt_prod-20039/js/' + filename, mimetype='text/javascript')
+    return send_file('static/headstarter/js/' + filename, mimetype='text/javascript')
 
 
 @app.route('/images/<path:filename>')
 def images(filename):
     if filename.endswith('.jpg'):
-        return send_file('static/wt_prod-20039/images/' + filename, mimetype='image/jpeg')
+        return send_file('static/headstarter/images/' + filename, mimetype='image/jpeg')
     else:
-        return send_file('static/wt_prod-20039/images/' + filename, mimetype='image/png')
+        return send_file('static/headstarter/images/' + filename, mimetype='image/png')
 
 
 @app.route('/fonts/<path:filename>')
 def fonts(filename):
     if filename.endswith('.svg'):
-        return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='image/svg+xml')
+        return send_file('static/headstarter/fonts/' + filename, mimetype='image/svg+xml')
     elif filename.endswith('.eot'):
-        return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='application/vnd.ms-fontobject')
+        return send_file('static/headstarter/fonts/' + filename, mimetype='application/vnd.ms-fontobject')
     elif filename.endswith('.ttf'):
-        return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/ttf')
+        return send_file('static/headstarter/fonts/' + filename, mimetype='font/ttf')
     elif filename.endswith('.woff'):
-        return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/woff')
+        return send_file('static/headstarter/fonts/' + filename, mimetype='font/woff')
     elif filename.endswith('.woff2'):
-        return send_file('static/wt_prod-20039/fonts/' + filename, mimetype='font/woff2')
+        return send_file('static/headstarter/fonts/' + filename, mimetype='font/woff2')
 
 
 @app.errorhandler(404)
@@ -302,7 +302,7 @@ def forgot_password():
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/Forgoten-password.html')
     elif request.method == 'POST':
         user = User.query.filter(User.email == request.form['email']).one()
-        from app.v1.helpers.mailer import Mailer
+        from app.v1.mail_tools.mailer import Mailer
         Mailer.sendPasswordReset(user)
         flash('Check your inbox to reset your password.')
         return my_redirect('/')

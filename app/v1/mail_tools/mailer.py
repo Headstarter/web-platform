@@ -52,13 +52,13 @@ class Mailer:
                 import datetime
                 verify = Mailer.get_verification(new_user).code
                 msg = Message('Confirm teacher\'s registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[User.query.filter(User.id == new_user.school.admin).one().email, 'headstarter@headstarter.eu'])
-                msg.html = render_template('reg_teacher_confirm.html', link='https://headstarter.eu/verify/' + verify, teacher = new_user, time = datetime.datetime.now().strftime("%H:%M on %d.%m.%Y"), location=Mailer.get_country(request.remote_addr))
+                msg.html = render_template('mails/reg_teacher_confirm.html', link='https://headstarter.eu/verify/' + verify, teacher = new_user, time = datetime.datetime.now().strftime("%H:%M on %d.%m.%Y"), location=Mailer.get_country(request.remote_addr))
                 mail.send(msg)
                 return msg.html
             else:
                 verify = Mailer.get_verification(new_user)
                 msg = Message('Confirm your registration in headstarter.eu', sender='Headstarter Corporation <' + os.environ['EMAILUSER'] + '>', recipients=[new_user.email, 'headstarter@headstarter.eu'])
-                msg.html = render_template('reg_confirm.html', link='https://headstarter.eu/verify/' + verify.code)
+                msg.html = render_template('mails/reg_confirm.html', link='https://headstarter.eu/verify/' + verify.code)
                 mail.send(msg)
                 return msg.html
         
