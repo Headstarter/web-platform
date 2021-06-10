@@ -4,6 +4,8 @@ from flask import session, request, url_for, redirect
 from app.models import User, Tag, Company, Position, create_cv, update_cv, CV
 import os
 from werkzeug.utils import secure_filename
+from app.v1.target import Target_Group, abstractmethod
+
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -19,15 +21,16 @@ def allowed_image(filename):
 class Students:
 	@staticmethod
 	def homepage():
-		return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/index.html',
+		return render_template('core/' + str(session['language'] or get_locale()) + '/students/index.html',
 								tags=Tag.query.all(),
-								number_offers=Position.query.filter(Position.available == True).count(),
-								open=[Position.query.filter(Position.available == True)
-													.filter(Position.tag_id == x.id)
-													.count() for x in Tag.query.all()],
-								positions=Position.query.filter(Position.available == True)
-														.order_by(Position.id.desc())
-														.limit(5))
+								number_offers=Position.query.filter(
+									Position.available == True).count(),
+								open=Target_Group.groupTags(),
+								positions=Position.query.filter(
+									Position.available == True)
+								.order_by(Position.id.desc())
+								.limit(5))
+
 
 	@staticmethod
 	def upload_cv_picture():
@@ -45,7 +48,7 @@ class Students:
 			if file and allowed_image(file.filename):
 				import os
 				saved = False
-				where = 'static/wt_prod-20039/images/students/' + str(User.query.filter(User.id == session['id']).one().id) + '.png'
+				where = 'static/headstarter/images/students/' + str(User.query.filter(User.id == session['id']).one().id) + '.png'
 				where_db = '/images/students/' + str(User.query.filter(User.id == session['id']).one().id) + '.png'
 				where = os.path.join(os.environ['basedir'], where)
 				os.system('echo > ' + where)
@@ -60,7 +63,7 @@ class Students:
 					except FileNotFoundError:
 						print('FileNotFound', file=sys.stderr)
 						import shutil
-						shutil.copy(os.path.join(os.environ['basedir'], 'static/wt_prod-20039/images/students/150.png'), 
+						shutil.copy(os.path.join(os.environ['basedir'], 'static/headstarter/images/students/150.png'), 
                   					where)
 					except TypeError:
 						import sys
