@@ -1,0 +1,13 @@
+name: Notifier
+
+on: [push, pull_request, issues]
+
+jobs:
+  notifying:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sent notification
+      uses: techulus/push-github-action@0.0.1
+      env:
+        API_KEY: 'bbcf1444-9d53-4cf4-8303-67cd8be38065'
+        MESSAGE: "New EVENT happened in Headstarter/web-platform by ACTOR"
