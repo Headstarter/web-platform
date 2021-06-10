@@ -4,8 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 
-os.environ['CONFIG'] = os.environ['CONFIG'] or 'config.cfg'
-os.environ['DEBUG'] = os.environ['DEBUG'] or False
+if 'CONFIG' in os.environ:
+    os.environ['CONFIG'] = os.environ['CONFIG'] or 'config.cfg'
+else:
+    os.environ['CONFIG'] = 'config.cfg'
+
+if 'DEBUG' in os.environ:
+    os.environ['DEBUG'] = os.environ['DEBUG'] or 'False'
+else:
+    os.environ['DEBUG'] = 'False'
 
 app = Flask(__name__)
 app.config.from_pyfile(os.environ['CONFIG'])
