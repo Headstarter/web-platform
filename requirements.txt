@@ -1,6 +1,6 @@
 alembic==1.2.1
 astroid==2.5.8
-autopep8==1.4.4
+autopep8==1.5.7
 Babel==2.7.0
 beautifulsoup4==4.8.1
 blinker==1.4
