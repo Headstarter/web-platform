@@ -1,0 +1,13 @@
+name: Build under Ubuntu Linux
+
+on: [push]
+
+jobs:
+  build-on-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: setup
+        run: echo "TODO"
+        shell: bash
