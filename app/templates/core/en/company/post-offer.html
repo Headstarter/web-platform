@@ -47,7 +47,7 @@
               console.log (dataFD, data_export);
               $.ajax({
                       async: false,
-                      url: "{{ url_for('core.post_offer') }}",
+                      url: "{{ url_for('core.publish_position') }}",
                       method: 'POST',
                       cache: false,
                       data: dataFD,
@@ -56,10 +56,10 @@
                       success: function (response) {
                         console.log(response);
                         // similar behavior as an HTTP redirect
-                        window.location.replace("{{url_for('core.list_my_offers')}}");
+                        window.location.replace("{{url_for('core.list_my_positions')}}");
 
                         // similar behavior as clicking on a link
-                        window.location.href = "{{url_for('core.list_my_offers')}}";
+                        window.location.href = "{{url_for('core.list_my_positions')}}";
                       },
                       error: function(response) {
                         console.log(response);

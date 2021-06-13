@@ -9,7 +9,7 @@
             <div class="jumbotron-creative-main">
               <h2 class="jumbotron-creative-title">Headstarter.<br>Намери своя талант.</h2>
               <div class="form-layout-search-outer">
-                <form action="{{ url_for('core.browse') }}" class="form-layout-search form-lg">
+                <form action="{{ url_for('core.browse_positions') }}" class="form-layout-search form-lg">
                   <div class="form-wrap form-wrap-icon">
                     <!-- Select 2-->
                     <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
@@ -25,7 +25,7 @@
                   </div>
                 </form>
               </div>
-              <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse') }}">{{ number_offers }} позиции за теб</a> в момента!</p>
+              <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse_positions') }}">{{ number_offers }} позиции за теб</a> в момента!</p>
             </div>
           </div>
           <div class="jc-decoration">
@@ -109,7 +109,7 @@
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title"><a href="{{ url_for ('core.browse') }}">Разгледай позициите</a></h5>
+                <h5 class="ll-item-title"><a href="{{ url_for ('core.browse_positions') }}">Разгледай позициите</a></h5>
                 <p>Лесно търсене по различни категории</p>
               </div>
             </li>
@@ -141,7 +141,7 @@
                   <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                 </svg>
               </div>
-              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for ('core.browse') }}">Започни сега</a></div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for ('core.browse_positions') }}">Започни сега</a></div>
             </li>
           </ul><br>
           <h3>или</h3>
@@ -153,7 +153,7 @@
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title"><a href="{{ url_for('core.post_offer') }}">Публикувай обява</a></h5>
+                <h5 class="ll-item-title"><a href="{{ url_for('core.publish_position') }}">Публикувай обява</a></h5>
                 <p>Бързо и лесно</p>
               </div>
             </li>
@@ -185,7 +185,7 @@
                   <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                 </svg>
               </div>
-              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.post_offer') }}">Започни сега</a></div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.publish_position') }}">Започни сега</a></div>
             </li>
           </ul>
         </div>
@@ -222,7 +222,7 @@
               </table>
               </div>
             </div>
-            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.browse') }}">Виж още обяви</a></div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.browse_positions') }}">Виж още обяви</a></div>
           </div>
         </div>
       </section>
@@ -233,7 +233,7 @@
           <!-- Owl Carousel-->
           <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
               {% for tag in open %}
-              <a class="box-creative" href="{{ url_for('core.browse') }}?group={{ tag.id }}">
+              <a class="box-creative" href="{{ url_for('core.browse_positions') }}?group={{ tag.id }}">
               <div class="box-creative-inner">
                 <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
                 <p class="box-creative-title">{{ tag.label | safe }}</p>
