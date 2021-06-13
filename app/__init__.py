@@ -9,10 +9,10 @@ if 'CONFIG' in os.environ:
 else:
     os.environ['CONFIG'] = 'config.cfg'
 
-if 'DEBUG' in os.environ:
-    os.environ['DEBUG'] = os.environ['DEBUG'] or 'False'
+if 'FLASK_DEBUG' in os.environ:
+    os.environ['FLASK_DEBUG'] = os.environ['FLASK_DEBUG'] or '1'
 else:
-    os.environ['DEBUG'] = 'False'
+    os.environ['FLASK_DEBUG'] = '1'
 
 app = Flask(__name__)
 app.config.from_pyfile(os.environ['CONFIG'])

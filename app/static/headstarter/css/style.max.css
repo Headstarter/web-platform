@@ -7033,15 +7033,16 @@ hr {
 .button-primary,
 .button-primary:focus {
     color: #f7b733;
+    color: #ea6138;
     background-color: transparent;
-    border-color: #f7b733
+    border-color: #ea6138;
 }
 
 .button-primary:hover,
 .button-primary:active {
     color: #fff;
-    background-color: #fc4a1a;
-    border-color: #fc4a1a
+    background-color: #ea6138;
+    border-color: #ea6138;
 }
 
 .bg-primary .button-primary,
@@ -7134,8 +7135,8 @@ hr {
 .button-primary-outline:hover,
 .button-primary-outline:active {
     color: #fff;
-    background-color: #fc4a1a;
-    border-color: #fc4a1a
+    background-color: #9067fc;
+    border-color: #9067fc;
 }
 
 .bg-primary .button-primary-outline,
@@ -12215,14 +12216,10 @@ p.profile-minimal-position {
     .jc-decoration-item-2 {
         top: -5.8%;
         left: 1.5%;
-        fill: #4abdac
+        fill: #59d2c8;
     }
     .jc-decoration-image {
-        position: absolute;
-        top: 60%;
-        left: calc(50% - 90px);
         max-width: 380px;
-        transform: translate3d(0, -60%, 0)
     }
     .jumbotron-creative-main {
         padding: 70px 0 120px;
@@ -21349,4 +21346,7 @@ html .text-primary {
 
 .call-to-action {
     background: url('/images/calltoaction.jpg');
+}
+.owl-carousel .post-minimal-media, .owl-carousel .post-minimal-title {
+    color: black;
 }
