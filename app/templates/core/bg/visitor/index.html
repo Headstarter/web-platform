@@ -6,26 +6,20 @@
 {% block banner %}
         <div class="jumbotron-creative-inner">
           <div class="container">
-            <div class="jumbotron-creative-main">
-              <h2 class="jumbotron-creative-title">Headstarter.<br>Намери своя талант.</h2>
-              <div class="form-layout-search-outer">
-                <form action="{{ url_for('core.browse_positions') }}" class="form-layout-search form-lg">
-                  <div class="form-wrap form-wrap-icon">
-                    <!-- Select 2-->
-                    <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="All Regions" name="tag" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                      <option value="0">Всички позиции</option>
-                      {% for tag in tags %}
-                      <option value="{{ tag.id }}">{{ tag.name | safe }}</option>
-                      {% endfor %}
-                    </select>
-                    <i class="icon fa fa-filter" aria-hidden="true"></i>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="jumbotron-creative-main">
+                  <h2 class="jumbotron-creative-title">Headstarter.<br>Намери своя талант.</h2>
+                  <br>
+                  <div style="display: block;width: 100%; text-align: left; padding-right:60px;">
+                    <a href="{{ url_for ('core.browse_positions') }}"><span class="button button-primary-outline" style="border-radius: 5px; font-size:35px;font-weight: normal;">Започни сега!</span></a>
                   </div>
-                  <div class="form-wrap form-wrap-button form-wrap-button-icon-only">
-                    <button class="button button-lg button-primary button-icon-only" type="submit" aria-label="search"><span class="icon-5 icon thin-icon-email-search"></span></button>
-                  </div>
-                </form>
+                 <!-- <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse_positions') }}">{{ number_offers }} позиции за теб</a> в момента!</p>-->
+                </div>
               </div>
-              <p class="big text-gray-800">Предлагаме&nbsp;<a href="{{ url_for ('core.browse_positions') }}">{{ number_offers }} позиции за теб</a> в момента!</p>
+              <div class="col-md-6">
+                <img class="jc-decoration-image" src="/images/home-1-748x528.png" alt="">
+              </div>
             </div>
           </div>
           <div class="jc-decoration">
@@ -38,72 +32,81 @@
               <svg version="1.1" x="0px" y="0px" viewBox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
                 <path d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z"></path>
               </svg>
-            </div><img class="jc-decoration-image" src="/images/home-1-748x528.png" alt="">
+            </div>
           </div>
         </div>
-{% endblock %}
-
-{% block content %}
-
-<!-- Welcome to Headstarter.eu -->
-      <section class="section section-md bg-default text-center">
-        <div class="container">
-          <h3>Добре дошли в <span class="text-primary">Headstarter</span></h3>
-          <p class="text-spacing-05">Мястото, където работодателите търсят твоя талант и опит.</p>
-          <div class="row row-50 justify-content-center align-items-center text-left">
-            <div class="col-md-10 col-lg-6">
-              <figure class="figure-responsive block-5"><img src="/images/imgtest.png" alt=""/>
-              </figure>
-            </div>
-            <div class="col-md-10 col-lg-6">
-              <div class="row row-50 row-xl-70">
-                <div class="col-sm-6">
-                  <!-- Box Line-->
-                  <article class="box-line box-line_sm">
-                    <div class="box-line-inner">
-                      <div class="box-line-icon icon mercury-icon-group"></div>
-                      <h5 class="box-line-title">Най-големият сайт за стажантски програми в България</h5>
-                    </div>
-                  </article>
-                </div>
-                <div class="col-sm-6">
-                  <!-- Box Line-->
-                  <article class="box-line box-line_sm">
-                    <div class="box-line-inner">
-                      <div class="box-line-icon icon mercury-icon-partners"></div>
-                      <h5 class="box-line-title">Направено от ученици за ученици</h5>
-                    </div>
-                  </article>
-                </div>
-                <div class="col-sm-6">
-                  <!-- Box Line  -->
-                  <article class="box-line box-line_sm">
-                    <div class="box-line-inner">
-                      <div class="box-line-icon icon mercury-icon-chat"></div>
-                      <h5 class="box-line-title">Статии, които да те напътстват през цялото време</h5>
-                    </div>
-                  </article>
-                </div>
-                <div class="col-sm-6">
-                  <!-- Box Line-->
-                  <article class="box-line box-line_sm">
-                    <div class="box-line-inner">
-                      <div class="box-line-icon icon mercury-icon-target"></div>
-                      <h5 class="box-line-title">Само актуална и достоверна информация</h5>
-                    </div>
-                  </article>
+        <!-- Welcome to Headstarter.eu -->
+        <section class="section section-md text-center" style="background-color: transparent;">
+          <div class="container">
+            <h3>Добре дошли в <span class="text-primary">Headstarter</span></h3>
+            <p class="text-spacing-05">Мястото, където работодателите търсят твоя талант и опит.</p>
+            <div class="row row-50 justify-content-center align-items-center text-left">
+              <div class="col-md-10 col-lg-6">
+                <figure class="figure-responsive block-5"><img src="/images/imgtest.png" alt=""/>
+                </figure>
+              </div>
+              <div class="col-md-10 col-lg-6">
+                <div class="row row-50 row-xl-70">
+                  <div class="col-sm-6">
+                    <!-- Box Line-->
+                    <article class="box-line box-line_sm">
+                      <div class="box-line-inner">
+                        <div class="box-line-icon icon mercury-icon-group"></div>
+                        <h5 class="box-line-title">Най-големият сайт за стажантски програми в България</h5>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- Box Line-->
+                    <article class="box-line box-line_sm">
+                      <div class="box-line-inner">
+                        <div class="box-line-icon icon mercury-icon-partners"></div>
+                        <h5 class="box-line-title">Направено от ученици за ученици</h5>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- Box Line  -->
+                    <article class="box-line box-line_sm">
+                      <div class="box-line-inner">
+                        <div class="box-line-icon icon mercury-icon-chat"></div>
+                        <h5 class="box-line-title">Статии, които да те напътстват през цялото време</h5>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- Box Line-->
+                    <article class="box-line box-line_sm">
+                      <div class="box-line-inner">
+                        <div class="box-line-icon icon mercury-icon-target"></div>
+                        <h5 class="box-line-title">Само актуална и достоверна информация</h5>
+                      </div>
+                    </article>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
+{% endblock %}
+
+{% block content %}
+
+      <!-- Call to action -->     
+      <section class="call-to-action section section-md bg-default text-center">
+        <div class="container container-fullwidth">
+          <h3>Намери своя талант сега!</h3>
+          <h10>Намери перфектната за теб работа. Намери перфектния кандидат.</h10>
+          <!-- Owl Carousel-->
+          <div class="ll-item-main">
+            <a href="/join">
+              <span class="button button-sm button-primary-outline">Започни сега</span>
+            </a>
+          </div>
         </div>
       </section>
-
-
-      
-
-
-      <!-- 3 easy steps-->
+       
+      <!-- 3 easy steps -->
       <section class="section section-md bg-default text-center">
         <div class="container">
           <h3>3 стъпки - много възможности</h3>
@@ -160,8 +163,28 @@
             </li>
           </ul>
         </div>
-      </section>         
-       <!--Latest Offers-->
+      </section> 
+
+      <!-- Popular Categories -->
+      <section class="section section-md bg-default text-center">
+        <div class="container container-fullwidth">
+          <h3>Популярни категории</h3>
+          <!-- Owl Carousel-->
+          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
+              {% for tag in open %}
+              <a class="box-creative" href="{{ url_for('core.browse_positions') }}?group={{ tag.id }}">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
+                <p class="box-creative-title">{{ tag.label | safe }}</p>
+                <p>{{ tag.count }} отворени позиции</p>
+              </div>
+              <div class="box-creative-dummy"></div></a>
+              {% endfor %}
+          </div>
+        </div>
+      </section>
+
+       <!--Latest Offers -->
       <section class="section section-md bg-grey-100">
         <div class="container">
           <div class="row row-40">
@@ -197,33 +220,17 @@
           </div>
         </div>
       </section>
-      <!-- Popular Categories-->
-      <section class="section section-md bg-default text-center">
-        <div class="container container-fullwidth">
-          <h3>Популярни категории</h3>
-          <!-- Owl Carousel-->
-          <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
-              {% for tag in open %}
-              <a class="box-creative" href="{{ url_for('core.browse_positions') }}?group={{ tag.id }}">
-              <div class="box-creative-inner">
-                <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
-                <p class="box-creative-title">{{ tag.label | safe }}</p>
-                <p>{{ tag.count }} отворени позиции</p>
-              </div>
-              <div class="box-creative-dummy"></div></a>
-              {% endfor %}
-          </div>
-        </div>
-      </section>
-      <!-- Latest Posts-->
-      <section class="section section-md bg-grey-100">
-        <div class="container">
-          <!--<h3 class="text-center">Последни публикации</h3>-->
-          <div class="row row-30 row-xl-70">
-            <div class="col-12 col-lg-4">
-              <!-- Post Minimal-->
+
+      <!-- Latest Posts -->     
+      <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" > <!--data-parallax-img="images/bg-image-7.jpg"-->
+        <div class="parallax-content">
+          <div class="container">
+            <h3>Последни статии</h3>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="true" data-margin="30" data-autoplay="true" data-mouse-drag="true">
+              
               <article class="post-minimal">
-                <a class="post-minimal-media" href="/post/1">
+                <a class="post-minimal-media" href="/blog/posts/1">
                   <img class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt=""/>
                   <div class="post-minimal-main">
                     <h4 class="post-minimal-title">Как да си направим CV?</h4>
@@ -232,11 +239,9 @@
                   </div>
                 </a>
               </article>
-            </div>
-            <div class="col-12 col-lg-4">
-              <!-- Post Minimal-->
+
               <article class="post-minimal">
-                <a class="post-minimal-media" href="/post/2">
+                <a class="post-minimal-media" href="/blog/posts/2">
                   <img class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt=""/>
                   <div class="post-minimal-main">
                     <h4 class="post-minimal-title">Как да си наемем стажант?</h4>
@@ -245,11 +250,9 @@
                   </div>
                 </a>
               </article>
-            </div>
-            <div class="col-12 col-lg-4">
-              <!-- Post Minimal-->
+
               <article class="post-minimal">
-                <a class="post-minimal-media" href="/post/3">
+                <a class="post-minimal-media" href="/blog/posts/3">
                   <img class="post-minimal-image" src="/images/blog-post-3-768x475.jpg" alt=""/>
                   <div class="post-minimal-main">
                     <h4 class="post-minimal-title">Как да си избереш професия?</h4>
@@ -262,13 +265,25 @@
           </div>
         </div>
       </section>
-      <!-- Success Stories-->
-      
+
+      <!-- Call to action -->     
+      <section class="call-to-action section section-md bg-default text-center">
+        <div class="container container-fullwidth">
+          <h3>Намери своя талант сега!</h3>
+          <h10>Намери перфектната за теб работа. Намери перфектния кандидат.</h10>
+          <div class="ll-item-main">
+            <a href="/join">
+              <span class="button button-sm button-primary-outline">Започни сега</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team -->
       <section class="section parallax-container section-md bg-primary bg-overlay-1 text-center" > <!--data-parallax-img="images/bg-image-7.jpg"-->
         <div class="parallax-content">
           <div class="container">
             <h3>Кои сме ние?</h3>
-            <!-- Owl Carousel-->
             <div class="owl-carousel" data-items="1" data-md-items="2" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="true" data-margin="30" data-autoplay="true" data-mouse-drag="true">
               <blockquote class="quote-mary">
                 <div class="quote-mary-main">
@@ -372,25 +387,6 @@
                   </div>
                 </div>
               </blockquote>
-              <!--
-              <blockquote class="quote-mary">
-                <div class="quote-mary-main">
-                  <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewbox="0 0 36 28" width="38" height="28">
-                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
-                  </svg>
-                  <
-                  <div class="quote-mary-text">
-                    <p>Неразбраният артист. За каквото и изкуство да се сетите, Лили разбира от него. Закачлив писател, уникален художник и винаги душата на компанията. Лили е от хората, които можете да питате за всичко,тя ще ви отговори и посъветва. Винаги можете да разчитате на Лили да ви каже истината, такава каквато е, без да ви спестява. Тя е човека, който няма против лудостта, щом става дума за изкуство.</p>
-                  </div>
-                </div>
-                <div class="quote-mary-meta"><img class="quote-mary-avatar" src="/images/we/Lili.jpg" alt=""/>
-                  <div class="quote-mary-info">
-                    <cite class="quote-mary-cite heading-5">Това е Лили!</cite>
-                    <p class="quote-mary-subtitle">Съосновател на Headstarter</p>
-                  </div>
-                </div>
-              </blockquote>
-            -->
 
               <blockquote class="quote-mary">
                 <div class="quote-mary-main">
@@ -408,12 +404,11 @@
                   </div>
                 </div>
               </blockquote>
-
-
             </div>
           </div>
         </div>
       </section>
+
       <!-- Call To Action -->
       <section class="call-to-action section section-md bg-default text-center">
         <div class="container container-fullwidth">

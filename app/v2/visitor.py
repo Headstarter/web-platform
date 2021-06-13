@@ -8,13 +8,6 @@ class Visitor (IWebsite):
         return 'visitor'
 
     def homepage(self): 
-        print()
-        print()
-        print()
-        print(Tag.query.all())
-        print()
-        print()
-        print()
         return render_template('core/' + self.language + '/' + self.template_folder() + '/index.html',
                                tags=Tag.query.all(),
                                number_offers=Position.query.filter(
@@ -96,7 +89,7 @@ class Visitor (IWebsite):
         elif str(id) == "2":
             return redirect("http://bnr.bg/horizont/post/101157715/onlain-platforma-tarsi-stajove-za-uchenici")
 
-    def blog_posts(self):
+    def blog_posts(self, id):
         if str(id) == "1":
             return render_template('core/' + self.language + '/' + self.template_folder() + '/how_to_cv.html')
         elif str(id) == "2":

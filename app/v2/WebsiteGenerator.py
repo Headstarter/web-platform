@@ -46,8 +46,8 @@ class WebsiteGenerator(IWebsite):
     def publish_position(self):
         return self.role_class[session['type']].publish_position()
     
-    def edit_position(self, positionId):
-        return self.role_class[session['type']].edit_position(positionId)
+    def edit_position(self, id):
+        return self.role_class[session['type']].edit_position(id)
 
     def list_my_positions(self):
         return self.role_class[session['type']].list_my_positions()
@@ -62,10 +62,10 @@ class WebsiteGenerator(IWebsite):
         return self.role_class[session['type']].news()
 
     def media(self, id):
-        return self.role_class[session['type']].media()
+        return self.role_class[session['type']].media(id)
 
-    def blog_posts(self):
-        return self.role_class[session['type']].blog_posts()
+    def blog_posts(self, id):
+        return self.role_class[session['type']].blog_posts(id)
 
     def about(self):
         return self.role_class[session['type']].about()
