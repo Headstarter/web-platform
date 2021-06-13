@@ -30,8 +30,8 @@ class Mapper(Base, db.Model):
     company_id = db.Column(
         db.Integer, db.ForeignKey('Company.id'), nullable=True)
     company = db.relationship('Company', back_populates='mapper')
-    #def __init__(self, id, company_name, company_id):
-    #    super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
+    def __init__(self, id, company_name, company_id):
+        super(Mapper, self).__init__(id=id, company_name=company_name, company_id=company_id)
 
 class Tag(Base, db.Model):
     __tablename__ = 'Tag'
@@ -43,8 +43,8 @@ class Tag(Base, db.Model):
     def __repr__(self):
         return '<Tag ' + str(self.id) + ' - ' + str(self.name) + '>'
 
-    #def __init__(self, id, name):
-    #    super(Tag, self).__init__(id=id, name=name)
+    def __init__(self, id, name):
+        super(Tag, self).__init__(id=id, name=name)
 
 class Company(Base, db.Model):
     __tablename__ = 'Company'
@@ -61,8 +61,8 @@ class Company(Base, db.Model):
     logo = db.Column(db.String(256))
     website = db.Column(db.String(256))
     contacts = db.Column(db.String(32768))
-    #def __init__(self, id, uid, name, description, logo, website, contacts):
-    #    super(Company, self).__init__(id=id, uid=uid, name=name, description=description, logo=logo, website=website, contacts=contacts)
+    def __init__(self, id, uid, name, description, logo, website, contacts):
+        super(Company, self).__init__(id=id, uid=uid, name=name, description=description, logo=logo, website=website, contacts=contacts)
 
     def __repr__(self):
         return '<Company {}, {}, {}>'.format(self.id, self.uid, self.name)
@@ -84,8 +84,8 @@ class School(Base, db.Model):
     admin = db.Column(db.Integer) # id of a user that is admin of the school account
     
     teachers = db.relationship("User", back_populates="school")
-    #def __init__(self, id, admin, name):
-    #    super(School, self).__init__(id=id, name=name, admin=admin)
+    def __init__(self, id, admin, name):
+        super(School, self).__init__(id=id, name=name, admin=admin)
 
 class User(Base, db.Model):
     __tablename__ = 'User'
@@ -112,8 +112,8 @@ class User(Base, db.Model):
 
     applications = db.relationship("Application", back_populates="user")
 
-    #def __init__(self, id, name, email, password, cv_id, company_id, verification_id, school_id):
-    #    super(User, self).__init__(id=id, name=name, email=email, password_hash=password, verification_id=verification_id, school_id=school_id, cv_id=cv_id, company_id=company_id)
+    def __init__(self, id, name, email, password, cv_id, company_id, verification_id, school_id):
+        super(User, self).__init__(id=id, name=name, email=email, password_hash=password, verification_id=verification_id, school_id=school_id, cv_id=cv_id, company_id=company_id)
 
     def to_dict(self):
         return {"id": self.id,
@@ -138,8 +138,8 @@ class Verify(Base, db.Model):
     user = db.relationship("User", back_populates="verification")
     code = db.Column(db.String(6))
 
-    #def __init__(self, id, user, code):
-    #    super(Verify, self).__init__(id=id, user=[], code=code)
+    def __init__(self, id, user, code):
+        super(Verify, self).__init__(id=id, user=[], code=code)
     
     @staticmethod
     def gen_code():
@@ -169,8 +169,8 @@ class CV(Base, db.Model):
     languages = db.Column(db.String(512))
     hobbies = db.Column(db.String(512))
 
-    #def __init__(self, id, photo, name, email, telephone, birthday, location, about, education, projects, skills, languages, hobbies):
-    #    super(CV, self).__init__(id=id, photo=photo, name=name, email=email, telephone=telephone, birthday=birthday, location=location, about=about, education=education, projects=projects, skills=skills, languages=languages, hobbies=hobbies)
+    def __init__(self, id, photo, name, email, telephone, birthday, location, about, education, projects, skills, languages, hobbies):
+        super(CV, self).__init__(id=id, photo=photo, name=name, email=email, telephone=telephone, birthday=birthday, location=location, about=about, education=education, projects=projects, skills=skills, languages=languages, hobbies=hobbies)
 
         
     def get_skills(self):
@@ -218,8 +218,8 @@ class Position(Base, db.Model):
     
     views = db.Column(db.Integer, default=0)
 
-    #def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
-    #    super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
+    def __init__(self, id, name, company_id, description, location, date, available, duration, email, hours_per_day, age_required, tag_id, views):
+        super(Position, self).__init__(id=id, name=name, company_id=company_id, description=description, location=location, date=date, available=available, duration=duration, email=email, hours_per_day=hours_per_day, age_required=age_required, tag_id=tag_id, views=views)
 
     
 
@@ -269,8 +269,8 @@ class Application (Base, db.Model):
         'Position.id'), primary_key=True)
     position = db.relationship('Position', back_populates='applications')
     company_id = db.Column(db.Integer, primary_key=True)
-    #def __init__(self, id, user_id, position_id, company_id):
-    #    super(Application, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
+    def __init__(self, id, user_id, position_id, company_id):
+        super(Application, self).__init__(id=id, user_id=user_id, company_id=company_id, position_id=position_id)
 
 def factory(classname):
     cls = globals()[classname]
@@ -518,7 +518,7 @@ def filter_offers_by_tag(position=None, company=None, group=None):
         
     if group is not None:
         import sys
-        from app.v1.target import groups, Target_Group
+        from app.v2.target import groups, Target_Group
         print('in', groups[int(group)]['tags'], file=sys.stderr)
         from sqlalchemy import or_
         positions = positions.filter(or_(*[Position.tag_id == x for x in groups[int(group)]['tags']]))
@@ -563,7 +563,7 @@ def filter_all_offers_by_tag(position=None, company=None, group=None):
         positions = positions.filter(Position.company_id == company)
         
     if group is not None:
-        from app.v1.target import groups, Target_Group
+        from app.v2.target import groups, Target_Group
         print('in', groups[int(group)]['tags'])
         from sqlalchemy import or_
         positions = positions.filter(or_(*[Position.tag_id.like(x) for x in groups[int(group)]['tags']]))

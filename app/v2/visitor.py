@@ -8,6 +8,13 @@ class Visitor (IWebsite):
         return 'visitor'
 
     def homepage(self): 
+        print()
+        print()
+        print()
+        print(Tag.query.all())
+        print()
+        print()
+        print()
         return render_template('core/' + self.language + '/' + self.template_folder() + '/index.html',
                                tags=Tag.query.all(),
                                number_offers=Position.query.filter(

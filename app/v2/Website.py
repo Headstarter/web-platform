@@ -4,9 +4,9 @@ routes = Blueprint('core', __name__)
 
 class Website:
     _websiteSingleton = WebsiteGenerator()
-    @staticmethod
-    def get_website():
-        return _websiteSingleton
+    @classmethod
+    def get_website(cls):
+        return cls._websiteSingleton
 
 routes.add_url_rule('/'                           , endpoint='homepage'          , view_func=lambda: Website.get_website().homepage()          , methods=['GET'        ])
 routes.add_url_rule('/faq'                        , endpoint='faq'               , view_func=lambda: Website.get_website().faq()               , methods=['GET'        ])
