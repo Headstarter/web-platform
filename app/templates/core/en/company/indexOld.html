@@ -137,7 +137,7 @@
           <!-- Owl Carousel-->
           <div class="owl-carousel owl-carousel-stretch" data-items="1" data-sm-items="1" data-md-items="3" data-lg-items="3" data-xl-items="6" data-xxl-items="6" data-dots="true" data-nav="false" data-stage-padding="1" data-loop="false" data-margin="26" data-md-margin="20" data-lg-margin="26" data-autoplay="false" data-autoplay-timeout="3500" data-mouse-drag="false">
               {% for tag in open %}
-              <a class="box-creative" href="{{ url_for('core.browse') }}?group={{ tag.id }}">
+              <a class="box-creative" href="{{ url_for('core.browse_positions') }}?group={{ tag.id }}">
               <div class="box-creative-inner">
                 <div class="icon box-creative-icon {{ tag.icon | safe }}"></div>
                 <p class="box-creative-title">{{ tag.label | safe }}</p>
@@ -178,7 +178,7 @@
               </table>
               </div>
             </div>
-            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.list_my_offers') }}">Show More Jobs</a></div>
+            <div class="col-12 text-center"><a class="button button-lg button-primary-outline" href="{{ url_for('core.list_my_positions') }}">Show More Jobs</a></div>
           </div>
         </div>
       </section>
@@ -301,7 +301,7 @@
                 </svg>
               </div>
               <div class="ll-item-main">
-                <h5 class="ll-item-title"><a href="{{ url_for('core.post_offer') }}">Публикувай обява</a></h5>
+                <h5 class="ll-item-title"><a href="{{ url_for('core.publish_position') }}">Публикувай обява</a></h5>
                 <p>Бързо и лесно</p>
               </div>
             </li>
@@ -333,7 +333,7 @@
                   <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
                 </svg>
               </div>
-              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.post_offer') }}">Започни сега</a></div>
+              <div class="ll-item-main"><a class="button button-sm button-primary-outline" href="{{ url_for('core.publish_position') }}">Започни сега</a></div>
             </li>
           </ul>
         </div>

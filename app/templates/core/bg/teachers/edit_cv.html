@@ -71,7 +71,7 @@ $(document).ready( function() {
 
               $.ajax({
                   async: false,
-                  url: "{{ url_for('core.upload_cv_picture') }}",
+                  url: "{{ url_for('core.upload_picture') }}",
                   method: 'POST',
                   cache: false,
                   data: fd,
@@ -104,7 +104,7 @@ $(document).ready( function() {
         console.log(data);
         $.ajax({
                 async: false,
-                url: "{{ url_for('core.edit_student_profile') }}",
+                url: "{{ url_for('core.edit_profile') }}",
                 method: 'POST',
                 cache: false,
                 data: data,

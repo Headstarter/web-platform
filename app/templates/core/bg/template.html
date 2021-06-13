@@ -63,15 +63,15 @@
 											  <li class="rd-nav-item">
 												  <a class="rd-nav-link" href="#">За учениците</a>
 												  <ul class="rd-menu rd-navbar-dropdown">
-													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.browse_positions') }}">Обяви</a></li>
 													  <!--<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="companies.html">Компании</a></li>-->
 												  </ul>
 											  </li>
 											  <li class="rd-nav-item">
 												  <a class="rd-nav-link" href="#">За фирми</a>
 												  <ul class="rd-menu rd-navbar-dropdown">
-													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.post_offer') }}">Нова обява</a></li>
-													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a></li>
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.publish_position') }}">Нова обява</a></li>
+													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_positions') }}">Моите обяви</a></li>
 													  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>
 												  </ul>
 											  </li>
@@ -124,8 +124,8 @@
 								  <div class="rd-navbar-main-element">
 									  <div class="rd-navbar-nav-wrap">
 										  <ul class="rd-navbar-nav">
-											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
-											  <!--<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Компании</a></li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse_positions') }}">Обяви</a></li>
+											  <!--<li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_positions') }}">Компании</a></li>
 												  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>-->
 											  <li class="rd-nav-item">
 												  <a class="rd-nav-link" href="#">Още</a>
@@ -174,7 +174,7 @@
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_teachers') }}">Моите учители</a></li>
 												  </ul>
 											  </li>
-											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse_positions') }}">Обяви</a></li>
 											  <li class="rd-nav-item">
 												  <a class="rd-nav-link" href="#">Още</a>
 												  <ul class="rd-menu rd-navbar-dropdown">
@@ -222,7 +222,7 @@
 													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.school_teachers') }}">Моите учители</a></li>
 												  </ul>
 											  </li>
-											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse') }}">Обяви</a></li>
+											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.browse_positions') }}">Обяви</a></li>
 											  <li class="rd-nav-item">
 												  <a class="rd-nav-link" href="#">Още</a>
 												  <ul class="rd-menu rd-navbar-dropdown">
@@ -264,9 +264,9 @@
 									  <div class="rd-navbar-nav-wrap">
 										  <ul class="rd-navbar-nav">
 											  <li class="rd-nav-item">
-												  <a class="rd-nav-link" href="{{ url_for('core.list_my_offers') }}">Моите обяви</a>
+												  <a class="rd-nav-link" href="{{ url_for('core.list_my_positions') }}">Моите обяви</a>
 												  <ul class="rd-menu rd-navbar-dropdown">
-													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.post_offer') }} ">Нова обява</a></li>
+													  <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="{{ url_for('core.publish_position') }} ">Нова обява</a></li>
 												  </ul>
 											  </li>
 											  <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('core.list_my_candidates') }}">Моите кандидати</a></li>

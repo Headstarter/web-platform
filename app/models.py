@@ -342,7 +342,7 @@ def insert_user(name, email, password, company=None, school=None):
     db.session.add(new_user)
     db.session.commit()
     
-    from app.v1.mail_tools.mailer import Mailer
+    from app.v2.mail_tools.mailer import Mailer
     return Mailer.sendConfirmation(new_user)
 
 def insert_application(user_id, position_id):

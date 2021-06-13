@@ -4,7 +4,6 @@ from flask import session
 from flask import request, redirect, url_for
 from app.models import User, Company, Position, Tag, Application, insert_application, create_cv, filter_offers_by_tag
 import sys
-from abc import ABC, abstractmethod
 
 groups = [
     {'id':0, 'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [1,2,3,4,5,6]},
@@ -17,10 +16,10 @@ groups = [
     {'id':7, 'icon': 'linearicons-cog', 'label': 'Technology', 'tags': [58,59,60,61,62,63,64,65,66,67]},    
 ]
 
-class Target_Group (ABC):
+class Target_Group:
     
     @staticmethod
-    def groupTags(company = None):
+    def groupTags( company = None):
         groups1 = [
             {'id':0, 'icon': 'linearicons-plane', 'label': 'Aviation', 'tags': [1,2,3,4,5,6]},
             {'id':1, 'icon': 'linearicons-palette', 'label': 'Arts', 'tags': [7,8,9,10,11,12,13]},

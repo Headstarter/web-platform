@@ -78,7 +78,7 @@ $(document).ready( function() {
             console.log (dataFD, data_export);
             $.ajax({
                     async: false,
-                    url: "{{ url_for('core.edit_company_profile') }}",
+                    url: "{{ url_for('core.edit_profile') }}",
                     method: 'POST',
                     cache: false,
                     data: dataFD,
@@ -87,10 +87,10 @@ $(document).ready( function() {
                     success: function (response) {
                       console.log(response);
                       // similar behavior as an HTTP redirect
-                      window.location.replace("{{url_for('core.list_my_offers')}}");
+                      window.location.replace("{{url_for('core.list_my_positions')}}");
 
                       // similar behavior as clicking on a link
-                      window.location.href = "{{url_for('core.list_my_offers')}}";
+                      window.location.href = "{{url_for('core.list_my_positions')}}";
                     },
                     error: function(response) {
                       console.log(response);

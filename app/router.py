@@ -302,7 +302,7 @@ def forgot_password():
         return render_template('core/' + str(session['language'] or get_locale()) + '/visitor/Forgoten-password.html')
     elif request.method == 'POST':
         user = User.query.filter(User.email == request.form['email']).one()
-        from app.v1.mail_tools.mailer import Mailer
+        from app.v2.mail_tools.mailer import Mailer
         Mailer.sendPasswordReset(user)
         flash('Check your inbox to reset your password.')
         return my_redirect('/')
@@ -363,9 +363,5 @@ def logout():
 def terms():
     return render_template('privacy-policy.html')
 
-
-from app.v1.core import routes
+from app.v2.Website import routes
 app.register_blueprint(routes, url_prefix='/')
-
-from app.blog.blog import routes
-app.register_blueprint(routes, url_prefix='/blog')
