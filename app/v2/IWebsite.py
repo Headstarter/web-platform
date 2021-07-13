@@ -97,3 +97,7 @@ class IWebsite:
     @abstractmethod
     def about(self):
         raise NotImplementedError
+
+    @abstractmethod
+    def admin(self):
+        raise NotImplementedError

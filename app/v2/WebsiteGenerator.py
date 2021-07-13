@@ -69,3 +69,6 @@ class WebsiteGenerator(IWebsite):
 
     def about(self):
         return self.role_class[session['type']].about()
+
+    def admin(self):
+        return self.role_class[session['type']].admin()
