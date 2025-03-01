@@ -6,7 +6,6 @@ import sys
 app.config['STATIC_FOLDER'] = '/static/headstarter'
 app.secret_key = 'b94079a3717eda429c4580496be97bc9675d3ea4eb0ae50d'
 
-
 def my_redirect(path, redirect_action='reload', html=''):
     import flask
     if redirect_action == 'reload':
@@ -18,10 +17,11 @@ def my_redirect(path, redirect_action='reload', html=''):
     return response
 
 
-@babel.localeselector
 def get_locale():
     translations = ['bg', 'en']
     return request.accept_languages.best_match(translations) or 'en'
+
+babel.init_app(app, locale_selector=get_locale)
 
 
 @app.after_request
